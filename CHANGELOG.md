@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.2.3] - 2017-11-24
+### Fixed
+- Inventory not displaying items
+
 ## [0.2.2] - 2017-11-24
 ### Added
 - Fade out when the player loses combat
@@ -21,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - If the player is severely wounded at night time, they can now immediately sleep through the night instead of having to rest until healed first
 
 ### Fixed
-- items with quantity 0 appearing in player inventory
+- Items with quantity 0 appearing in player inventory
 
 ## [0.2.1] - 2017-11-23
 ### Added
