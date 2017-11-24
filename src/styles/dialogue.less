@@ -1,0 +1,78 @@
+@import './variables';
+
+.dialogue {
+  cursor: default;
+
+  .text {
+    margin-bottom: @font-size;
+    padding: 0;
+    user-select: auto;
+
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  p, blockquote {
+    margin: 0 0 @font-size 0;
+  }
+
+  b {
+    color: #fff;
+    font-weight: normal;
+  }
+
+  q,
+  blockquote {
+    font-style: italic;
+
+    &::before {
+      content: '“';
+    }
+    &::after {
+      content: '”';
+    }
+
+    //hides the quotation marks until there is content inside of them, this is needed by the typing animation
+    &:empty{
+      &::before,
+      &::after {
+        content: '';
+      }
+    }
+  }
+
+  .options {
+    padding: 0;
+    margin: 0;
+
+    li {
+      cursor: pointer;
+      list-style: none;
+      padding: 6px 0;
+      font-size: @font-size;
+
+      body[mouse-control=true] &:hover,
+      body:not([mouse-control=true]) &.focus {
+        color: #fff;
+        background-color: #000;
+      }
+
+      &:empty {
+        padding: 0;
+      }
+
+      &.disabled{
+        opacity: 0.35;
+        filter: grayscale(100%);
+      }
+    }
+  }
+
+  .block {
+    vertical-align: top;
+    display: inline-block;
+    margin-right: 36px;
+  }
+}

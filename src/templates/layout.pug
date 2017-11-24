@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title SubDomain
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+    meta(name="theme-color", content="#191c2b")
+    meta(name="mobile-web-app-capable", content="yes")
+
+  body
+    each jsFile in htmlWebpackPlugin.files.js
+      script(type="text/javascript") !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}

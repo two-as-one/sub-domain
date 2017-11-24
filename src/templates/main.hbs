@@ -1,0 +1,11 @@
+<div class="dialogue" id="dialogue">
+  <div class="text">{{{text}}}</div>
+  <ul class="options">
+    {{#each responses}}
+      <li class="option {{#if @first}}focus{{/if}} {{#if disabled}}disabled{{/if}}" choice="{{id}}">
+        {{#if index}}<b>{{index}}.</b> {{/if}}{{{text}}}
+      </li>
+    {{/each}}
+  </ul>
+</div>
+<div id="app-version">version {{VERSION}}</div>

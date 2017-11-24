@@ -1,0 +1,109 @@
+@import './variables';
+
+
+@keyframes heavy-drop {
+  0% {
+    top: -300px;
+  }
+  90% {
+    top: 0px;
+    transform: perspective(100px) rotateX(0);
+  }
+  91% {
+    left: 3px;
+    transform: perspective(100px) rotateX(10deg);
+  }
+  92% {
+    left: -3px;
+  }
+  93% {
+    left: 2px;
+  }
+  94% {
+    left: -2px;
+  }
+  98% {
+    transform: perspective(100px) rotateX(0);
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes show-options {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.title-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .dialogue {
+    width: 100%;
+  }
+
+  .title {
+    overflow: hidden;
+    .title-1,
+    .title-2,
+    .sub-title {
+      display: block;
+      text-align: center;
+      position: relative;
+      margin-top: 6px;
+    }
+    .title-1,
+    .title-2 {
+      font-size: @font-size * 5;
+      font-weight: normal;
+      line-height: 0.7em;
+    }
+
+    .main-title {
+      font-family: @font-family-title;
+    }
+  }
+
+  .option {
+    text-align: center;
+  }
+
+  &.animated {
+    .title {
+      .title-1,
+      .title-2,
+      .sub-title {
+        top: -500px;
+        animation-name: heavy-drop;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+      }
+      .title-1 {
+        animation-delay: 1s;
+      }
+      .title-2 {
+        animation-delay: 1.25s;
+      }
+      .sub-title {
+        animation-delay: 2s;
+      }
+    }
+
+    .option {
+      opacity: 0;
+      animation-delay: 3s;
+      animation-name: show-options;
+      animation-duration: 3s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
+  }
+}

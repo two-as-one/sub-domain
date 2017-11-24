@@ -1,0 +1,65 @@
+@import './variables';
+
+html, body {
+  background-color: @dark;
+  color: @light;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  font-family: @font-family-default;
+  font-size: @font-size;
+  min-height: 100vh;
+}
+
+html {
+  background-color: #000;
+}
+
+body {
+  box-sizing: border-box;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: @spacing;
+
+  @media (min-width: 800px) {
+    & {
+      padding: @spacing * 10;
+    }
+  }
+
+  &.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f00;
+  }
+
+  & > * {
+    transition: opacity 1s linear;
+  }
+
+  &.fade > * {
+    opacity: 0;
+  }
+}
+
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.cool-typewriter-empty {
+  display: none;
+}
+
+#app-version{
+  position: fixed;
+  pointer-events: none;
+  bottom: 4px;
+  right: 4px;
+  color: rgba(255,255,255,.25);
+  font-size: 12px;
+  font-family: monospace;
+}
+
+@import './dialogue';

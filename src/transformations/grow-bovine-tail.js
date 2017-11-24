@@ -1,0 +1,29 @@
+import Transformation from "./_super"
+
+/**
+ * Grows a bovine tail if the player has none
+ */
+export default class BreastGrowth extends Transformation {
+  get name() {
+    return "grow bovine tail"
+  }
+
+  get available() {
+    return !this.owner.parts.tail.has
+  }
+
+  apply() {
+    this.owner.parts.tail.grow()
+    this.owner.parts.tail.type = "bovine"
+
+    const text = `
+      <p>
+        Your have an itching sensation in your lower back and as you reach down to scratch you realize where it's coming from…
+      </p>
+      <p>
+        <b>You now have a bovine tail!</b>
+      </p>`
+
+    return text
+  }
+}
