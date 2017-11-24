@@ -29,8 +29,8 @@ export default class Inventory extends Saveable {
 
   get all() {
     return Object.keys(this.data.bag)
+      .filter(key => Number(this.data.bag[key]) > 0)
       .map(fileName => Item.create(fileName))
-      .filter(item => item.quantity > 0)
       .sort()
   }
 
