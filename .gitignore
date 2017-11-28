@@ -1,4 +1,4 @@
 node_modules
 *.log
 temp
-dist/bundle.js
+dist/scripts.js
