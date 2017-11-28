@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "build": "webpack --env.dist",
-    "build:add": "git add dist/sub-domain.*.html",
+    "build:add": "git add dist/sub-domain.html",
     "dev": "webpack-dev-server --content-base dist/ --port 3000 --open",
     "lint-staged": "lint-staged"
   },
@@ -51,7 +51,7 @@
     "serve-favicon": "~2.4.2"
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "eslint --fix",
       "prettier --write --no-semi",
       "git add"

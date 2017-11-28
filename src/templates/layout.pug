@@ -7,5 +7,4 @@ html
     meta(name="mobile-web-app-capable", content="yes")
 
   body
-    each jsFile in htmlWebpackPlugin.files.js
-      script(type="text/javascript") !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
+    block scripts

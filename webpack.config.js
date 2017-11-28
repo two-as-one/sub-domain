@@ -3,7 +3,6 @@
 var path = require("path")
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 var webpack = require("webpack")
-var pkg = require("./package.json")
 
 module.exports = function(env) {
   env = env || {}
@@ -22,12 +21,13 @@ module.exports = function(env) {
 
     devServer: {
       inline: true,
+      hot: true,
       stats: "minimal"
     },
 
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "bundle.js",
+      filename: "[name].js",
       library: "game",
       libraryTarget: "var"
     },
@@ -66,14 +66,6 @@ module.exports = function(env) {
     },
 
     plugins: [
-      new HtmlWebpackPlugin({
-        filename: env.dist
-          ? ["sub-domain", pkg.version, "html"].join(".")
-          : "index.html",
-        inject: false,
-        cache: false,
-        template: "./src/templates/layout.pug"
-      }),
       new webpack.DefinePlugin({
         VERSION: JSON.stringify(require("./package.json").version)
       })
@@ -97,6 +89,28 @@ module.exports = function(env) {
     config.plugins.unshift(
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
+      })
+    )
+
+    //dist index file
+    config.plugins.push(
+      new HtmlWebpackPlugin({
+        filename: "sub-domain.html",
+        inject: false,
+        cache: false,
+        template: "./src/templates/layout-dist.pug"
+      })
+    )
+  } else {
+    config.plugins.push(new webpack.HotModuleReplacementPlugin())
+
+    //dev index file
+    config.plugins.push(
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        inject: false,
+        cache: false,
+        template: "./src/templates/layout-dev.pug"
       })
     )
   }
