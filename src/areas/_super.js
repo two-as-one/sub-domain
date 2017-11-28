@@ -4,6 +4,7 @@ const chance = new Chance()
 
 /**
  * Area
+ * @augments Saveable
  * This is the base class from which all areas must inherit from
  * refer to README.md for instructions on how to make custom areas
  */
@@ -26,9 +27,17 @@ export default class Area extends Saveable {
     })
   }
 
+  get discovered() {
+    return Boolean(this.stats.discovered)
+  }
+
+  set discovered(val) {
+    this.stats.discovered = Boolean(val)
+  }
+
   //discover this area
   discover() {
-    this.stats.discovered = true
+    this.discovered = true
   }
 
   //leave this area

@@ -5,14 +5,13 @@ export default class Main extends State {
   constructor(game) {
     super(game)
 
-    this.area = game.area
+    this.area = game.world.area
 
     this.state.main()
   }
 
   checkpoint() {
-    this.game.player.save()
-    this.game.areas.forEach(area => area.save())
+    this.game.save()
   }
 
   get FSMStates() {
@@ -135,14 +134,12 @@ export default class Main extends State {
   }
 
   travel(data) {
-    this.game.world.advance()
-    this.game.switchArea(data.area)
-    this.game.switchState("main")
+    this.game.world.switchArea(data.area)
+    this.fade().then(() => this.game.switchState("main"))
   }
 
   rest() {
     this.game.world.advanceToDawn()
-    this.game.player.heal(this.game.player.maxHP)
 
     this.render({
       text: this.area.sleepMessage,
@@ -151,14 +148,7 @@ export default class Main extends State {
   }
 
   heal() {
-    const restoration = 10 //percentage of HP regained per hour
-    const hours = Math.ceil(
-      (this.game.player.maxHP - this.game.player.currentHP) /
-        (this.game.player.maxHP / restoration)
-    )
-
-    this.game.world.advance(hours)
-    this.game.player.heal(this.game.player.maxHP)
+    this.game.world.advanceUntilHealed()
 
     this.render({
       text: `You lay down and rest.`,
@@ -232,6 +222,6 @@ export default class Main extends State {
   }
 
   get availableTravelAreas() {
-    return this.game.availableAreas.filter(area => !area.stats.current)
+    return this.game.world.availableAreas.filter(area => !area.stats.current)
   }
 }

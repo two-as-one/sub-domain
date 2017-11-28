@@ -8,11 +8,6 @@ import TitleScreen from "states/title-screen"
 import World from "world"
 import save from "save/save"
 
-/* eslint-disable sort-imports */
-import Beach from "areas/beach"
-import Forest from "areas/forest"
-/* eslint-enable  sort-imports */
-
 export default class Game {
   constructor() {
     document.addEventListener("click", e => this._click(e))
@@ -20,13 +15,13 @@ export default class Game {
     document.addEventListener("keydown", e => this._keyPress(e))
   }
 
+  /** Initialize the game */
   initGame() {
     this.player = new Player()
-    this.forest = new Forest(this)
-    this.beach = new Beach(this)
     this.world = new World(this)
   }
 
+  /** Toggle the game between mouse and keyboard control */
   static mouseControl(on) {
     if (on) {
       document.body.setAttribute("mouse-control", true)
@@ -35,10 +30,19 @@ export default class Game {
     }
   }
 
+  /**
+   * Detects when the mouse moves so that the game can switch between mouse and keyboard controls
+   * @private
+   */
   _mouseMove() {
     Game.mouseControl(true)
   }
 
+  /**
+   * Handles mouse controls
+   * @private
+   * Allows the user to click on options to select them
+   */
   _click(e) {
     Game.mouseControl(true)
     const target = e.target.closest(".option")
@@ -46,10 +50,17 @@ export default class Game {
     if (this.currentState.isTyping) {
       this.currentState.finishTyping()
     } else if (target) {
-      this.pickOption(target)
+      this._pickOption(target)
     }
   }
 
+  /**
+   * Handles keyboard controls
+   * @private
+   * Listens for number keys to directly select options
+   * Listens for up/down arrows to move focus around
+   * Listens for Enter to select focussed option
+   */
   _keyPress(e) {
     const key = e.code
     const num = key.match(/^(Digit|Numpad)([0-9])/)
@@ -71,14 +82,14 @@ export default class Game {
 
     //number keys
     if (num) {
-      return this.pickOption(
+      return this._pickOption(
         document.querySelector(`[choice="choice_${Number(num[2]) - 1}"]`)
       )
     }
 
     //select focus
     if (enter && focus) {
-      return this.pickOption(focus)
+      return this._pickOption(focus)
     }
 
     //start focussing
@@ -105,15 +116,12 @@ export default class Game {
     }
   }
 
-  //saves the game
-  save() {
-    this.player.save()
-    this.areas.forEach(area => area.save())
-    this.world.save()
-  }
-
-  //pick an option
-  pickOption(el) {
+  /**
+   * Selects one of the options available on screen
+   * @private
+   * @param  {HTMLElement} el - The Element on the page
+   */
+  _pickOption(el) {
     if (!el) {
       return
     }
@@ -121,37 +129,32 @@ export default class Game {
     this.currentState.interact(el.getAttribute("choice"))
   }
 
+  /** saves the game */
+  save() {
+    this.player.save()
+    this.world.save()
+  }
+
+  /** Start a new game */
   newGame() {
     save.clear()
     this.initGame()
     this.switchState(new CharacterCreation(this))
   }
 
+  /** Resume from previous save */
   resume() {
     this.initGame()
     this.switchState("main")
   }
 
-  get areas() {
-    return [this.forest, this.beach]
-  }
-
-  get availableAreas() {
-    return this.areas.filter(area => area.stats.discovered)
-  }
-
-  get area() {
-    return this.areas.find(area => area.stats.current)
-  }
-
-  switchArea(to) {
-    if (this.area) {
-      this.area.leave()
-    }
-
-    to.enter()
-  }
-
+  /**
+   * Switch the game to a different state
+   * @param  {(String|Object.State)} state - The state to switch to
+   *                                {String} A specific know state to switch to
+   *                                {Object.State} A state that has already been instantiated
+   * @param {...args} - Any extra parameters that will be passed down to the new state's constructor
+   */
   switchState(state, ...args) {
     if (this.currentState) {
       this.currentState.kill()
@@ -167,9 +170,6 @@ export default class Game {
       case "continue":
         this.resume()
         break
-      // case 'dialogue':
-      //   this.currentState = new DialogueState(this, ...args);
-      //   break;
       case "inventory":
         this.currentState = new InventoryState(this)
         break
