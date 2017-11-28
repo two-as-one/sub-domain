@@ -12,6 +12,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [Unreleased]
+### Added
+### Changed
+- Milk restores 8 hunger, up from 3
+- Reduced sensitivity of most parts by about 25%
+- Breast sensitivity is reduced by 50% if their size is 0
+
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## [0.2.3] - 2017-11-24
 ### Fixed
 - Inventory not displaying items

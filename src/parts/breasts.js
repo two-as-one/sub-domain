@@ -61,6 +61,14 @@ export default class Breasts extends Part {
     this.stats.config = chance.pickone(options).filter(row => row)
   }
 
+  get sensitivity() {
+    if (this.size === 0) {
+      return super.sensitivity / 2
+    } else {
+      return super.sensitivity
+    }
+  }
+
   get description() {
     let text = ""
 

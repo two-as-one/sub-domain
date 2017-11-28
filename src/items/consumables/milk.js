@@ -5,10 +5,6 @@ export default class Milk extends Consumable {
     return "milk"
   }
 
-  get hunger() {
-    return 3
-  }
-
   get description() {
     return `
       <p>

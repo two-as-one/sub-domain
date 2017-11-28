@@ -62,7 +62,7 @@ export default class Anus extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
       size: 0.5, //diameter of opening
-      sensitivity: 1,
+      sensitivity: 0.75,
       quantity: 1
     })
   }

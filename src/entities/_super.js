@@ -275,7 +275,7 @@ export default class Entity extends Saveable {
   //extend this when creating a new entity
   //eslint-disable-next-line no-unused-vars
   sensitivity(part) {
-    return 1
+    return 0.5
   }
 
   //extend this method to return the diameter of a body part

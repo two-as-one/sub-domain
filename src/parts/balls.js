@@ -8,6 +8,7 @@ export default class Balls extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
       size: 1, //length in inches
+      sensitivity: 0.5,
       quantity: 2, //number of testicles in the scrotum
       external: true //whether the scrotum is inside or outside of the body
     })
