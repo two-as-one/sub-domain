@@ -29,15 +29,6 @@ allow backspace key for 'back' options
 
 ## areas
 
-add message when low on health
-add message when horny
-
-add fade in/out when sleeping
-
-change area descriptions based on
- * area level
- * area day/night cycle
-
 1. first time travel message (explain exploring and setting up camp)
 2. travel to message (explain moving back to previous camp)
 3. night falls...
