@@ -20,6 +20,7 @@ export default class Main extends State {
       { name: "levelUp", from: "main" },
       { name: "chooseArea", from: "main" },
       { name: "travel", from: "chooseArea" },
+      { name: "switchArea", from: "travel" },
       { name: "inventory", from: "main" },
       { name: "sunset", from: "main" },
       { name: "rest", from: "main" },
@@ -134,6 +135,15 @@ export default class Main extends State {
   }
 
   travel(data) {
+    this.render({
+      text: `<p>You pack you bags and and travel to the <b>${
+        data.area.name
+      }</b>.</p>`,
+      responses: [{ state: "switchArea", area: data.area }]
+    })
+  }
+
+  switchArea(data) {
     this.game.world.switchArea(data.area)
     this.fade().then(() => this.game.switchState("main"))
   }

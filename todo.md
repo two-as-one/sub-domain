@@ -1,4 +1,3 @@
-### Versioning
 allow player to grapple
 allow enemies to submit
 

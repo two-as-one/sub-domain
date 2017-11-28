@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Extra message when travelling to a different area
+- Extra message when exploring the beach
+
 ### Changed
 - Milk restores 8 hunger, up from 3
 - Reduced sensitivity of most parts by about 25%

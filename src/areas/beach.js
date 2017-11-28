@@ -1,4 +1,6 @@
 import Area from "./_super"
+import Chance from "chance"
+const chance = new Chance()
 
 export default class Beach extends Area {
   get saveKey() {
@@ -32,10 +34,12 @@ export default class Beach extends Area {
   }
 
   get exploreMessage() {
-    return `
-      <p>The soft sand caresses ${
+    return chance.pickone([
+      `<p>The soft sand caresses ${
         this.game.player.parts.feet.all
-      } as you explore the <b>beach</b>.</p>`
+      } as you explore the <b>beach</b>.</p>`,
+      `<p>You have a long walk along the <b>beach</b>.</p>`
+    ])
   }
 
   get sleepMessage() {
