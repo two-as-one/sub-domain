@@ -266,27 +266,23 @@ export default class Entity extends Saveable {
 
   //multiplier that affects how successful a seduction will be
   //extend this when creating a new entity
-  //eslint-disable-next-line no-unused-vars
   likes(part) {
     return 1
   }
 
   //get the sensitivity of a part
   //extend this when creating a new entity
-  //eslint-disable-next-line no-unused-vars
   sensitivity(part) {
     return 0.5
   }
 
   //extend this method to return the diameter of a body part
-  //eslint-disable-next-line no-unused-vars
   getDiameter(part) {
     return 0
   }
 
   //method that applies a transformation to the player
   //extend this method if the creature can infect the player
-  //eslint-disable-next-line no-unused-vars
   infect(player) {}
 
   //measure difficulty of a target
@@ -330,7 +326,6 @@ export default class Entity extends Saveable {
   // Capability flags
   //-----------------
 
-  //eslint-disable-next-line no-unused-vars
   has(part) {
     return false
   }
