@@ -82,7 +82,7 @@ export default class Main extends State {
           text: "sleep",
           state: "rest",
           disabled: this.game.world.day,
-          if: !wounded
+          if: !(wounded && this.game.world.day)
         },
         { text: "inventory", state: "inventory" },
         { text: "examine self", state: "self" }
