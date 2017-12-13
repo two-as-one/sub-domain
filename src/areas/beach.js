@@ -81,7 +81,7 @@ export default class Beach extends Area {
   }
 
   discoverForest() {
-    this.game.forest.discover()
+    this.game.world.forest.discover()
 
     return `
       <p>There's a forest which seems to span all the way across the coast — at least as far as the eye can see.</p>
