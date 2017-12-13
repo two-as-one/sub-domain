@@ -18,7 +18,9 @@ export default class MinotaurCum extends Transformation {
       "increase breast size",
       "increase penis size",
       "change tail to bovine",
-      "grow bovine tail"
+      "grow bovine tail",
+      "grow a bovine udder",
+      "increase udder size"
     ])
   }
 }

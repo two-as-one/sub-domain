@@ -159,13 +159,13 @@ export default class Breasts extends Part {
 
   get adjective() {
     if (this.size < 4) {
-      return "perky"
+      return Part.random(["small", "little", "perky"])
     } else if (this.size < 8) {
-      return "respectable"
+      return Part.random(["modest", "sizable"])
     } else if (this.size < 12) {
-      return "massive"
+      return Part.random(["hefty", "heavy", "large"])
     } else {
-      return "humongous"
+      return Part.random(["humongous", "enormous", "massive", "imposing"])
     }
   }
 

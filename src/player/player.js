@@ -11,6 +11,7 @@ import Penis from "parts/penis"
 import PerkManager from "perks/_manager"
 import Tail from "parts/tail"
 import TransformationManager from "transformations/_manager"
+import Udder from "parts/udder"
 import Vagina from "parts/vagina"
 
 export default class Player extends Entity {
@@ -22,16 +23,17 @@ export default class Player extends Entity {
     this.inventory = new Inventory(this)
 
     this.parts = {
-      penis: new Penis(this),
-      balls: new Balls(this),
-      breasts: new Breasts(this),
-      vagina: new Vagina(this),
       anus: new Anus(this),
-      hands: new Hands(this),
-      feet: new Feet(this),
-      mouth: new Mouth(this),
+      balls: new Balls(this),
       body: new Body(this),
-      tail: new Tail(this)
+      breasts: new Breasts(this),
+      feet: new Feet(this),
+      hands: new Hands(this),
+      mouth: new Mouth(this),
+      penis: new Penis(this),
+      tail: new Tail(this),
+      udder: new Udder(this),
+      vagina: new Vagina(this)
     }
 
     this.transform = new TransformationManager(this)
@@ -278,6 +280,7 @@ export default class Player extends Entity {
     return `
       ${this.parts.body.description}
       ${this.parts.breasts.description}
+      ${this.parts.udder.description}
       ${this.genitaliaDescription}
       ${this.buttDescription}
     `
