@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.2.5] - 2017-12-13
+### Added
+- Udder body part
+- Udder transformations via minotaur cum
+- More adjectives describing breasts
+
+### Fixed
+- Bug that would crash the game when discovering the forest
+- Bug where the player was unable to sleep when wounded
+- Issues where impotence perk wouldn't be respected by certain descriptions
+
 ## [0.2.4] - 2017-11-28
 ### Added
 - Extra message when travelling to a different area

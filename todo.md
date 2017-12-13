@@ -38,3 +38,9 @@ allow backspace key for 'back' options
 travelling has variable duration based on distance
 
 add masturbate option - like an encounter but with masturbation options, jerk off until climax... or stop early?
+
+Add `Camp` option to `main` state
+- describes camp
+- allows you to do camp stuff
+  - talk with NPC's
+  - ...
