@@ -89,7 +89,7 @@ export default class LevelUp extends State {
       text: description,
       responses: [
         { text: "OK", state: "end" },
-        { text: "start over", state: "choosePrimaryStats" }
+        { text: "I've changed my mind", state: "choosePrimaryStats" }
       ]
     })
   }

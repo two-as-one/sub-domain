@@ -106,10 +106,7 @@ export default class DefaultEncounter extends CombatState {
     }
 
     this.render({
-      text:
-        this.mainMessage +
-        starvationMessage +
-        `<p>Choose an action to perform:</p>`,
+      text: this.mainMessage + starvationMessage,
       responses: actions
     })
   }
