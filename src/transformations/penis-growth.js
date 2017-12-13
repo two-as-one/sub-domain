@@ -21,20 +21,18 @@ export default class PenisGrowth extends Transformation {
         <p>
           ${Part.capitalize(
             this.owner.parts.penis.all
-          )} starts throbbing and quickly grows erect, but it doesn't stop there — it grows way past its normal size!
-        </p>
-        <p>
-          <b>${Part.capitalize(this.owner.parts.penis.all)} has grown!</b>
+          )} throbs as it grows thicker and longer — <b>${Part.capitalize(
+        this.owner.parts.penis.all
+      )} has grown!</b>
         </p>`
     } else {
       return `
         <p>
           ${Part.capitalize(
             this.owner.parts.penis.all
-          )} start throbbing and quickly grow erect, but they don't stop there — they keep growing way past their normal size!
-        </p>
-        <p>
-          <b>${Part.capitalize(this.owner.parts.penis.all)} have grown!</b>
+          )} throb as they grow thicker and longer — <b>${Part.capitalize(
+        this.owner.parts.penis.all
+      )} have grown!</b>
         </p>`
     }
   }

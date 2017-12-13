@@ -17,7 +17,7 @@ export default class Penis extends Part {
     let text
 
     if (this.has) {
-      if (this.owner.normalizedLust < 0.5) {
+      if (this.owner.normalizedLust < 0.5 || this.owner.perks.has("impotent")) {
         text = `Dangling `
       } else {
         text = `Throbbing with arousal `
@@ -37,6 +37,8 @@ export default class Penis extends Part {
 
       if (this.size < 2) {
         text += ` — so tiny and useless.`
+      } else if (this.owner.perks.has("impotent")) {
+        text += ` — unable to get hard.`
       } else {
         text += `.`
       }
@@ -89,7 +91,7 @@ export default class Penis extends Part {
     let adjectives
 
     if (this.owner.perks.has("impotent")) {
-      return "limp"
+      return Part.random(["limp", "useless"])
     }
 
     if (this.size < 2) {
