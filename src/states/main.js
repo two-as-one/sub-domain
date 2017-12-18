@@ -210,7 +210,7 @@ export default class Main extends State {
 
   self() {
     this.render({
-      text: this.game.player.statsDescription,
+      static: this.game.player.statsDescription,
       responses: [
         { text: "examine body", state: "body" },
         { text: "examine gear", state: "gear" },

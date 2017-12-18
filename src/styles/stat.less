@@ -1,0 +1,66 @@
+@import './variables';
+
+.stat {
+  width: 100%;
+  min-width: 20vw;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  line-height: calc(~"14pt + 8px");
+
+  .label {
+    flex-shrink: 0;
+  }
+
+  .raw-value {
+    flex-shrink: 0;
+  }
+
+  &.bar {
+    .label {
+      width: 76px;
+    }
+
+    .bar {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+
+      border: 2px solid @light;
+      height: calc(~"14pt + 4px");
+      box-sizing: border-box;
+      vertical-align: middle;
+
+      .fill {
+        background-color: @light;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: hidden;
+
+        .value,
+        .modifier {
+          color: @dark;
+        }
+      }
+
+      .value,
+      .modifier {
+        position: absolute;
+        left: 2px;
+        width: calc(~"100% - 4px");
+        font-size: @font-size;
+        top: -3px;
+        text-align: right;
+        font-weight: bold;
+      }
+
+      .modifier {
+        width: auto;
+      }
+    }
+  }
+}

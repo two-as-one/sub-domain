@@ -523,8 +523,8 @@ export default class DefaultEncounter extends CombatState {
     }
 
     this.render({
-      classes: "combat-end",
       text: text,
+      hideStats: true,
       responses: [{ state: "exit" }]
     })
   }
@@ -621,9 +621,7 @@ export default class DefaultEncounter extends CombatState {
   }
 
   succubusMessage(hunger) {
-    return `<p>You are satiated by all that semen — <b>${
-      hunger
-    } hunger restored</b>.</p>`
+    return `<p>You are satiated by all that semen — <b>${hunger} hunger restored</b>.</p>`
   }
 
   xpGainMessage(amount) {

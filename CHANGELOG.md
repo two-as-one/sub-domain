@@ -12,10 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.2.6] -
+## [0.2.6] - 2017-12-18
 ### Added
 - A message when entering an area for the first time
 - %-bars to player stats on `self` screen
+- The ability for specific pieces of text to not auto-type but instead appear immediately. Used for `combat` and `self`
 
 ### Changed
 - renamed `examine self` to `self` - The player will be doing more than just examining themselves here... if you know what I mean

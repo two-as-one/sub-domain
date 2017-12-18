@@ -128,7 +128,7 @@ export default class State {
       data.classes.split(/\s+/).forEach(c => document.body.classList.add(c))
     }
 
-    this.type(document.getElementsByClassName("dialogue")[0])
+    this.type()
     this.locked = false
   }
 
@@ -136,8 +136,10 @@ export default class State {
     typeWriter.complete()
   }
 
-  type(el) {
-    typeWriter.type(el).start()
+  type() {
+    typeWriter.type(document.getElementsByClassName("dialogue")[0])
+    typeWriter.type(document.getElementsByClassName("options")[0])
+    typeWriter.start()
   }
 
   get isTyping() {
