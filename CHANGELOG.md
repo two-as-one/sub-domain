@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.2.6] -
+### Added
+- A message when entering an area for the first time
+- %-bars to player stats on `self` screen
+
+### Changed
+- renamed `examine self` to `self` - The player will be doing more than just examining themselves here... if you know what I mean
+
+### Removed
+- Camp description from main state, this will be moved to it's own `camp` section later
+
 ## [0.2.5] - 2017-12-13
 ### Added
 - Udder body part

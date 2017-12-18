@@ -17,6 +17,7 @@ export default class Main extends State {
   get FSMStates() {
     return [
       { name: "main", from: "*" },
+      { name: "areaIntro", from: "main" },
       { name: "levelUp", from: "main" },
       { name: "chooseArea", from: "main" },
       { name: "travel", from: "chooseArea" },
@@ -37,6 +38,10 @@ export default class Main extends State {
   }
 
   main() {
+    if (this.area.lvl < 1) {
+      this.state.areaIntro()
+    }
+
     //if the player 'died', restore them back to 1 hp
     if (this.game.player.currentHP < 1) {
       this.game.player.stats.dmg = this.game.player.maxHP - 1
@@ -52,10 +57,16 @@ export default class Main extends State {
       return this.state.sunset()
     }
 
-    this.render({
-      text:
+    let text = this.area.description
+
+    if (this.game.world.day) {
+      text =
         (this.game.player.woundedDescription ||
-          this.game.player.hungerDescription) + this.area.description,
+          this.game.player.hungerDescription) + text
+    }
+
+    this.render({
+      text: text,
       responses: [
         {
           text: "<b>Level up!</b>",
@@ -63,7 +74,7 @@ export default class Main extends State {
           if: this.game.player.canLvlUp
         },
         {
-          text: "explore " + this.area.name,
+          text: `explore <b>${this.area.name}</b>`,
           state: "explore",
           disabled: this.game.world.night || mortallyWounded || aroused
         },
@@ -85,8 +96,17 @@ export default class Main extends State {
           if: !(wounded && this.game.world.day)
         },
         { text: "inventory", state: "inventory" },
-        { text: "examine self", state: "self" }
+        { text: "self", state: "self" }
       ]
+    })
+  }
+
+  areaIntro() {
+    this.area.lvlUp()
+
+    this.render({
+      text: this.area.introMessage,
+      responses: [{ state: "main" }]
     })
   }
 

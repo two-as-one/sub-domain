@@ -10,28 +10,37 @@ export default class Forest extends Area {
     return "forest"
   }
 
+  get introMessage() {
+    return `<p>
+      You have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
+      Hardly any sunlight manages to make its way through the dense canopy.
+      Strange exotic sounds echo through the wilds and keep you on your toes.
+    </p>
+    <p>
+      After a couple of hours of exploration, you find a small opening in the vegetation with a hollow tree in the middle.
+      Exhausted and needing a rest, you decide to set up camp here.
+    </p>`
+  }
+
   get dayDescription() {
     return `
       <p>
-        You are lost in the <b>forest</b>.
-      </p>
-      <p>
         The temperature is uncomfortably high while the air feels heavy and damp.
         A handful of sun rays pierce through the dense canopy, illuminating the darkness below.
-        You have set up camp inside a massive hollow tree.
       </p>`
   }
 
   get nightDescription() {
     return `
       <p>
-        Night has fallen over the <b>forest</b>.
-      </p>
-      <p>
         The familiar sounds of the forest have been replaced by those of crickets and owls.
         The pitch blackness occasionally pierced by the light of a firefly.
       </p>
     `
+  }
+
+  get campDescription() {
+    return `<p>You have set up camp inside a massive hollow tree.</p>`
   }
 
   get exploreMessage() {
@@ -69,9 +78,9 @@ export default class Forest extends Area {
 
     super.explore()
 
-    if (lvl === 0) {
+    if (lvl === 1) {
       return this.nothingHappened()
-    } else if (lvl === 1) {
+    } else if (lvl === 2) {
       return this.findMeatyMushroom()
     } else {
       return Area.weighted([

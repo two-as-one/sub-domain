@@ -1,0 +1,35 @@
+<span class="stat {{class}} {{#if percentage includeZero=true}}bar{{/if}}">
+  {{#if label}}
+    <span class="label">{{label}}</span>
+  {{/if}}
+
+  {{#if percentage includeZero=true}}
+    <span class="bar">
+      {{#unless hidden}}
+        {{#if modifier}}
+          <span class="modifier">[{{modifier}}]</span>
+        {{/if}}
+        <span class="value nowrap">{{current}}/{{max}}</span>
+      {{/unless}}
+      <span class="fill" style="clip-path: polygon(0 -10%, {{percentage}}% -10%, {{percentage}}% 110%, 0 110%)">
+        {{#unless hidden}}
+          {{#if modifier}}
+            <span class="modifier">[{{modifier}}]</span>
+          {{/if}}
+          <span class="value nowrap">{{current}}/{{max}}</span>
+        {{/unless}}
+      </span>
+    </span>
+  {{else}}
+    <span class="raw-value">
+      : <b>{{current}}
+        {{#if max includeZero=true}}
+          / {{max}}
+        {{/if}}
+      </b>
+      {{#if modifier}}
+        [{{modifier}}]
+      {{/if}}
+    </span>
+  {{/if}}
+</span>

@@ -17,9 +17,11 @@ This function **must** return either a string or another state.
   - if a state is returned, the game will switch to that state. Generally this state should be an encounter state.
 
 #### 3. extend `description`, `exploreMessage` and `sleepMessage`
+  - `introMessage` - the message shown when the player enters this area for the first time
   - `exploreMessage` - the message shown when the player explores this area before determining what actually happens
   - `dayDescription` - the description of the area during the day, this is displayed on the `main` state
   - `nightDescription` - the description of the area during at night, this is displayed on the `main` state
+  - `campDescription` - describes the player's camp
   - `sleepMessage` - the message shown when the player sleeps through the night
   - `sunsetMessage` - the message shown when sun sets
   - `sunriseMessage` - the message shown when sun rises

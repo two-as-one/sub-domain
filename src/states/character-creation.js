@@ -20,8 +20,7 @@ export default class CharacterCreation extends State {
       { name: "outro2", from: "outro" },
       { name: "outro3", from: "outro2" },
       { name: "outro4", from: "outro3" },
-      { name: "outro5", from: "outro4" },
-      { name: "end", from: "outro5" }
+      { name: "end", from: "outro4" }
     ]
   }
 
@@ -217,29 +216,12 @@ export default class CharacterCreation extends State {
       this.render({
         classes: "title-screen animated",
         text: titleScreen(),
-        responses: [{ state: "outro5" }]
+        responses: [{ state: "end" }]
       })
       this.finishTyping()
       this.locked = true
 
       setTimeout(() => (this.locked = false), 4500)
-    })
-  }
-
-  outro5() {
-    this.render({
-      text: `
-        <p>
-          You open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
-          The peaceful sound of waves crashing against the shore reminding you of home.
-        </p>
-        <p>
-          You're still alive … and somehow free.
-        </p>
-        <p>
-          As you try to get up, your body hurts all over — maybe you'll just lay down for a little longer …
-        </p>`,
-      responses: [{ state: "end" }]
     })
   }
 

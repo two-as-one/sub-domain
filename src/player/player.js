@@ -13,6 +13,7 @@ import Tail from "parts/tail"
 import TransformationManager from "transformations/_manager"
 import Udder from "parts/udder"
 import Vagina from "parts/vagina"
+import statBarTemplate from "templates/stat-bar.hbs"
 
 export default class Player extends Entity {
   constructor() {
@@ -133,11 +134,11 @@ export default class Player extends Entity {
   //describes how hungry the player is - displayed on main state
   get hungerDescription() {
     if (this.isStarving) {
-      return `<p><b>You are starving!</b> — You should eat something.</p>`
+      return `<p><b>You are starving!</b> — You will be weakened until you eat something.</p>`
     }
 
     if (this.isHungry) {
-      return `<p><b>You are hungry.</b> — You should eat something.</p>`
+      return `<p><b>You are hungry</b> and should eat something.</p>`
     }
 
     return ""
@@ -244,27 +245,69 @@ export default class Player extends Entity {
   get statsDescription() {
     let statModifier = this.hungerModifier
     if (statModifier > 0) {
-      statModifier = `[+${statModifier}]`
+      statModifier = `+${statModifier}`
     } else if (statModifier < 0) {
-      statModifier = `[${statModifier}]`
+      statModifier = `${statModifier}`
     } else {
       statModifier = ""
     }
 
     return `
       <p class="block">
-        Level: <b>${this.stats.lvl}</b><br>
-        XP: <b>${this.stats.xp}/${this.expRequired}</b><br>
-        HP: <b>${this.currentHP}/${this.maxHP}</b><br>
-        Lust: <b>${this.currentLust}/${this.maxLust}</b><br>
-        Hunger: <b>${this.stats.hunger} [${this.hungerStatus}]</b><br>
+        ${statBarTemplate({
+          label: "Level",
+          current: this.stats.lvl
+        })}
+        ${statBarTemplate({
+          label: "XP",
+          current: this.stats.xp,
+          max: this.expRequired,
+          percentage: this.stats.xp / this.expRequired * 100
+        })}
+        ${statBarTemplate({
+          label: "HP",
+          current: this.currentHP,
+          max: this.maxHP,
+          percentage: this.currentHP / this.maxHP * 100
+        })}
+        ${statBarTemplate({
+          label: "Lust",
+          current: this.currentLust,
+          max: this.maxLust,
+          percentage: this.currentLust / this.maxLust * 100
+        })}
+        ${statBarTemplate({
+          label: "Hunger",
+          current: this.stats.hunger,
+          max: 24,
+          percentage: this.stats.hunger / 24 * 100,
+          modifier: this.hungerStatus
+        })}
       </p>
       <p class="block">
-        Strength: <b>${this.strength}</b> ${statModifier}<br>
-        Stamina: <b>${this.stamina}</b><br>
-        Charisma: <b>${this.charisma}</b> ${statModifier}<br>
-        Willpower: <b>${this.willpower}</b><br>
-        Dexterity: <b>${this.dexterity}</b> ${statModifier}<br>
+        ${statBarTemplate({
+          label: "Strength",
+          current: this.strength,
+          modifier: statModifier
+        })}
+        ${statBarTemplate({
+          label: "Stamina",
+          current: this.stamina
+        })}
+        ${statBarTemplate({
+          label: "Charisma",
+          current: this.charisma,
+          modifier: statModifier
+        })}
+        ${statBarTemplate({
+          label: "Willpower",
+          current: this.willpower
+        })}
+        ${statBarTemplate({
+          label: "Dexterity",
+          current: this.dexterity,
+          modifier: statModifier
+        })}
       </p>`
   }
 

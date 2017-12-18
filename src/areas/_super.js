@@ -35,6 +35,14 @@ export default class Area extends Saveable {
     this.stats.discovered = Boolean(val)
   }
 
+  get lvl() {
+    return this.stats.lvl
+  }
+
+  set lvl(val) {
+    this.stats.lvl = val
+  }
+
   //discover this area
   discover() {
     this.discovered = true
@@ -78,7 +86,11 @@ export default class Area extends Saveable {
 
   //get the correct description based on day/nigh cycle
   get description() {
-    return this.game.world.day ? this.dayDescription : this.nightDescription
+    if (this.game.world.day) {
+      return this.dayDescription
+    } else {
+      return `<p>Night has fallen</p>` + this.nightDescription
+    }
   }
 
   // Extend these with area specific values
@@ -102,6 +114,11 @@ export default class Area extends Saveable {
     return "area-super"
   }
 
+  //this message is shown the first time the player enters this area
+  get introMessage() {
+    return ""
+  }
+
   //message when exploring the area
   get exploreMessage() {
     return ""
@@ -114,6 +131,11 @@ export default class Area extends Saveable {
 
   //the description of the area when at your camp during at night
   get nightDescription() {
+    return ""
+  }
+
+  //description of the player's camp
+  get campDescription() {
     return ""
   }
 

@@ -2,40 +2,36 @@
   <div class="combat">
     <div class="player">
       <span class="name">{{player.name}} <span class="nowrap">[LVL {{player.stats.lvl}}]</span></span>
-      <span class="health">
-        <span class="label">HP</span>
-        <span class="bar">
-          <span class="value nowrap">{{player.currentHP}}/{{player.maxHP}}</span>
-          <span class="fill" style="clip-path: polygon(0 -10%, {{player.healthBar}}% -10%, {{player.healthBar}}% 110%, 0 110%)">
-            <span class="value nowrap">{{player.currentHP}}/{{player.maxHP}}</span>
-          </span>
-        </span>
-      </span>
-      <span class="lust">
-        <span class="label">Lust</span>
-        <span class="bar">
-          <span class="value nowrap">{{player.currentLust}}/{{player.maxLust}}</span>
-          <span class="fill" style="clip-path: polygon(0 -10%, {{player.lustBar}}% -10%, {{player.lustBar}}% 110%, 0 110%)">
-            <span class="value nowrap">{{player.currentLust}}/{{player.maxLust}}</span>
-          </span>
-        </span>
-      </span>
+
+      {{> stat-bar
+          class="health"
+          label="HP"
+          current=player.currentHP
+          max=player.maxHP
+          percentage=player.healthBar}}
+
+      {{> stat-bar
+          class="lust"
+          label="Lust"
+          current=player.currentLust
+          max=player.maxLust
+          percentage=player.lustBar}}
     </div>
 
     <div class="opponent">
       <span class="name">{{enemy.name}} <span class="nowrap">[LVL {{enemy.stats.lvl}}]</span></span>
-      <span class="health">
-        <span class="label">HP</span>
-        <span class="bar">
-          <span class="fill" style="width: {{enemy.healthBar}}%"></span>
-        </span>
-      </span>
-      <span class="lust">
-        <span class="label">Lust</span>
-        <span class="bar">
-          <span class="fill" style="width: {{enemy.lustBar}}%"></span>
-        </span>
-      </span>
+
+      {{> stat-bar
+          class="health"
+          label="HP"
+          hidden=true
+          percentage=enemy.healthBar}}
+
+      {{> stat-bar
+          class="lust"
+          label="Lust"
+          hidden=true
+          percentage=enemy.lustBar}}
     </div>
   </div>
 {{/unless}}

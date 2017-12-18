@@ -19,18 +19,33 @@ export default class Beach extends Area {
     })
   }
 
+  get introMessage() {
+    return `
+        <p>
+          You open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
+          The peaceful sound of waves crashing against the shore reminding you of home.
+        </p>
+        <p>
+          You're still alive … and somehow free.
+        </p>
+        <p>
+          As you try to get up, your body hurts all over — maybe you'll just lay down for a little longer …
+        </p>`
+  }
+
   get dayDescription() {
     return `
-      <p>You are stranded on the <b>beach</b>.</p>
-      <p>The sun shines bright on the hot sand while a cool breeze from the ocean keeps things bearable.</p>
-      <p>You have made a ramshackle camp using debris from a sunken ship.</p>`
+      <p>The sun shines bright on the hot sand while a cool breeze from the ocean keeps things bearable.</p>`
   }
 
   get nightDescription() {
     return `
-      <p>Night has fallen on the <b>beach</b>.</p>
       <p>A beautiful starry sky blankets over the ocean with the pale moon reflecting on the water and illuminating the shore. The temperature has dropped drastically.</p>
     `
+  }
+
+  get campDescription() {
+    return `<p>You have made a ramshackle camp using debris from a sunken ship.</p>`
   }
 
   get exploreMessage() {
@@ -69,7 +84,7 @@ export default class Beach extends Area {
     if (!this.game.world.forest.discovered) {
       return this.discoverForest()
       //guarantee finding a clam at lvl 1 - since the player will have just gone hungry, it teaches them they can find food by exploring
-    } else if (lvl === 1) {
+    } else if (lvl === 2) {
       return this.findClam()
     } else {
       return Area.weighted([
