@@ -33,11 +33,16 @@ export default class Udder extends Part {
       }
 
       if (this.quantity === 1) {
-        // prettier-ignore
-        text += `you have <b>${Part.articlize(this.adjective)} ${this.pluralized}</b>`
+        const adjective = Part.articlize(this.adjective)
+        const udder = this.pluralized
+
+        text += `you have <b>${adjective} ${udder}</b>`
       } else {
-        // prettier-ignore
-        text += `you have <b>${this.number} ${this.adjective} ${this.pluralized}</b>`
+        const number = this.number
+        const adjective = this.adjective
+        const udders = this.pluralized
+
+        text += `you have <b>${number} ${adjective} ${udders}</b>`
       }
 
       text += ` with <b>${Part.number(this.teats)} teats</b>`

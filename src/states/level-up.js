@@ -78,9 +78,11 @@ export default class LevelUp extends State {
     }
 
     if (this.perk) {
-      // prettier-ignore
       description += `
-        <p><b>${Part.capitalize(this.perk.name)}</b>: <q>${this.perk.description}</q> — ${this.perk.effect}</p>
+        <p>
+          <b>${Part.capitalize(this.perk.name)}</b>:
+          <q>${this.perk.description}</q> — ${this.perk.effect}
+        </p>
       `
     }
 

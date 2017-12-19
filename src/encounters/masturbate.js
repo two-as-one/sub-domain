@@ -98,15 +98,16 @@ export default class MastrubateEncounter extends DefaultEncounter {
     let text = ""
 
     switch (this.fucking.name) {
-      case "finger ass":
-        // prettier-ignore
+      case "finger ass": {
+        const your_ass = this.player.parts.anus.one
         text += `
           <p>
-            Reaching down between your legs, you let your middle finger trace the contour of ${this.player.parts.anus.one}.
+            Reaching down between your legs, you let your middle finger trace the contour of ${your_ass}.
             A soft moan escapes your lips as you push your finger inside.
-            You pause for a moment and savour the wonderful sensation, but you can't resist much longer and quickly pick up the pace — continually fingering ${this.player.parts.anus.one}.
+            You pause for a moment and savour the wonderful sensation, but you can't resist much longer and quickly pick up the pace — continually fingering ${your_ass}.
           </p>`
         break
+      }
       case "jerk off":
         break
     }
@@ -118,11 +119,11 @@ export default class MastrubateEncounter extends DefaultEncounter {
     let text = ""
 
     switch (this.fucking.name) {
-      case "finger ass":
-        // prettier-ignore
+      case "finger ass": {
+        const your_ass = Part.capitalize(this.player.parts.anus.one)
         text += `
           <p>
-            ${Part.capitalize(this.player.parts.anus.one)} squirms hungrily as you ceaselessly finger it.
+            ${your_ass} squirms hungrily as you ceaselessly finger it.
             You lose yourself to the overwhelming sensation and cry out with pure ecstasy as an earth-shattering anal orgasm courses through your body.
             Your entire body quivering and shaking while you slowly regain your senses.
           </p>
@@ -130,6 +131,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
             You smile, licking your fingers with satisfaction as you bask in the glory of the aftermath.
           </p>`
         break
+      }
     }
 
     return text

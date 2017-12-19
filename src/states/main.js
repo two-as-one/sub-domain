@@ -246,8 +246,10 @@ export default class Main extends State {
       .filter(perk => perk.available)
       .map(
         perk =>
-          // prettier-ignore
-          `<p><b>${Part.capitalize(perk.name)}</b>: <q>${perk.description}</q> — ${perk.effect}</p>`
+          `<p>
+            <b>${Part.capitalize(perk.name)}</b>:
+            <q>${perk.description}</q> — ${perk.effect}
+          </p>`
       )
       .join("")
 

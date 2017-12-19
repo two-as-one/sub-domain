@@ -7,14 +7,15 @@ export default class Impotent extends Perk {
   }
 
   get description() {
-    const verb = this.player.parts.penis.quanitity > 1 ? "are" : "is"
-    // prettier-ignore
-    return `${Part.capitalize(this.player.parts.penis.all)} ${verb} limp and useless.`
+    const your_penis = Part.capitalize(this.player.parts.penis.all)
+    const is = this.player.parts.penis.quanitity > 1 ? "are" : "is"
+
+    return `${your_penis} ${is} limp and useless.`
   }
 
   get effect() {
-    // prettier-ignore
-    return `You can't get hard and ${this.player.parts.penis.all} can't be used for any sexual moves.`
+    const your_penis = this.player.parts.penis.all
+    return `You can't get hard and ${your_penis} can't be used for any sexual moves.`
   }
 
   get available() {

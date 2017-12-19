@@ -6,11 +6,14 @@ export default class Anus extends Part {
 
     if (this.has) {
       if (this.quantity === 1) {
-        // prettier-ignore
-        text = `<b>${Part.articlize(this.adjective)} ${this.pluralized}</b> nestled in between.`
+        const adjective = Part.articlize(this.adjective)
+        const anus = this.pluralized
+        text = `<b>${adjective} ${anus}</b> nestled in between.`
       } else {
-        // prettier-ignore
-        text = `<b>${this.number} ${this.adjective} ${this.pluralized}</b> nestled in between.`
+        const number = this.number
+        const adjective = this.adjective
+        const anuses = this.pluralized
+        text = `<b>${number} ${adjective} ${anuses}</b> nestled in between.`
       }
 
       return Part.trim(`${text}`)
@@ -43,8 +46,9 @@ export default class Anus extends Part {
 
       const was = this.quantity > 1 ? "were" : "was"
       const is = this.quantity > 1 ? "are" : "is"
-      // prettier-ignore
-      return `<p><b>${Part.capitalize(this.all)} ${was} stretched</b> and ${is} now looser.</p>`
+      const your_anus = Part.capitalize(this.all)
+
+      return `<p><b>${your_anus} ${was} stretched</b> and ${is} now looser.</p>`
     }
   }
 

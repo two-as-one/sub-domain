@@ -79,8 +79,12 @@ export default class Breasts extends Part {
         text += `You have `
       }
 
-      // prettier-ignore
-      text += `<b>${this.number} ${this.adjective} ${this.cupSize} ${this.pluralized}</b>`
+      const number = this.number
+      const adjective = this.adjective
+      const cupSize = this.cupSize
+      const tits = this.pluralized
+
+      text += `<b>${number} ${adjective} ${cupSize} ${tits}</b>`
 
       //false if rows are uneven, otherwise returns the amount of breasts per row
       const evenRows = this.stats.config.reduce((a, b) => a === b && b)
@@ -89,11 +93,12 @@ export default class Breasts extends Part {
         if (this.stats.config.length === 1) {
           text += ` — all in a single row`
         } else if (evenRows) {
-          // prettier-ignore
-          text += ` — ${Part.number(this.stats.config.length)} rows of ${Part.number(evenRows)}`
+          const row_number = Part.number(this.stats.config.length)
+          const number = Part.number(evenRows)
+          text += ` — ${row_number} rows of ${number}`
         } else {
-          // prettier-ignore
-          text += `. Spread over ${Part.number(this.stats.config.length)} rows —`
+          const row_number = Part.number(this.stats.config.length)
+          text += `. Spread over ${row_number} rows —`
 
           this.stats.config.forEach((row, i, list) => {
             text += ` ${Part.number(row)} on the ${Part.ordinal(i + 1)}`
@@ -116,13 +121,14 @@ export default class Breasts extends Part {
   }
 
   get seductionMessage() {
-    // prettier-ignore
+    const your_tits = this.all
+
     return Part.random([
       `<p>
-        You cup ${this.all} and make them jiggle. You then squeeze them individually before squishing them together.
+        You cup ${your_tits} and make them jiggle. You then squeeze them individually before squishing them together.
       </p>`,
       `<p>
-        With your hands behind your head, your shake your bosom. Making ${this.all} bounce against one another in a delightful display.
+        With your hands behind your head, your shake your bosom. Making ${your_tits} bounce against one another in a delightful display.
       </p>`
     ])
   }

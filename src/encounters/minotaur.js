@@ -49,20 +49,25 @@ export default class MinotaurEncounter extends DefaultEncounter {
       return `<p>You are facing a <b>minotaur</b>.</p>`
     } else {
       switch (this.fucking.name) {
-        case "anal":
-          // prettier-ignore
-          return `<p>The <b>minotaur</b> has its cock lodged deep inside ${this.player.parts.anus.one}.</p>`
-        case "vaginal":
-          // prettier-ignore
-          return `<p>The <b>minotaur</b>'s cock is throbbing deep inside ${this.player.parts.vagina.one}.</p>`
+        case "anal": {
+          const your_ass = this.player.parts.anus.one
+          return `<p>The <b>minotaur</b> has its cock lodged deep inside ${your_ass}.</p>`
+        }
+        case "vaginal": {
+          const your_pussy = this.player.parts.vagina.one
+          return `<p>The <b>minotaur</b>'s cock is throbbing deep inside ${your_pussy}.</p>`
+        }
         case "blowjob":
           return `<p>The <b>minotaur</b>'s cock is throbbing deep down your throat.</p>`
-        case "boobjob":
-          // prettier-ignore
-          return `<p>You have ${this.player.parts.breasts.all} squeezed tightly around the <b>minotaur</b>'s cock.</p>`
-        case "frotting":
-          // prettier-ignore
-          return `<p>You have ${this.player.parts.hands.all} wrapped around the <b>minotaur</b>'s and ${this.player.parts.penis.all}.</p>`
+        case "boobjob": {
+          const your_tits = this.player.parts.breasts.all
+          return `<p>You have ${your_tits} squeezed tightly around the <b>minotaur</b>'s cock.</p>`
+        }
+        case "frotting": {
+          const your_hands = this.player.parts.hands.all
+          const your_cock = this.player.parts.penis.all
+          return `<p>You have ${your_hands} wrapped around the <b>minotaur</b>'s and ${your_cock}.</p>`
+        }
       }
     }
   }
@@ -119,89 +124,103 @@ export default class MinotaurEncounter extends DefaultEncounter {
 
   get playerInitiatePositionMessage() {
     switch (this.fucking.name) {
-      case "anal":
-        // prettier-ignore
+      case "anal": {
+        const your_ass = this.player.parts.anus.one
         return `
         <p>
           You turn your back towards the minotaur, shaking your ass a few times before bending over.
           On all fours and with your ass pointing up, you look back over your shoulder at the minotaur.
-          It snorts, unable to resist and with one hand on its cock and the other on your ass it brutally rams its bovine cock into ${this.player.parts.anus.one}.
+          It snorts, unable to resist and with one hand on its cock and the other on your ass it brutally rams its bovine cock into ${your_ass}.
         </p>`
-      case "vaginal":
-        // prettier-ignore
+      }
+      case "vaginal": {
+        const your_pussy = this.player.parts.vagina.one
         return `
         <p>
           You turn your back towards the minotaur, shaking your ass a few times before bending over.
           On all fours and with your ass pointing up, you look back at the minotaur from between your legs.
-          Without any hesitation, the minotaur grabs you by your hips and rams its monstrous cock into ${this.player.parts.vagina.one}.
+          Without any hesitation, the minotaur grabs you by your hips and rams its monstrous cock into ${your_pussy}.
         </p>`
-      case "blowjob":
-        // prettier-ignore
+      }
+      case "blowjob": {
+        const your_mouth = this.player.parts.mouth.one
+        const your_hands = this.player.parts.hands.all
         return `
         <p>
           You get down on your knees in front of the minotaur.
-          Facing its massive bovine cock, you grab it with ${this.player.parts.hands.all} and jerk it a few times.
-          Licking your lips hungrily, you open ${this.player.parts.mouth.one} and swallow it whole.
+          Facing its massive bovine cock, you grab it with ${your_hands} and jerk it a few times.
+          Licking your lips hungrily, you open ${your_mouth} and swallow it whole.
         </p>`
-      case "boobjob":
-        // prettier-ignore
+      }
+      case "boobjob": {
+        const your_tits = this.player.parts.breasts.all
+        const both_your_tits = this.player.parts.breasts.two
         return `
         <p>
           You get down on your knees in front of the minotaur.
-          Cupping ${this.player.parts.breasts.all} and kneading them playfully.
-          The minotaur takes you up on the offer and jams its throbbing cock in between ${this.player.parts.breasts.all}.
+          Cupping ${both_your_tits} and kneading them playfully.
+          The minotaur takes you up on the offer and jams its throbbing cock in between ${your_tits}.
         </p>`
-      case "frotting":
-        // prettier-ignore
+      }
+      case "frotting": {
+        const your_cock = this.player.parts.penis.all
         return `
         <p>
           You carefully approach the minotaur as it looks down at you with a curious gaze.
-          Slowly shuffling closer until ${this.player.parts.penis.one} pokes against its inhumanly large bovine cock.
+          Slowly shuffling closer until ${your_cock} pokes against its inhumanly large bovine cock.
           The minotaur snorts as you wrap your fingers around the cocks and slowly start jerking them together.
         </p>`
+      }
     }
     return ""
   }
 
   get enemyInitiatePositionMessage() {
     switch (this.fucking.name) {
-      case "anal":
-        // prettier-ignore
+      case "anal": {
+        const your_ass = this.player.parts.anus.one
         return `
         <p>
           The minotaur grabs you by your wrist then pins you face first down against the ground.
-          Snorting like a bull, it hungrily looks down at your ass before brutally ramming its cock into ${this.player.parts.anus.one}.
+          Snorting like a bull, it hungrily looks down at your ass before brutally ramming its cock into ${your_ass}.
         </p>`
-      case "vaginal":
-        // prettier-ignore
+      }
+      case "vaginal": {
+        const your_pussy = this.player.parts.vagina.all
+        const it =
+          this.player.parts.vagina.quantity === 1 ? "it" : "one of them"
         return `
         <p>
           The minotaur's mighty hands grab you by the waist as it forces you to turn around and bend over.
-          Grunting as it looks down at ${this.player.parts.vagina.all} and then rams its brutish cock into ${this.player.parts.vagina.quantity === 1 ? "it" : "one of them"}.
+          Grunting as it looks down at ${your_pussy} and then rams its brutish cock into ${it}.
         </p>`
-      case "blowjob":
-        // prettier-ignore
+      }
+      case "blowjob": {
+        const your_mouth = this.player.parts.mouth.one
         return `
         <p>
           The minotaur punches you in the gut.
-          As soon as ${this.player.parts.mouth.one} opens to cry out in pain, it shoves its massive cock through your lips.
-          The thick bovine shaft drilling into ${this.player.parts.mouth.one} and forcing itself down your throat.
+          As soon as ${your_mouth} opens to cry out in pain, it shoves its massive cock through your lips.
+          The thick bovine shaft drilling into ${your_mouth} and forcing itself down your throat.
         </p>`
-      case "boobjob":
-        // prettier-ignore
+      }
+      case "boobjob": {
+        const your_tits = this.player.parts.breasts.all
         return `
         <p>
           The minotaur overpowers you and pins you to the floor under its weight.
-          It sits down on top of you with its cock throbbing between ${this.player.parts.breasts.all}.
+          It sits down on top of you with its cock throbbing between ${your_tits}.
         </p>`
-      case "frotting":
-        // prettier-ignore
+      }
+      case "frotting": {
+        const your_cock = this.player.parts.penis.all
         return `
         <p>
           The minotaur tramples over you, pinning you down on the floor underneath its weight and strength.
-          With its massive bovine cock throbbing against ${this.player.parts.penis.all} it starts dry-humping you.
+          With its massive bovine cock throbbing against ${your_cock} it starts dry-humping you.
           Its heavy ball sack slapping against your bottom.
         </p>`
+      }
     }
     return ""
   }
@@ -223,18 +242,20 @@ export default class MinotaurEncounter extends DefaultEncounter {
         <p>
           You continue to bob your head back and forth as that massive bovine cocks fills your throat.
         </p>`
-      case "boobjob":
-        // prettier-ignore
+      case "boobjob": {
+        const your_tits = this.player.parts.breasts.two
         return `
         <p>
-          You squeeze ${this.player.parts.breasts.all} together around the minotaur's cock.
+          You squeeze ${your_tits} together around the minotaur's cock.
         </p>`
-      case "frotting":
-        // prettier-ignore
+      }
+      case "frotting": {
+        const your_cock = this.player.parts.penis.all
         return `
         <p>
-          You continue to stroke ${this.player.parts.penis.all} and the minotaur's cock together.
+          You continue to stroke ${your_cock} and the minotaur's cock together.
         </p>`
+      }
     }
     return ""
   }
@@ -246,11 +267,13 @@ export default class MinotaurEncounter extends DefaultEncounter {
         <p>
           The minotaur continues to ravage your ass.
         </p>`
-      case "vaginal":
+      case "vaginal": {
+        const your_pussy = this.player.parts.vagina.one
         return `
         <p>
-          The minotaur pounds vigorously at ${this.player.parts.vagina.one}.
+          The minotaur pounds vigorously at ${your_pussy}.
         </p>`
+      }
       case "blowjob":
         return `
         <p>
@@ -261,12 +284,13 @@ export default class MinotaurEncounter extends DefaultEncounter {
         <p>
           The minotaur continues to fuck your cleavage.
         </p>`
-      case "frotting":
-        // prettier-ignore
+      case "frotting": {
+        const your_cock = this.player.parts.penis.all
         return `
         <p>
-          The minotaur keeps humping against ${this.player.parts.penis.all}, pre-cum drooling all over you.
+          The minotaur continues dry-humping ${your_cock}, pre-cum drooling all over you.
         </p>`
+      }
     }
     return ""
   }
@@ -296,27 +320,29 @@ export default class MinotaurEncounter extends DefaultEncounter {
     }
 
     switch (this.fucking.name) {
-      case "anal":
-        // prettier-ignore
+      case "anal": {
+        const your_ass = this.player.parts.anus.all
         return `
         <p>
           The minotaur roars out loudly as it's close to orgasm.
           With both hands around your waist it furiously ravages your ass until it finally explodes into it.
-          Thick bovine cum slathering your insides and dribbling out of ${this.player.parts.anus.all}.
+          Thick bovine cum slathering your insides and dribbling out of ${your_ass}.
           Overwhelmed with satisfaction, the minotaur falls down on its back — pulling you down with it, impaled on its shaft.
           You then slowly get up, feeling that massive cock sliding out of your abused hole, beads of cum trickling down your thighs.
         </p>`
-      case "vaginal":
-        // prettier-ignore
+      }
+      case "vaginal": {
+        const your_pussy = this.player.parts.vagina.one
         return `
         <p>
-          The minotaur picks up the pace, its monstrous cock sliding in and out of ${this.player.parts.vagina.one}.
+          The minotaur picks up the pace, its monstrous cock sliding in and out of ${your_pussy}.
           You greedily squeeze down on it, moaning with pleasure.
-          It doesn't take long for the monster to roar out and unload into ${this.player.parts.vagina.one}.
+          It doesn't take long for the monster to roar out and unload into ${your_pussy}.
           Hot bovine spunk building up inside of you and finally spurting out under its own pressure — dripping down your inner thighs.
           Snorting one last time and filled with satisfaction — the minotaur falls asleep, pinning you under its weight.
           With some effort you manage to dislodge the cock while wriggling out from under the sleeping beast.
         </p>`
+      }
       case "blowjob":
         return `
         <p>
@@ -326,24 +352,26 @@ export default class MinotaurEncounter extends DefaultEncounter {
           Thick salty cum filling your insides — rushing down your throat and spurting through your nose.
           Its grip weakening — you pull back quickly, feeling that monster cock sliding out of your throat before you are able to gasp for air.
         </p>`
-      case "boobjob":
-        // prettier-ignore
+      case "boobjob": {
+        const your_tits = this.player.parts.breasts.all
         return `
         <p>
-          The minotaur groans and growls with its monstrous cock throbbing between ${this.player.parts.breasts.all}.
+          The minotaur groans and growls with its monstrous cock throbbing between ${your_tits}.
           It fucks your cleavage over and over like a wild beast.
           You even start to feel sore but you can't help but moan out with joy — triggering the minotaur's climax.
           Thick bovine spunk spraying all over your face.
         </p>`
-      case "frotting":
-        // prettier-ignore
+      }
+      case "frotting": {
+        const your_cock = this.player.parts.penis.all
         return `
         <p>
-          The minotaur growls as you keep rubbing ${this.player.parts.penis.all} against his.
+          The minotaur growls as you keep rubbing ${your_cock} against his.
           Wrapping its hands around yours and forcing you to continue jerking those cocks.
           You keep at it, slowly picking up the pace until neither of you can resist any longer.
           You both climax at the same time — spunk mixing as it lands all over your chest and face.
         </p>`
+      }
     }
     return ""
   }
