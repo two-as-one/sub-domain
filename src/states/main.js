@@ -1,3 +1,4 @@
+import Mastrubate from "encounters/masturbate"
 import Part from "parts/_super"
 import State from "./_super"
 
@@ -28,6 +29,7 @@ export default class Main extends State {
       { name: "sunrise", from: "rest" },
       { name: "heal", from: "main" },
       { name: "self", from: "main" },
+      { name: "masturbate", from: "self" },
       { name: "gear", from: "self" },
       { name: "body", from: "self" },
       { name: "perks", from: "self" },
@@ -212,12 +214,17 @@ export default class Main extends State {
     this.render({
       static: this.game.player.statsDescription,
       responses: [
+        { text: "masturbate [WIP]", state: "masturbate" },
         { text: "examine body", state: "body" },
         { text: "examine gear", state: "gear" },
         { text: "view perks", state: "perks" },
         { text: "back", state: "main" }
       ]
     })
+  }
+
+  masturbate() {
+    this.game.switchState(new Mastrubate(this.game))
   }
 
   gear() {
