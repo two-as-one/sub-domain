@@ -140,22 +140,51 @@ export default class Part extends Saveable {
   }
 
   get one() {
-    if (this.quantity === 1) {
-      return this.all
-    } else {
+    if (this.quantity > 1) {
       return Part.trim(
         `one of your ${Part.random(["", this.number])} ${Part.random([
           "",
           this.adjective
         ])} ${this.pluralized}`
       )
+    } else {
+      return this.all
     }
   }
 
   get two() {
-    if (this.quantity === 2) {
+    if (this.quantity > 2) {
       return Part.trim(
-        `both of your ${Part.random(["", this.adjective])} ${this.pluralized}`
+        `two of your ${Part.random(["", this.number])} ${Part.random([
+          "",
+          this.adjective
+        ])} ${this.pluralized}`
+      )
+    } else {
+      return this.all
+    }
+  }
+
+  get three() {
+    if (this.quantity > 3) {
+      return Part.trim(
+        `three of your ${Part.random(["", this.number])} ${Part.random([
+          "",
+          this.adjective
+        ])} ${this.pluralized}`
+      )
+    } else {
+      return this.all
+    }
+  }
+
+  get four() {
+    if (this.quantity > 4) {
+      return Part.trim(
+        `four of your ${Part.random(["", this.number])} ${Part.random([
+          "",
+          this.adjective
+        ])} ${this.pluralized}`
       )
     } else {
       return this.all
