@@ -8,7 +8,8 @@ export default class Mouth extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 1,
-      sensitivity: 0.5
+      sensitivity: 0.5,
+      size: 1
     })
   }
 
