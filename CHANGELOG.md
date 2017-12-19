@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Removed
 ### Fixed
+- `Hands`, `Feet` and `Mouth` having a default size of `0`
+
 ### Security
 
 ## [0.2.6] - 2017-12-18
