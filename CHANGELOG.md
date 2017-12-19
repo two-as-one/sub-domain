@@ -12,18 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.2.7]
+## [0.2.7] - 2017-12-19
 ### Added
 - `Mastrubate` option available via `self` menu
   - only `finger ass` option available so far but more to be added later
 
-### Changed
-### Deprecated
-### Removed
 ### Fixed
 - `Hands`, `Feet` and `Mouth` having a default size of `0`
-
-### Security
 
 ## [0.2.6] - 2017-12-18
 ### Added
