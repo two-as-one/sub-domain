@@ -46,11 +46,10 @@ export default class TitleScreen extends State {
 
   outOfDate() {
     this.render({
+      // prettier-ignore
       text: `
         <p>
-          Your saved game [${
-            save.fetch().VERSION
-          }] does not match the latest version of the game [${VERSION}].
+          Your saved game [${save.fetch().VERSION}] does not match the latest version of the game [${VERSION}].
           You can still continue but this may cause unexpected bugs.
         </p>
         <p>

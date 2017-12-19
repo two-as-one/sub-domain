@@ -42,12 +42,11 @@ export default class Vagina extends Part {
   }
 
   get seductionMessage() {
+    // prettier-ignore
     return `
       <p>
         You spread your legs lightly while facing you opponent.
-        Placing your hands on your inner thighs and sensually moving them upwards towards ${
-          this.all
-        } but never quite reaching it.
+        Placing your hands on your inner thighs and sensually moving them upwards towards ${this.all} but never quite reaching it.
       </p>`
   }
 
@@ -61,9 +60,8 @@ export default class Vagina extends Part {
 
       const was = this.quantity > 1 ? "were" : "was"
       const is = this.quantity > 1 ? "are" : "is"
-      return `<p><b>${Part.capitalize(this.all)} ${was} stretched</b> and ${
-        is
-      } now looser.</p>`
+      // prettier-ignore
+      return `<p><b>${Part.capitalize(this.all)} ${was} stretched</b> and ${is} now looser.</p>`
     }
   }
 

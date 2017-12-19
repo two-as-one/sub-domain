@@ -79,9 +79,8 @@ export default class Breasts extends Part {
         text += `You have `
       }
 
-      text += `<b>${this.number} ${this.adjective} ${this.cupSize} ${
-        this.pluralized
-      }</b>`
+      // prettier-ignore
+      text += `<b>${this.number} ${this.adjective} ${this.cupSize} ${this.pluralized}</b>`
 
       //false if rows are uneven, otherwise returns the amount of breasts per row
       const evenRows = this.stats.config.reduce((a, b) => a === b && b)
@@ -90,13 +89,11 @@ export default class Breasts extends Part {
         if (this.stats.config.length === 1) {
           text += ` — all in a single row`
         } else if (evenRows) {
-          text += ` — ${Part.number(
-            this.stats.config.length
-          )} rows of ${Part.number(evenRows)}`
+          // prettier-ignore
+          text += ` — ${Part.number(this.stats.config.length)} rows of ${Part.number(evenRows)}`
         } else {
-          text += `. Spread over ${Part.number(
-            this.stats.config.length
-          )} rows —`
+          // prettier-ignore
+          text += `. Spread over ${Part.number(this.stats.config.length)} rows —`
 
           this.stats.config.forEach((row, i, list) => {
             text += ` ${Part.number(row)} on the ${Part.ordinal(i + 1)}`
@@ -119,16 +116,13 @@ export default class Breasts extends Part {
   }
 
   get seductionMessage() {
+    // prettier-ignore
     return Part.random([
       `<p>
-        You cup ${
-          this.all
-        } and make them jiggle. You then squeeze them individually before squishing them together.
+        You cup ${this.all} and make them jiggle. You then squeeze them individually before squishing them together.
       </p>`,
       `<p>
-        With your hands behind your head, your shake your bosom. Making ${
-          this.all
-        } bounce against one another in a delightful display.
+        With your hands behind your head, your shake your bosom. Making ${this.all} bounce against one another in a delightful display.
       </p>`
     ])
   }

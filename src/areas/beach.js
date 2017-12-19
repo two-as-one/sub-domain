@@ -49,10 +49,9 @@ export default class Beach extends Area {
   }
 
   get exploreMessage() {
+    // prettier-ignore
     return chance.pickone([
-      `<p>The soft sand caresses ${
-        this.game.player.parts.feet.all
-      } as you explore the <b>beach</b>.</p>`,
+      `<p>The soft sand caresses ${this.game.player.parts.feet.all} as you explore the <b>beach</b>.</p>`,
       `<p>You have a long walk along the <b>beach</b>.</p>`
     ])
   }

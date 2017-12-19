@@ -52,9 +52,8 @@ export default class Balls extends Part {
 
       if (!this.owner.parts.penis.has) {
         if (this.owner.parts.vagina.has) {
-          text += ` — it somehow allows your ${
-            this.owner.parts.vagina.pluralized
-          } to produce semen.`
+          // prettier-ignore
+          text += ` — it somehow allows your ${this.owner.parts.vagina.pluralized} to produce semen.`
         } else {
           text += ` — without any outlet for semen, you are constantly aroused.`
         }

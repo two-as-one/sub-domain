@@ -26,13 +26,11 @@ export default class Penis extends Part {
       text += `between your legs, `
 
       if (this.quantity === 1) {
-        text += `you have <b>${Part.articlize(this.adjective)} ${
-          this.size
-        } inch ${this.pluralized}</b>`
+        // prettier-ignore
+        text += `you have <b>${Part.articlize(this.adjective)} ${this.size} inch ${this.pluralized}</b>`
       } else {
-        text += `you have <b>${this.number} ${this.adjective} ${
-          this.size
-        } inch ${this.pluralized}</b>`
+        // prettier-ignore
+        text += `you have <b>${this.number} ${this.adjective} ${this.size} inch ${this.pluralized}</b>`
       }
 
       if (this.size < 2) {
