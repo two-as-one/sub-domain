@@ -42,6 +42,3 @@ Add `Camp` option to `main` state
 - allows you to do camp stuff
   - talk with NPC's
   - ...
-
-after using an item, if more are left, go back to inspecting it
-

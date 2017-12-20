@@ -20,7 +20,8 @@ export default class MastrubateEncounter extends DefaultEncounter {
         enemy: "hands",
         disabled: this.player.perks.has("impotent")
       },
-      { name: "milk tits", player: "breasts", enemy: "hands" }
+      { name: "milk tits", player: "breasts", enemy: "hands" },
+      { name: "finger pussy", player: "vagina", enemy: "hands" }
     ]
   }
 
@@ -70,6 +71,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
     })
   }
 
+  /** fleeing is immediate since there's nothing to flee from */
   flee() {
     this.state.exit()
   }
@@ -140,6 +142,17 @@ export default class MastrubateEncounter extends DefaultEncounter {
             It doesn't take long before you find yourself greedily groping and kneading them${extra_milky}.
           </p>`
       }
+
+      case "finger pussy": {
+        const your_clit = this.player.parts.vagina.multiple
+          ? "your many clits"
+          : "your sensitive clitty"
+        return `
+          <p>
+            You reach down between your legs and place a hand against your womanhood — Your fingers exploring your slick folds while your fingers occasionally flick ${your_clit}.
+            You can't help but moan with delight at the wonderful sensation.
+          </p>`
+      }
     }
   }
 
@@ -193,6 +206,24 @@ export default class MastrubateEncounter extends DefaultEncounter {
               You can't believe you came just from playing with ${your_tits}.
             </p>
           `
+      }
+
+      case "finger pussy": {
+        const your_pussy = this.player.parts.vagina.all
+        const one_of_your_pussies = this.player.parts.vagina.one
+        const feels = this.player.parts.vagina.multiple ? "feel" : "feels"
+        return `
+          <p>
+            You keep rubbing ${your_pussy} — drenching your fingers in girl drool.
+            Losing track of time as the euphoric sensation washes over you.
+            You just need <i>more</i>, and without any hesitation you shove as many fingers as you can fit into ${one_of_your_pussies}.
+            The sensation overwhelms you and you cry out with joy — waves of pure delight coursing through your body as you ride that orgasm for as long as you can.
+          </p>
+          <p>
+            Moments pass and you breathe heavily as you recover from your orgasm.
+            You've lost track of time and all you know is that ${your_pussy} ${feels} sore and used - <i>you</i> however, glow with satisfaction.
+          </p>
+        `
       }
     }
   }

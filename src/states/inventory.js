@@ -11,7 +11,7 @@ export default class Inventory extends State {
     return [
       { name: "list", from: "*" },
 
-      { name: "inspect", from: "list" },
+      { name: "inspect", from: ["list", "use"] },
       { name: "use", from: "inspect" },
       { name: "discard", from: "inspect" },
 
@@ -64,9 +64,18 @@ export default class Inventory extends State {
     const result = item.consume(this.game.player)
     this.game.player.inventory.discard(item.fileName)
 
+    let next
+    const more = this.game.player.inventory.find(item.fileName)
+
+    if (more) {
+      next = { state: "inspect", item: more }
+    } else {
+      next = { state: "list" }
+    }
+
     this.render({
       text: result,
-      responses: [{ state: "list" }]
+      responses: [next]
     })
   }
 

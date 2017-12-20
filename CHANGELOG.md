@@ -16,16 +16,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `jerk off` option when masturbating
 - `milk tits` option when masturbating
+- `finger pussy` option when masturbating
 - the ability for `breasts` to be milky
 - `increase breast milk` transformation to `minotaur cum`
 
 ### Changed
 - some sexual positions are now disabled instead of hidden when unavailable, due to `impotence` for instance
+- when consuming an item, if more are left the game will go back to inspecting that item instead of listing all the items
 
-### Deprecated
 ### Removed
-### Fixed
-### Security
+- `[WIP]` label from `masturbate`
 
 ## [0.3.0] - 2017-12-19
 ### Added

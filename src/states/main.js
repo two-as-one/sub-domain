@@ -214,7 +214,7 @@ export default class Main extends State {
     this.render({
       static: this.game.player.statsDescription,
       responses: [
-        { text: "masturbate [WIP]", state: "masturbate" },
+        { text: "masturbate", state: "masturbate" },
         { text: "examine body", state: "body" },
         { text: "examine gear", state: "gear" },
         { text: "view perks", state: "perks" },
