@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.3.1] -
+## [0.3.1] - 2017-12-20
 ### Added
 - `jerk off` option when masturbating
 - `milk tits` option when masturbating
