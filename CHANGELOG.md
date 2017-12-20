@@ -12,6 +12,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.3.1] -
+### Added
+- `jerk off` option when masturbating
+- `milk tits` option when masturbating
+- the ability for `breasts` to be milky
+- `increase breast milk` transformation to `minotaur cum`
+
+### Changed
+- some sexual positions are now disabled instead of hidden when unavailable, due to `impotence` for instance
+
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## [0.3.0] - 2017-12-19
 ### Added
 - `Mastrubate` option available via `self` menu

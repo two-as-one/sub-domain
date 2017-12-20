@@ -21,8 +21,7 @@ export default class TestItem extends Consumable {
       </p>`
 
     text += player.transform.pickOne([
-      "grow a bovine udder",
-      "increase udder size"
+      //add the transformations you wish to test here
     ])
 
     return text
