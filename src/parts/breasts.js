@@ -41,6 +41,7 @@ export default class Breasts extends Part {
       size: 2, //in bust inches
       sensitivity: 0.5,
       quantity: 2,
+      milk: 0, //milk production
       config: [2] //defines how many breasts there are per row
     })
   }
@@ -67,6 +68,14 @@ export default class Breasts extends Part {
     } else {
       return super.sensitivity
     }
+  }
+
+  /**
+   * check whether these breasts produce any milk
+   * @type {Boolean}
+   */
+  get milky() {
+    return this.stats.milk > 0
   }
 
   get description() {
@@ -113,6 +122,10 @@ export default class Breasts extends Part {
       }
 
       text += `.`
+
+      if (this.milky) {
+        text += ` They ache, feeling full of milk.`
+      }
     } else {
       text = `Your chest is flat and unnoteworthy.`
     }
@@ -158,15 +171,25 @@ export default class Breasts extends Part {
   }
 
   get adjective() {
+    const list = []
+
     if (this.size < 4) {
-      return Part.random(["small", "little", "perky"])
+      list.push("small", "little", "perky")
     } else if (this.size < 8) {
-      return Part.random(["modest", "sizable"])
+      list.push("modest", "sizeable")
     } else if (this.size < 12) {
-      return Part.random(["hefty", "heavy", "large"])
+      list.push("hefty", "heavy", "large")
     } else {
-      return Part.random(["humongous", "enormous", "massive", "imposing"])
+      list.push("humongous", "enormous", "massive", "imposing")
     }
+
+    if (this.milky) {
+      list.push("milky", "bountiful")
+    }
+
+    list.push("sensitive")
+
+    return Part.random(list)
   }
 
   get cupSize() {

@@ -29,13 +29,13 @@ export default class Beach extends Area {
           You're still alive … and somehow free.
         </p>
         <p>
-          As you try to get up, your body hurts all over — maybe you'll just lay down for a little longer …
+          You try to get up but your body hurts all over — maybe you'll just lay down for a little longer.
         </p>`
   }
 
   get dayDescription() {
     return `
-      <p>The sun shines bright on the hot sand while a cool breeze from the ocean keeps things bearable.</p>`
+      <p>The sun shines bright on the hot sand, but the cool ocean breeze keeps things bearable.</p>`
   }
 
   get nightDescription() {

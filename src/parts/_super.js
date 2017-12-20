@@ -61,6 +61,14 @@ export default class Part extends Saveable {
     this.stats.sensitivity = val
   }
 
+  /**
+   * Check whether there are multiple parts of this type
+   * @type {Boolean}
+   */
+  get multiple() {
+    return this.quantity !== 1
+  }
+
   grow() {
     this.size += this.growth
 

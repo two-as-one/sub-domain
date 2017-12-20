@@ -13,11 +13,11 @@ export default class Forest extends Area {
   get introMessage() {
     return `<p>
       You have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
-      Hardly any sunlight manages to make its way through the dense canopy.
-      Strange exotic sounds echo through the wilds and keep you on your toes.
+      Hardly any sunlight manages to make its way through the ominous canopy.
+      Strange exotic sounds echo through the wilds, keeping you on your toes.
     </p>
     <p>
-      After a couple of hours of exploration, you find a small opening in the vegetation with a hollow tree in the middle.
+      After a couple of hours, you find a small opening in the vegetation with a hollow tree in the middle.
       Exhausted and needing a rest, you decide to set up camp here.
     </p>`
   }

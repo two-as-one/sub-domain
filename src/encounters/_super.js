@@ -177,7 +177,8 @@ export default class DefaultEncounter extends CombatState {
     const responses = this.availablePositions.map(position => ({
       state: "submitResults",
       text: position.name,
-      position: position
+      position: position,
+      disabled: position.disabled
     }))
 
     responses.push({ state: "main", text: "cancel" })
@@ -552,32 +553,27 @@ export default class DefaultEncounter extends CombatState {
   }
 
   get availablePositions() {
-    return this.positions
+    const positions = this.positions
       .filter(
         position =>
           this.player.has(position.player) && this.enemy.has(position.enemy)
       )
-      .filter(
-        position =>
-          !(position.player === "penis" && this.player.perks.has("impotent"))
-      )
+      .filter(position => !position.hasOwnProperty("if") || position.if)
       .sort((a, b) => a.name > b.name)
-  }
 
-  hasPositionFor(part) {
-    return Boolean(
-      this.availablePositions.find(position => position.player === part)
-    )
-  }
+    positions.forEach(position => {
+      if (position.player === "penis" && this.player.perks.has("impotent")) {
+        position.disabled = true
+      }
+    })
 
-  choosePosition(part) {
-    return chance.pickone(
-      this.availablePositions.filter(position => position.player === part)
-    )
+    return positions
   }
 
   enemyChoosePosition() {
-    const choices = this.availablePositions
+    const choices = this.availablePositions.filter(
+      position => !position.disabled
+    )
     const weights = choices.map(position => this.enemy.likes(position.player))
 
     if (!choices.length) {

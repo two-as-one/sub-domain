@@ -36,7 +36,7 @@ export default class CharacterCreation extends State {
   chooseSex() {
     this.render({
       text: `
-        There you lived, happy and carefree, cultivating crops and tending to the animals as needed.
+        There you lived, happy and carefree, cultivating crops and tending to the animals.
         You had just come of age — still living with your parents, you were their only …`,
       responses: [
         { state: "confirmSex", text: "son", sex: "man" },
@@ -174,9 +174,9 @@ export default class CharacterCreation extends State {
         </p>
         <p>
           But good things must come to an end, and for you they did in the most drastic of ways.
-          It was a dark an gloomy day, on your way back home from the local village, you were abducted by a band of slavers.
-          Taken from your home, never to see it again.
-          You were to be sold to the highest bidder and with a young and able body like yours — the slavers would have made quite the coin off of you.
+          It was a dark gloomy day and you were on your way back home from the local village.
+          That's when you were abducted by a band of slavers — taken from your home, never to see it again.
+          You were to be sold to the highest bidder, and with a young and able body like yours the slavers would have made quite the coin.
         </p>
         <p>
           You remember travelling for several days before eventually embarking on their dreadful ship.
@@ -189,7 +189,7 @@ export default class CharacterCreation extends State {
     this.render({
       text: `
         It was the first time you had set foot on a ship — or even seen the sea for that matter, though your journey was anything but pleasant.
-        You spent all your days inside the brig, locked up with the other slaves.
+        You spent all your days locked up inside the brig, with the other slaves.
         Powerless and with no control over your destiny, you grew increasingly desperate.`,
       responses: [{ state: "outro3" }]
     })
@@ -202,7 +202,7 @@ export default class CharacterCreation extends State {
           But fate is fickle and yours took another unforeseen twist.
         </p>
         <p>
-          Waking up from an uncomfortable sleep, the ship was violently rocking back and forth — it must've ventured into a serious storm, or so you thought.
+          You woke up from an uncomfortable sleep, and the ship was violently rocking back and forth — it must've ventured into a serious storm, or so you thought.
           What happened next was over in the blink of an eye — first a loud bang, followed by endless waves of water crashing down inside the ship.
           It sank, pulling you and everything else down with it.
           The darkness of the abyss swallowing you whole.

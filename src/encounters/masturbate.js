@@ -13,8 +13,14 @@ export default class MastrubateEncounter extends DefaultEncounter {
   /** for the purposes of masturbation the `enemy` is also the player */
   get positions() {
     return [
-      { name: "finger ass", player: "anus", enemy: "hands" }
-      //{ name: "jerk off", player: "penis", enemy: "hands" }
+      { name: "finger ass", player: "anus", enemy: "hands" },
+      {
+        name: "jerk off",
+        player: "penis",
+        enemy: "hands",
+        disabled: this.player.perks.has("impotent")
+      },
+      { name: "milk tits", player: "breasts", enemy: "hands" }
     ]
   }
 
@@ -23,15 +29,21 @@ export default class MastrubateEncounter extends DefaultEncounter {
       return this.state.end()
     }
 
-    const actions = []
+    const actions = this.availablePositions.map(position => ({
+      text: position.name,
+      state: "fuck",
+      disabled: Boolean(position.disabled),
+      position: position
+    }))
 
-    this.positions.forEach(position => {
-      if (this.player.has(position.player) && this.player.has(position.enemy)) {
-        actions.push({
-          text: position.name,
-          state: "fuck",
-          position: position
-        })
+    //sort actions by name
+    actions.sort((a, b) => {
+      if (a.text < b.text) {
+        return -1
+      } else if (a.text > b.text) {
+        return 1
+      } else {
+        return 0
       }
     })
 
@@ -47,7 +59,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
     this.fucking = data.position
 
     const lust = this.player.fuck(
-      this.enemy,
+      this.player,
       this.fucking.player,
       this.fucking.enemy
     )
@@ -72,11 +84,8 @@ export default class MastrubateEncounter extends DefaultEncounter {
     super.render(data)
   }
 
-  // Combat messages
-  //----------------
-
   get introMessage() {
-    return `<p>You find a nice and comfortable spot to spend some alone-time.</p>`
+    return `<p>You find yourself a nice and comfortable spot to spend some well-deserved <q>alone time</q>.</p>`
   }
 
   get mainMessage() {
@@ -84,56 +93,107 @@ export default class MastrubateEncounter extends DefaultEncounter {
     if (lust < 0.1) {
       return `<p>You're not really in the mood but with a little stimulation you might get there.</p>`
     } else if (lust < 0.3) {
-      return `<p>You're feeling a little horny as your body lusts for more.</p>`
+      return `<p>You're feeling a little horny and your body lusts for more.</p>`
     } else if (lust < 0.6) {
       return `<p>Your body feels warm and tingly and your mind is flooded with dirty images.</p>`
     } else if (lust < 0.8) {
       return `<p>All you can think of is sex and you just want to feel that sweet release.</p>`
     } else if (lust < 1) {
-      return `<p>Oh god — You're so close! You can feel it coming, just a little more.</p>`
+      return `<p>Oh god — You're so close! You can feel it coming, just a little more…</p>`
     }
   }
 
   get masturbateMessage() {
-    let text = ""
-
     switch (this.fucking.name) {
       case "finger ass": {
         const your_ass = this.player.parts.anus.one
-        text += `
+        return `
           <p>
             Reaching down between your legs, you let your middle finger trace the contour of ${your_ass}.
             A soft moan escapes your lips as you push your finger inside.
             You pause for a moment and savour the wonderful sensation, but you can't resist much longer and quickly pick up the pace — continually fingering ${your_ass}.
           </p>`
-        break
       }
-      case "jerk off":
-        break
-    }
 
-    return text
+      case "jerk off": {
+        const your_cock = this.player.parts.penis.all
+        const your_hands = this.player.parts.hands.two
+        const it = this.player.parts.penis.multiple ? "them" : "it"
+        return `
+          <p>
+            You reach down with ${your_hands} at ${your_cock}.
+            Groaning as you start jerking ${it} — slowly and steadily.
+            Soon ${your_hands} get all sticky as you drool pre all over them.
+          </p>`
+      }
+
+      case "milk tits": {
+        const your_hands = this.player.parts.hands.all
+        const your_tits = this.player.parts.breasts.all
+        const extra_milky = this.player.parts.breasts.milky
+          ? ` as milk drools out of your throbbing nips`
+          : ""
+        return `
+          <p>
+            With ${your_hands} you sensually caress the curves of ${your_tits}.
+            Taking your time and easing yourself into the wonderful sensation — occasionally flicking your nipples.
+            It doesn't take long before you find yourself greedily groping and kneading them${extra_milky}.
+          </p>`
+      }
+    }
   }
 
   get climaxMessage() {
-    let text = ""
-
     switch (this.fucking.name) {
       case "finger ass": {
         const your_ass = Part.capitalize(this.player.parts.anus.one)
-        text += `
+        return `
           <p>
             ${your_ass} squirms hungrily as you ceaselessly finger it.
-            You lose yourself to the overwhelming sensation and cry out with pure ecstasy as an earth-shattering anal orgasm courses through your body.
+            You lose yourself to the amazing sensation and cry out with pure ecstasy as an earth-shattering anal orgasm overwhelms your body.
             Your entire body quivering and shaking while you slowly regain your senses.
           </p>
           <p>
             You smile, licking your fingers with satisfaction as you bask in the glory of the aftermath.
           </p>`
-        break
+      }
+
+      case "jerk off": {
+        const your_cock = this.player.parts.penis.all
+        const it = this.player.parts.penis.multiple ? "them" : "it"
+        const throbs = this.player.parts.penis.multiple ? "throb" : "throbs"
+        return `
+            <p>
+              Your groans get louder and more erratic as ${your_cock} ${throbs} with anticipation.
+              You find yourself jerking ${it} furiously — lost in primal sensation.
+              Then, as a shiver runs down your spine, you burst out with pure ecstasy — spurting cum all over yourself.
+            </p>
+            <p>
+              Moments pass as you revel in the fading afterglow.
+            </p>`
+      }
+
+      case "milk tits": {
+        const your_tits = this.player.parts.breasts.all
+        const extra_milky1 = this.player.parts.breasts.milky
+          ? `, squirting milk all over yourself`
+          : ""
+        const extra_milky2 = this.player.parts.breasts.milky
+          ? `Your nipples bursting out like fountains of milk — spraying it everywhere!`
+          : ""
+        return `
+            <p>
+              You keep rubbing and squeezing ${your_tits}${extra_milky1}.
+              The sensation is thrilling and wonderful and you just can't stop tugging on your nipples.
+              A warmth emanates from your chest and engulfs your entire body as you cry out with joy.
+              ${extra_milky2}
+            </p>
+            <p>
+              Slowly you regain your senses, still rubbing ${your_tits}, but more slowly now.
+              You can't believe you came just from playing with ${your_tits}.
+            </p>
+          `
       }
     }
-
-    return text
   }
 }
