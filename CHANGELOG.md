@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.0] - 2017-12-19
 ### Added
-- `Mastrubate` option available via `self` menu
+- `Masturbate` option available via `self` menu
   - only `finger ass` option available so far but more to be added later
 
 ### Fixed
