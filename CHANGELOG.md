@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.3.2] - 2018-01-05
+### Added
+- [WIP] `conjoined` perk - currently classified as a perk but this is likely to change in the future
+- added `nipples` body part and description on character sheet
+- added `nipple growth` transformations to `milk` and `minotaur cum`
+- added `nipple multiplication` transformation to `minotaur cum`
+
+### Changed
+- instances of `your body` `your head` `your face` `you` to be dynamic based on `conjoined` perk
+
 ## [0.3.1] - 2017-12-20
 ### Added
 - `jerk off` option when masturbating

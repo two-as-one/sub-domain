@@ -10,6 +10,7 @@ import Hands from "parts/hands"
 import Head from "parts/head"
 import Inventory from "./inventory"
 import Mouth from "parts/mouth"
+import Nipples from "parts/nipples"
 import Penis from "parts/penis"
 import PerkManager from "perks/_manager"
 import Tail from "parts/tail"
@@ -37,6 +38,7 @@ export default class Player extends Entity {
       hands: new Hands(this),
       head: new Head(this),
       mouth: new Mouth(this),
+      nipples: new Nipples(this),
       penis: new Penis(this),
       tail: new Tail(this),
       udder: new Udder(this),

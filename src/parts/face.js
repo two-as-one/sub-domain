@@ -7,10 +7,6 @@ export default class Face extends Part {
     return null
   }
 
-  get derived() {
-    return true
-  }
-
   get size() {
     return this.owner.parts.head.size
   }

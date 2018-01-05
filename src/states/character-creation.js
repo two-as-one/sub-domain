@@ -57,6 +57,7 @@ export default class CharacterCreation extends State {
         gender = "girl"
         this.game.player.parts.penis.quantity = 0
         this.game.player.parts.balls.quantity = 0
+        this.game.player.parts.nipples.size = 0.4
         break
     }
 

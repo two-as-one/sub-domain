@@ -101,11 +101,11 @@ export default class Breasts extends Part {
 
       if (this.quantity > 3) {
         if (this.stats.config.length === 1) {
-          text += ` — all in a single row`
+          text += ` — all in a single row and each `
         } else if (evenRows) {
           const row_number = Grammar.number(this.stats.config.length)
           const number = Grammar.number(evenRows)
-          text += ` — ${row_number} rows of ${number}`
+          text += ` — ${row_number} rows of ${number}. Each `
         } else {
           const row_number = Grammar.number(this.stats.config.length)
           text += `. Spread over ${row_number} rows —`
@@ -119,16 +119,26 @@ export default class Breasts extends Part {
               text += ` and`
             }
           })
+
+          text += `. Each `
         }
+      } else if (this.quantity === 2) {
+        text += ` — both `
+      } else {
+        text += ` — each `
       }
 
-      text += `.`
+      text += this.owner.parts.nipples.description
 
       if (this.milky) {
-        text += ` They ache, feeling full of milk.`
+        text += ` ${Grammar.capitalize(
+          this.all
+        )} ache, feeling <b>full of milk</b>.`
       }
     } else {
-      text = `Your chest is flat and unnoteworthy.`
+      text = `Your chest is flat and unnoteworthy. Your pecs each ${
+        this.owner.parts.nipples.description
+      }`
     }
 
     return Grammar.trim(`<p>${text}</p>`)
@@ -158,6 +168,10 @@ export default class Breasts extends Part {
   get singular() {
     let choices = ["breast", "boob", "tit", "mammary"]
 
+    if (this.size === 0) {
+      return "pec"
+    }
+
     if (this.size > 8) {
       choices = choices.concat(["knocker", "jug", "melon"])
     }
@@ -168,6 +182,10 @@ export default class Breasts extends Part {
   get plural() {
     let choices = ["breasts", "boobs", "boobies", "tits", "mammaries"]
 
+    if (this.size === 0) {
+      return "pecs"
+    }
+
     if (this.size > 8) {
       choices = choices.concat(["knockers", "jugs", "melons"])
     }
@@ -177,6 +195,10 @@ export default class Breasts extends Part {
 
   get adjective() {
     const list = []
+
+    if (this.size === 0) {
+      return "flat"
+    }
 
     if (this.size < 4) {
       list.push("small", "little", "perky")

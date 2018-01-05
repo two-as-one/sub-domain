@@ -25,7 +25,8 @@ export default class Milk extends Consumable {
     if (Math.random() > 0.5) {
       text += player.transform.pickOne([
         "increase breast size",
-        "grow a pair of breasts"
+        "grow a pair of breasts",
+        "increase nipple size"
       ])
     }
 

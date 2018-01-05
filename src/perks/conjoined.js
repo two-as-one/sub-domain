@@ -6,7 +6,7 @@ export default class Conjoined extends Perk {
   }
 
   get description() {
-    return `You share your body with someone else.`
+    return `[WIP] You share your body with someone else.`
   }
 
   get effect() {
