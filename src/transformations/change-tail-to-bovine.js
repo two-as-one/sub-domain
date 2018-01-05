@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -15,9 +16,13 @@ export default class BreastGrowth extends Transformation {
   apply() {
     this.owner.parts.tail.type = "bovine"
 
+    const you = this.owner.who
+
     const text = `
       <p>
-        As you start walking, you immediately lose balance. It's as if your center of gravity has changed. You examine yourself to find out why…
+        As you start walking, you immediately lose balance.
+        It's as if your center of gravity has changed.
+        ${Grammar.capitalize(you)} examine yourself to find out why…
       </p>
       <p>
         <b>Your tail has turned into a bovine one!</b>

@@ -47,7 +47,7 @@ export default class Vagina extends Part {
 
     return `
       <p>
-        You spread your legs lightly while facing you opponent.
+        You spread your legs lightly while facing your opponent.
         Placing your hands on your inner thighs and sensually moving them upwards towards ${your_pussy} but never quite reaching it.
       </p>`
   }

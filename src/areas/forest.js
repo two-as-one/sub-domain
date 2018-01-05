@@ -1,4 +1,5 @@
 import Area from "./_super"
+import Grammar from "utils/grammar"
 import MinotaurEncounter from "encounters/minotaur"
 
 export default class Forest extends Area {
@@ -11,14 +12,18 @@ export default class Forest extends Area {
   }
 
   get introMessage() {
+    const you = this.game.player.who
+
     return `<p>
-      You have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
+      ${Grammar.capitalize(
+        you
+      )} have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
       Hardly any sunlight manages to make its way through the ominous canopy.
       Strange exotic sounds echo through the wilds, keeping you on your toes.
     </p>
     <p>
       After a couple of hours, you find a small opening in the vegetation with a hollow tree in the middle.
-      Exhausted and needing a rest, you decide to set up camp here.
+      Exhausted and needing a rest, ${you} decide to set up camp here.
     </p>`
   }
 
@@ -44,17 +49,21 @@ export default class Forest extends Area {
   }
 
   get exploreMessage() {
+    const you = this.game.player.who
     return `
       <p>
-        You cautiously creep through the dense foliage.
+        ${Grammar.capitalize(you)} cautiously creep through the dense foliage.
         Thick vines and branches constantly getting in your way and slowing you down.
       </p>`
   }
 
   get sleepMessage() {
+    const you = this.game.player.who
     return `
     <p>
-      You curl up on a bed of leaves and doze off to the sound of crickets and owls.
+      ${Grammar.capitalize(
+        you
+      )} curl up on a bed of leaves and doze off to the sound of crickets and owls.
     </p>`
   }
 
@@ -66,10 +75,15 @@ export default class Forest extends Area {
   }
 
   get sunriseMessage() {
+    const you = this.game.player.who
+    const your_face = this.game.player.parts.face.all
+
     return `
       <p>
-        You wake up from an uncomfortable night of sleep, due to the high temperature and humidity.
-        A bright ray of sunshine pierces through the canopy and shines straight on your face.
+        ${Grammar.capitalize(
+          you
+        )} wake up from an uncomfortable night of sleep, due to the high temperature and humidity.
+        A bright ray of sunshine pierces through the canopy and shines straight on ${your_face}.
       </p>`
   }
 
@@ -107,9 +121,11 @@ export default class Forest extends Area {
   nothingHappened() {
     const xp = 5
     this.game.player.giveXP(xp)
+
+    const you = this.game.player.who
     return `
       <p>
-        About an hour later you end up back at your camp.
+        About an hour later ${you} end up back at your camp.
         You had no idea you were going in a circle, but you've learned a little about this place.
       </p>
       <p>You gain <b>${xp}xp</b></p>`

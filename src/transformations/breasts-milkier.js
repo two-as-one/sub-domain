@@ -21,10 +21,14 @@ export default class BreastMilkier extends Transformation {
     const milky =
       this.owner.parts.breasts.stats.milk === 1 ? "milky" : "milkier"
 
+    const you = this.owner.who
+
     const text = `
       <p>
         Your chest starts aching as ${your_tits} feel <i>just so full</i>.
-        You look down and notice beads of milk forming around your nipples.
+        ${Grammar.capitalize(
+          you
+        )} look down and notice beads of milk forming around your nipples.
       </p>
       <p>
         <b>${Grammar.capitalize(

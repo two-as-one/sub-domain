@@ -3,8 +3,11 @@ import Balls from "parts/balls"
 import Body from "parts/body"
 import Breasts from "parts/breasts"
 import Entity from "entities/_super"
+import Face from "parts/face"
 import Feet from "parts/feet"
+import Grammar from "utils/grammar"
 import Hands from "parts/hands"
+import Head from "parts/head"
 import Inventory from "./inventory"
 import Mouth from "parts/mouth"
 import Penis from "parts/penis"
@@ -29,8 +32,10 @@ export default class Player extends Entity {
       balls: new Balls(this),
       body: new Body(this),
       breasts: new Breasts(this),
+      face: new Face(this),
       feet: new Feet(this),
       hands: new Hands(this),
+      head: new Head(this),
       mouth: new Mouth(this),
       penis: new Penis(this),
       tail: new Tail(this),
@@ -40,6 +45,23 @@ export default class Player extends Entity {
 
     this.transform = new TransformationManager(this)
     this.perks = new PerkManager(this)
+  }
+
+  /**
+   * Allows the formation of sentences describing the player or the player and their conjoined twin if applicable
+   * Use with caution and just use 'you' where applicable
+   * when to use:
+   *   When performing an action: `${player.who} swing your fists at the opponent`
+   * when NOT to use:
+   *   When referring to the player directly: 'You gained ${xp}XP'
+   *   When it would overload the sentence: '${player.who} talked while you took a shower'
+   */
+  get who() {
+    if (this.perks.has("conjoined")) {
+      return Grammar.random(["both of you", "you both"])
+    } else {
+      return "you"
+    }
   }
 
   // Saving

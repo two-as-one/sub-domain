@@ -24,10 +24,12 @@ export default class Anus extends Part {
   }
 
   get seductionMessage() {
+    const you = this.owner.who
+
     return Grammar.random([
       `<p>
         You turn around and place your hands on your hips.
-        Looking back over your shoulder, you invitingly sway your bottom back and forth.
+        Looking back over your shoulder, ${you} invitingly sway your bottom back and forth.
         Then, with a playful smirk on your face, you firmly slap your own ass.
       </p>`,
       `<p>

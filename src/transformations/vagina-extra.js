@@ -15,11 +15,14 @@ export default class VaginaExtra extends Transformation {
   apply() {
     this.owner.parts.vagina.add()
 
+    const you = this.owner.who
+
     let text = `
       <p>
-        You have an itch between your legs. Soon the sensation keeps building up until you reach some sort of pseudo-orgasm.
+        You have an itch between your legs.
+        Soon the sensation keeps building up until you reach some sort of pseudo-orgasm.
         You feel a trickle down your inner thigh.
-        Gasping — you look down and notice why.
+        Gasping — ${you} look down and notice why.
       </p>`
 
     if (this.owner.parts.vagina.quantity === 2) {

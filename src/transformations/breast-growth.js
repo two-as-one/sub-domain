@@ -16,10 +16,12 @@ export default class BreastGrowth extends Transformation {
   apply() {
     this.owner.parts.breasts.grow()
 
+    const you = this.owner.who
+
     const text = `
       <p>
         Your chest feels tingly and hot.
-        You look down and quickly realize why.
+        ${Grammar.capitalize(you)} look down and quickly realize why.
       </p>
       <p>
         <b>${Grammar.capitalize(this.owner.parts.breasts.all)} have grown!</b>

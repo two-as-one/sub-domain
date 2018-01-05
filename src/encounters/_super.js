@@ -511,11 +511,13 @@ export default class DefaultEncounter extends CombatState {
       text += this.combatVictoryMessage
     }
 
+    const you = this.player.who
+
     if (this.player.orgasmed || !this.player.alive) {
       this.fadeout = true
       text += `
         <p>
-          Time passes before you regain your senses.
+          Time passes before ${you} regain your senses.
         </p>
       `
     }
@@ -612,15 +614,28 @@ export default class DefaultEncounter extends CombatState {
   }
 
   get tooHornyMessage() {
-    return `<p>You are overwhelmed with lust and unable to control your actions.</p>`
+    const you = this.game.player.who
+
+    return `<p>${Grammar.capitalize(
+      you
+    )} are overwhelmed with lust and unable to control your actions.</p>`
   }
 
   get tooWeakMessage() {
-    return `<p>You have lost all strength in your body and are unable to resist.</p>`
+    const you = this.game.player.who
+    const your_body = this.game.player.parts.body.your
+
+    return `<p>${Grammar.capitalize(
+      you
+    )} have lost all strength in ${your_body} and are unable to resist.</p>`
   }
 
   succubusMessage(hunger) {
-    return `<p>You are satiated by all that semen — <b>${hunger} hunger restored</b>.</p>`
+    const you = this.game.player.who
+
+    return `<p>${Grammar.capitalize(
+      you
+    )} are satiated by all that semen — <b>${hunger} hunger restored</b>.</p>`
   }
 
   xpGainMessage(amount) {
@@ -628,17 +643,25 @@ export default class DefaultEncounter extends CombatState {
   }
 
   get attackMessage() {
-    return `<p>You swing your ${this.player.weapon.name} at ${
-      this.enemy.who
-    }.</p>`
+    const you = this.game.player.who
+
+    return `<p>${Grammar.capitalize(you)} swing your ${
+      this.player.weapon.name
+    } at ${this.enemy.who}.</p>`
   }
 
   get fleeSuccessMessage() {
-    return `<p>You manage to run away from ${this.enemy.who}!</p>`
+    const you = this.game.player.who
+
+    return `<p>${Grammar.capitalize(you)} manage to run away from ${
+      this.enemy.who
+    }!</p>`
   }
 
   get fleeFailureMessage() {
-    return `<p>You try to flee but ${
+    const you = this.game.player.who
+
+    return `<p>${Grammar.capitalize(you)} try to flee but ${
       this.enemy.who
     } stops you in your tracks!</p>`
   }

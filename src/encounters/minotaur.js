@@ -1,4 +1,5 @@
 import DefaultEncounter from "./_super"
+import Grammar from "utils/grammar"
 import Minotaur from "entities/minotaur"
 
 export default class MinotaurEncounter extends DefaultEncounter {
@@ -13,7 +14,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
       { name: "blowjob", player: "mouth", enemy: "penis", infects: true },
       { name: "boobjob", player: "breasts", enemy: "penis" },
       { name: "frotting", player: "penis", enemy: "penis" }
-      // 'vagina':   'doggystyle',
       // 'hands':    'handjob',
       // 'feet':     'footjob',
     ]
@@ -23,9 +23,11 @@ export default class MinotaurEncounter extends DefaultEncounter {
   //----------------
 
   get introMessage() {
+    const your_head = this.game.player.parts.head.all
+
     return `
       <p>
-        Suddenly a massive axe swings right above your head and cuts through the flora. You are ambushed by a <b>minotaur</b>!
+        Suddenly a massive axe swings right above ${your_head} and cuts through the flora. You are ambushed by a <b>minotaur</b>!
       </p>`
   }
 
@@ -100,7 +102,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   get notInterestedMessage() {
-    return `<p>The minotaur isn't interested in what you're offering.</p>`
+    return `<p>The minotaur slaps you in the face as you try to approach it — clearly not impressed by what you're offering.</p>`
   }
 
   get grappleFailureMessage() {
@@ -111,13 +113,15 @@ export default class MinotaurEncounter extends DefaultEncounter {
   //-----------------
 
   get playerInitiatePositionMessage() {
+    const you = this.player.who
+
     switch (this.fucking.name) {
       case "anal": {
         const your_ass = this.player.parts.anus.one
         return `
         <p>
           You turn your back towards the minotaur, shaking your ass a few times before bending over.
-          On all fours and with your ass pointing up, you look back over your shoulder at the minotaur.
+          On all fours and with your ass pointing up, ${you} look back over your shoulder at the minotaur.
           It snorts, unable to resist and with one hand on its cock and the other on your ass it brutally rams its bovine cock into ${your_ass}.
         </p>`
       }
@@ -126,7 +130,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         return `
         <p>
           You turn your back towards the minotaur, shaking your ass a few times before bending over.
-          On all fours and with your ass pointing up, you look back at the minotaur from between your legs.
+          On all fours and with your ass pointing up, ${you} look back at the minotaur from between your legs.
           Without any hesitation, the minotaur grabs you by your hips and rams its monstrous cock into ${your_pussy}.
         </p>`
       }
@@ -135,7 +139,9 @@ export default class MinotaurEncounter extends DefaultEncounter {
         const your_hands = this.player.parts.hands.all
         return `
         <p>
-          You get down on your knees in front of the minotaur.
+          ${Grammar.capitalize(
+            you
+          )} get down on your knees in front of the minotaur.
           Facing its massive bovine cock, you grab it with ${your_hands} and jerk it a few times.
           Licking your lips hungrily, you open ${your_mouth} and swallow it whole.
         </p>`
@@ -154,7 +160,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         const your_cock = this.player.parts.penis.all
         return `
         <p>
-          You carefully approach the minotaur as it looks down at you with a curious gaze.
+          You carefully approach the minotaur as it looks down at ${you} with a curious gaze.
           Slowly shuffling closer until ${your_cock} pokes against its inhumanly large bovine cock.
           The minotaur snorts as you wrap your fingers around the cocks and slowly start jerking them together.
         </p>`
@@ -164,12 +170,14 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   get enemyInitiatePositionMessage() {
+    const you = this.player.who
+
     switch (this.fucking.name) {
       case "anal": {
         const your_ass = this.player.parts.anus.one
         return `
         <p>
-          The minotaur grabs you by your wrist then pins you face first down against the ground.
+          The minotaur grabs you by your wrist then pins ${you} face first down against the ground.
           Snorting like a bull, it hungrily looks down at your ass before brutally ramming its cock into ${your_ass}.
         </p>`
       }
@@ -196,7 +204,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         const your_tits = this.player.parts.breasts.all
         return `
         <p>
-          The minotaur overpowers you and pins you to the floor under its weight.
+          The minotaur overpowers you and pins ${you} to the floor under its weight.
           It sits down on top of you with its cock throbbing between ${your_tits}.
         </p>`
       }
@@ -204,7 +212,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         const your_cock = this.player.parts.penis.all
         return `
         <p>
-          The minotaur tramples over you, pinning you down on the floor underneath its weight and strength.
+          The minotaur tramples over you, pinning ${you} down on the floor underneath its weight and strength.
           With its massive bovine cock throbbing against ${your_cock} it starts dry-humping you.
           Its heavy ball sack slapping against your bottom.
         </p>`
@@ -214,11 +222,15 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   get playerContinuePositionMessage() {
+    const you = this.player.who
+
     switch (this.fucking.name) {
       case "anal":
         return `
         <p>
-          You squeeze down on that cock that ceaselessly pounds away at your ass.
+          ${Grammar.capitalize(
+            you
+          )} squeeze down on that cock that ceaselessly pounds away at your ass.
         </p>`
       case "vaginal":
         return `
@@ -234,14 +246,18 @@ export default class MinotaurEncounter extends DefaultEncounter {
         const your_tits = this.player.parts.breasts.two
         return `
         <p>
-          You squeeze ${your_tits} together around the minotaur's cock.
+          ${Grammar.capitalize(
+            you
+          )} squeeze ${your_tits} together around the minotaur's cock.
         </p>`
       }
       case "frotting": {
         const your_cock = this.player.parts.penis.all
         return `
         <p>
-          You continue to stroke ${your_cock} and the minotaur's cock together.
+          ${Grammar.capitalize(
+            you
+          )} continue to stroke ${your_cock} and the minotaur's cock together.
         </p>`
       }
     }
@@ -288,7 +304,8 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   get struggleFailureMessage() {
-    return `<p>You attempt to struggle free but the minotaur keeps you firmly pinned down.</p>`
+    const you = this.player.who
+    return `<p>You attempt to struggle free but the minotaur keeps ${you} firmly pinned down.</p>`
   }
 
   get pullOutMessage() {
@@ -298,11 +315,14 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   get climaxMessage() {
+    const you = this.player.who
+    const your_face = this.player.parts.face.all
+
     if (!this.fucking) {
       return `
         <p>
           The minotaur roars out with both hands around its cock, jerking itself off until it explodes into an overwhelming orgasm.
-          Cum spurting all over the place with a few drops managing to land on your face.
+          Cum spurting all over the place with a few drops managing to land on ${your_face}.
           Half unconscious the minotaur falls down to the ground.
         </p>`
     }
@@ -315,7 +335,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
           The minotaur roars out loudly as it's close to orgasm.
           With both hands around your waist it furiously ravages your ass until it finally explodes into it.
           Thick bovine cum slathering your insides and dribbling out of ${your_ass}.
-          Overwhelmed with satisfaction, the minotaur falls down on its back — pulling you down with it, impaled on its shaft.
+          Overwhelmed with satisfaction, the minotaur falls down on its back — pulling ${you} down with it, impaled on its shaft.
           You then slowly get up, feeling that massive cock sliding out of your abused hole, beads of cum trickling down your thighs.
         </p>`
       }
@@ -327,7 +347,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
           You greedily squeeze down on it, moaning with pleasure.
           It doesn't take long for the monster to roar out and unload into ${your_pussy}.
           Hot bovine spunk building up inside of you and finally spurting out under its own pressure — dripping down your inner thighs.
-          Snorting one last time and filled with satisfaction — the minotaur falls asleep, pinning you under its weight.
+          Snorting one last time and filled with satisfaction — the minotaur falls asleep, pinning ${you} under its weight.
           With some effort you manage to dislodge the cock while wriggling out from under the sleeping beast.
         </p>`
       }
@@ -342,22 +362,25 @@ export default class MinotaurEncounter extends DefaultEncounter {
         </p>`
       case "boobjob": {
         const your_tits = this.player.parts.breasts.all
+        const your_face = this.player.parts.face.all
         return `
         <p>
           The minotaur groans and growls with its monstrous cock throbbing between ${your_tits}.
           It fucks your cleavage over and over like a wild beast.
-          You even start to feel sore but you can't help but moan out with joy — triggering the minotaur's climax.
-          Thick bovine spunk spraying all over your face.
+          You even start to feel sore but ${you} can't help but moan out with joy — triggering the minotaur's climax.
+          Thick bovine spunk spraying all over ${your_face}.
         </p>`
       }
       case "frotting": {
         const your_cock = this.player.parts.penis.all
+        const your_face = this.player.parts.face.all
+        const both = this.player.perks.has("conjoined") ? "all" : "both"
         return `
         <p>
           The minotaur growls as you keep rubbing ${your_cock} against his.
-          Wrapping its hands around yours and forcing you to continue jerking those cocks.
+          Wrapping its hands around yours and forcing ${you} to continue jerking those cocks.
           You keep at it, slowly picking up the pace until neither of you can resist any longer.
-          You both climax at the same time — spunk mixing as it lands all over your chest and face.
+          You ${both} climax at the same time — spunk mixing as it lands all over ${your_face} and chest.
         </p>`
       }
     }

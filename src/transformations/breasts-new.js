@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -16,10 +17,12 @@ export default class BreastsNew extends Transformation {
     this.owner.parts.breasts.quantity = 2
     this.owner.parts.breasts.size = 1
 
+    const you = this.owner.who
+
     const text = `
       <p>
         Your chest feels tingly and hot.
-        You look down and quickly realize why.
+        ${Grammar.capitalize(you)} look down and quickly realize why.
       </p>
       <p>
         Your chest has swollen and <b>you now have ${

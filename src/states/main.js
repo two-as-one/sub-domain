@@ -158,7 +158,7 @@ export default class Main extends State {
 
   travel(data) {
     this.render({
-      text: `<p>You pack you bags and and travel to the <b>${
+      text: `<p>You pack your bags and and travel to the <b>${
         data.area.name
       }</b>.</p>`,
       responses: [{ state: "switchArea", area: data.area }]

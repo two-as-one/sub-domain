@@ -1,5 +1,7 @@
 import Area from "./_super"
 import Chance from "chance"
+import Grammar from "utils/grammar"
+
 const chance = new Chance()
 
 export default class Beach extends Area {
@@ -20,16 +22,19 @@ export default class Beach extends Area {
   }
 
   get introMessage() {
+    const you = Grammar.capitalize(this.game.player.who)
+    const your_body = this.game.player.parts.body.your
+
     return `
         <p>
-          You open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
+          ${you} open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
           The peaceful sound of waves crashing against the shore reminding you of home.
         </p>
         <p>
           You're still alive … and somehow free.
         </p>
         <p>
-          You try to get up but your body hurts all over — maybe you'll just lay down for a little longer.
+          ${you} try to get up but ${your_body} hurts all over — maybe you'll just lay down for a little longer.
         </p>`
   }
 
@@ -50,15 +55,17 @@ export default class Beach extends Area {
 
   get exploreMessage() {
     const your_feet = this.game.player.parts.feet.all
+    const you = this.game.player.who
     return chance.pickone([
-      `<p>The soft sand caresses ${your_feet} as you explore the <b>beach</b>.</p>`,
+      `<p>The soft sand caresses ${your_feet} as ${you} explore the <b>beach</b>.</p>`,
       `<p>You have a long walk along the <b>beach</b>.</p>`
     ])
   }
 
   get sleepMessage() {
+    const you = this.game.player.who
     return `
-      <p>You lay down on the cool sand. Gazing up to the sky, you count the stars until you drift off.</p>
+      <p>You lay down on the cool sand. Gazing up to the sky, ${you} count the stars until you drift off.</p>
     `
   }
 
@@ -69,8 +76,9 @@ export default class Beach extends Area {
   }
 
   get sunriseMessage() {
+    const you = Grammar.capitalize(this.game.player.who)
     return `
-      <p>You wake up to the sound of crashing waves. The sun has already begun its ascend across the sky.</p>
+      <p>${you} wake up to the sound of crashing waves. The sun has already begun its ascend across the sky.</p>
     `
   }
 
@@ -125,8 +133,10 @@ export default class Beach extends Area {
   nothingHappened() {
     const xp = 5
     this.game.player.giveXP(xp)
+    const you = this.game.player.who
+
     return `
-      <p>After a long and uneventful stroll along the coast, you decide to head back to camp.</p>
+      <p>After a long and uneventful stroll along the coast, ${you} decide to head back to camp.</p>
       <p>You gain <b>${xp}xp</b></p>`
   }
 }

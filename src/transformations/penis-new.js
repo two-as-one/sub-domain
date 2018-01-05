@@ -15,9 +15,11 @@ export default class PenisNew extends Transformation {
   apply() {
     this.owner.parts.penis.add()
 
+    const you = this.owner.who
+
     return `
       <p>
-        Your groin feels hot and itchy — as you reach down to scratch, you notice something unusual.
+        Your groin feels hot and itchy — as you reach down to scratch, ${you} notice something unusual.
       </p>
       <p>
         <b>You have grown a tiny new ${this.owner.parts.penis.singular}!</b>
