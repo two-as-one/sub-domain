@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.0] - 2018-01-05
+### Changed
+- incremented version number to indicate save-breaking changes
+
 ## [0.3.2] - 2018-01-05
 ### Added
 - [WIP] `conjoined` perk - currently classified as a perk but this is likely to change in the future
