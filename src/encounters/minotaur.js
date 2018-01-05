@@ -72,10 +72,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
     }
   }
 
-  get attackMessage() {
-    return `<p>You swing your ${this.player.weapon.name} at the minotaur.</p>`
-  }
-
   get playerAttackdeMessage() {
     return `<p>The minotaur swings its massive axe at you.</p>`
   }
@@ -94,14 +90,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
 
   get climaxVictoryMessage() {
     return `<p>You sneak off as the minotaur has become docile from its recent orgasm.</p>`
-  }
-
-  get fleeSuccessMessage() {
-    return `<p>You manage to run away from the minotaur!</p>`
-  }
-
-  get fleeFailureMessage() {
-    return `<p>You try to flee but the minotaur stops you in your tracks!</p>`
   }
 
   // Seduction messages

@@ -1,5 +1,5 @@
+import Grammar from "utils/grammar"
 import Mastrubate from "encounters/masturbate"
-import Part from "parts/_super"
 import State from "./_super"
 
 export default class Main extends State {
@@ -247,7 +247,7 @@ export default class Main extends State {
       .map(
         perk =>
           `<p>
-            <b>${Part.capitalize(perk.name)}</b>:
+            <b>${Grammar.capitalize(perk.name)}</b>:
             <q>${perk.description}</q> — ${perk.effect}
           </p>`
       )

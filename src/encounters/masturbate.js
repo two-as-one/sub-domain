@@ -1,5 +1,5 @@
 import DefaultEncounter from "./_super"
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 
 /**
  * Masturbate encounter - lets the player blow off some steam
@@ -159,7 +159,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
   get climaxMessage() {
     switch (this.fucking.name) {
       case "finger ass": {
-        const your_ass = Part.capitalize(this.player.parts.anus.one)
+        const your_ass = Grammar.capitalize(this.player.parts.anus.one)
         return `
           <p>
             ${your_ass} squirms hungrily as you ceaselessly finger it.

@@ -1,8 +1,5 @@
-import Articles from "articles"
-import Chance from "chance"
+import Grammar from "utils/grammar"
 import Saveable from "save/saveable"
-
-const chance = new Chance()
 
 export default class Part extends Saveable {
   constructor(owner) {
@@ -132,8 +129,8 @@ export default class Part extends Saveable {
   }
 
   get your() {
-    return Part.trim(
-      `your ${Part.random(["", this.adjective])} ${this.pluralized}`
+    return Grammar.trim(
+      `your ${Grammar.random(["", this.adjective])} ${this.pluralized}`
     )
   }
 
@@ -141,16 +138,18 @@ export default class Part extends Saveable {
     if (this.quantity === 1) {
       return this.your
     } else if (this.quantity === 2) {
-      return Part.trim(`both of ${this.your}`)
+      return Grammar.trim(`both of ${this.your}`)
     } else {
-      return Part.trim(`all ${Part.random(["", this.number])} of ${this.your}`)
+      return Grammar.trim(
+        `all ${Grammar.random(["", this.number])} of ${this.your}`
+      )
     }
   }
 
   get one() {
     if (this.quantity > 1) {
-      return Part.trim(
-        `one of your ${Part.random(["", this.number])} ${Part.random([
+      return Grammar.trim(
+        `one of your ${Grammar.random(["", this.number])} ${Grammar.random([
           "",
           this.adjective
         ])} ${this.pluralized}`
@@ -162,8 +161,8 @@ export default class Part extends Saveable {
 
   get two() {
     if (this.quantity > 2) {
-      return Part.trim(
-        `two of your ${Part.random(["", this.number])} ${Part.random([
+      return Grammar.trim(
+        `two of your ${Grammar.random(["", this.number])} ${Grammar.random([
           "",
           this.adjective
         ])} ${this.pluralized}`
@@ -175,8 +174,8 @@ export default class Part extends Saveable {
 
   get three() {
     if (this.quantity > 3) {
-      return Part.trim(
-        `three of your ${Part.random(["", this.number])} ${Part.random([
+      return Grammar.trim(
+        `three of your ${Grammar.random(["", this.number])} ${Grammar.random([
           "",
           this.adjective
         ])} ${this.pluralized}`
@@ -188,8 +187,8 @@ export default class Part extends Saveable {
 
   get four() {
     if (this.quantity > 4) {
-      return Part.trim(
-        `four of your ${Part.random(["", this.number])} ${Part.random([
+      return Grammar.trim(
+        `four of your ${Grammar.random(["", this.number])} ${Grammar.random([
           "",
           this.adjective
         ])} ${this.pluralized}`
@@ -200,91 +199,6 @@ export default class Part extends Saveable {
   }
 
   get number() {
-    return Part.number(this.quantity)
-  }
-
-  static number(value) {
-    switch (value) {
-      case 0:
-        return "zero"
-      case 1:
-        return "one"
-      case 2:
-        return "two"
-      case 3:
-        return "three"
-      case 4:
-        return "four"
-      case 5:
-        return "five"
-      case 6:
-        return "six"
-      case 7:
-        return "seven"
-      case 8:
-        return "eight"
-      case 9:
-        return "nine"
-      case 10:
-        return "ten"
-      default:
-        return value
-    }
-  }
-
-  static ordinal(value) {
-    switch (value) {
-      case 1:
-        return "first"
-      case 2:
-        return "second"
-      case 3:
-        return "third"
-      case 4:
-        return "fourth"
-      case 5:
-        return "fifth"
-      case 6:
-        return "sixth"
-      case 7:
-        return "seventh"
-      case 8:
-        return "eighth"
-      case 9:
-        return "ninth"
-      case 10:
-        return "tenth"
-      default:
-        return value
-    }
-  }
-
-  static articlize(word) {
-    return Articles.articlize(word)
-  }
-
-  static trim(string) {
-    return (string || "").replace(/  +/g, " ")
-  }
-
-  static random(list) {
-    return chance.pickone(list)
-  }
-
-  //converts cm into feet and inches as a string
-  static toFt(cm) {
-    const realFeet = cm * 0.3937 / 12
-    const feet = Math.floor(realFeet)
-    const inches = Math.round((realFeet - feet) * 12)
-    return feet + "&prime;" + inches + "&Prime;"
-  }
-
-  //converts kg into lbs as a string
-  static toLbs(kg) {
-    return Math.round(kg * 2.20462) + " lbs"
-  }
-
-  static capitalize(words) {
-    return words.charAt(0).toUpperCase() + words.slice(1)
+    return Grammar.number(this.quantity)
   }
 }

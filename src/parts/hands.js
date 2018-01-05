@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Hands extends Part {
@@ -13,11 +14,11 @@ export default class Hands extends Part {
   }
 
   get singular() {
-    return Part.random(["hand"])
+    return Grammar.random(["hand"])
   }
 
   get plural() {
-    return Part.random(["hands"])
+    return Grammar.random(["hands"])
   }
 
   get adjective() {

@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import State from "./_super"
 
 export default class LevelUp extends State {
@@ -80,7 +80,7 @@ export default class LevelUp extends State {
     if (this.perk) {
       description += `
         <p>
-          <b>${Part.capitalize(this.perk.name)}</b>:
+          <b>${Grammar.capitalize(this.perk.name)}</b>:
           <q>${this.perk.description}</q> — ${this.perk.effect}
         </p>
       `

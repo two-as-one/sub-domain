@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Penis extends Part {
@@ -26,7 +27,7 @@ export default class Penis extends Part {
       text += `between your legs, `
 
       if (this.quantity === 1) {
-        const adjective = Part.articlize(this.adjective)
+        const adjective = Grammar.articlize(this.adjective)
         const size = this.size
         const penis = this.pluralized
 
@@ -48,7 +49,7 @@ export default class Penis extends Part {
         text += `.`
       }
 
-      return Part.trim(text)
+      return Grammar.trim(text)
     }
 
     return ""
@@ -67,7 +68,7 @@ export default class Penis extends Part {
   }
 
   get singular() {
-    return Part.random([
+    return Grammar.random([
       "penis",
       "dick",
       "dong",
@@ -80,7 +81,7 @@ export default class Penis extends Part {
   }
 
   get plural() {
-    return Part.random([
+    return Grammar.random([
       "penises",
       "dicks",
       "dongs",
@@ -96,7 +97,7 @@ export default class Penis extends Part {
     let adjectives
 
     if (this.owner.perks.has("impotent")) {
-      return Part.random(["limp", "useless"])
+      return Grammar.random(["limp", "useless"])
     }
 
     if (this.size < 2) {
@@ -118,6 +119,6 @@ export default class Penis extends Part {
       adjectives.push("erect")
     }
 
-    return Part.random(adjectives)
+    return Grammar.random(adjectives)
   }
 }

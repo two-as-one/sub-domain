@@ -18,7 +18,7 @@
   </div>
 
   <div class="opponent">
-    <span class="name">{{enemy.name}} <span class="nowrap">[LVL {{enemy.stats.lvl}}]</span></span>
+    <span class="name">{{#if enemy.name}}{{enemy.name}}{{else}}{{enemy.title}}{{/if}} <span class="nowrap">[LVL {{enemy.stats.lvl}}]</span></span>
 
     {{> stat-bar
         class="health"

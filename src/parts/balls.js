@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Balls extends Part {
@@ -38,7 +39,7 @@ export default class Balls extends Part {
         text += `Inside your abdomen sits `
       }
 
-      text += `<b>${Part.articlize(this.adjective)} scrotum</b> containing `
+      text += `<b>${Grammar.articlize(this.adjective)} scrotum</b> containing `
 
       if (this.quantity === 1) {
         text += ` <b>a single`
@@ -70,7 +71,7 @@ export default class Balls extends Part {
       text += `<b>lacking a scrotum</b> and can't produce semen.`
     }
 
-    return Part.trim(text)
+    return Grammar.trim(text)
   }
 
   get all() {
@@ -88,11 +89,11 @@ export default class Balls extends Part {
   }
 
   get singular() {
-    return Part.random(["ball", "testicle"])
+    return Grammar.random(["ball", "testicle"])
   }
 
   get plural() {
-    return Part.random(["balls", "testicles"])
+    return Grammar.random(["balls", "testicles"])
   }
 
   get scrotumSize() {
@@ -107,7 +108,7 @@ export default class Balls extends Part {
     if (this.scrotumSize < 4) {
       return "tight"
     } else if (this.scrotumSize < 8) {
-      return Part.random(["heavy", "saggy"])
+      return Grammar.random(["heavy", "saggy"])
     } else {
       return `monstrous`
     }

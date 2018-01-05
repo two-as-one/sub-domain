@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import Perk from "./_super"
 
 export default class Impotent extends Perk {
@@ -7,7 +7,7 @@ export default class Impotent extends Perk {
   }
 
   get description() {
-    const your_penis = Part.capitalize(this.player.parts.penis.all)
+    const your_penis = Grammar.capitalize(this.player.parts.penis.all)
     const is = this.player.parts.penis.quanitity > 1 ? "are" : "is"
 
     return `${your_penis} ${is} limp and useless.`

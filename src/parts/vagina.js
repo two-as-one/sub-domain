@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Vagina extends Part {
@@ -24,7 +25,7 @@ export default class Vagina extends Part {
       }
 
       if (this.quantity === 1) {
-        text += `<b>${Part.articlize(this.adjective)} ${this.pluralized}</b>`
+        text += `<b>${Grammar.articlize(this.adjective)} ${this.pluralized}</b>`
       } else {
         text += `<b>${this.number} ${this.adjective} ${this.pluralized}</b>`
       }
@@ -35,7 +36,7 @@ export default class Vagina extends Part {
         text += ` between your legs.`
       }
 
-      return Part.trim(text)
+      return Grammar.trim(text)
     }
 
     return ""
@@ -61,7 +62,7 @@ export default class Vagina extends Part {
 
       const was = this.quantity > 1 ? "were" : "was"
       const is = this.quantity > 1 ? "are" : "is"
-      const your_pussy = Part.capitalize(this.all)
+      const your_pussy = Grammar.capitalize(this.all)
 
       return `<p><b>${your_pussy} ${was} stretched</b> and ${is} now looser.</p>`
     }
@@ -72,11 +73,11 @@ export default class Vagina extends Part {
   }
 
   get singular() {
-    return Part.random(["vagina", "pussy", "cunt", "cunny", "slit", "vulva"])
+    return Grammar.random(["vagina", "pussy", "cunt", "cunny", "slit", "vulva"])
   }
 
   get plural() {
-    return Part.random([
+    return Grammar.random([
       "vaginas",
       "pussies",
       "cunts",
@@ -88,11 +89,11 @@ export default class Vagina extends Part {
 
   get adjective() {
     if (this.size < 1) {
-      return Part.random(["tight", "firm"])
+      return Grammar.random(["tight", "firm"])
     } else if (this.size < 3) {
-      return Part.random(["used", "sloppy", "loose"])
+      return Grammar.random(["used", "sloppy", "loose"])
     } else {
-      return Part.random([
+      return Grammar.random([
         "ravenous",
         "greedy",
         "wide",

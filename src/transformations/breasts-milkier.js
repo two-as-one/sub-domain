@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -27,7 +27,7 @@ export default class BreastMilkier extends Transformation {
         You look down and notice beads of milk forming around your nipples.
       </p>
       <p>
-        <b>${Part.capitalize(
+        <b>${Grammar.capitalize(
           this.owner.parts.breasts.all
         )} have grown ${milky}!</b>
       </p>`

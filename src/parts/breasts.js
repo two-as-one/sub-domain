@@ -1,4 +1,5 @@
 import Chance from "chance"
+import Grammar from "utils/grammar"
 import Part from "./_super"
 const chance = new Chance()
 
@@ -102,15 +103,15 @@ export default class Breasts extends Part {
         if (this.stats.config.length === 1) {
           text += ` — all in a single row`
         } else if (evenRows) {
-          const row_number = Part.number(this.stats.config.length)
-          const number = Part.number(evenRows)
+          const row_number = Grammar.number(this.stats.config.length)
+          const number = Grammar.number(evenRows)
           text += ` — ${row_number} rows of ${number}`
         } else {
-          const row_number = Part.number(this.stats.config.length)
+          const row_number = Grammar.number(this.stats.config.length)
           text += `. Spread over ${row_number} rows —`
 
           this.stats.config.forEach((row, i, list) => {
-            text += ` ${Part.number(row)} on the ${Part.ordinal(i + 1)}`
+            text += ` ${Grammar.number(row)} on the ${Grammar.ordinal(i + 1)}`
 
             if (list[i + 2]) {
               text += ","
@@ -130,13 +131,13 @@ export default class Breasts extends Part {
       text = `Your chest is flat and unnoteworthy.`
     }
 
-    return Part.trim(`<p>${text}</p>`)
+    return Grammar.trim(`<p>${text}</p>`)
   }
 
   get seductionMessage() {
     const your_tits = this.all
 
-    return Part.random([
+    return Grammar.random([
       `<p>
         You cup ${your_tits} and make them jiggle. You then squeeze them individually before squishing them together.
       </p>`,
@@ -157,7 +158,7 @@ export default class Breasts extends Part {
       choices = choices.concat(["knocker", "jug", "melon"])
     }
 
-    return Part.random(choices)
+    return Grammar.random(choices)
   }
 
   get plural() {
@@ -167,7 +168,7 @@ export default class Breasts extends Part {
       choices = choices.concat(["knockers", "jugs", "melons"])
     }
 
-    return Part.random(choices)
+    return Grammar.random(choices)
   }
 
   get adjective() {
@@ -189,7 +190,7 @@ export default class Breasts extends Part {
 
     list.push("sensitive")
 
-    return Part.random(list)
+    return Grammar.random(list)
   }
 
   get cupSize() {

@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Udder extends Part {
@@ -33,7 +34,7 @@ export default class Udder extends Part {
       }
 
       if (this.quantity === 1) {
-        const adjective = Part.articlize(this.adjective)
+        const adjective = Grammar.articlize(this.adjective)
         const udder = this.pluralized
 
         text += `you have <b>${adjective} ${udder}</b>`
@@ -45,7 +46,7 @@ export default class Udder extends Part {
         text += `you have <b>${number} ${adjective} ${udders}</b>`
       }
 
-      text += ` with <b>${Part.number(this.teats)} teats</b>`
+      text += ` with <b>${Grammar.number(this.teats)} teats</b>`
 
       if (this.quantity > 1) {
         text += ` each`
@@ -61,29 +62,29 @@ export default class Udder extends Part {
     }
 
     if (text) {
-      text = `<p>${Part.capitalize(text)}.</p>`
+      text = `<p>${Grammar.capitalize(text)}.</p>`
     }
 
     return text
   }
 
   get singular() {
-    return Part.random(["udder"])
+    return Grammar.random(["udder"])
   }
 
   get plural() {
-    return Part.random(["udders"])
+    return Grammar.random(["udders"])
   }
 
   get adjective() {
     if (this.size < 4) {
-      return Part.random(["small", "little", "perky"])
+      return Grammar.random(["small", "little", "perky"])
     } else if (this.size < 8) {
-      return Part.random(["modest", "sizable"])
+      return Grammar.random(["modest", "sizable"])
     } else if (this.size < 12) {
-      return Part.random(["hefty", "heavy", "large"])
+      return Grammar.random(["hefty", "heavy", "large"])
     } else {
-      return Part.random(["humongous", "enormous", "massive", "imposing"])
+      return Grammar.random(["humongous", "enormous", "massive", "imposing"])
     }
   }
 }

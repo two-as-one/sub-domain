@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Body extends Part {
@@ -48,10 +49,10 @@ export default class Body extends Part {
   }
 
   get height() {
-    return Part.toFt(this.stats.size)
+    return Grammar.toFt(this.stats.size)
   }
 
   get weight() {
-    return Part.toLbs(this.stats.weight)
+    return Grammar.toLbs(this.stats.weight)
   }
 }

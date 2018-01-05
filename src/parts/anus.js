@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Anus extends Part {
@@ -6,7 +7,7 @@ export default class Anus extends Part {
 
     if (this.has) {
       if (this.quantity === 1) {
-        const adjective = Part.articlize(this.adjective)
+        const adjective = Grammar.articlize(this.adjective)
         const anus = this.pluralized
         text = `<b>${adjective} ${anus}</b> nestled in between.`
       } else {
@@ -16,14 +17,14 @@ export default class Anus extends Part {
         text = `<b>${number} ${adjective} ${anuses}</b> nestled in between.`
       }
 
-      return Part.trim(`${text}`)
+      return Grammar.trim(`${text}`)
     }
 
     return ""
   }
 
   get seductionMessage() {
-    return Part.random([
+    return Grammar.random([
       `<p>
         You turn around and place your hands on your hips.
         Looking back over your shoulder, you invitingly sway your bottom back and forth.
@@ -46,7 +47,7 @@ export default class Anus extends Part {
 
       const was = this.quantity > 1 ? "were" : "was"
       const is = this.quantity > 1 ? "are" : "is"
-      const your_anus = Part.capitalize(this.all)
+      const your_anus = Grammar.capitalize(this.all)
 
       return `<p><b>${your_anus} ${was} stretched</b> and ${is} now looser.</p>`
     }
@@ -69,20 +70,20 @@ export default class Anus extends Part {
   }
 
   get singular() {
-    return Part.random(["anus", "butthole", "rectum", "rosebud"])
+    return Grammar.random(["anus", "butthole", "rectum", "rosebud"])
   }
 
   get plural() {
-    return Part.random(["anuses", "buttholes", "rectums", "rosebuds"])
+    return Grammar.random(["anuses", "buttholes", "rectums", "rosebuds"])
   }
 
   get adjective() {
     if (this.size < 1) {
-      return Part.random(["tight", "firm"])
+      return Grammar.random(["tight", "firm"])
     } else if (this.size < 3) {
-      return Part.random(["used", "sloppy", "loose"])
+      return Grammar.random(["used", "sloppy", "loose"])
     } else {
-      return Part.random([
+      return Grammar.random([
         "ravenous",
         "greedy",
         "wide",

@@ -1,5 +1,6 @@
 import Chance from "chance"
 import CombatState from "states/combat"
+import Grammar from "utils/grammar"
 const chance = new Chance()
 
 /**
@@ -155,7 +156,7 @@ export default class DefaultEncounter extends CombatState {
     responses.push({ state: "main", text: "cancel" })
 
     this.render({
-      text: `How do you want to try to seduce the ${this.enemy.name}?`,
+      text: `How do you want to try to seduce ${this.enemy.who}?`,
       responses: responses
     })
   }
@@ -601,7 +602,9 @@ export default class DefaultEncounter extends CombatState {
   }
 
   seduceResultsMessage(lust) {
-    return `<p>The ${this.enemy.name} gains <b>${lust} lust</b></p>`
+    return `<p>${Grammar.capitalize(
+      this.enemy.who
+    )} gains <b>${lust} lust</b></p>`
   }
 
   seducedResultsMessage(lust) {
@@ -624,6 +627,22 @@ export default class DefaultEncounter extends CombatState {
     return `<p>Gained <b>${amount}xp</b></p>`
   }
 
+  get attackMessage() {
+    return `<p>You swing your ${this.player.weapon.name} at ${
+      this.enemy.who
+    }.</p>`
+  }
+
+  get fleeSuccessMessage() {
+    return `<p>You manage to run away from ${this.enemy.who}!</p>`
+  }
+
+  get fleeFailureMessage() {
+    return `<p>You try to flee but ${
+      this.enemy.who
+    } stops you in your tracks!</p>`
+  }
+
   // Messages - extend these with encounter specific messages
   //---------------------------------------------------------
 
@@ -639,10 +658,6 @@ export default class DefaultEncounter extends CombatState {
   }
 
   get mainMessage() {
-    return ""
-  }
-
-  get attackMessage() {
     return ""
   }
 
@@ -663,14 +678,6 @@ export default class DefaultEncounter extends CombatState {
   }
 
   get climaxVictoryMessage() {
-    return ""
-  }
-
-  get fleeSuccessMessage() {
-    return ""
-  }
-
-  get fleeFailureMessage() {
     return ""
   }
 

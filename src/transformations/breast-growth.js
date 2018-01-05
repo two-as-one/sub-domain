@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -22,7 +22,7 @@ export default class BreastGrowth extends Transformation {
         You look down and quickly realize why.
       </p>
       <p>
-        <b>${Part.capitalize(this.owner.parts.breasts.all)} have grown!</b>
+        <b>${Grammar.capitalize(this.owner.parts.breasts.all)} have grown!</b>
       </p>`
 
     return text

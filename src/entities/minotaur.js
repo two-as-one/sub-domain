@@ -6,7 +6,7 @@ export default class Minotaur extends Entity {
 
     this.stats.lvl = 3
 
-    this.name = "minotaur"
+    this.title = "minotaur"
 
     this.giveRandomStats(this.stats.lvl * 2, ["str", "stam"])
   }

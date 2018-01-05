@@ -20,6 +20,7 @@ export default class Player extends Entity {
     super()
 
     this.name = "player"
+    this.title = "hero"
 
     this.inventory = new Inventory(this)
 
@@ -235,7 +236,16 @@ export default class Player extends Entity {
     return this.parts[name] || {}
   }
 
+  /**
+   * Check whether the player has a specific part
+   * @param  {String|Array}  name - A single part name or an Array of part names
+   * @return {Boolean}       returns true if the player has said part, if an array was passed only true will be returned if the player has all the parts asked for
+   */
   has(name) {
+    if (Array.isArray(name)) {
+      return name.map(part => this.has(part)).every(result => result)
+    }
+
     return Boolean(this.getPart(name).has)
   }
 

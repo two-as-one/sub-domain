@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -27,11 +27,11 @@ export default class UdderGrowth extends Transformation {
     text = `<p>${text}.</p>`
 
     if (this.owner.parts.udder.quantity === 1) {
-      text += `<p><b>${Part.capitalize(
+      text += `<p><b>${Grammar.capitalize(
         this.owner.parts.udder.all
       )} has swollen permanently!</b></p>`
     } else {
-      text += `<p><b>${Part.capitalize(
+      text += `<p><b>${Grammar.capitalize(
         this.owner.parts.udder.all
       )} have swollen permanently!</b></p>`
     }

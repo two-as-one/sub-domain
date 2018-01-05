@@ -15,7 +15,13 @@ export default class Entity extends Saveable {
   constructor() {
     super()
 
+    //name is used by specific NPC's, leave this blank if an entity has no known name
+    //eg: 'Bob', 'Alice'
     this.name = ""
+
+    //the title refers to the category of this entity
+    //eg: 'Minotaur', 'Goblin'
+    this.title = "creature"
   }
 
   get savedAttribute() {
@@ -328,5 +334,17 @@ export default class Entity extends Saveable {
 
   has(part) {
     return false
+  }
+
+  // Grammar related
+  // ---------------
+
+  /** Returns the name of this creature or 'the {title}' */
+  get who() {
+    if (this.name) {
+      return this.name
+    } else {
+      return `the ${this.title}`
+    }
   }
 }

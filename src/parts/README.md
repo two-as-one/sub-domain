@@ -13,10 +13,10 @@ This is needed for the part to be able to be saved, make sure this does not coll
 This is the default config the part will have when a new game is started.
 
 #### 3. extend `singular`
-This should return the singular of the name of the part, you can use `Part.random()` to define multiple names.
+This should return the singular of the name of the part, you can use `Grammar.random()` to define multiple names.
 
 #### 4. extend `plural`
-This should return the plural of the name of the part, you can use `Part.random()` to define multiple names.
+This should return the plural of the name of the part, you can use `Grammar.random()` to define multiple names.
 
 #### 5. extend `adjective`
 You should return an adjective for the part, you can use any logic to define which adjectives can be returned based on part size, quantity, etc...

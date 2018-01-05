@@ -1,4 +1,4 @@
-import Part from "parts/_super"
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -19,18 +19,18 @@ export default class PenisGrowth extends Transformation {
     if (this.owner.parts.penis.quantity === 1) {
       return `
         <p>
-          ${Part.capitalize(
+          ${Grammar.capitalize(
             this.owner.parts.penis.all
-          )} throbs as it grows thicker and longer — <b>${Part.capitalize(
+          )} throbs as it grows thicker and longer — <b>${Grammar.capitalize(
         this.owner.parts.penis.all
       )} has grown!</b>
         </p>`
     } else {
       return `
         <p>
-          ${Part.capitalize(
+          ${Grammar.capitalize(
             this.owner.parts.penis.all
-          )} throb as they grow thicker and longer — <b>${Part.capitalize(
+          )} throb as they grow thicker and longer — <b>${Grammar.capitalize(
         this.owner.parts.penis.all
       )} have grown!</b>
         </p>`
