@@ -31,12 +31,6 @@ Gifts:
 
 
 ## areas
-
-1. first time travel message (explain exploring and setting up camp)
-2. travel to message (explain moving back to previous camp)
-3. night falls...
-4. night description
-
 - wet dreams, wake up with some lust
 
 travelling has variable duration based on distance
