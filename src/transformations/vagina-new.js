@@ -13,7 +13,8 @@ export default class VaginaNew extends Transformation {
   }
 
   apply() {
-    this.owner.parts.vagina.add()
+    this.owner.parts.vagina.quantity = 1
+    this.owner.parts.vagina.size = 0.2
 
     const you = this.owner.who
 

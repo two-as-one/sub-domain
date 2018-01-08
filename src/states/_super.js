@@ -77,6 +77,10 @@ export default class State {
         response.text = "…"
       }
 
+      if (/^(back|cancel)$/i.test(response.text)) {
+        response.back = true
+      }
+
       if (!response.id) {
         response.id = "choice_" + i
       }

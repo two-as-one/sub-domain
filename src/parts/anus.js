@@ -2,6 +2,18 @@ import Grammar from "utils/grammar"
 import Part from "./_super"
 
 export default class Anus extends Part {
+  get saveKey() {
+    return "player-part-anus"
+  }
+
+  get defaults() {
+    return Object.assign(super.defaults, {
+      size: 0.2, //diameter of opening
+      sensitivity: 0.75,
+      quantity: 1
+    })
+  }
+
   get description() {
     let text
 
@@ -57,18 +69,6 @@ export default class Anus extends Part {
 
   get growth() {
     return this.size > 2 ? this.size / 10 : 0.2
-  }
-
-  get saveKey() {
-    return "player-part-anus"
-  }
-
-  get defaults() {
-    return Object.assign(super.defaults, {
-      size: 0.5, //diameter of opening
-      sensitivity: 0.75,
-      quantity: 1
-    })
   }
 
   get singular() {

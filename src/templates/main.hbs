@@ -9,8 +9,18 @@
 
   <ul class="options">
     {{#each responses}}
-      <li class="option {{#if @first}}focus{{/if}} {{#if disabled}}disabled{{/if}}" choice="{{id}}">
-        {{#if index}}<b>{{index}}.</b> {{/if}}{{{text}}}
+      <li
+        class="option {{#if @first}}focus{{/if}} {{#if disabled}}disabled{{/if}}"
+        {{#if back}}back{{/if}}
+        choice="{{id}}">
+        {{#if back}}
+          ◄&nbsp;
+        {{else}}
+          {{#if index}}
+            <b>{{index}}.</b>
+          {{/if}}
+        {{/if}}
+        {{{text}}}
       </li>
     {{/each}}
   </ul>

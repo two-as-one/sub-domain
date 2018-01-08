@@ -66,12 +66,13 @@ export default class Game {
     const num = key.match(/^(Digit|Numpad)([0-9])/)
     const up = key === "ArrowUp"
     const down = key === "ArrowDown"
+    const back = key === "Escape" || key === "Backspace"
     const enter = Boolean(key.match(/Enter/))
     let focus = document.querySelector("body:not(.mouse-control) .option.focus")
 
     Game.mouseControl(false)
 
-    if (num || up || down || enter) {
+    if (num || up || down || enter || back) {
       e.preventDefault()
     }
 
@@ -85,6 +86,10 @@ export default class Game {
       return this._pickOption(
         document.querySelector(`[choice="choice_${Number(num[2]) - 1}"]`)
       )
+    }
+
+    if (back) {
+      return this._pickOption(document.querySelector("[back]"))
     }
 
     //select focus

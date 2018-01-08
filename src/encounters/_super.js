@@ -133,7 +133,7 @@ export default class DefaultEncounter extends CombatState {
   examine() {
     this.render({
       text: this.describeEnemyMessage,
-      responses: [{ state: "main" }]
+      responses: [{ text: "back", state: "main" }]
     })
   }
 
@@ -153,7 +153,7 @@ export default class DefaultEncounter extends CombatState {
       })
     })
 
-    responses.push({ state: "main", text: "cancel" })
+    responses.push({ state: "main", text: "back" })
 
     this.render({
       text: `How do you want to try to seduce ${this.enemy.who}?`,
@@ -182,7 +182,7 @@ export default class DefaultEncounter extends CombatState {
       disabled: position.disabled
     }))
 
-    responses.push({ state: "main", text: "cancel" })
+    responses.push({ state: "main", text: "back" })
 
     this.render({
       text: `What are you offering?`,

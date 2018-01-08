@@ -28,7 +28,7 @@ export default class Main extends State {
       { name: "rest", from: "main" },
       { name: "sunrise", from: "rest" },
       { name: "heal", from: "main" },
-      { name: "self", from: "main" },
+      { name: "self", from: "*" },
       { name: "masturbate", from: "self" },
       { name: "gear", from: "self" },
       { name: "body", from: "self" },
@@ -146,7 +146,7 @@ export default class Main extends State {
     }))
 
     options.push({
-      text: "cancel",
+      text: "back",
       state: "main"
     })
 
@@ -230,14 +230,14 @@ export default class Main extends State {
   gear() {
     this.render({
       text: this.game.player.equipmentDescription,
-      responses: [{ text: "back", state: "main" }]
+      responses: [{ text: "back", state: "self" }]
     })
   }
 
   body() {
     this.render({
       text: this.game.player.bodyDescription,
-      responses: [{ text: "back", state: "main" }]
+      responses: [{ text: "back", state: "self" }]
     })
   }
 
@@ -255,7 +255,7 @@ export default class Main extends State {
 
     this.render({
       text: text || `You don't have any perks yet.`,
-      responses: [{ text: "back", state: "main" }]
+      responses: [{ text: "back", state: "self" }]
     })
   }
 

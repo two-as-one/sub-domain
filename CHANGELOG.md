@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.1] -
+### Added
+- `Backspace` and `Escape` keys can now be used for `back` and `cancel` options
+
+### Changed
+- Changed default sizes for newly grown parts
+- most instances of `cancel` have been changed to `back`
+
+### Fixed
+- Page layout during combat on mobile
+
 ## [0.4.0] - 2018-01-05
 ### Changed
 - incremented version number to indicate save-breaking changes

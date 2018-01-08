@@ -13,7 +13,8 @@ export default class PenisNew extends Transformation {
   }
 
   apply() {
-    this.owner.parts.penis.add()
+    this.owner.parts.penis.quantity = 1
+    this.owner.parts.penis.size = 2
 
     const you = this.owner.who
 

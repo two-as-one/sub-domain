@@ -47,4 +47,12 @@ export default class Saveable {
   get defaults() {
     return {}
   }
+
+  get serialized() {
+    if (this.savedAttribute) {
+      return JSON.parse(JSON.stringify(this[this.savedAttribute]))
+    } else {
+      return null
+    }
+  }
 }
