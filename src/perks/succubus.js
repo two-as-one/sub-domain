@@ -10,7 +10,7 @@ export default class Succubus extends Perk {
   }
 
   get effect() {
-    return `Consuming spunk restores hunger and health.`
+    return `Consuming fresh spunk restores hunger and health.`
   }
 
   get available() {

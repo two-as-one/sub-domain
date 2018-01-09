@@ -88,13 +88,7 @@ export default class Main extends State {
           disabled: this.game.world.night || mortallyWounded || aroused
         },
         {
-          text: "travel",
-          state: "chooseArea",
-          disabled: this.game.world.night || mortallyWounded || aroused,
-          if: this.availableTravelAreas.length > 0
-        },
-        {
-          text: "sleep until healed",
+          text: "rest until healed",
           state: "heal",
           if: wounded && this.game.world.day
         },
@@ -105,7 +99,13 @@ export default class Main extends State {
           if: !(wounded && this.game.world.day)
         },
         { text: "inventory", state: "inventory" },
-        { text: "self", state: "self" }
+        { text: "self", state: "self" },
+        {
+          text: "travel",
+          state: "chooseArea",
+          disabled: this.game.world.night || mortallyWounded || aroused,
+          if: this.availableTravelAreas.length > 0
+        }
       ]
     })
   }
@@ -231,10 +231,10 @@ export default class Main extends State {
     this.render({
       static: this.game.player.statsDescription,
       responses: [
-        { text: "masturbate", state: "masturbate" },
         { text: "examine body", state: "body" },
-        { text: "examine gear", state: "gear" },
-        { text: "view perks", state: "perks" },
+        { text: "gear", state: "gear" },
+        { text: "perks", state: "perks" },
+        { text: "masturbate", state: "masturbate" },
         { text: "back", state: "main" }
       ]
     })
