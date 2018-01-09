@@ -22,16 +22,12 @@ bone soldier
 
 nipple penetration perk/position
 
-
-allow backspace key for 'back' options
-
 Gifts:
 - Gifts are like perks except that they are gained by other means
 - They can immediately grow/remove parts and prevent them from being removed or growing in the future
 
 
 ## areas
-- wet dreams, wake up with some lust
 
 travelling has variable duration based on distance
 

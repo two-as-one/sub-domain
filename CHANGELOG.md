@@ -15,12 +15,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.4.2]
 ### Added
 - `vial of minotaur spunk` item, looted from `minotaur`
+- `wet dreams`
 
 ### Changed
 - How the chance of a transformation is calculated
   - Instead of being part of the item, this is now part of the transformation itself
   - First a transformation is picked from the list of possible transformation. Then a roll is made for that transformation to test if it gets applied.
 - renamed `milk` to `bottled milk`
+- `succubus` perk now also restores some HP
 
 ## [0.4.1] - 2018-01-08
 ### Added

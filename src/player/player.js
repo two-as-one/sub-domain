@@ -213,10 +213,14 @@ export default class Player extends Entity {
   //allows the player to regain an amount of hunger
   eat(amount) {
     amount = amount || 1
-    this.stats.hunger += amount
+    const previous = this.stats.hunger
+
+    this.stats.hunger += Math.ceil(amount)
 
     //prevent hunger from going above 24
     this.stats.hunger = Math.min(this.stats.hunger, 24)
+
+    return this.stats.hunger - previous
   }
 
   //makes the player lose some hunger

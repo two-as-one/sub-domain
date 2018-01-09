@@ -196,15 +196,15 @@ export default class Main extends State {
   }
 
   sunrise() {
-    this.game.player.arouse(this.game.player.currentLust / 2)
-
     let wetDream = ""
-    if (this.game.player.normalizedLust === 1) {
+    if (this.game.player.normalizedLust > 0.5) {
       wetDream = `<p>
           <b>You had a wet dream</b> — Your loins are on fire and you've made a sticky mess down there.
-          Your memories of wonderfully horny dreams quickly fade away, leaving you with a burning desire.
+          Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.
         </p>`
     }
+
+    this.game.player.arouse(this.game.player.currentLust / 2)
 
     this.fade().then(() => {
       this.game.world.transitioned = false

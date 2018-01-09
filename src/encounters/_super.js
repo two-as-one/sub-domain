@@ -491,9 +491,9 @@ export default class DefaultEncounter extends CombatState {
       this.fucking.infects &&
       this.player.perks.has("succubus")
     ) {
-      const hunger = 8
-      this.player.eat(hunger)
-      text += this.succubusMessage(hunger)
+      const hunger = this.player.eat(8)
+      const health = this.player.heal(this.player.maxHP / 10)
+      text += this.succubusMessage(hunger, health)
     }
 
     //infection
@@ -636,12 +636,18 @@ export default class DefaultEncounter extends CombatState {
     )} have lost all strength in ${your_body} and are unable to resist.</p>`
   }
 
-  succubusMessage(hunger) {
-    const you = this.game.player.who
+  succubusMessage(hunger, health) {
+    const you = Grammar.capitalize(this.game.player.who)
 
-    return `<p>${Grammar.capitalize(
-      you
-    )} are satiated by all that semen — <b>${hunger} hunger restored</b>.</p>`
+    if (hunger || health) {
+      const and = health && hunger ? "and" : ""
+      hunger = hunger ? `${hunger} hunger` : ""
+      health = health ? `${health} health` : ""
+
+      return `<p>${you} are satiated by all that semen — <b>${hunger} ${and} ${health} restored</b>.</p>`
+    } else {
+      return ""
+    }
   }
 
   gainMessage(xp, item) {

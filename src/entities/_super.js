@@ -198,7 +198,7 @@ export default class Entity extends Saveable {
 
   damage(amount) {
     amount = Entity.damageFormula(amount, this.deflection, this.variance)
-    this.stats.dmg += amount
+    this.stats.dmg += Math.ceil(amount)
 
     return amount
   }
@@ -220,7 +220,7 @@ export default class Entity extends Saveable {
 
   arouse(amount) {
     amount = Entity.damageFormula(amount, this.numbness, this.variance)
-    this.stats.lust += amount
+    this.stats.lust += Math.ceil(amount)
 
     return amount
   }
@@ -261,13 +261,25 @@ export default class Entity extends Saveable {
   }
 
   heal(amount) {
+    amount = Math.ceil(amount)
+
+    const previous = this.stats.dmg
+
     this.stats.dmg -= amount
     this.stats.dmg = Math.max(0, this.stats.dmg)
+
+    return previous - this.stats.dmg
   }
 
   soothe(amount) {
+    amount = Math.ceil(amount)
+
+    const previous = this.stats.lust
+
     this.stats.lust -= amount
     this.stats.lust = Math.max(0, this.stats.lust)
+
+    return this.stats.lust - previous
   }
 
   //multiplier that affects how successful a seduction will be
