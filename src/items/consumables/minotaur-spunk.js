@@ -2,7 +2,7 @@ import Consumable from "./_super"
 
 export default class MinotaurSpunk extends Consumable {
   get name() {
-    return "minotaur spunk"
+    return "vial of minotaur spunk"
   }
 
   get description() {

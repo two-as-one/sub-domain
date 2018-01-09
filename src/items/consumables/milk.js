@@ -2,7 +2,7 @@ import Consumable from "./_super"
 
 export default class Milk extends Consumable {
   get name() {
-    return "milk"
+    return "bottled milk"
   }
 
   get description() {
