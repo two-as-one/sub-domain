@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.4.2]
+## [0.4.2] - 2018-01-09
 ### Added
 - `vial of minotaur spunk` item, looted from `minotaur`
 - `wet dreams`
@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - First a transformation is picked from the list of possible transformation. Then a roll is made for that transformation to test if it gets applied.
 - renamed `milk` to `bottled milk`
 - `succubus` perk now also restores some HP
+- description on `succubus` perk to specify only fresh cum
+- order of options on `main screen`
 
 ## [0.4.1] - 2018-01-08
 ### Added
