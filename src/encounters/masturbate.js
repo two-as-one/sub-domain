@@ -48,7 +48,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
     })
 
-    actions.push({ text: "stop", state: "flee" })
+    actions.push({ text: "cancel", state: "flee" })
 
     this.render({
       text: this.mainMessage,

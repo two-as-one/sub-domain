@@ -159,11 +159,11 @@ export default class Player extends Entity {
   //describes how hungry the player is - displayed on main state
   get hungerDescription() {
     if (this.isStarving) {
-      return `<p><b>You are starving!</b> — You will be weakened until you eat something.</p>`
+      return `<p>You are <b>starving!</b> — You will be weakened until you eat something.</p>`
     }
 
     if (this.isHungry) {
-      return `<p><b>You are hungry</b> and should eat something.</p>`
+      return `<p>You are <b>hungry</b> and should eat something.</p>`
     }
 
     return ""
@@ -171,7 +171,15 @@ export default class Player extends Entity {
 
   get woundedDescription() {
     if (this.currentHP <= 1) {
-      return `<p><b>You are severely wounded</b> and must rest.</p>`
+      return `<p>You are <b>severely wounded</b> and must rest.</p>`
+    }
+
+    return ""
+  }
+
+  get arousedDescription() {
+    if (this.currentLust >= this.maxLust - 1) {
+      return `<p>You are <b>too horny</b> to do anything productive.</p>`
     }
 
     return ""

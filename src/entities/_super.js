@@ -90,7 +90,7 @@ export default class Entity extends Saveable {
   }
 
   get currentHP() {
-    return Math.max(0, this.maxHP - this.stats.dmg)
+    return Math.min(this.maxHP, Math.max(0, this.maxHP - this.stats.dmg))
   }
 
   //normalized HP on a scale from 0 to 1
@@ -108,7 +108,7 @@ export default class Entity extends Saveable {
   }
 
   get currentLust() {
-    return Math.min(this.maxLust, this.stats.lust)
+    return Math.max(0, Math.min(this.maxLust, this.stats.lust))
   }
 
   //normalized lust on a scale from 0 to 1

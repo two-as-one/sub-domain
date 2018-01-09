@@ -49,9 +49,15 @@ export default class Main extends State {
       this.game.player.stats.dmg = this.game.player.maxHP - 1
     }
 
+    //if the player is at max lust, reduce it by 1 to allow them to masturbate for release
+    if (this.game.player.normalizedLust === 1) {
+      this.game.player.stats.lust = this.game.player.maxLust - 1
+    }
+
     const wounded = this.game.player.normalizedHP < 1
     const mortallyWounded = this.game.player.currentHP === 1
-    const aroused = this.game.player.normalizedLust === 1
+    const aroused =
+      this.game.player.currentLust === this.game.player.maxLust - 1
 
     this.checkpoint()
 
@@ -64,6 +70,7 @@ export default class Main extends State {
     if (this.game.world.day) {
       text =
         (this.game.player.woundedDescription ||
+          this.game.player.arousedDescription ||
           this.game.player.hungerDescription) + text
     }
 
@@ -189,10 +196,20 @@ export default class Main extends State {
   }
 
   sunrise() {
+    this.game.player.arouse(this.game.player.currentLust / 2)
+
+    let wetDream = ""
+    if (this.game.player.normalizedLust === 1) {
+      wetDream = `<p>
+          <b>You had a wet dream</b> — Your loins are on fire and you've made a sticky mess down there.
+          Your memories of wonderfully horny dreams quickly fade away, leaving you with a burning desire.
+        </p>`
+    }
+
     this.fade().then(() => {
       this.game.world.transitioned = false
       this.render({
-        text: this.area.sunriseMessage,
+        text: this.area.sunriseMessage + wetDream,
         responses: [{ state: "main" }]
       })
     })
