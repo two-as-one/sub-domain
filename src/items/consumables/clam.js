@@ -26,13 +26,10 @@ export default class Clam extends Consumable {
         All those slick juices make it slip down your throat.
       </p>`
 
-    //50% chance to grow a vagina with diminishing returns based on how many the player already has
-    if (Math.random() < 0.5 / (player.parts.vagina.quantity + 1)) {
-      text += player.transform.pickOne([
-        "grow an extra vagina",
-        "grow a new vagina"
-      ])
-    }
+    text += player.transform.pickOne([
+      "grow an extra vagina",
+      "grow a new vagina"
+    ])
 
     return text
   }

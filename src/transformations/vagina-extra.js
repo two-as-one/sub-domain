@@ -12,6 +12,18 @@ export default class VaginaExtra extends Transformation {
     return this.owner.parts.vagina.has && this.owner.parts.vagina.quantity < 3
   }
 
+  //diminishing returns
+  get chance() {
+    switch (this.owner.parts.vagina.quantity) {
+      case 1:
+        return 0.1
+      case 2:
+        return 0.05
+      default:
+        return 0
+    }
+  }
+
   apply() {
     this.owner.parts.vagina.add()
 

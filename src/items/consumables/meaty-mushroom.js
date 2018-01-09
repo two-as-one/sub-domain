@@ -22,12 +22,10 @@ export default class MeatyMushroom extends Consumable {
     let text = `
       <p>You swallow the mushroom whole. You can feel it throbbing as it slides down your throat — lewd!</p>`
 
-    if (Math.random() > 0.5) {
-      text += player.transform.pickOne([
-        "increase penis size",
-        "grow a new penis"
-      ])
-    }
+    text += player.transform.pickOne([
+      "increase penis size",
+      "grow a new penis"
+    ])
 
     return text
   }

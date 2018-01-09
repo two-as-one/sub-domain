@@ -466,7 +466,13 @@ export default class DefaultEncounter extends CombatState {
     if (!this.player.orgasmed && this.player.alive) {
       const xp = this.enemy.XPWorth
       this.player.giveXP(xp)
-      text += this.xpGainMessage(xp)
+
+      let item
+      if (this.enemy.loot) {
+        item = this.player.inventory.loot(this.enemy.loot)
+      }
+
+      text += this.gainMessage(xp, item)
     }
 
     //dilation
@@ -491,7 +497,7 @@ export default class DefaultEncounter extends CombatState {
     }
 
     //infection
-    if (this.fucking && this.fucking.infects && Math.random() > 0.5) {
+    if (this.fucking && this.fucking.infects) {
       const transformation = this.enemy.infect(this.player)
 
       if (transformation) {
@@ -638,8 +644,14 @@ export default class DefaultEncounter extends CombatState {
     )} are satiated by all that semen — <b>${hunger} hunger restored</b>.</p>`
   }
 
-  xpGainMessage(amount) {
-    return `<p>Gained <b>${amount}xp</b></p>`
+  gainMessage(xp, item) {
+    let text = `Gained <b>${xp}xp</b>`
+
+    if (item) {
+      text += ` and found <b>${item.name}</b>`
+    }
+
+    return `<p>${text}.</p>`
   }
 
   get attackMessage() {

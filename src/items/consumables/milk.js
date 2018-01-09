@@ -22,13 +22,11 @@ export default class Milk extends Consumable {
     let text = `
       <p>You uncork the bottle and down its contents. The sweet milk soothes you.</p>`
 
-    if (Math.random() > 0.5) {
-      text += player.transform.pickOne([
-        "increase breast size",
-        "grow a pair of breasts",
-        "increase nipple size"
-      ])
-    }
+    text += player.transform.pickOne([
+      "increase breast size",
+      "grow a pair of breasts",
+      "increase nipple size"
+    ])
 
     return text
   }

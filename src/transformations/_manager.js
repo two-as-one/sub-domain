@@ -32,6 +32,12 @@ export default class TransformationManager {
       return ""
     }
 
-    return choice.apply()
+    const roll = Math.random()
+
+    if (roll < choice.chance) {
+      return choice.apply()
+    } else {
+      return ""
+    }
   }
 }
