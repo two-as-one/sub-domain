@@ -39,7 +39,7 @@ export default class Breasts extends Part {
 
   get defaults() {
     return Object.assign(super.defaults, {
-      size: 2, //in bust inches
+      size: 5, //in bust inches
       sensitivity: 0.5,
       quantity: 2,
       milk: 0, //milk production
