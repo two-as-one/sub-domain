@@ -28,13 +28,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added `wet dreams`
 
 ### Changed
-- How the chance of a transformation is calculated
+- Changed how the chance of a transformation is calculated
   - Instead of being part of the item, this is now part of the transformation itself
   - First a transformation is picked from the list of possible transformation. Then a roll is made for that transformation to test if it gets applied.
 - Renamed `milk` to `bottled milk`
 - `succubus` perk now also restores some HP
-- Description on `succubus` perk to specify only fresh cum
-- Order of options on `main screen`
+- Changed description on `succubus` perk to specify only fresh cum
+- Changed order of options on `main screen`
 
 ## [0.4.1] - 2018-01-08
 ### Changed
@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added `nipple multiplication` transformation to `minotaur cum`
 
 ### Changed
-- instances of `your body` `your head` `your face` `you` to be dynamic based on `conjoined` perk
+- Changed instances of `your body` `your head` `your face` `you` to be dynamic based on `conjoined` perk
 
 ## [0.3.1] - 2017-12-20
 ### Added
