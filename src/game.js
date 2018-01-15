@@ -3,22 +3,24 @@ import CharacterCreation from "states/character-creation"
 import InventoryState from "states/inventory"
 import LevelUpState from "states/level-up"
 import MainState from "states/main"
+import Mastrubate from "encounters/masturbate"
+import MinotaurEncounter from "encounters/minotaur"
 import Player from "player/player"
 import TitleScreen from "states/title-screen"
 import World from "world"
 import save from "save/save"
 
+const ENCOUNTERS = {
+  minotaur: MinotaurEncounter
+}
+
 export default class Game {
   constructor() {
+    this.init()
+
     document.addEventListener("click", e => this._click(e))
     document.addEventListener("mousemove", e => this._mouseMove(e))
     document.addEventListener("keydown", e => this._keyPress(e))
-  }
-
-  /** Initialize the game */
-  initGame() {
-    this.player = new Player()
-    this.world = new World(this)
   }
 
   /** Toggle the game between mouse and keyboard control */
@@ -140,17 +142,22 @@ export default class Game {
     this.world.save()
   }
 
-  /** Start a new game */
-  newGame() {
+  /** clears all progress */
+  clear() {
     save.clear()
-    this.initGame()
-    this.switchState(new CharacterCreation(this))
+    this.init()
   }
 
-  /** Resume from previous save */
-  resume() {
-    this.initGame()
-    this.switchState("main")
+  /** initializes game objects */
+  init() {
+    this.player = new Player()
+    this.world = new World(this)
+  }
+
+  /** start an encounter by name */
+  Encounter(name) {
+    const encounter = ENCOUNTERS[name]
+    return new encounter(this)
   }
 
   /**
@@ -167,25 +174,21 @@ export default class Game {
 
     switch (state) {
       case "start":
-        this.currentState = new TitleScreen(this, ...args)
-        break
+        return (this.currentState = new TitleScreen(this))
       case "new-game":
-        this.newGame()
-        break
-      case "continue":
-        this.resume()
-        break
+        return (this.currentState = new CharacterCreation(this))
       case "inventory":
-        this.currentState = new InventoryState(this)
-        break
+        return (this.currentState = new InventoryState(this))
       case "main":
-        this.currentState = new MainState(this, ...args)
-        break
+        return (this.currentState = new MainState(this))
       case "level-up":
-        this.currentState = new LevelUpState(this, ...args)
-        break
+        return (this.currentState = new LevelUpState(this))
+      case "masturbate":
+        return (this.currentState = new Mastrubate(this))
+      case "encounter":
+        return (this.currentState = this.Encounter(...args))
       default:
-        this.currentState = state
+        throw new Error(`Error: unknown game state: ${state}`)
     }
   }
 }

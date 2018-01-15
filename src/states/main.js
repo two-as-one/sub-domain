@@ -1,5 +1,4 @@
 import Grammar from "utils/grammar"
-import Mastrubate from "encounters/masturbate"
 import State from "./_super"
 
 export default class Main extends State {
@@ -241,7 +240,7 @@ export default class Main extends State {
   }
 
   masturbate() {
-    this.game.switchState(new Mastrubate(this.game))
+    this.game.switchState("masturbate")
   }
 
   gear() {

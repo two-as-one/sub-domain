@@ -40,7 +40,7 @@ export default class TitleScreen extends State {
     if (save.isOutOfDate && !options.force) {
       this.state.outOfDate()
     } else {
-      this.game.switchState("continue")
+      this.game.switchState("main")
     }
   }
 

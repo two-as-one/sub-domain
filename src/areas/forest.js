@@ -1,6 +1,5 @@
 import Area from "./_super"
 import Grammar from "utils/grammar"
-import MinotaurEncounter from "encounters/minotaur"
 
 export default class Forest extends Area {
   get saveKey() {
@@ -98,7 +97,10 @@ export default class Forest extends Area {
       return this.findMeatyMushroom()
     } else {
       return Area.weighted([
-        { option: () => new MinotaurEncounter(this.game), weight: 1 },
+        {
+          option: () => this.game.switchState("encounter", "minotaur"),
+          weight: 1
+        },
         { option: this.findMeatyMushroom, weight: 1 },
         { option: this.nothingHappened, weight: 0.5 }
       ]).call(this)
