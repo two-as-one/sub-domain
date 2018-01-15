@@ -252,7 +252,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
       case "frotting":
         // prettier-ignore
         text = `
-          ${player.who} carefully ${G.verb(player.who, 'approach', false)} ${enemy.who} as ${G.verb(enemy.they, 'looks')} down at ${player.them} with a curious gaze.
+          ${player.who} carefully ${G.verb(player.who, 'approach', false)} ${enemy.who} as ${G.verb(enemy.they, 'look')} down at ${player.them} with a curious gaze.
           Slowly shuffling closer until ${player.penis.all} pokes against ${enemy.their} inhumanly large bovine cock.
           ${G.verb(enemy.who, 'snort')} as ${G.verb(player.they, 'wrap')} ${player.their} fingers around the cocks and slowly start jerking them together.`
         break

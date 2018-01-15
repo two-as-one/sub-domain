@@ -71,26 +71,26 @@ const PRONOUNS = {
   first: {
     subjective: "I",
     objective: "me",
-    possessive: "my",
+    possessive: "mine",
     reflexive: "myself"
   },
   second: {
     subjective: "you",
     objective: "you",
-    possessive: "your",
+    possessive: "yours",
     reflexive: "yourself"
   },
   third: {
     neutral: {
       subjective: "they",
       objective: "them",
-      possessive: "their",
+      possessive: "theirs",
       reflexive: "themself"
     },
     female: {
       subjective: "she",
       objective: "her",
-      possessive: "her",
+      possessive: "hers",
       reflexive: "herself"
     },
     male: {
@@ -105,6 +105,17 @@ const PRONOUNS = {
       possessive: "its",
       reflexive: "itself"
     }
+  }
+}
+
+const DETERMINERS = {
+  first: "my",
+  second: "your",
+  third: {
+    neutral: "their",
+    female: "her",
+    male: "his",
+    none: "its"
   }
 }
 
@@ -152,6 +163,15 @@ export default class Grammar {
 
   /** his/her/their/its */
   get their() {
+    if (this.owner.person === "third") {
+      return DETERMINERS[this.owner.person][this.owner.gender]
+    } else {
+      return DETERMINERS[this.owner.person]
+    }
+  }
+
+  /** his/hers/theirs/its */
+  get theirs() {
     if (this.owner.person === "third") {
       return PRONOUNS[this.owner.person][this.owner.gender]["possessive"]
     } else {

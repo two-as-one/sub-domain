@@ -386,6 +386,10 @@ export default class Entity extends Saveable {
     return this.g.their
   }
 
+  get theirs() {
+    return this.g.theirs
+  }
+
   get themself() {
     return this.g.themself
   }
