@@ -162,10 +162,8 @@ export default class Game {
 
   /**
    * Switch the game to a different state
-   * @param  {(String|Object.State)} state - The state to switch to
-   *                                {String} A specific know state to switch to
-   *                                {Object.State} A state that has already been instantiated
-   * @param {...args} - Any extra parameters that will be passed down to the new state's constructor
+   * @param  {String} state - The state name to switch to
+   * @param {...args} - Any extra parameters to pass on to the state constructor
    */
   switchState(state, ...args) {
     if (this.currentState) {

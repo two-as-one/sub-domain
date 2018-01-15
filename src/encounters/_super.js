@@ -1,6 +1,6 @@
 import Chance from "chance"
 import CombatState from "states/combat"
-import Grammar from "utils/grammar"
+import G from "utils/grammar"
 const chance = new Chance()
 
 /**
@@ -610,9 +610,7 @@ export default class DefaultEncounter extends CombatState {
   }
 
   seduceResultsMessage(lust) {
-    return `<p>${Grammar.capitalize(
-      this.enemy.who
-    )} gains <b>${lust} lust</b></p>`
+    return `<p>${G.capitalize(this.enemy.who)} gains <b>${lust} lust</b></p>`
   }
 
   seducedResultsMessage(lust) {
@@ -622,7 +620,7 @@ export default class DefaultEncounter extends CombatState {
   get tooHornyMessage() {
     const you = this.game.player.who
 
-    return `<p>${Grammar.capitalize(
+    return `<p>${G.capitalize(
       you
     )} are overwhelmed with lust and unable to control your actions.</p>`
   }
@@ -631,13 +629,13 @@ export default class DefaultEncounter extends CombatState {
     const you = this.game.player.who
     const your_body = this.game.player.parts.body.your
 
-    return `<p>${Grammar.capitalize(
+    return `<p>${G.capitalize(
       you
     )} have lost all strength in ${your_body} and are unable to resist.</p>`
   }
 
   succubusMessage(hunger, health) {
-    const you = Grammar.capitalize(this.game.player.who)
+    const you = G.capitalize(this.game.player.who)
 
     if (hunger || health) {
       const and = health && hunger ? "and" : ""
@@ -663,15 +661,15 @@ export default class DefaultEncounter extends CombatState {
   get attackMessage() {
     const you = this.game.player.who
 
-    return `<p>${Grammar.capitalize(you)} swing your ${
-      this.player.weapon.name
-    } at ${this.enemy.who}.</p>`
+    return `<p>${G.capitalize(you)} swing ${this.player.weapon.name} at ${
+      this.enemy.who
+    }.</p>`
   }
 
   get fleeSuccessMessage() {
     const you = this.game.player.who
 
-    return `<p>${Grammar.capitalize(you)} manage to run away from ${
+    return `<p>${G.capitalize(you)} manage to run away from ${
       this.enemy.who
     }!</p>`
   }
@@ -679,7 +677,7 @@ export default class DefaultEncounter extends CombatState {
   get fleeFailureMessage() {
     const you = this.game.player.who
 
-    return `<p>${Grammar.capitalize(you)} try to flee but ${
+    return `<p>${G.capitalize(you)} try to flee but ${
       this.enemy.who
     } stops you in your tracks!</p>`
   }
@@ -722,6 +720,22 @@ export default class DefaultEncounter extends CombatState {
     return ""
   }
 
+  get infectionMessage() {
+    return ""
+  }
+
+  get pullOutMessage() {
+    return ""
+  }
+
+  get struggleSuccessMessage() {
+    return ""
+  }
+
+  get struggleFailureMessage() {
+    return ""
+  }
+
   // Seduction messages
   //-----------------
 
@@ -758,23 +772,71 @@ export default class DefaultEncounter extends CombatState {
     return ""
   }
 
-  get struggleSuccessMessage() {
-    return ""
-  }
-
-  get struggleFailureMessage() {
-    return ""
-  }
-
   get climaxMessage() {
     return ""
   }
 
-  get pullOutMessage() {
-    return ""
+  // Debugging
+  //----------
+
+  /** output all static text strings */
+  get debugStatic() {
+    return G.trim(`
+      ${this.attackResultsMessage(10)}
+      ${this.attackedResultsMessage(10)}
+      ${this.attackedResultsMessage(10, 10)}
+      ${this.seduceResultsMessage(10)}
+      ${this.tooHornyMessage}
+      ${this.tooWeakMessage}
+      ${this.succubusMessage(10, 10)}
+      ${this.gainMessage(10)}
+      ${this.gainMessage(10, { name: "Dummy" })}
+      ${this.attackMessage}
+      ${this.fleeSuccessMessage}
+      ${this.fleeFailureMessage}
+      ${this.introMessage}
+      ${this.describeEnemyMessage}
+      ${this.playerAttackdeMessage}
+      ${this.combatLossMessage}
+      ${this.combatVictoryMessage}
+      ${this.climaxLossMessage}
+      ${this.climaxVictoryMessage}
+      ${this.seducedMessage}
+      ${this.notInterestedMessage}
+      ${this.grappleFailureMessage}
+      ${this.infectionMessage}
+      ${this.pullOutMessage}
+      ${this.struggleSuccessMessage}
+      ${this.struggleFailureMessage}
+    `)
   }
 
-  get infectionMessage() {
-    return ""
+  /** output dynamic strings */
+  get debugDynamic() {
+    const fucking = this.fucking
+    const text = this.positions
+      .map(position => {
+        this.fucking = position
+
+        return `
+        ## ${position.name} ##
+        ${this.playerInitiatePositionMessage}
+        ${this.enemyInitiatePositionMessage}
+        ${this.playerContinuePositionMessage}
+        ${this.enemyContinuePositionMessage}
+        ${this.climaxMessage}
+      `
+      })
+      .join("")
+
+    this.fucking = fucking
+    return G.trim(text)
+  }
+
+  get debug() {
+    return G.trim(`
+      ${this.debugStatic}
+      ${this.debugDynamic}
+    `)
   }
 }

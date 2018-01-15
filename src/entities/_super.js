@@ -1,4 +1,5 @@
 import Chance from "chance"
+import Grammar from "utils/grammar"
 import Saveable from "save/saveable"
 
 const chance = new Chance()
@@ -22,6 +23,19 @@ export default class Entity extends Saveable {
     //the title refers to the category of this entity
     //eg: 'Minotaur', 'Goblin'
     this.title = "creature"
+
+    //the gender of this creature
+    //male/female/neutral/none
+    //he/she/they/it
+    this.gender = "none"
+
+    //whether to refer to this entity in the first, second or third person
+    //third person used for NPC's
+    //second person used for the player
+    this.person = "third"
+
+    //used to create grammatical sentences about this creature
+    this.g = new Grammar(this)
   }
 
   get savedAttribute() {
@@ -351,12 +365,32 @@ export default class Entity extends Saveable {
   // Grammar related
   // ---------------
 
-  /** Returns the name of this creature or 'the {title}' */
+  /** grammar shortcuts */
   get who() {
-    if (this.name) {
-      return this.name
-    } else {
-      return `the ${this.title}`
-    }
+    return this.g.who
+  }
+
+  get whose() {
+    return this.g.whose
+  }
+
+  get they() {
+    return this.g.they
+  }
+
+  get them() {
+    return this.g.them
+  }
+
+  get their() {
+    return this.g.their
+  }
+
+  get themself() {
+    return this.g.themself
+  }
+
+  verb(word) {
+    return this.g.verb(word)
   }
 }

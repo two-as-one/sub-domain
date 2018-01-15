@@ -5,7 +5,7 @@ import Breasts from "parts/breasts"
 import Entity from "entities/_super"
 import Face from "parts/face"
 import Feet from "parts/feet"
-import Grammar from "utils/grammar"
+//import Grammar from "utils/grammar"
 import Hands from "parts/hands"
 import Head from "parts/head"
 import Inventory from "./inventory"
@@ -23,27 +23,29 @@ export default class Player extends Entity {
   constructor() {
     super()
 
-    this.name = "player"
+    this.name = ""
     this.title = "hero"
+    this.person = "second"
+    this.gender = "neutral"
 
     this.inventory = new Inventory(this)
 
-    this.parts = {
-      anus: new Anus(this),
-      balls: new Balls(this),
-      body: new Body(this),
-      breasts: new Breasts(this),
-      face: new Face(this),
-      feet: new Feet(this),
-      hands: new Hands(this),
-      head: new Head(this),
-      mouth: new Mouth(this),
-      nipples: new Nipples(this),
-      penis: new Penis(this),
-      tail: new Tail(this),
-      udder: new Udder(this),
-      vagina: new Vagina(this)
-    }
+    this.anus = new Anus(this)
+    this.balls = new Balls(this)
+    this.body = new Body(this)
+    this.breasts = new Breasts(this)
+    this.face = new Face(this)
+    this.feet = new Feet(this)
+    this.hands = new Hands(this)
+    this.head = new Head(this)
+    this.mouth = new Mouth(this)
+    this.nipples = new Nipples(this)
+    this.penis = new Penis(this)
+    this.tail = new Tail(this)
+    this.udder = new Udder(this)
+    this.vagina = new Vagina(this)
+
+    this.parts = this
 
     this.transform = new TransformationManager(this)
     this.perks = new PerkManager(this)
@@ -58,13 +60,13 @@ export default class Player extends Entity {
    *   When referring to the player directly: 'You gained ${xp}XP'
    *   When it would overload the sentence: '${player.who} talked while you took a shower'
    */
-  get who() {
-    if (this.perks.has("conjoined")) {
-      return Grammar.random(["both of you", "you both"])
-    } else {
-      return "you"
-    }
-  }
+  // get who() {
+  //   if (this.perks.has("conjoined")) {
+  //     return Grammar.random(["both of you", "you both"])
+  //   } else {
+  //     return "you"
+  //   }
+  // }
 
   // Saving
   //-------
@@ -83,10 +85,25 @@ export default class Player extends Entity {
   save() {
     super.save()
 
-    this.inventory.save()
-    this.perks.save()
+    ;[
+      "inventory",
+      "perks",
 
-    Object.keys(this.parts).forEach(key => this.getPart(key).save())
+      "anus",
+      "balls",
+      "body",
+      "breasts",
+      "face",
+      "feet",
+      "hands",
+      "head",
+      "mouth",
+      "nipples",
+      "penis",
+      "tail",
+      "udder",
+      "vagina"
+    ].forEach(part => this[part].save())
   }
 
   // Base Stats
