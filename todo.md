@@ -33,10 +33,23 @@ Shrines:
 
 ## areas
 
-travelling has variable duration based on distance
+travelling has variable duration based on distance - distance to what?? 2d map... ?
 
 Add `Camp` option to `main` state
 - describes camp
 - allows you to do camp stuff
   - talk with NPC's
   - ...
+
+
+## BUGS
+ - player lust NaN
+
+## automated testing
+- allow all text of an encounter to be printed out (for spell checking)
+
+## refactor positions so that all 5 messages are contained within the position
+
+grammar for body parts?
+- it pokes
+- they poke
