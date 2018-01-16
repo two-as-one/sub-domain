@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Changed
 - `breast` size when starting as female from `A-cup` to `C-cup`
+- significant under-the-hood changes in terms of grammar an sentence structure to allow for dynamic conjugation/pluralization/contractions/capitalization
 
 ### Deprecated
 ### Removed
