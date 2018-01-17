@@ -5,7 +5,7 @@ import Breasts from "parts/breasts"
 import Entity from "entities/_super"
 import Face from "parts/face"
 import Feet from "parts/feet"
-//import Grammar from "utils/grammar"
+import G from "utils/grammar"
 import Hands from "parts/hands"
 import Head from "parts/head"
 import Inventory from "./inventory"
@@ -60,13 +60,13 @@ export default class Player extends Entity {
    *   When referring to the player directly: 'You gained ${xp}XP'
    *   When it would overload the sentence: '${player.who} talked while you took a shower'
    */
-  // get who() {
-  //   if (this.perks.has("conjoined")) {
-  //     return Grammar.random(["both of you", "you both"])
-  //   } else {
-  //     return "you"
-  //   }
-  // }
+  get who() {
+    if (this.head.quantity === 2) {
+      return G.random(["both of you", "you both", "you"])
+    } else {
+      return super.who
+    }
+  }
 
   // Saving
   //-------
@@ -84,7 +84,6 @@ export default class Player extends Entity {
 
   save() {
     super.save()
-
     ;[
       "inventory",
       "perks",
