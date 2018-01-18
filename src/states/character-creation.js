@@ -25,6 +25,8 @@ export default class CharacterCreation extends State {
   }
 
   intro() {
+    this.game.clear()
+
     this.render({
       text: `
         This story began on a peaceful farm in a peaceful land — far, far away and quite some time ago.
