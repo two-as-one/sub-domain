@@ -331,14 +331,22 @@ export default class Grammar {
     return contractions.contract(text)
   }
 
-  /** provides a grammatically cleaned paragraph of text */
+  /**
+   * grammatically cleans up text and wraps it in paragraphs
+   * use a double new line to introduce a new paragraph
+   * @param  {String} text - the text to clean up
+   * @return {String}      the cleaned up text
+   */
   static clean(text = "") {
-    text = Grammar.collapse(text)
-    text = Grammar.trim(text)
-    text = Grammar.sentences(text)
-    text = Grammar.contract(text)
-    text = Grammar.p(text)
+    text = text.split(/\n\n|\r\r/)
+    text = text
+      .map(text => Grammar.collapse(text))
+      .filter(text => text)
+      .map(text => Grammar.trim(text))
+      .map(text => Grammar.sentences(text))
+      .map(text => Grammar.contract(text))
+      .map(text => Grammar.p(text))
 
-    return text
+    return text.join("")
   }
 }
