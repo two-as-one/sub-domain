@@ -34,8 +34,8 @@ export default class Entity extends Saveable {
     //second person used for the player
     this.person = "third"
 
-    //used to create grammatical sentences about this creature
-    this.g = new Grammar(this)
+    //whether this entity is actually multiple people
+    this.multiple = false
   }
 
   get savedAttribute() {
@@ -361,40 +361,6 @@ export default class Entity extends Saveable {
   has(part) {
     return false
   }
-
-  // Grammar related
-  // ---------------
-
-  /** grammar shortcuts */
-  get who() {
-    return this.g.who
-  }
-
-  get whose() {
-    return this.g.whose
-  }
-
-  get they() {
-    return this.g.they
-  }
-
-  get them() {
-    return this.g.them
-  }
-
-  get their() {
-    return this.g.their
-  }
-
-  get theirs() {
-    return this.g.theirs
-  }
-
-  get themself() {
-    return this.g.themself
-  }
-
-  verb(word) {
-    return this.g.verb(word)
-  }
 }
+
+Grammar.mix(Entity)

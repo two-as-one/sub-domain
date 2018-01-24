@@ -1,6 +1,6 @@
 import Area from "./_super"
 import Chance from "chance"
-import Grammar from "utils/grammar"
+import G from "utils/grammar"
 
 const chance = new Chance()
 
@@ -15,27 +15,25 @@ export default class Beach extends Area {
 
   get defaults() {
     return Object.assign(super.defaults, {
-      lvl: 0,
       current: true,
       discovered: true
     })
   }
 
   get introMessage() {
-    const you = Grammar.capitalize(this.game.player.who)
-    const your_body = this.game.player.parts.body.your
+    const player = this.game.player
 
-    return `
-        <p>
-          ${you} open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
-          The peaceful sound of waves crashing against the shore reminding you of home.
-        </p>
-        <p>
-          You're still alive … and somehow free.
-        </p>
-        <p>
-          ${you} try to get up but ${your_body} hurts all over — maybe you'll just lay down for a little longer.
-        </p>`
+    return G.clean(`
+      ${
+        player.who
+      } open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
+      The peaceful sound of waves crashing against the shore reminding you of home.
+
+      You're still alive … and somehow free.
+
+      ${player.who} try to get up but ${
+      player.body.your
+    } hurts all over — maybe you'll just lay down for a little longer.`)
   }
 
   get dayDescription() {
@@ -71,12 +69,12 @@ export default class Beach extends Area {
 
   get sunsetMessage() {
     return `
-      <p>The day comes to its end as the <b>sun sets</b> below the horizon.</p>
+      <p>The day comes to its end as the <b>sun sets</b> below the horizon.</p>X
     `
   }
 
   get sunriseMessage() {
-    const you = Grammar.capitalize(this.game.player.who)
+    const you = G.capitalize(this.game.player.who)
     return `
       <p>${you} wake up to the sound of crashing waves. The sun has already begun its ascend across the sky.</p>
     `

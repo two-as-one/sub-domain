@@ -19,6 +19,14 @@ export default class Part extends Saveable {
     })
   }
 
+  get person() {
+    return "third"
+  }
+
+  get gender() {
+    return "none"
+  }
+
   //only return a description if the player has this part
   get description() {
     return ""
@@ -130,7 +138,7 @@ export default class Part extends Saveable {
 
   get your() {
     return Grammar.trim(
-      `your ${Grammar.random(["", this.adjective])} ${this.pluralized}`
+      `${this.owner.their} ${Grammar.maybe(this.adjective)} ${this.pluralized}`
     )
   }
 
@@ -140,19 +148,16 @@ export default class Part extends Saveable {
     } else if (this.quantity === 2) {
       return Grammar.trim(`both of ${this.your}`)
     } else {
-      return Grammar.trim(
-        `all ${Grammar.random(["", this.number])} of ${this.your}`
-      )
+      return Grammar.trim(`all ${Grammar.maybe(this.number)} of ${this.your}`)
     }
   }
 
   get one() {
     if (this.quantity > 1) {
       return Grammar.trim(
-        `one of your ${Grammar.random(["", this.number])} ${Grammar.random([
-          "",
+        `one of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
           this.adjective
-        ])} ${this.pluralized}`
+        )} ${this.pluralized}`
       )
     } else {
       return this.all
@@ -162,10 +167,9 @@ export default class Part extends Saveable {
   get two() {
     if (this.quantity > 2) {
       return Grammar.trim(
-        `two of your ${Grammar.random(["", this.number])} ${Grammar.random([
-          "",
+        `two of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
           this.adjective
-        ])} ${this.pluralized}`
+        )} ${this.pluralized}`
       )
     } else {
       return this.all
@@ -175,10 +179,9 @@ export default class Part extends Saveable {
   get three() {
     if (this.quantity > 3) {
       return Grammar.trim(
-        `three of your ${Grammar.random(["", this.number])} ${Grammar.random([
-          "",
+        `three of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
           this.adjective
-        ])} ${this.pluralized}`
+        )} ${this.pluralized}`
       )
     } else {
       return this.all
@@ -188,10 +191,9 @@ export default class Part extends Saveable {
   get four() {
     if (this.quantity > 4) {
       return Grammar.trim(
-        `four of your ${Grammar.random(["", this.number])} ${Grammar.random([
-          "",
+        `four of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
           this.adjective
-        ])} ${this.pluralized}`
+        )} ${this.pluralized}`
       )
     } else {
       return this.all
@@ -202,3 +204,5 @@ export default class Part extends Saveable {
     return Grammar.number(this.quantity)
   }
 }
+
+Grammar.mix(Part)

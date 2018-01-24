@@ -139,8 +139,6 @@ export default class Main extends State {
       })
 
       this.game.world.advance()
-    } else {
-      this.game.switchState(result)
     }
   }
 

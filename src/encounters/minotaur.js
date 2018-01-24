@@ -27,9 +27,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `Suddenly a massive axe swings right above ${player.head.all} and cuts through the flora. ${player.who} are ambushed by a <b>${enemy.title}</b>!`
-
-    return G.clean(text)
+    return `Suddenly a massive axe swings right above ${player.head.all} and cuts through the flora. ${player.who} are ambushed by a <b>${enemy.title}</b>!`
   }
 
   get describeEnemyMessage() {
@@ -51,7 +49,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     text += ` Brandishing an oversized axe and wearing no clothing or jewellery.
               The tales failed to mention a considerable detail — ${enemy.their} monstrous bovine cock, throbbing and filling the air with potent musk!`
 
-    return G.clean(text)
+    return text
   }
 
   get mainMessage() {
@@ -88,7 +86,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
       }
     }
 
-    return G.clean(text)
+    return text
   }
 
   get playerAttackdeMessage() {
@@ -96,27 +94,21 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'swing')} ${enemy.their} massive axe at ${player.who}.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'swing')} ${enemy.their} massive axe at ${player.who}.`
   }
 
   get combatLossMessage() {
     const enemy = this.enemy
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'roar')} victoriously, swinging ${enemy.their} axe in the air a few times before walking away. Leaving your —almost lifeless— body behind.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'roar')} victoriously, swinging ${enemy.their} axe in the air a few times before walking away. Leaving your —almost lifeless— body behind.`
   }
 
   get combatVictoryMessage() {
     const enemy = this.enemy
 
     // prettier-ignore
-    const text =`${G.verb(enemy.who, 'succumb')} to ${enemy.their} wounds.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'succumb')} to ${enemy.their} wounds.`
   }
 
   get climaxLossMessage() {
@@ -124,9 +116,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `Satisfied from the fucking, ${G.verb(enemy.who, 'leave')} ${enemy.their} bitch —${player.who}— behind as ${G.verb(enemy.they, 'shuffle')} back into the wilderness.`
-
-    return G.clean(text)
+    return `Satisfied from the fucking, ${G.verb(enemy.who, 'leave')} ${enemy.their} bitch —${player.who}— behind as ${G.verb(enemy.they, 'shuffle')} back into the wilderness.`
   }
 
   get climaxVictoryMessage() {
@@ -134,9 +124,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${player.who} sneak off as ${G.verb(enemy.who, 'have')} become docile from ${enemy.their} recent orgasm.`
-
-    return G.clean(text)
+    return `${player.who} sneak off as ${G.verb(enemy.who, 'have')} become docile from ${enemy.their} recent orgasm.`
   }
 
   // Seduction messages
@@ -146,9 +134,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const enemy = this.enemy
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'stroke')} ${enemy.their} massive bovine cock — Pre-cum dribbling down from ${enemy.their} tip and filling the air with overpowering musk.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'stroke')} ${enemy.their} massive bovine cock — Pre-cum dribbling down from ${enemy.their} tip and filling the air with overpowering musk.`
   }
 
   get notInterestedMessage() {
@@ -156,9 +142,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'slap')} ${player.who} in the face as you try to approach ${enemy.them} — clearly not impressed by what you're offering.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'slap')} ${player.who} in the face as you try to approach ${enemy.them} — clearly not impressed by what you're offering.`
   }
 
   get grappleFailureMessage() {
@@ -166,18 +150,14 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'be')} horny as fuck and ${G.verb(enemy.who, 'try', false)} to pin ${player.who} down, but you manage to dodge ${enemy.their} attack.`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'be')} horny as fuck and ${G.verb(enemy.who, 'try', false)} to pin ${player.who} down, but you manage to dodge ${enemy.their} attack.`
   }
 
   get infectionMessage() {
     const enemy = this.enemy
 
     // prettier-ignore
-    const text = `<b>${enemy.whose} spunk corrupts your body…</b>`
-
-    return G.clean(text)
+    return `<b>${enemy.whose} spunk corrupts your body…</b>`
   }
 
   get struggleSuccessMessage() {
@@ -185,9 +165,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${player.who} manage to wriggle out of ${enemy.whose} grasp.`
-
-    return G.clean(text)
+    return `${player.who} manage to wriggle out of ${enemy.whose} grasp.`
   }
 
   get struggleFailureMessage() {
@@ -195,18 +173,14 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    const text = `${player.who} attempt to struggle free but ${G.verb(enemy.who, 'keep')} you firmly pinned down.`
-
-    return G.clean(text)
+    return `${player.who} attempt to struggle free but ${G.verb(enemy.who, 'keep')} you firmly pinned down.`
   }
 
   get pullOutMessage() {
     const enemy = this.enemy
 
     // prettier-ignore
-    const text = `${G.verb(enemy.who, 'be')} about to climax — pull out at the last moment?`
-
-    return G.clean(text)
+    return `${G.verb(enemy.who, 'be')} about to climax — pull out at the last moment?`
   }
 
   // Fucking messages
@@ -256,7 +230,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         break
     }
 
-    return G.clean(text)
+    return text
   }
 
   get enemyInitiatePositionMessage() {
@@ -300,7 +274,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         break
     }
 
-    return G.clean(text)
+    return text
   }
 
   get playerContinuePositionMessage() {
@@ -337,7 +311,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         break
     }
 
-    return G.clean(text)
+    return text
   }
 
   get enemyContinuePositionMessage() {
@@ -374,7 +348,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
         break
     }
 
-    return G.clean(text)
+    return text
   }
 
   get climaxMessage() {
@@ -438,6 +412,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
         break
     }
 
-    return G.clean(text)
+    return text
   }
 }

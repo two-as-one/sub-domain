@@ -1,3 +1,4 @@
+import G from "utils/grammar"
 import StateMachine from "javascript-state-machine"
 import TypeWriter from "cool-typewriter"
 import template from "templates/main.hbs"
@@ -71,6 +72,8 @@ export default class State {
     data.responses = data.responses.filter(
       response => !response.hasOwnProperty("if") || response.if
     )
+
+    data.text = G.clean(data.text || "")
 
     data.responses.forEach((response, i) => {
       if (!response.text) {

@@ -98,12 +98,17 @@ export default class DefaultEncounter extends CombatState {
       ]
     }
 
+    const player = this.player
     let starvationMessage = ""
     if (this.player.isStarving) {
-      starvationMessage = `<p><b>You are severely weakened due to your starvation!</b></p>`
+      starvationMessage = `
+
+        <b>${player.who} are severely weakened due to your starvation!</b>`
     }
     if (this.player.isHungry) {
-      starvationMessage = `<p><b>You are hungry and weakened.</b></p>`
+      starvationMessage = `
+
+        <b>${player.who} are hungry and weakened.</b>`
     }
 
     this.render({
@@ -517,15 +522,11 @@ export default class DefaultEncounter extends CombatState {
       text += this.combatVictoryMessage
     }
 
-    const you = this.player.who
-
     if (this.player.orgasmed || !this.player.alive) {
       this.fadeout = true
       text += `
-        <p>
-          Time passes before ${you} regain your senses.
-        </p>
-      `
+
+      Time passes before ${this.player.who} regain your senses.`
     }
 
     if (this.player.orgasmed) {
@@ -596,90 +597,108 @@ export default class DefaultEncounter extends CombatState {
   //----------------
 
   attackResultsMessage(damage) {
-    return `<p>You deal <b>${damage} damage</b></p>`
+    return `
+
+    You deal <b>${damage} damage</b>`
   }
 
   attackedResultsMessage(damage, lust) {
-    let text = `You suffer <b>${damage} damage</b>`
+    let text = `
+
+      You suffer <b>${damage} damage</b>`
 
     if (lust) {
       text += `, it feels good — you gain <b>${lust} lust</b>`
     }
 
-    return `<p>${text}.</p>`
+    return text
   }
 
   seduceResultsMessage(lust) {
-    return `<p>${G.capitalize(this.enemy.who)} gains <b>${lust} lust</b></p>`
+    return `
+
+      ${this.enemy.who} gains <b>${lust} lust</b>`
   }
 
   seducedResultsMessage(lust) {
-    return `<p>You gain <b>${lust} lust</b></p>`
+    return `
+
+      You gain <b>${lust} lust</b>`
   }
 
   get tooHornyMessage() {
-    const you = this.game.player.who
+    const player = this.game.player
 
-    return `<p>${G.capitalize(
-      you
-    )} are overwhelmed with lust and unable to control your actions.</p>`
+    return `
+
+      ${
+        player.who
+      } are overwhelmed with lust and unable to control your actions.`
   }
 
   get tooWeakMessage() {
-    const you = this.game.player.who
-    const your_body = this.game.player.parts.body.your
+    const player = this.game.player
 
-    return `<p>${G.capitalize(
-      you
-    )} have lost all strength in ${your_body} and are unable to resist.</p>`
+    return `
+
+      ${player.who} have lost all strength in ${
+      player.body.your
+    } and are unable to resist.`
   }
 
   succubusMessage(hunger, health) {
-    const you = G.capitalize(this.game.player.who)
+    const player = this.game.player
 
     if (hunger || health) {
       const and = health && hunger ? "and" : ""
       hunger = hunger ? `${hunger} hunger` : ""
       health = health ? `${health} health` : ""
 
-      return `<p>${you} are satiated by all that semen — <b>${hunger} ${and} ${health} restored</b>.</p>`
+      return `
+
+        ${
+          player.who
+        } are satiated by all that semen — <b>${hunger} ${and} ${health} restored</b>.`
     } else {
       return ""
     }
   }
 
   gainMessage(xp, item) {
-    let text = `Gained <b>${xp}xp</b>`
+    let text = `
+
+      Gained <b>${xp}xp</b>`
 
     if (item) {
       text += ` and found <b>${item.name}</b>`
     }
 
-    return `<p>${text}.</p>`
+    return text
   }
 
   get attackMessage() {
-    const you = this.game.player.who
+    const player = this.game.player
+    const enemy = this.enemy
 
-    return `<p>${G.capitalize(you)} swing ${this.player.weapon.name} at ${
-      this.enemy.who
-    }.</p>`
+    return `
+
+      ${player.who} swing ${player.weapon.name} at ${enemy.who}.`
   }
 
   get fleeSuccessMessage() {
-    const you = this.game.player.who
+    const player = this.game.player
+    const enemy = this.enemy
 
-    return `<p>${G.capitalize(you)} manage to run away from ${
-      this.enemy.who
-    }!</p>`
+    return `
+      ${player.who} manage to run away from ${enemy.who}!`
   }
 
   get fleeFailureMessage() {
-    const you = this.game.player.who
+    const player = this.game.player
+    const enemy = this.enemy
 
-    return `<p>${G.capitalize(you)} try to flee but ${
-      this.enemy.who
-    } stops you in your tracks!</p>`
+    return `
+      ${player.who} try to flee but ${enemy.who} stops you in your tracks!`
   }
 
   // Messages - extend these with encounter specific messages
@@ -782,32 +801,32 @@ export default class DefaultEncounter extends CombatState {
   /** output all static text strings */
   get debugStatic() {
     return G.trim(`
-      ${this.attackResultsMessage(10)}
-      ${this.attackedResultsMessage(10)}
-      ${this.attackedResultsMessage(10, 10)}
-      ${this.seduceResultsMessage(10)}
-      ${this.tooHornyMessage}
-      ${this.tooWeakMessage}
-      ${this.succubusMessage(10, 10)}
-      ${this.gainMessage(10)}
-      ${this.gainMessage(10, { name: "Dummy" })}
-      ${this.attackMessage}
-      ${this.fleeSuccessMessage}
-      ${this.fleeFailureMessage}
-      ${this.introMessage}
-      ${this.describeEnemyMessage}
-      ${this.playerAttackdeMessage}
-      ${this.combatLossMessage}
-      ${this.combatVictoryMessage}
-      ${this.climaxLossMessage}
-      ${this.climaxVictoryMessage}
-      ${this.seducedMessage}
-      ${this.notInterestedMessage}
-      ${this.grappleFailureMessage}
-      ${this.infectionMessage}
-      ${this.pullOutMessage}
-      ${this.struggleSuccessMessage}
-      ${this.struggleFailureMessage}
+      ${G.clean(this.attackResultsMessage(10))}
+      ${G.clean(this.attackedResultsMessage(10))}
+      ${G.clean(this.attackedResultsMessage(10, 10))}
+      ${G.clean(this.seduceResultsMessage(10))}
+      ${G.clean(this.tooHornyMessage)}
+      ${G.clean(this.tooWeakMessage)}
+      ${G.clean(this.succubusMessage(10, 10))}
+      ${G.clean(this.gainMessage(10))}
+      ${G.clean(this.gainMessage(10, { name: "Dummy" }))}
+      ${G.clean(this.attackMessage)}
+      ${G.clean(this.fleeSuccessMessage)}
+      ${G.clean(this.fleeFailureMessage)}
+      ${G.clean(this.introMessage)}
+      ${G.clean(this.describeEnemyMessage)}
+      ${G.clean(this.playerAttackdeMessage)}
+      ${G.clean(this.combatLossMessage)}
+      ${G.clean(this.combatVictoryMessage)}
+      ${G.clean(this.climaxLossMessage)}
+      ${G.clean(this.climaxVictoryMessage)}
+      ${G.clean(this.seducedMessage)}
+      ${G.clean(this.notInterestedMessage)}
+      ${G.clean(this.grappleFailureMessage)}
+      ${G.clean(this.infectionMessage)}
+      ${G.clean(this.pullOutMessage)}
+      ${G.clean(this.struggleSuccessMessage)}
+      ${G.clean(this.struggleFailureMessage)}
     `)
   }
 
@@ -820,11 +839,11 @@ export default class DefaultEncounter extends CombatState {
 
         return `
         ## ${position.name} ##
-        ${this.playerInitiatePositionMessage}
-        ${this.enemyInitiatePositionMessage}
-        ${this.playerContinuePositionMessage}
-        ${this.enemyContinuePositionMessage}
-        ${this.climaxMessage}
+        ${G.clean(this.playerInitiatePositionMessage)}
+        ${G.clean(this.enemyInitiatePositionMessage)}
+        ${G.clean(this.playerContinuePositionMessage)}
+        ${G.clean(this.enemyContinuePositionMessage)}
+        ${G.clean(this.climaxMessage)}
       `
       })
       .join("")

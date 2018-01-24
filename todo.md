@@ -1,3 +1,5 @@
+## Game mechanics
+
 allow player to grapple
 allow enemies to submit
 
@@ -46,9 +48,9 @@ Add `Camp` option to `main` state
  - player lust NaN
 
 ## automated testing
-- allow all text of an encounter to be printed out (for spell checking)
 
-## refactor positions so that all 5 messages are contained within the position
+## Code upgrades
+refactor positions so that all 5 messages are contained within the position
 
 grammar for body parts?
 - it pokes

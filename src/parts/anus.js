@@ -15,21 +15,16 @@ export default class Anus extends Part {
   }
 
   get description() {
-    let text
+    let description
 
     if (this.has) {
       if (this.quantity === 1) {
-        const adjective = Grammar.articlize(this.adjective)
-        const anus = this.pluralized
-        text = `<b>${adjective} ${anus}</b> nestled in between.`
+        description = Grammar.a(`${this.adjective} ${this.pluralized}`)
       } else {
-        const number = this.number
-        const adjective = this.adjective
-        const anuses = this.pluralized
-        text = `<b>${number} ${adjective} ${anuses}</b> nestled in between.`
+        description = `${this.number} ${this.adjective} ${this.pluralized}`
       }
 
-      return Grammar.trim(`${text}`)
+      return Grammar.trim(`<b>${description}</b> nestled in between.`)
     }
 
     return ""

@@ -2,6 +2,7 @@ import Articles from "articles"
 import Chance from "chance"
 import { Contractions } from "contractions"
 import conjugate from "conjugate"
+import number from "number-to-words"
 import pluralize from "pluralize"
 
 /** custom list of contractions as some of the default ones are very old-school */
@@ -69,136 +70,164 @@ const chance = new Chance()
 
 const PRONOUNS = {
   first: {
-    subjective: "I",
-    objective: "me",
-    possessive: "mine",
-    reflexive: "myself"
+    singular: {
+      subjective: "I",
+      objective: "me",
+      determiner: "my",
+      possessive: "mine",
+      reflexive: "myself"
+    },
+    plural: {
+      subjective: "we",
+      objective: "us",
+      determiner: "our",
+      possessive: "ours",
+      reflexive: "ourselves"
+    }
   },
   second: {
-    subjective: "you",
-    objective: "you",
-    possessive: "yours",
-    reflexive: "yourself"
+    singular: {
+      subjective: "you",
+      objective: "you",
+      determiner: "your",
+      possessive: "yours",
+      reflexive: "yourself"
+    },
+    plural: {
+      subjective: "you",
+      objective: "you",
+      determiner: "your",
+      possessive: "yours",
+      reflexive: "yourself"
+    }
   },
   third: {
-    neutral: {
+    singular: {
+      neutral: {
+        subjective: "they",
+        objective: "them",
+        determiner: "their",
+        possessive: "theirs",
+        reflexive: "themself"
+      },
+      female: {
+        subjective: "she",
+        objective: "her",
+        determiner: "her",
+        possessive: "hers",
+        reflexive: "herself"
+      },
+      male: {
+        subjective: "he",
+        objective: "him",
+        determiner: "his",
+        possessive: "his",
+        reflexive: "himself"
+      },
+      none: {
+        subjective: "it",
+        objective: "it",
+        determiner: "its",
+        possessive: "its",
+        reflexive: "itself"
+      }
+    },
+    plural: {
       subjective: "they",
       objective: "them",
+      determiner: "their",
       possessive: "theirs",
-      reflexive: "themself"
-    },
-    female: {
-      subjective: "she",
-      objective: "her",
-      possessive: "hers",
-      reflexive: "herself"
-    },
-    male: {
-      subjective: "he",
-      objective: "him",
-      possessive: "his",
-      reflexive: "himself"
-    },
-    none: {
-      subjective: "it",
-      objective: "it",
-      possessive: "its",
-      reflexive: "itself"
+      reflexive: "themselves"
     }
   }
 }
 
-const DETERMINERS = {
-  first: "my",
-  second: "your",
-  third: {
-    neutral: "their",
-    female: "her",
-    male: "his",
-    none: "its"
+/** return the correct pronoun based on a set of criteria */
+function pronoun(type, plural = false, person = "third", gender = "neutral") {
+  let p = PRONOUNS[person]
+  p = p && p[plural ? "plural" : "singular"]
+
+  if (person === "third" && !plural) {
+    p = p && p[gender]
   }
+
+  p = p && p[type]
+
+  return p
 }
 
 export default class Grammar {
-  constructor(owner) {
-    this.owner = owner
-  }
+  //mixes a class with built-in Grammar capability
+  static mix(SuperClass) {
+    Object.defineProperty(SuperClass.prototype, "who", {
+      get() {
+        if (this.person === "second") {
+          return pronoun("subjective", this.multiple, this.person, this.gender)
+        } else if (this.name) {
+          return this.name
+        } else {
+          return `the ${this.title}`
+        }
+      }
+    })
 
-  /** Returns the name of this creature or 'the {title}' */
-  get who() {
-    if (this.owner.person === "second") {
-      return PRONOUNS[this.owner.person]["subjective"]
-    } else if (this.owner.name) {
-      return this.owner.name
-    } else {
-      return `the ${this.owner.title}`
-    }
-  }
+    Object.defineProperty(SuperClass.prototype, "whose", {
+      get() {
+        if (this.person === "second") {
+          return pronoun("possessive", this.multiple, this.person, this.gender)
+        } else {
+          return `${this.who}'s`
+        }
+      }
+    })
 
-  get whose() {
-    if (this.owner.person === "second") {
-      return PRONOUNS[this.owner.person]["possessive"]
-    } else {
-      return `${this.owner.who}'s`
-    }
-  }
+    /** he/she/they/it */
+    Object.defineProperty(SuperClass.prototype, "they", {
+      get() {
+        return pronoun("subjective", this.multiple, this.person, this.gender)
+      }
+    })
 
-  /** he/she/they/it */
-  get they() {
-    if (this.owner.person === "third") {
-      return PRONOUNS[this.owner.person][this.owner.gender]["subjective"]
-    } else {
-      return PRONOUNS[this.owner.person]["subjective"]
-    }
-  }
+    /** him/her/them/it */
+    Object.defineProperty(SuperClass.prototype, "them", {
+      get() {
+        return pronoun("objective", this.multiple, this.person, this.gender)
+      }
+    })
 
-  /** him/her/them/it */
-  get them() {
-    if (this.owner.person === "third") {
-      return PRONOUNS[this.owner.person][this.owner.gender]["objective"]
-    } else {
-      return PRONOUNS[this.owner.person]["objective"]
-    }
-  }
+    /** his/her/their/its */
+    Object.defineProperty(SuperClass.prototype, "their", {
+      get() {
+        return pronoun("determiner", this.multiple, this.person, this.gender)
+      }
+    })
 
-  /** his/her/their/its */
-  get their() {
-    if (this.owner.person === "third") {
-      return DETERMINERS[this.owner.person][this.owner.gender]
-    } else {
-      return DETERMINERS[this.owner.person]
-    }
-  }
+    /** his/hers/theirs/its */
+    Object.defineProperty(SuperClass.prototype, "theirs", {
+      get() {
+        return pronoun("possessive", this.multiple, this.person, this.gender)
+      }
+    })
 
-  /** his/hers/theirs/its */
-  get theirs() {
-    if (this.owner.person === "third") {
-      return PRONOUNS[this.owner.person][this.owner.gender]["possessive"]
-    } else {
-      return PRONOUNS[this.owner.person]["possessive"]
-    }
-  }
-
-  /** himself/herself/themself/itself */
-  get themself() {
-    if (this.owner.person === "third") {
-      return PRONOUNS[this.owner.person][this.owner.gender]["reflexive"]
-    } else {
-      return PRONOUNS[this.owner.person]["reflexive"]
-    }
+    /** himself/herself/themself/itself */
+    Object.defineProperty(SuperClass.prototype, "themself", {
+      get() {
+        return pronoun("reflexive", this.multiple, this.person, this.gender)
+      }
+    })
   }
 
   /** conjugates a verb based on noun/pronoun */
-  static verb(who, verb, both = true) {
+  static verb(who, verb, full = true) {
     if (!Grammar.isPronoun(who)) {
       let out = conjugate("he", verb)
-      if (both) {
+      if (full) {
         out = `${who} ${out}`
       }
       return out
     }
 
-    return conjugate(who, verb, both)
+    return conjugate(who, verb, full)
   }
 
   /** check whether a word is a pronoun */
@@ -212,65 +241,25 @@ export default class Grammar {
 
   /** converts a numeric number between 0-1 into its word */
   static number(value = 0) {
-    switch (value) {
-      case 0:
-        return "zero"
-      case 1:
-        return "one"
-      case 2:
-        return "two"
-      case 3:
-        return "three"
-      case 4:
-        return "four"
-      case 5:
-        return "five"
-      case 6:
-        return "six"
-      case 7:
-        return "seven"
-      case 8:
-        return "eight"
-      case 9:
-        return "nine"
-      case 10:
-        return "ten"
-      default:
-        return value
-    }
+    return number.toWords(value)
   }
 
   /** converts a numeric number between 1-10 into its ordinal word */
   static ordinal(value = 0) {
-    switch (value) {
-      case 1:
-        return "first"
-      case 2:
-        return "second"
-      case 3:
-        return "third"
-      case 4:
-        return "fourth"
-      case 5:
-        return "fifth"
-      case 6:
-        return "sixth"
-      case 7:
-        return "seventh"
-      case 8:
-        return "eighth"
-      case 9:
-        return "ninth"
-      case 10:
-        return "tenth"
-      default:
-        return value
-    }
+    return number.toWordsOrdinal(value)
   }
 
   /** adds an article to a word */
   static articlize(word = "") {
     return Articles.articlize(word)
+  }
+
+  static an(word) {
+    return Grammar.articlize(word)
+  }
+
+  static a(word) {
+    return Grammar.articlize(word)
   }
 
   /** make a word plural */
@@ -293,6 +282,17 @@ export default class Grammar {
   /** return a random element from an array */
   static random(list = []) {
     return chance.pickone(list)
+  }
+
+  /**
+   * outputs a word some of the time
+   * @param  {String} text - the word to condition
+   * @param  {Number} [chance] - the chance that the word to be outputted
+   * example:
+   *   `Your ${Grammar.maybe('mighty')} fists`
+   */
+  static maybe(text = "", chance = 0.5) {
+    return Math.random() > chance ? text : ""
   }
 
   /** converts cm into feet and inches as a string */
@@ -326,9 +326,28 @@ export default class Grammar {
     return `<p>${text}</p>`
   }
 
-  /** contracts words such as `does not` into `doesn't` */
+  /**
+   * contracts words such as `does not` into `doesn't`
+   * if you want to specifically prevent a word to be contracted, you can separate them with a /
+   * if the words separated by a slash don't contract, the / will be preserved
+   * examples:
+   *   "i have" -> "i've"
+   *   "i/have" -> "i have"
+   *   "and/or" -> "and/or"
+   */
   static contract(text = "") {
-    return contractions.contract(text)
+    text = contractions.contract(text)
+
+    text = text.replace(/(\w*\s?\/\s?\w*)/g, match => {
+      const word = match.replace(/\s?\/\s?/g, " ")
+      if (contractions.contract(word) !== word) {
+        return word
+      } else {
+        return match
+      }
+    })
+
+    return text
   }
 
   /**
