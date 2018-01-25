@@ -79,7 +79,7 @@ module.exports = function(env) {
       use: {
         loader: "babel-loader",
         options: {
-          ignore: "underscore",
+          ignore: ["underscore", "conjugate"],
           presets: ["env"]
         }
       }
