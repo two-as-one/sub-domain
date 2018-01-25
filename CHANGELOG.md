@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.4] - 2018-01-25
+### Fixed
+- Fixed the game not working D:
+
 ## [0.4.3] - 2018-01-24
 ### Changed
 - `breast` size when starting as female from `A-cup` to `C-cup`
