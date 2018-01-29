@@ -7,25 +7,18 @@ export default class MinotaurSpunk extends Consumable {
 
   get description() {
     return `
-      <p>
         An elongated vial containing what appears to be goopy cream.
-      </p>
-      <p>
-        <b>Restores ${this.hunger} hunger.</b>
-      </p>`
+
+        **Restores ${this.hunger} hunger.**`
   }
 
   consume(player) {
     super.consume(player)
 
-    let text = `
-      <p>
-        You uncork the vial and immediately get overwhelmed by its potent musk.
-        Without any hesitation you down its contents — Yuck!
-      </p>`
+    return `
+      You uncork the vial and immediately get overwhelmed by a potent musk.
+      Quickly and without any hesitation you down its contents — Yuck!
 
-    text += player.transform.pickOne(["minotaur cum"])
-
-    return text
+      ${player.transform.pickOne(["minotaur cum"])}`
   }
 }

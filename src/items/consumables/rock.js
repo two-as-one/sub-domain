@@ -7,11 +7,9 @@ export default class Rock extends Consumable {
 
   get description() {
     return `
-      <p>
         It's just a rock.
-        You're not quite sure why you picked it up.
-        There's nothing particularily interesting about it.
-      </p>`
+        You're not quite sure why you even picked it up.
+        There's nothing particularly interesting about it.`
   }
 
   get hunger() {
@@ -21,6 +19,6 @@ export default class Rock extends Consumable {
   consume(player) {
     super.consume(player)
 
-    return `<p>You threw the rock as far as you could. Clever.</p>`
+    return `You threw the rock as far as you could. Clever.`
   }
 }

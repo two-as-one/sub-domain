@@ -6,24 +6,17 @@ export default class TestItem extends Consumable {
   }
 
   get description() {
-    return `
-      <p>
-        [DEV ITEM] This is a test item, it can be used to test transformations.
-      </p>`
+    return `[DEV ITEM] This is a test item, it can be used to test transformations.`
   }
 
   consume(player) {
     super.consume(player)
 
-    let text = `
-      <p>
-        Test item used.
-      </p>`
+    return `
+      Test item used.
 
-    text += player.transform.pickOne([
-      //add the transformations you wish to test here
-    ])
-
-    return text
+      ${player.transform.pickOne([
+        //add the transformations you wish to test here
+      ])}`
   }
 }

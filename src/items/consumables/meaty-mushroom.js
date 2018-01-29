@@ -7,26 +7,18 @@ export default class MeatyMushroom extends Consumable {
 
   get description() {
     return `
-      <p>
         A mushroom with a long, thick stalk and a small pinkish cap.
-        It throbs when touched, just like a penis — even the texture feels like skin.
-      </p>
-      <p>
-        <b>Restores ${this.hunger} hunger.</b>
-      </p>`
+        It has a skin-like texture and throbs inexplicably when you touch it — weird!
+
+        **Restores ${this.hunger} hunger.**`
   }
 
   consume(player) {
     super.consume(player)
 
-    let text = `
-      <p>You swallow the mushroom whole. You can feel it throbbing as it slides down your throat — lewd!</p>`
+    return `
+      You swallow the mushroom whole. You can feel it throbbing as it slides down your throat — lewd!
 
-    text += player.transform.pickOne([
-      "increase penis size",
-      "grow a new penis"
-    ])
-
-    return text
+      ${player.transform.pickOne(["increase penis size", "grow a new penis"])}`
   }
 }
