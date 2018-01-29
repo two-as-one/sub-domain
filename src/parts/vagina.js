@@ -91,7 +91,7 @@ export default class Vagina extends Part {
     if (this.size < 1) {
       return Grammar.random(["tight", "firm"])
     } else if (this.size < 3) {
-      return Grammar.random(["used", "sloppy", "loose"])
+      return Grammar.random(["used", "sloppy", "loose", "plump"])
     } else {
       return Grammar.random([
         "ravenous",

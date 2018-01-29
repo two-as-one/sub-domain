@@ -52,13 +52,13 @@ Automatic contraction can be prevented with `/`.
 "and/or" //-> "and/or" - does not contract, / preserved
 ```
 
-##### Add paragraphs
-HTML Paragraphs will be added when there are *two newlines*.
+##### Markdown
+All text will be parsed as (markdown)[https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet].
 
 ```js
-`paragraph one
+`paragraph *one*
 
-paragraph two` // -> "<p>paragraph one</p><p>paragraph two</p>"
+paragraph **two**` // -> "<p>paragraph <em>one</em></p><p>paragraph <strong>two</strong></p>"
 ```
 
 ## Entities

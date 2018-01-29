@@ -105,6 +105,10 @@ export default class Part extends Saveable {
     this.quantity = Math.max(0, this.quantity)
   }
 
+  arouse(val = 0) {
+    this.owner.arouse(val * this.sensitivity)
+  }
+
   get has() {
     return this.quantity > 0 && this.size > 0
   }

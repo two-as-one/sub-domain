@@ -48,7 +48,8 @@
     "conjugate": "^1.0.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
-    "number-to-words": "^1.2.3"
+    "number-to-words": "^1.2.3",
+    "showdown": "^1.8.6"
   },
   "lint-staged": {
     "src/**/*.js": [

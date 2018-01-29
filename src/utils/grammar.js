@@ -4,6 +4,9 @@ import { Contractions } from "contractions"
 import conjugate from "conjugate"
 import number from "number-to-words"
 import pluralize from "pluralize"
+import showdown from "showdown"
+
+const converter = new showdown.Converter()
 
 /** custom list of contractions as some of the default ones are very old-school */
 const contractions = new Contractions({
@@ -215,6 +218,11 @@ export default class Grammar {
         return pronoun("reflexive", this.multiple, this.person, this.gender)
       }
     })
+
+    /** conjugate a verb for this entity */
+    SuperClass.prototype.verb = function(verb, full) {
+      return Grammar.conjugate(this.they, verb, full)
+    }
   }
 
   /** conjugates a verb based on noun/pronoun */
@@ -228,6 +236,9 @@ export default class Grammar {
     }
 
     return conjugate(who, verb, full)
+  }
+  static conjugate(who, verb, full) {
+    return Grammar.verb(who, verb, full)
   }
 
   /** check whether a word is a pronoun */
@@ -364,7 +375,7 @@ export default class Grammar {
       .map(text => Grammar.trim(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))
-      .map(text => Grammar.p(text))
+      .map(text => converter.makeHtml(text))
 
     return text.join("")
   }

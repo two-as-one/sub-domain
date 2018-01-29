@@ -69,7 +69,7 @@ export default class Beach extends Area {
 
   get sunsetMessage() {
     return `
-      <p>The day comes to its end as the <b>sun sets</b> below the horizon.</p>X
+      <p>The day comes to its end as the <b>sun sets</b> below the horizon.</p>
     `
   }
 
