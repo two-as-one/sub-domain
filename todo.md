@@ -51,7 +51,3 @@ Add `Camp` option to `main` state
 
 ## Code upgrades
 refactor positions so that all 5 messages are contained within the position
-
-grammar for body parts?
-- it pokes
-- they poke

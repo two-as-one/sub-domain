@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.5]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Fixed incorrect `you're` and `you've` contractions
+
 ## [0.4.4] - 2018-01-25
 ### Fixed
 - Fixed the game not working D:
