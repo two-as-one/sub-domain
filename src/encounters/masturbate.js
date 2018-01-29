@@ -95,7 +95,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
   }
 
   get mainMessage() {
-    const lust = this.player.normalizedLust
+    const lust = this.player.lustNormalized
     const you = this.game.player.who
     const both = this.game.player.perks.has("conjoined") ? "both" : ""
     const your_body = this.game.player.parts.body.your

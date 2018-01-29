@@ -44,19 +44,18 @@ export default class Main extends State {
     }
 
     //if the player 'died', restore them back to 1 hp
-    if (this.game.player.currentHP < 1) {
-      this.game.player.stats.dmg = this.game.player.maxHP - 1
+    if (this.game.player.health < 1) {
+      this.game.player.stats.dmg = this.game.player.healthMax - 1
     }
 
     //if the player is at max lust, reduce it by 1 to allow them to masturbate for release
-    if (this.game.player.normalizedLust === 1) {
-      this.game.player.stats.lust = this.game.player.maxLust - 1
+    if (this.game.player.lustNormalized === 1) {
+      this.game.player.stats.lust = this.game.player.lustMax - 1
     }
 
-    const wounded = this.game.player.normalizedHP < 1
-    const mortallyWounded = this.game.player.currentHP === 1
-    const aroused =
-      this.game.player.currentLust === this.game.player.maxLust - 1
+    const wounded = this.game.player.healthNormalized < 1
+    const mortallyWounded = this.game.player.health === 1
+    const aroused = this.game.player.lust === this.game.player.lustMax - 1
 
     this.checkpoint()
 
@@ -194,14 +193,14 @@ export default class Main extends State {
 
   sunrise() {
     let wetDream = ""
-    if (this.game.player.normalizedLust > 0.5) {
+    if (this.game.player.lustNormalized > 0.5) {
       wetDream = `<p>
           <b>You had a wet dream</b> — Your loins are on fire and you've made a sticky mess down there.
           Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.
         </p>`
     }
 
-    this.game.player.arouse(this.game.player.currentLust / 2)
+    this.game.player.arouse(this.game.player.lust / 2)
 
     this.fade().then(() => {
       this.game.world.transitioned = false

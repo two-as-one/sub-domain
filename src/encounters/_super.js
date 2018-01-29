@@ -124,7 +124,7 @@ export default class DefaultEncounter extends CombatState {
 
     //up to 50% bonus damage based on how much lust the player has
     if (this.player.perks.has("sadist")) {
-      bonus = Math.round(damage * this.player.normalizedLust * 0.5)
+      bonus = Math.round(damage * this.player.lustNormalized * 0.5)
       this.enemy.stats.dmg += bonus
     }
 
@@ -278,7 +278,7 @@ export default class DefaultEncounter extends CombatState {
     //player unable to resist, the enemy can have their way with them
     if (!this.player.alive || this.player.orgasmed) {
       if (this.fucking) {
-        enemy.stats.lust = enemy.maxLust
+        enemy.stats.lust = enemy.lustMax
         return this.state.end()
       } else if (wantsToFuck) {
         return this.state.getForceSubmitted()
@@ -296,7 +296,7 @@ export default class DefaultEncounter extends CombatState {
       return this.state.getForceSubmitted()
 
       // seduce player
-    } else if (Math.random() < enemy.normalizedLust) {
+    } else if (Math.random() < enemy.lustNormalized) {
       return this.state.getSeduced()
 
       // attack player
@@ -497,7 +497,7 @@ export default class DefaultEncounter extends CombatState {
       this.player.perks.has("succubus")
     ) {
       const hunger = this.player.eat(8)
-      const health = this.player.heal(this.player.maxHP / 10)
+      const health = this.player.heal(this.player.healthMax / 10)
       text += this.succubusMessage(hunger, health)
     }
 

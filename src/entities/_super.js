@@ -58,40 +58,50 @@ export default class Entity extends Saveable {
   // Base stats
   //-----------
 
-  //STRENGTH - Main attribute for inflicting physical damage and overpowering opponents
-  // AttackPower      100%
-  // pinAttackPower   100%
-  // pinDefence        50%
+  /**
+   * STRENGTH - Main attribute for inflicting physical damage and overpowering opponents
+   * AttackPower      100%
+   * pinAttackPower   100%
+   * pinDefence        50%
+   */
   get strength() {
     return this.stats.str + this.stats.lvl * LEVEL_STAT_SCALE
   }
 
-  //STAMINA - Main attribute for physical fortitude, allows you to last longer in a fisticuffs
-  // maxHP            100%
-  // maxLust           25%
+  /**
+   * STAMINA - Main attribute for physical fortitude, allows you to last longer in a fisticuffs
+   * healthMax            100%
+   * lustMax           25%
+   */
   get stamina() {
     return this.stats.stam + this.stats.lvl * LEVEL_STAT_SCALE
   }
 
-  //CHARISMA - Main attribute for mental and sensual warfare
-  // arousePower      100%
+  /**
+   * CHARISMA - Main attribute for mental and sensual warfare
+   * arousePower      100%
+   */
   get charisma() {
     return this.stats.char + this.stats.lvl * LEVEL_STAT_SCALE
   }
 
-  //WILLPOWER - Main attribute for mental fortitude, allows you to last longer in the game of love
-  // maxLust          100%
-  // maxHP             25%
+  /**
+   * WILLPOWER - Main attribute for mental fortitude, allows you to last longer in the game of love
+   * lustMax          100%
+   * healthMax             25%
+   */
   get willpower() {
     return this.stats.will + this.stats.lvl * LEVEL_STAT_SCALE
   }
 
-  //DEXTERITY - Useful for a variety of roles
-  // attackPower       25%
-  // arousePower       25%
-  // deflection        50%
-  // pinAttackPower    50%
-  // pinDefence       100%
+  /**
+   * DEXTERITY - Useful for a variety of roles
+   * attackPower       25%
+   * arousePower       25%
+   * deflection        50%
+   * pinAttackPower    50%
+   * pinDefence       100%
+   */
   get dexterity() {
     return this.stats.dex + this.stats.lvl * LEVEL_STAT_SCALE
   }
@@ -99,89 +109,138 @@ export default class Entity extends Saveable {
   // Life totals
   //------------
 
-  get maxHP() {
+  /**
+   * Entity health, when it drops to 0 they fall unconscious
+   * @type {Number}
+   */
+  get health() {
+    return Math.min(
+      this.healthMax,
+      Math.max(0, this.healthMax - this.stats.dmg)
+    )
+  }
+
+  set health(val) {
+    if (typeof val === "number" && !Number.isNaN(val)) {
+      //can't drop below 0
+      if (val < 0) {
+        val = 0
+      }
+      //can't go above healthMax
+      if (val > this.healthMax) {
+        val = this.healthMax
+      }
+      this.stats.dmg = this.healthMax - val
+    }
+  }
+
+  /** maximum health */
+  get healthMax() {
     return Math.ceil(this.stamina + this.willpower * 0.25) * HP_SCALE
   }
 
-  get currentHP() {
-    return Math.min(this.maxHP, Math.max(0, this.maxHP - this.stats.dmg))
+  /** health as a normalized value between 0 and 1 */
+  get healthNormalized() {
+    return this.health / this.healthMax
   }
 
-  //normalized HP on a scale from 0 to 1
-  get normalizedHP() {
-    return this.currentHP / this.maxHP
+  /** health as a percentage from 0 to 100 */
+  get healthPercentage() {
+    return this.healthNormalized * 100
   }
 
-  //normalized hp from 0 - 100
-  get healthBar() {
-    return this.normalizedHP * 100
+  /**
+   * Entity lust, the higher it goes the hornier they get!
+   * @type {Number}
+   */
+  get lust() {
+    return this.stats.lust
   }
 
-  get maxLust() {
+  set lust(val) {
+    if (typeof val === "number" && !Number.isNaN(val)) {
+      //can't drop below 0
+      if (val < 0) {
+        val = 0
+      }
+      //can't go above lustMax
+      if (val > this.lustMax) {
+        val = this.lustMax
+      }
+      this.stats.lust = val
+    }
+  }
+
+  /** maximum lust */
+  get lustMax() {
     return Math.ceil(this.willpower + this.stamina * 0.25) * HP_SCALE
   }
 
-  get currentLust() {
-    return Math.max(0, Math.min(this.maxLust, this.stats.lust))
+  /** lust as a normalized value between 0 and 1 */
+  get lustNormalized() {
+    return this.lust / this.lustMax
   }
 
-  //normalized lust on a scale from 0 to 1
-  get normalizedLust() {
-    return this.currentLust / this.maxLust
-  }
-
-  //normalized lust from 0 - 100
-  get lustBar() {
-    return this.normalizedLust * 100
+  /** lust as a percentage from 0 to 100 */
+  get lustPercentage() {
+    return this.lustNormalized * 100
   }
 
   // Derived stats
   //--------------
 
-  //damage inflicted by physical attacks
+  /** damage inflicted by physical attacks */
   get attackPower() {
     return this.strength + this.dexterity * 0.25
   }
 
-  //lust reduces physical damage by up to 50%, multiplier from 1 to 0.5
-  get lustDamagePenality() {
-    return 1 - this.normalizedLust / 2
-  }
-
-  //ability to deflect a portion of physical damage received
+  /**
+   * The ability to deflect a portion of physical damage received
+   * @return {Number} A multiplier from 0 to 1
+   */
   get deflection() {
     return this.dexterity * 0.5
   }
 
-  //power of arousal inflicted to opponents
+  /** lust reduces physical damage by up to 50%, multiplier from 1 to 0.5 */
+  get lustPowerPenality() {
+    return 1 - this.lustNormalized / 2
+  }
+
+  /** power of arousal inflicted to opponents */
   get arousePower() {
     return this.charisma + this.dexterity * 0.25
   }
 
-  //ability to withstand arousal received
+  /**
+   * The ability to withstand incoming arousal
+   * @return {Number} A multiplier from 0 to 1
+   */
   get numbness() {
     return 0
   }
 
-  //ability to pin down targets
+  /** ability to pin down targets */
   get pinAttackPower() {
     return this.strength + this.dexterity * 0.5
   }
 
-  //ability to escape from a grapple
+  /** ability to escape from a grapple */
   get pinDefence() {
     return this.strength * 0.5 + this.dexterity
   }
 
+  /** check whether this entity is alive */
   get alive() {
-    return this.currentHP > 0
+    return this.health > 0
   }
 
+  /** check whether this entity has reached orgasm */
   get orgasmed() {
-    return this.maxLust === this.currentLust
+    return this.lustMax === this.lust
   }
 
-  // how much XP is this entity worth?
+  /** how much XP is this entity worth? */
   get XPWorth() {
     return (
       this.strength +
@@ -192,37 +251,61 @@ export default class Entity extends Saveable {
     )
   }
 
-  //introduce a level of randomness to certain moves, returns a multiplier to be applied to other values
+  /** Introduce a level of randomness to certain moves */
   get variance() {
-    const variance = 20 //as a percentage
-    return Math.random() * (variance * 2 / 100) + 0.9
+    return 0.2
   }
 
+  /** true if the entity intends to fuck */
   get wantsToFuck() {
-    return Math.random() < this.normalizedLust
+    return Math.random() < this.lustNormalized
   }
 
   // Methods
   //--------
 
-  //attack a target, lust reduces the damage dealt
+  /**
+   * Attack another entity and damage it
+   * Damage reduced by current lust
+   * @param  {Entity} target - The entity to attack
+   * @return {Number}        The amount of damage that was dealt
+   */
   attack(target) {
-    return target.damage(this.attackPower * this.lustDamagePenality)
+    return target.damage(this.attackPower * this.lustPowerPenality)
   }
 
-  damage(amount) {
+  /**
+   * Damage this entity
+   * Damage reduced by deflection and variance
+   * @param  {Number} amount - The damage to apply
+   * @return {Number}        The actual damage that was applied
+   */
+  damage(amount = 0) {
     amount = Entity.damageFormula(amount, this.deflection, this.variance)
-    this.stats.dmg += Math.ceil(amount)
+    this.health -= Math.ceil(amount)
 
     return amount
   }
 
-  //seduce the target, arousal affected by how much the target likes the part and armor worn
+  /**
+   * Seduce another entity and arouse it
+   * Arousal influenced by how much they like the body part used
+   * @param  {Entity} target - The entity to seduce
+   * @param  {Part} part     - The body part used to seduce
+   * @return {Number}        The amount of lust inflicted
+   */
   seduce(target, part) {
     return target.arouse(this.arousePower * target.likes(part))
   }
 
-  //fuck the target, arousal affected by how much the target likes the part
+  /**
+   * Fuck another entity
+   * Arousal influenced by how much the other entity like the body part used and how sensitive their own body part is
+   * @param  {Entity} target   - The entity to fuck
+   * @param  {Part} ownPart    - The body part used to fuck
+   * @param  {Part} targetPart - The body part that was fucked
+   * @return {Number}          The amount of lust inflicted
+   */
   fuck(target, ownPart, targetPart) {
     return target.arouse(
       this.arousePower *
@@ -232,27 +315,42 @@ export default class Entity extends Saveable {
     )
   }
 
-  arouse(amount) {
+  /**
+   * Arouse this entity by an amount
+   * Arousal reduced by numbness and variance
+   * @param  {Number} amount - The amount of lust to arouse by
+   * @return {Number}        The actual lust that was inflicted
+   */
+  arouse(amount = 0) {
     amount = Entity.damageFormula(amount, this.numbness, this.variance)
-    this.stats.lust += Math.ceil(amount)
+    this.lust += Math.ceil(amount)
 
     return amount
   }
 
-  //check whether this entity accepts a specific position that was submitted
+  /**
+   * check whether this entity accepts a specific position that was submitted
+   * @param  {Object} position - Position object provided by the encounter
+   * @return {Boolean}         true if the position was accepted
+   */
   submit(position) {
     return (
-      this.normalizedLust *
+      this.lustNormalized *
         this.likes(position.player) *
         this.sensitivity(position.enemy) >
       0.2
     )
   }
 
-  //attempt to grapple a target
+  /**
+   * Grapple a target
+   * @param  {Entity} target   - The entity to grapple
+   * @return {Boolean}         true if the grapple was successful
+   */
   grapple(target) {
+    //unable to resist
     if (target.orgasmed || !target.alive) {
-      return true //unable to resist
+      return true
     }
 
     return (
@@ -261,7 +359,11 @@ export default class Entity extends Saveable {
     )
   }
 
-  //struggle against a grapple
+  /**
+   * Struggle out of a grapple
+   * @param  {Entity} target   - The entity to struggle against
+   * @return {Boolean}         true if the struggle was successful
+   */
   struggle(target) {
     return (
       Math.random() <
@@ -269,58 +371,91 @@ export default class Entity extends Saveable {
     )
   }
 
-  //attempt to flee from a target
+  /**
+   * attempt to flee from a target
+   * @param  {Entity} target   - The entity to flee from
+   * @return {Boolean}         true if fleeing was successful
+   */
   flee(target) {
     return Math.random() < this.dexterity / (this.dexterity + target.dexterity)
   }
 
+  /**
+   * Heal this entity by an amount
+   * @param  {Number} amount - The amount of health to restore
+   * @return {Number}        The actual amount of health restored
+   */
   heal(amount) {
     amount = Math.ceil(amount)
 
-    const previous = this.stats.dmg
+    const previous = this.health
 
-    this.stats.dmg -= amount
-    this.stats.dmg = Math.max(0, this.stats.dmg)
+    this.health += amount
 
-    return previous - this.stats.dmg
+    return this.health - previous
   }
 
+  /**
+   * Soothe this entity by an amount, reducing lust
+   * @param  {Number} amount - The amount of lust to soothe
+   * @return {Number}        The actual amount of lust soothed
+   */
   soothe(amount) {
     amount = Math.ceil(amount)
 
-    const previous = this.stats.lust
+    const previous = this.lust
 
-    this.stats.lust -= amount
-    this.stats.lust = Math.max(0, this.stats.lust)
+    this.lust -= amount
 
-    return this.stats.lust - previous
+    return previous - this.lust
   }
 
-  //multiplier that affects how successful a seduction will be
-  //extend this when creating a new entity
+  /**
+   * Determines how much this entity likes the given part
+   * Extend this with a custom function when implementing bespoke entities
+   * @param  {Part} part - The part to check
+   * @return {Number}    A multiplier to be applied where relevant
+   */
   likes(part) {
     return 1
   }
 
-  //get the sensitivity of a part
-  //extend this when creating a new entity
+  /**
+   * Determines how sensitive a given part is
+   * Extend this with a custom function when implementing bespoke entities
+   * @param  {Part} part - The part to check
+   * @return {Number}    A multiplier to be applied where relevant
+   */
   sensitivity(part) {
     return 0.5
   }
 
-  //extend this method to return the diameter of a body part
+  /**
+   * Find the diameter of a given part, used by dilation
+   * Extend this with a custom function when implementing bespoke entities
+   * @param  {Part} part - The part to check
+   * @return {Number}    The diameter of the part
+   */
   getDiameter(part) {
     return 0
   }
 
-  //method that applies a transformation to the player
-  //extend this method if the creature can infect the player
+  /**
+   * Method that applies a transformation to the player
+   * Extend this with a custom function when implementing bespoke entities
+   * @param  {Entity} player - The player to infect
+   * @return {String}        A string describing the transformation
+   */
   infect(player) {}
 
-  //measure difficulty of a target
-  // 2+   success unlikely
-  // 1    even match
-  // 0.5- trivial
+  /**
+   * measure difficulty of a target
+   * @param  {Entity} target - The target to compare against
+   * @return {Number}        A number describing the difficulty:
+   *                           >2   success unlikely
+   *                           1    even match
+   *                           <0.5 trivial
+   */
   difficulty(target) {
     return (
       (target.strength +
@@ -336,7 +471,11 @@ export default class Entity extends Saveable {
     )
   }
 
-  //gives random stats to this entity from a list of possible options
+  /**
+   * Gives random stats to this entity from a list of possible options
+   * @param  {Number} number      - The number of stats to distribute
+   * @param  {Array[String]} list - The list of possible stats to increase
+   */
   giveRandomStats(number, list) {
     if (!list) {
       list = ["str", "stam", "dex", "will", "char"]
@@ -351,8 +490,22 @@ export default class Entity extends Saveable {
     }
   }
 
-  static damageFormula(attack, defence, variance) {
-    return Math.round(attack * (attack / (attack + defence)) * variance)
+  /**
+   * Formula for calculating damage
+   * @param  {Number} attack   - the incoming attack damage
+   * @param  {Number} defence  - the level of defence
+   * @param  {Number} variance - a level of variance
+   * @return {Number}          The actual damage inflicted
+   */
+  static damageFormula(attack = 0, defence = 0, variance = 0) {
+    return Math.round(
+      attack * (attack / (attack + defence)) * Entity.vary(variance)
+    )
+  }
+
+  /** Formula that varies a number */
+  static vary(variance) {
+    return Math.random() * (variance * 2) + (1 - variance)
   }
 
   // Capability flags

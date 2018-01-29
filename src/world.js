@@ -81,7 +81,7 @@ export default class World extends Saveable {
       this.game.player.metabolize()
 
       if (resting) {
-        this.game.player.heal(Math.ceil(this.game.player.maxHP / 10))
+        this.game.player.heal(Math.ceil(this.game.player.healthMax / 10))
       }
 
       this.data.hour += 1
@@ -108,8 +108,8 @@ export default class World extends Saveable {
   /** rest until healed */
   advanceUntilHealed() {
     const hours = Math.ceil(
-      (this.game.player.maxHP - this.game.player.currentHP) /
-        (this.game.player.maxHP / 10)
+      (this.game.player.healthMax - this.game.player.health) /
+        (this.game.player.healthMax / 10)
     )
 
     this.advance(hours, true)

@@ -186,7 +186,7 @@ export default class Player extends Entity {
   }
 
   get woundedDescription() {
-    if (this.currentHP <= 1) {
+    if (this.health <= 1) {
       return `<p>You are <b>severely wounded</b> and must rest.</p>`
     }
 
@@ -194,7 +194,7 @@ export default class Player extends Entity {
   }
 
   get arousedDescription() {
-    if (this.currentLust >= this.maxLust - 1) {
+    if (this.lust >= this.lustMax - 1) {
       return `<p>You are <b>too horny</b> to do anything productive.</p>`
     }
 
@@ -328,15 +328,15 @@ export default class Player extends Entity {
         })}
         ${statBarTemplate({
           label: "HP",
-          current: this.currentHP,
-          max: this.maxHP,
-          percentage: this.currentHP / this.maxHP * 100
+          current: this.health,
+          max: this.healthMax,
+          percentage: this.health / this.healthMax * 100
         })}
         ${statBarTemplate({
           label: "Lust",
-          current: this.currentLust,
-          max: this.maxLust,
-          percentage: this.currentLust / this.maxLust * 100
+          current: this.lust,
+          max: this.lustMax,
+          percentage: this.lust / this.lustMax * 100
         })}
         ${statBarTemplate({
           label: "Hunger",

@@ -5,16 +5,16 @@
     {{> stat-bar
         class="health"
         label="HP"
-        current=player.currentHP
-        max=player.maxHP
-        percentage=player.healthBar}}
+        current=player.health
+        max=player.healthMax
+        percentage=player.healthPercentage}}
 
     {{> stat-bar
         class="lust"
         label="Lust"
-        current=player.currentLust
-        max=player.maxLust
-        percentage=player.lustBar}}
+        current=player.lust
+        max=player.lustMax
+        percentage=player.lustPercentage}}
   </div>
 
   <div class="opponent">
@@ -24,12 +24,12 @@
         class="health"
         label="HP"
         hidden=true
-        percentage=enemy.healthBar}}
+        percentage=enemy.healthPercentage}}
 
     {{> stat-bar
         class="lust"
         label="Lust"
         hidden=true
-        percentage=enemy.lustBar}}
+        percentage=enemy.lustPercentage}}
   </div>
 {{/unless}}
