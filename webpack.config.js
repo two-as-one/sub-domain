@@ -6,6 +6,8 @@ var webpack = require("webpack")
 
 module.exports = function(env) {
   env = env || {}
+  env.dist = Boolean(env.dist)
+  env.dev = !env.dist
 
   const config = {
     resolve: {
@@ -67,7 +69,8 @@ module.exports = function(env) {
 
     plugins: [
       new webpack.DefinePlugin({
-        VERSION: JSON.stringify(require("./package.json").version)
+        VERSION: JSON.stringify(require("./package.json").version),
+        "process.env": env
       })
     ]
   }

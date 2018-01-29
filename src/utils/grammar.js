@@ -369,3 +369,7 @@ export default class Grammar {
     return text.join("")
   }
 }
+
+if (process.env.dev) {
+  window.Grammar = Grammar
+}

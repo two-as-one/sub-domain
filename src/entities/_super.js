@@ -517,3 +517,7 @@ export default class Entity extends Saveable {
 }
 
 Grammar.mix(Entity)
+
+if (process.env.dev) {
+  window.Entity = Entity
+}

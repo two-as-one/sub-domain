@@ -6,7 +6,8 @@
     },
     "globals": {
         "Promise": true,
-        "VERSION": true
+        "VERSION": true,
+        "process": true
     },
     "parserOptions": {
         "sourceType": "module"
