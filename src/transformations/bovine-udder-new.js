@@ -10,12 +10,12 @@ export default class BovineUdderGrowth extends Transformation {
   }
 
   get available() {
-    return !this.owner.parts.udder.has
+    return !this.owner.udder.has
   }
 
   apply() {
-    this.owner.parts.udder.grow()
-    this.owner.parts.udder.teats = 4
+    this.owner.udder.grow()
+    this.owner.udder.teats = 4
 
     const you = this.owner.who
 

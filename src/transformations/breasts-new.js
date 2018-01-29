@@ -10,12 +10,12 @@ export default class BreastsNew extends Transformation {
   }
 
   get available() {
-    return !this.owner.parts.breasts.has
+    return !this.owner.breasts.has
   }
 
   apply() {
-    this.owner.parts.breasts.quantity = 2
-    this.owner.parts.breasts.size = 1
+    this.owner.breasts.quantity = 2
+    this.owner.breasts.size = 1
 
     const you = this.owner.who
 
@@ -26,10 +26,8 @@ export default class BreastsNew extends Transformation {
       </p>
       <p>
         Your chest has swollen and <b>you now have ${
-          this.owner.parts.breasts.number
-        } ${this.owner.parts.breasts.adjective} ${
-      this.owner.parts.breasts.pluralized
-    }!</b>
+          this.owner.breasts.number
+        } ${this.owner.breasts.adjective} ${this.owner.breasts.pluralized}!</b>
       </p>`
 
     return text

@@ -10,11 +10,11 @@ export default class BreastGrowth extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.tail.has && this.owner.parts.tail.type !== "bovine"
+    return this.owner.tail.has && this.owner.tail.type !== "bovine"
   }
 
   apply() {
-    this.owner.parts.tail.type = "bovine"
+    this.owner.tail.type = "bovine"
 
     const you = this.owner.who
 

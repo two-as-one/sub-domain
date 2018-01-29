@@ -128,7 +128,7 @@ export default class Breasts extends Part {
         text += ` — each `
       }
 
-      text += this.owner.parts.nipples.description
+      text += this.owner.nipples.description
 
       if (this.milky) {
         text += ` ${Grammar.capitalize(
@@ -137,7 +137,7 @@ export default class Breasts extends Part {
       }
     } else {
       text = `Your chest is flat and unnoteworthy. Your pecs each ${
-        this.owner.parts.nipples.description
+        this.owner.nipples.description
       }`
     }
 
@@ -147,7 +147,7 @@ export default class Breasts extends Part {
   get seductionMessage() {
     const your_tits = this.all
     const you = this.owner.who
-    const your_head = this.owner.parts.head.all
+    const your_head = this.owner.head.all
 
     return Grammar.random([
       `<p>

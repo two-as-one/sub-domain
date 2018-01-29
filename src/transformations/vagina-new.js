@@ -9,12 +9,12 @@ export default class VaginaNew extends Transformation {
   }
 
   get available() {
-    return !this.owner.parts.vagina.has
+    return !this.owner.vagina.has
   }
 
   apply() {
-    this.owner.parts.vagina.quantity = 1
-    this.owner.parts.vagina.size = 0.2
+    this.owner.vagina.quantity = 1
+    this.owner.vagina.size = 0.2
 
     const you = this.owner.who
 
@@ -26,7 +26,7 @@ export default class VaginaNew extends Transformation {
         Overwhelmed by an orgasm unlike any you've had before.
       </p>
       <p>
-        <b>You have grown a brand new ${this.owner.parts.vagina.singular}!</b>
+        <b>You have grown a brand new ${this.owner.vagina.singular}!</b>
       </p>`
   }
 }

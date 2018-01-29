@@ -9,13 +9,11 @@ export default class BreastsQuartet extends Transformation {
   }
 
   get available() {
-    return (
-      this.owner.parts.breasts.has && this.owner.parts.breasts.quantity !== 4
-    )
+    return this.owner.breasts.has && this.owner.breasts.quantity !== 4
   }
 
   apply() {
-    this.owner.parts.breasts.quantity = 4
+    this.owner.breasts.quantity = 4
 
     const text = `
       <p>
@@ -23,9 +21,9 @@ export default class BreastsQuartet extends Transformation {
         You look down and quickly realize why.
       </p>
       <p>
-        <b>You now have ${this.owner.parts.breasts.number} ${
-      this.owner.parts.breasts.adjective
-    } ${this.owner.parts.breasts.pluralized}!</b>
+        <b>You now have ${this.owner.breasts.number} ${
+      this.owner.breasts.adjective
+    } ${this.owner.breasts.pluralized}!</b>
       </p>`
 
     return text

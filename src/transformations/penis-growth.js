@@ -10,28 +10,28 @@ export default class PenisGrowth extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.penis.has
+    return this.owner.penis.has
   }
 
   apply() {
-    this.owner.parts.penis.grow()
+    this.owner.penis.grow()
 
-    if (this.owner.parts.penis.quantity === 1) {
+    if (this.owner.penis.quantity === 1) {
       return `
         <p>
           ${Grammar.capitalize(
-            this.owner.parts.penis.all
+            this.owner.penis.all
           )} throbs as it grows thicker and longer — <b>${Grammar.capitalize(
-        this.owner.parts.penis.all
+        this.owner.penis.all
       )} has grown!</b>
         </p>`
     } else {
       return `
         <p>
           ${Grammar.capitalize(
-            this.owner.parts.penis.all
+            this.owner.penis.all
           )} throb as they grow thicker and longer — <b>${Grammar.capitalize(
-        this.owner.parts.penis.all
+        this.owner.penis.all
       )} have grown!</b>
         </p>`
     }

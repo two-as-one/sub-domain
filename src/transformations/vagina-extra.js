@@ -9,12 +9,12 @@ export default class VaginaExtra extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.vagina.has && this.owner.parts.vagina.quantity < 3
+    return this.owner.vagina.has && this.owner.vagina.quantity < 3
   }
 
   //diminishing returns
   get chance() {
-    switch (this.owner.parts.vagina.quantity) {
+    switch (this.owner.vagina.quantity) {
       case 1:
         return 0.1
       case 2:
@@ -25,7 +25,7 @@ export default class VaginaExtra extends Transformation {
   }
 
   apply() {
-    this.owner.parts.vagina.add()
+    this.owner.vagina.add()
 
     const you = this.owner.who
 
@@ -37,15 +37,15 @@ export default class VaginaExtra extends Transformation {
         Gasping — ${you} look down and notice why.
       </p>`
 
-    if (this.owner.parts.vagina.quantity === 2) {
+    if (this.owner.vagina.quantity === 2) {
       text += `
         <p>
-          <b>You have grown a second ${this.owner.parts.vagina.singular}!</b>
+          <b>You have grown a second ${this.owner.vagina.singular}!</b>
         </p>`
     } else {
       text += `
         <p>
-          <b>You have grown a third ${this.owner.parts.vagina.singular}!</b>
+          <b>You have grown a third ${this.owner.vagina.singular}!</b>
         </p>`
     }
 

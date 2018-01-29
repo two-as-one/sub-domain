@@ -20,14 +20,14 @@ export default class Balls extends Part {
 
     if (this.has) {
       if (this.stats.external) {
-        if (this.owner.parts.penis.has) {
-          if (this.owner.parts.penis.quantity > 1) {
+        if (this.owner.penis.has) {
+          if (this.owner.penis.quantity > 1) {
             text += `They are accompanied by `
           } else {
             text += `It's accompanied by `
           }
-        } else if (this.owner.parts.vagina.has) {
-          if (this.owner.parts.vagina.quantity > 1) {
+        } else if (this.owner.vagina.has) {
+          if (this.owner.vagina.quantity > 1) {
             text += `Hanging in front of them, you/have `
           } else {
             text += `Hanging in front of it, you/have `
@@ -51,9 +51,9 @@ export default class Balls extends Part {
 
       text += ` ${this.pluralized}</b>`
 
-      if (!this.owner.parts.penis.has) {
-        if (this.owner.parts.vagina.has) {
-          const your_pussy = this.owner.parts.vagina.pluralized
+      if (!this.owner.penis.has) {
+        if (this.owner.vagina.has) {
+          const your_pussy = this.owner.vagina.pluralized
           text += ` — it somehow allows your ${your_pussy} to squirt semen.`
         } else {
           text += ` — without any outlet for semen, you are constantly aroused.`
@@ -61,8 +61,8 @@ export default class Balls extends Part {
       } else {
         text += `.`
       }
-    } else if (this.owner.parts.penis.has) {
-      if (this.owner.parts.penis.quantity > 1) {
+    } else if (this.owner.penis.has) {
+      if (this.owner.penis.quantity > 1) {
         text += `They are `
       } else {
         text += `It's `

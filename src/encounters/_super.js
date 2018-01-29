@@ -148,7 +148,7 @@ export default class DefaultEncounter extends CombatState {
     const responses = []
 
     parts.forEach(name => {
-      const part = this.player.parts[name]
+      const part = this.player[name]
 
       responses.push({
         state: "seduceResults",
@@ -172,7 +172,7 @@ export default class DefaultEncounter extends CombatState {
 
     this.render({
       text:
-        this.player.parts[data.part].seductionMessage +
+        this.player[data.part].seductionMessage +
         this.seduceResultsMessage(damage),
       responses: [{ state: "enemyAction" }]
     })

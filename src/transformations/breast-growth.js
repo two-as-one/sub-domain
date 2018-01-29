@@ -10,11 +10,11 @@ export default class BreastGrowth extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.breasts.has
+    return this.owner.breasts.has
   }
 
   apply() {
-    this.owner.parts.breasts.grow()
+    this.owner.breasts.grow()
 
     const you = this.owner.who
 
@@ -24,7 +24,7 @@ export default class BreastGrowth extends Transformation {
         ${Grammar.capitalize(you)} look down and quickly realize why.
       </p>
       <p>
-        <b>${Grammar.capitalize(this.owner.parts.breasts.all)} have grown!</b>
+        <b>${Grammar.capitalize(this.owner.breasts.all)} have grown!</b>
       </p>`
 
     return text

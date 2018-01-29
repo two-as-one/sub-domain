@@ -30,22 +30,24 @@ export default class Player extends Entity {
 
     this.inventory = new Inventory(this)
 
-    this.anus = new Anus(this)
-    this.balls = new Balls(this)
-    this.body = new Body(this)
-    this.breasts = new Breasts(this)
-    this.face = new Face(this)
-    this.feet = new Feet(this)
-    this.hands = new Hands(this)
-    this.head = new Head(this)
-    this.mouth = new Mouth(this)
-    this.nipples = new Nipples(this)
-    this.penis = new Penis(this)
-    this.tail = new Tail(this)
-    this.udder = new Udder(this)
-    this.vagina = new Vagina(this)
+    this.parts = {
+      anus: new Anus(this),
+      balls: new Balls(this),
+      body: new Body(this),
+      breasts: new Breasts(this),
+      face: new Face(this),
+      feet: new Feet(this),
+      hands: new Hands(this),
+      head: new Head(this),
+      mouth: new Mouth(this),
+      nipples: new Nipples(this),
+      penis: new Penis(this),
+      tail: new Tail(this),
+      udder: new Udder(this),
+      vagina: new Vagina(this)
+    }
 
-    this.parts = this
+    Object.keys(this.parts).forEach(key => (this[key] = this.parts[key]))
 
     this.transform = new TransformationManager(this)
     this.perks = new PerkManager(this)
@@ -285,7 +287,7 @@ export default class Player extends Entity {
   //------
 
   getPart(name) {
-    return this.parts[name] || {}
+    return this[name] || {}
   }
 
   /**
@@ -383,9 +385,9 @@ export default class Player extends Entity {
 
   get bodyDescription() {
     return `
-      ${this.parts.body.description}
-      ${this.parts.breasts.description}
-      ${this.parts.udder.description}
+      ${this.body.description}
+      ${this.breasts.description}
+      ${this.udder.description}
       ${this.genitaliaDescription}
       ${this.buttDescription}
     `
@@ -396,8 +398,8 @@ export default class Player extends Entity {
       "Your bottom sports a pair of round butt-cheeks with"
     let tailIntro = ""
 
-    if (this.parts.tail.has) {
-      if (this.parts.anus.quantity === 1) {
+    if (this.tail.has) {
+      if (this.anus.quantity === 1) {
         tailIntro = `It's accompanied by`
       } else {
         tailIntro = `They are accompanied by`
@@ -407,25 +409,25 @@ export default class Player extends Entity {
     return `
       <p>
         ${buttDescription}
-        ${this.parts.anus.description}
+        ${this.anus.description}
         ${tailIntro}
-        ${this.parts.tail.description}
+        ${this.tail.description}
       </p>`
   }
 
   get genitaliaDescription() {
-    if (this.parts.penis.has) {
+    if (this.penis.has) {
       return `
         <p>
-          ${this.parts.penis.description}
-          ${this.parts.balls.description}
-          ${this.parts.vagina.description}
+          ${this.penis.description}
+          ${this.balls.description}
+          ${this.vagina.description}
         </p>`
-    } else if (this.parts.vagina.has || this.parts.balls.has) {
+    } else if (this.vagina.has || this.balls.has) {
       return `
         <p>
-          ${this.parts.vagina.description}
-          ${this.parts.balls.description}
+          ${this.vagina.description}
+          ${this.balls.description}
         </p>`
     } else {
       return `

@@ -18,7 +18,7 @@ export default class Vagina extends Part {
     let text = ""
 
     if (this.has) {
-      if (this.owner.parts.penis.has) {
+      if (this.owner.penis.has) {
         text += `You also have `
       } else {
         text += `You/have `
@@ -30,7 +30,7 @@ export default class Vagina extends Part {
         text += `<b>${this.number} ${this.adjective} ${this.pluralized}</b>`
       }
 
-      if (this.owner.parts.penis.has) {
+      if (this.owner.penis.has) {
         text += `.`
       } else {
         text += ` between your legs.`

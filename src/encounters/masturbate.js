@@ -98,7 +98,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
     const lust = this.player.lustNormalized
     const you = this.game.player.who
     const both = this.game.player.perks.has("conjoined") ? "both" : ""
-    const your_body = this.game.player.parts.body.your
+    const your_body = this.game.player.body.your
 
     if (lust < 0.1) {
       return `<p>You're not really in the mood but with a little stimulation ${you} might get there.</p>`
@@ -118,7 +118,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
 
     switch (this.fucking.name) {
       case "finger ass": {
-        const your_ass = this.player.parts.anus.one
+        const your_ass = this.player.anus.one
         return `
           <p>
             Reaching down between your legs, you let your middle finger trace the contour of ${your_ass}.
@@ -128,9 +128,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "jerk off": {
-        const your_cock = this.player.parts.penis.all
-        const your_hands = this.player.parts.hands.two
-        const it = this.player.parts.penis.multiple ? "them" : "it"
+        const your_cock = this.player.penis.all
+        const your_hands = this.player.hands.two
+        const it = this.player.penis.multiple ? "them" : "it"
         return `
           <p>
             You reach down with ${your_hands} at ${your_cock}.
@@ -140,9 +140,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "milk tits": {
-        const your_hands = this.player.parts.hands.all
-        const your_tits = this.player.parts.breasts.all
-        const extra_milky = this.player.parts.breasts.milky
+        const your_hands = this.player.hands.all
+        const your_tits = this.player.breasts.all
+        const extra_milky = this.player.breasts.milky
           ? ` as milk drools out of your throbbing nips`
           : ""
         return `
@@ -154,7 +154,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "finger pussy": {
-        const your_clit = this.player.parts.vagina.multiple
+        const your_clit = this.player.vagina.multiple
           ? "your many clits"
           : "your sensitive clitty"
         return `
@@ -169,11 +169,11 @@ export default class MastrubateEncounter extends DefaultEncounter {
   get climaxMessage() {
     const you = this.game.player.who
     const both = this.game.player.perks.has("conjoined") ? "both" : ""
-    const your_body = this.game.player.parts.body.your
+    const your_body = this.game.player.body.your
 
     switch (this.fucking.name) {
       case "finger ass": {
-        const your_ass = Grammar.capitalize(this.player.parts.anus.one)
+        const your_ass = Grammar.capitalize(this.player.anus.one)
         return `
           <p>
             ${your_ass} squirms hungrily as you ceaselessly finger it.
@@ -186,9 +186,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "jerk off": {
-        const your_cock = this.player.parts.penis.all
-        const it = this.player.parts.penis.multiple ? "them" : "it"
-        const throbs = this.player.parts.penis.multiple ? "throb" : "throbs"
+        const your_cock = this.player.penis.all
+        const it = this.player.penis.multiple ? "them" : "it"
+        const throbs = this.player.penis.multiple ? "throb" : "throbs"
         return `
             <p>
               Your groans get louder and more erratic as ${your_cock} ${throbs} with anticipation.
@@ -201,11 +201,11 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "milk tits": {
-        const your_tits = this.player.parts.breasts.all
-        const extra_milky1 = this.player.parts.breasts.milky
+        const your_tits = this.player.breasts.all
+        const extra_milky1 = this.player.breasts.milky
           ? `, squirting milk all over yourself`
           : ""
-        const extra_milky2 = this.player.parts.breasts.milky
+        const extra_milky2 = this.player.breasts.milky
           ? `Your nipples bursting out like fountains of milk — spraying it everywhere!`
           : ""
         return `
@@ -223,9 +223,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
       }
 
       case "finger pussy": {
-        const your_pussy = this.player.parts.vagina.all
-        const one_of_your_pussies = this.player.parts.vagina.one
-        const feels = this.player.parts.vagina.multiple ? "feel" : "feels"
+        const your_pussy = this.player.vagina.all
+        const one_of_your_pussies = this.player.vagina.one
+        const feels = this.player.vagina.multiple ? "feel" : "feels"
         return `
           <p>
             You keep rubbing ${your_pussy} — drenching your fingers in girl drool.

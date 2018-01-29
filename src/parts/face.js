@@ -8,14 +8,14 @@ export default class Face extends Part {
   }
 
   get size() {
-    return this.owner.parts.head.size
+    return this.owner.head.size
   }
 
   //no-op
   set size(val) {}
 
   get quantity() {
-    return this.owner.parts.head.quantity
+    return this.owner.head.quantity
   }
 
   //no-op

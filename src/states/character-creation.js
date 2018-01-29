@@ -52,14 +52,14 @@ export default class CharacterCreation extends State {
     switch (data.sex) {
       case "man":
         gender = "boy"
-        this.game.player.parts.breasts.size = 0
-        this.game.player.parts.vagina.quantity = 0
+        this.game.player.breasts.size = 0
+        this.game.player.vagina.quantity = 0
         break
       case "woman":
         gender = "girl"
-        this.game.player.parts.penis.quantity = 0
-        this.game.player.parts.balls.quantity = 0
-        this.game.player.parts.nipples.size = 0.4
+        this.game.player.penis.quantity = 0
+        this.game.player.balls.quantity = 0
+        this.game.player.nipples.size = 0.4
         break
     }
 

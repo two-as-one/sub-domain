@@ -9,12 +9,12 @@ export default class PenisNew extends Transformation {
   }
 
   get available() {
-    return !this.owner.parts.penis.has
+    return !this.owner.penis.has
   }
 
   apply() {
-    this.owner.parts.penis.quantity = 1
-    this.owner.parts.penis.size = 2
+    this.owner.penis.quantity = 1
+    this.owner.penis.size = 2
 
     const you = this.owner.who
 
@@ -23,7 +23,7 @@ export default class PenisNew extends Transformation {
         Your groin feels hot and itchy — as you reach down to scratch, ${you} notice something unusual.
       </p>
       <p>
-        <b>You have grown a tiny new ${this.owner.parts.penis.singular}!</b>
+        <b>You have grown a tiny new ${this.owner.penis.singular}!</b>
       </p>`
   }
 }

@@ -10,11 +10,11 @@ export default class NippleExtra extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.nipples.has && this.owner.parts.nipples.quantity < 4
+    return this.owner.nipples.has && this.owner.nipples.quantity < 4
   }
 
   apply() {
-    this.owner.parts.nipples.add()
+    this.owner.nipples.add()
 
     const you = this.owner.who
 
@@ -25,7 +25,7 @@ export default class NippleExtra extends Transformation {
       </p>
       <p>
         <b>${Grammar.capitalize(
-          this.owner.parts.breasts.all
+          this.owner.breasts.all
         )} have grown an additional nipple!</b>
       </p>`
 

@@ -11,13 +11,13 @@ export default class NippleGrowth extends Transformation {
 
   get available() {
     return (
-      this.owner.parts.nipples.has &&
-      this.owner.parts.nipples.size < this.owner.parts.breasts.size / 10
+      this.owner.nipples.has &&
+      this.owner.nipples.size < this.owner.breasts.size / 10
     )
   }
 
   apply() {
-    this.owner.parts.nipples.grow()
+    this.owner.nipples.grow()
 
     const you = this.owner.who
 

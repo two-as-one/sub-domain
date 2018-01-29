@@ -52,7 +52,7 @@ export default class Beach extends Area {
   }
 
   get exploreMessage() {
-    const your_feet = this.game.player.parts.feet.all
+    const your_feet = this.game.player.feet.all
     const you = this.game.player.who
     return chance.pickone([
       `<p>The soft sand caresses ${your_feet} as ${you} explore the <b>beach</b>.</p>`,

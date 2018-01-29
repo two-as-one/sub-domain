@@ -10,16 +10,15 @@ export default class BreastMilkier extends Transformation {
   }
 
   get available() {
-    return this.owner.parts.breasts.has
+    return this.owner.breasts.has
   }
 
   apply() {
-    this.owner.parts.breasts.grow()
-    this.owner.parts.breasts.stats.milk += 1
+    this.owner.breasts.grow()
+    this.owner.breasts.stats.milk += 1
 
-    const your_tits = this.owner.parts.breasts.all
-    const milky =
-      this.owner.parts.breasts.stats.milk === 1 ? "milky" : "milkier"
+    const your_tits = this.owner.breasts.all
+    const milky = this.owner.breasts.stats.milk === 1 ? "milky" : "milkier"
 
     const you = this.owner.who
 
@@ -32,7 +31,7 @@ export default class BreastMilkier extends Transformation {
       </p>
       <p>
         <b>${Grammar.capitalize(
-          this.owner.parts.breasts.all
+          this.owner.breasts.all
         )} have grown ${milky}!</b>
       </p>`
 

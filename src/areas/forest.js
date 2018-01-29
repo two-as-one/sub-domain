@@ -75,7 +75,7 @@ export default class Forest extends Area {
 
   get sunriseMessage() {
     const you = this.game.player.who
-    const your_face = this.game.player.parts.face.all
+    const your_face = this.game.player.face.all
 
     return `
       <p>
