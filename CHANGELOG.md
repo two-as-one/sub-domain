@@ -12,11 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.4.5]
+## [0.4.5] 2018-01-29
 ### Added
+- Added `increase vagina size` transformation from `peculiar clam`
+
 ### Changed
-### Deprecated
+- Changed wording for some transformations
+- Changed wording for some items
+
 ### Removed
+- Removed `grow extra vagina` transformation from `peculiar clam`
+
 ### Fixed
 - Fixed incorrect `you're` and `you've` contractions
 
