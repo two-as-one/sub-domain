@@ -3,23 +3,45 @@ export default class Perk {
     this.player = player
   }
 
-  //perk name - this must be unique among perks as it's also used as an identifier
+  /**
+   * perk name
+   * This must be unique among perks as it's used as an identifier
+   * @return {String} The name of this perk
+   */
   get name() {
     return ""
   }
 
-  //return true if the player can pick this perk
+  /**
+   * Determines whether this perk is available for the player to pick
+   * @return {Boolean} true if available
+   */
   get available() {
     return false
   }
 
-  //flavor text
+  /**
+   * The description of this perk
+   * @return {String}
+   */
   get description() {
     return ""
   }
 
-  //describe effect
+  /**
+   * A description of the effect of this perk
+   * @return {String}
+   */
   get effect() {
     return ""
+  }
+
+  /**
+   * Defines whether this perk is a gift
+   * Gifts cannot be acquired through normal means
+   * @return {Boolean}
+   */
+  get gift() {
+    return false
   }
 }
