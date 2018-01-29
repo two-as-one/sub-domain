@@ -21,7 +21,7 @@ export default class Vagina extends Part {
       if (this.owner.parts.penis.has) {
         text += `You also have `
       } else {
-        text += `You have `
+        text += `You/have `
       }
 
       if (this.quantity === 1) {

@@ -10,7 +10,7 @@ export default class Sadist extends Perk {
   }
 
   get effect() {
-    return `Deal bonus damage based on how lusty you are.`
+    return `Deal bonus damage based on how lusty you/are.`
   }
 
   get available() {

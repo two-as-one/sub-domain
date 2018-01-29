@@ -10,7 +10,7 @@ export default class SlipperyWhenWet extends Perk {
   }
 
   get effect() {
-    return `You have an easier time slipping out of a grapple.`
+    return `You/have an easier time slipping out of a grapple.`
   }
 
   get available() {

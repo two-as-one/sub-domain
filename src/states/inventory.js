@@ -36,7 +36,7 @@ export default class Inventory extends State {
     if (items.length === 0) {
       text = `You don't have any items.`
     } else {
-      text = `These are the items you have.`
+      text = `These are the items you/have.`
     }
 
     this.render({

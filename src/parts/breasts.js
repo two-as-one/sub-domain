@@ -86,7 +86,7 @@ export default class Breasts extends Part {
       if (this.size < 4 && this.quantity < 5) {
         text += `Your chest is graced by `
       } else {
-        text += `You have `
+        text += `You/have `
       }
 
       const number = this.number

@@ -10,7 +10,7 @@ export default class Conjoined extends Perk {
   }
 
   get effect() {
-    return `You have a second head on your shoulders with its own personality.`
+    return `You/have a second head on your shoulders with its own personality.`
   }
 
   get available() {

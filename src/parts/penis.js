@@ -18,7 +18,7 @@ export default class Penis extends Part {
     let text
 
     if (this.has) {
-      if (this.owner.normalizedLust < 0.5 || this.owner.perks.has("impotent")) {
+      if (this.owner.lustNormalized < 0.5 || this.owner.perks.has("impotent")) {
         text = `Dangling `
       } else {
         text = `Throbbing with arousal `
@@ -31,14 +31,14 @@ export default class Penis extends Part {
         const size = this.size
         const penis = this.pluralized
 
-        text += `you have <b>${adjective} ${size} inch ${penis}</b>`
+        text += `you/have <b>${adjective} ${size} inch ${penis}</b>`
       } else {
         const number = this.number
         const adjective = this.adjective
         const size = this.size
         const penises = this.pluralized
 
-        text += `you have <b>${number} ${adjective} ${size} inch ${penises}</b>`
+        text += `you/have <b>${number} ${adjective} ${size} inch ${penises}</b>`
       }
 
       if (this.size < 2) {
@@ -112,7 +112,7 @@ export default class Penis extends Part {
       adjectives = ["monstrous", "giant", "humongous"]
     }
 
-    if (this.owner.normalizedLust < 0.5) {
+    if (this.owner.lustNormalized < 0.5) {
       adjectives.push("flaccid")
     } else {
       adjectives.push("throbbing")

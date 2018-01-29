@@ -56,7 +56,7 @@ export default class Beach extends Area {
     const you = this.game.player.who
     return chance.pickone([
       `<p>The soft sand caresses ${your_feet} as ${you} explore the <b>beach</b>.</p>`,
-      `<p>You have a long walk along the <b>beach</b>.</p>`
+      `<p>You/have a long walk along the <b>beach</b>.</p>`
     ])
   }
 

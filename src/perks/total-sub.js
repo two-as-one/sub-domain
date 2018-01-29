@@ -6,7 +6,7 @@ export default class TotalSub extends Perk {
   }
 
   get description() {
-    return `You are a total slut.`
+    return `You/are a total slut.`
   }
 
   get effect() {

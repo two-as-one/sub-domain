@@ -28,12 +28,12 @@ export default class Balls extends Part {
           }
         } else if (this.owner.parts.vagina.has) {
           if (this.owner.parts.vagina.quantity > 1) {
-            text += `Hanging in front of them, you have `
+            text += `Hanging in front of them, you/have `
           } else {
-            text += `Hanging in front of it, you have `
+            text += `Hanging in front of it, you/have `
           }
         } else {
-          text += `Hanging between your legs, you have `
+          text += `Hanging between your legs, you/have `
         }
       } else {
         text += `Inside your abdomen sits `
