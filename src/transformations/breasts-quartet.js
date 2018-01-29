@@ -13,19 +13,17 @@ export default class BreastsQuartet extends Transformation {
   }
 
   apply() {
-    this.owner.breasts.quantity = 4
+    const breasts = this.owner.breasts
 
-    const text = `
-      <p>
-        Your chest feels tingly and hot.
-        You look down and quickly realize why.
-      </p>
-      <p>
-        <b>You now have ${this.owner.breasts.number} ${
-      this.owner.breasts.adjective
-    } ${this.owner.breasts.pluralized}!</b>
-      </p>`
+    breasts.quantity = 4
+    breasts.arouse(10)
 
-    return text
+    return `
+      Your chest feels tingly and hot.
+      You look down and quickly realize why.
+
+      **You now have ${breasts.number} ${breasts.adjective} ${
+      breasts.pluralized
+    }!**`
   }
 }

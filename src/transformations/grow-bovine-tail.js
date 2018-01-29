@@ -16,14 +16,9 @@ export default class BreastGrowth extends Transformation {
     this.owner.tail.grow()
     this.owner.tail.type = "bovine"
 
-    const text = `
-      <p>
-        Your have an itching sensation in your lower back and as you reach down to scratch you realize where it's coming from…
-      </p>
-      <p>
-        <b>You now have a bovine tail!</b>
-      </p>`
+    return `
+      You have an itching sensation in your lower back and as you reach down to scratch you realize where it's coming from…
 
-    return text
+      **You now have a bovine tail!**`
   }
 }

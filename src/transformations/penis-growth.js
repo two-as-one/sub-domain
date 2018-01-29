@@ -1,4 +1,3 @@
-import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -14,26 +13,14 @@ export default class PenisGrowth extends Transformation {
   }
 
   apply() {
-    this.owner.penis.grow()
+    const penis = this.owner.penis
 
-    if (this.owner.penis.quantity === 1) {
-      return `
-        <p>
-          ${Grammar.capitalize(
-            this.owner.penis.all
-          )} throbs as it grows thicker and longer — <b>${Grammar.capitalize(
-        this.owner.penis.all
-      )} has grown!</b>
-        </p>`
-    } else {
-      return `
-        <p>
-          ${Grammar.capitalize(
-            this.owner.penis.all
-          )} throb as they grow thicker and longer — <b>${Grammar.capitalize(
-        this.owner.penis.all
-      )} have grown!</b>
-        </p>`
-    }
+    penis.grow()
+    penis.arouse(10)
+
+    return `
+      ${penis.all} ${penis.verb("throb", false)} as ${penis.verb(
+      "grow"
+    )} thicker and longer — **${penis.verb("have")} grown!**`
   }
 }

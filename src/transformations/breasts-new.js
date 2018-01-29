@@ -1,4 +1,3 @@
-import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -14,22 +13,18 @@ export default class BreastsNew extends Transformation {
   }
 
   apply() {
-    this.owner.breasts.quantity = 2
-    this.owner.breasts.size = 1
+    const breasts = this.owner.breasts
 
-    const you = this.owner.who
+    breasts.quantity = 2
+    breasts.size = 1
+    breasts.arouse(10)
 
-    const text = `
-      <p>
-        Your chest feels tingly and hot.
-        ${Grammar.capitalize(you)} look down and quickly realize why.
-      </p>
-      <p>
-        Your chest has swollen and <b>you now have ${
-          this.owner.breasts.number
-        } ${this.owner.breasts.adjective} ${this.owner.breasts.pluralized}!</b>
-      </p>`
+    return `
+      Your chest feels tingly and hot.
+      ${this.owner.who} look down and quickly realize why.
 
-    return text
+      Your chest has swollen and **you now have ${breasts.number} ${
+      breasts.adjective
+    } ${breasts.pluralized}!**`
   }
 }

@@ -1,3 +1,4 @@
+import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -25,30 +26,18 @@ export default class VaginaExtra extends Transformation {
   }
 
   apply() {
-    this.owner.vagina.add()
+    const vagina = this.owner.vagina
 
-    const you = this.owner.who
+    vagina.add()
+    vagina.arouse(30)
 
-    let text = `
-      <p>
-        You/have an itch between your legs.
-        Soon the sensation keeps building up until you reach some sort of pseudo-orgasm.
-        You feel a trickle down your inner thigh.
-        Gasping — ${you} look down and notice why.
-      </p>`
+    return `
+      You/have an uncontrollable itch between your legs and the sensation builds up until you reach some sort of pseudo-orgasm.
+      You feel a trickle down your inner thigh.
+      Gasping — ${this.owner.who} look down and notice why.
 
-    if (this.owner.vagina.quantity === 2) {
-      text += `
-        <p>
-          <b>You have grown a second ${this.owner.vagina.singular}!</b>
-        </p>`
-    } else {
-      text += `
-        <p>
-          <b>You have grown a third ${this.owner.vagina.singular}!</b>
-        </p>`
-    }
-
-    return text
+      **You have grown a ${Grammar.ordinal(vagina.quantity - 1)} ${
+      vagina.singular
+    }!**`
   }
 }

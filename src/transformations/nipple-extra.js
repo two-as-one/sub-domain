@@ -1,4 +1,3 @@
-import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -15,20 +14,12 @@ export default class NippleExtra extends Transformation {
 
   apply() {
     this.owner.nipples.add()
+    this.owner.nipples.arouse(10)
 
-    const you = this.owner.who
+    return `
+      Your chest feels tingly and hot.
+      ${this.owner.who} look down and quickly realize why.
 
-    const text = `
-      <p>
-        Your chest feels tingly and hot.
-        ${Grammar.capitalize(you)} look down and quickly realize why.
-      </p>
-      <p>
-        <b>${Grammar.capitalize(
-          this.owner.breasts.all
-        )} have grown an additional nipple!</b>
-      </p>`
-
-    return text
+      **${this.owner.breasts.all} have grown an additional nipple!**`
   }
 }

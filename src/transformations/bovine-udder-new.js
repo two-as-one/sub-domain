@@ -1,4 +1,3 @@
-import Grammar from "utils/grammar"
 import Transformation from "./_super"
 
 /**
@@ -16,18 +15,12 @@ export default class BovineUdderGrowth extends Transformation {
   apply() {
     this.owner.udder.grow()
     this.owner.udder.teats = 4
+    this.owner.udder.arouse(10)
 
-    const you = this.owner.who
+    return `
+      Your tummy feels sensitive and bloated.
+      ${this.owner.who} examine yourself to find out why.
 
-    const text = `
-      <p>
-        Your tummy feels sensitive and bloated.
-        ${Grammar.capitalize(you)} examine yourself to find out why.
-      </p>
-      <p>
-        You have grown <b>a perky udder</b> with <b>four sensitive teats</b>!
-      </p>`
-
-    return text
+      You have grown **a perky udder** with **four sensitive teats**!`
   }
 }
