@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.6] 2018-02-02
+### Changed
+- Changed mostly behind the scenes stuff, hopefully no new bugs
+
 ## [0.4.5] 2018-01-29
 ### Added
 - Added `increase vagina size` transformation from `peculiar clam`
