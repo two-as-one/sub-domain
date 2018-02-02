@@ -1,6 +1,5 @@
 import Area from "./_super"
 import Chance from "chance"
-import G from "utils/grammar"
 
 const chance = new Chance()
 
@@ -23,61 +22,61 @@ export default class Beach extends Area {
   get introMessage() {
     const player = this.game.player
 
-    return G.clean(`
-      ${
-        player.who
-      } open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
+    // prettier-ignore
+    return `
+      ${player.who} open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
       The peaceful sound of waves crashing against the shore reminding you of home.
 
       You're still alive … and somehow free.
 
-      ${player.who} try to get up but ${
-      player.body.your
-    } hurts all over — maybe you'll just lay down for a little longer.`)
+      ${player.who} try to get up but ${player.body.your} hurts all over — maybe you'll just lay down for a little longer.`
   }
 
   get dayDescription() {
     return `
-      <p>The sun shines bright on the hot sand, but the cool ocean breeze keeps things bearable.</p>`
+      The sun shines bright on the hot sand, but the cool ocean breeze keeps things bearable.`
   }
 
   get nightDescription() {
     return `
-      <p>A beautiful starry sky blankets over the ocean with the pale moon reflecting on the water and illuminating the shore. The temperature has dropped drastically.</p>
-    `
+      A beautiful starry sky blankets over the ocean with the pale moon reflecting on the water and illuminating the shore.
+      The temperature has dropped drastically.`
   }
 
   get campDescription() {
-    return `<p>You have made a ramshackle camp using debris from a sunken ship.</p>`
+    return `
+      You have made a ramshackle camp using debris from a sunken ship.`
   }
 
   get exploreMessage() {
-    const your_feet = this.game.player.feet.all
-    const you = this.game.player.who
+    const player = this.game.player
+
+    // prettier-ignore
     return chance.pickone([
-      `<p>The soft sand caresses ${your_feet} as ${you} explore the <b>beach</b>.</p>`,
-      `<p>You/have a long walk along the <b>beach</b>.</p>`
+      `The soft sand caresses ${player.feet.all} as ${player.who} explore the **beach**.`,
+      `You/have a long walk along the **beach**.`
     ])
   }
 
   get sleepMessage() {
-    const you = this.game.player.who
+    const player = this.game.player
+
     return `
-      <p>You lay down on the cool sand. Gazing up to the sky, ${you} count the stars until you drift off.</p>
-    `
+      You lay down on the cool sand.
+      Gazing up to the sky, ${player.who} count the stars until you drift off.`
   }
 
   get sunsetMessage() {
     return `
-      <p>The day comes to its end as the <b>sun sets</b> below the horizon.</p>
-    `
+      The day comes to its end as the **sun sets** below the horizon.`
   }
 
   get sunriseMessage() {
-    const you = G.capitalize(this.game.player.who)
+    const player = this.game.player
+
     return `
-      <p>${you} wake up to the sound of crashing waves. The sun has already begun its ascend across the sky.</p>
-    `
+      ${player.who} wake up to the sound of crashing waves.
+      The sun has already begun its ascend across the sky.`
   }
 
   explore() {
@@ -104,37 +103,44 @@ export default class Beach extends Area {
     this.game.world.forest.discover()
 
     return `
-      <p>There's a forest which seems to span all the way across the coast — at least as far as the eye can see.</p>
-      <p>Maybe you could explore it too?</p>
-      <p>You have discovered the <b>forest</b>!</p>
-    `
+      There's a forest which seems to span all the way across the coast — at least as far as the eye can see.
+
+      Maybe you could explore it too?
+
+      You have discovered the **forest**!`
   }
 
   findClam() {
     const item = this.game.player.inventory.loot("clam")
 
     return `
-      <p>You find a peculiar looking clam laying on the beach.</p>
-      <p>You pick it up, then head back to camp.</p>
-      <p><b>${item.name}</b> added to inventory.</p>`
+      You find a peculiar looking clam laying on the beach.
+
+      You pick it up, then head back to camp.
+
+      **${item.name}** added to inventory.`
   }
 
   findMilk() {
     const item = this.game.player.inventory.loot("milk")
 
     return `
-      <p>You stumble upon a half-buried bottle in the sand.</p>
-      <p>You pick it up, then head back to camp.</p>
-      <p><b>${item.name}</b> added to inventory.</p>`
+      You stumble upon a half-buried bottle in the sand.
+
+      You pick it up, then head back to camp.
+
+      **${item.name}** added to inventory.`
   }
 
   nothingHappened() {
     const xp = 5
-    this.game.player.giveXP(xp)
-    const you = this.game.player.who
+    const player = this.game.player
+    player.giveXP(xp)
 
+    // prettier-ignore
     return `
-      <p>After a long and uneventful stroll along the coast, ${you} decide to head back to camp.</p>
-      <p>You gain <b>${xp}xp</b></p>`
+      After a long and uneventful stroll along the coast, ${player.who} decide to head back to camp.
+
+      You gain **${xp}xp**`
   }
 }

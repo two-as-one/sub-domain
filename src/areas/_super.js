@@ -89,7 +89,10 @@ export default class Area extends Saveable {
     if (this.game.world.day) {
       return this.dayDescription
     } else {
-      return `<p>Night has fallen</p>` + this.nightDescription
+      return `
+        Night has fallen.
+
+        ${this.nightDescription}`
     }
   }
 
