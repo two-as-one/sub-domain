@@ -108,57 +108,42 @@ export default class CharacterCreation extends State {
     switch (data.occupation) {
       case "woodcutter":
         text = `
-        <p>
           A woodcutter — whenever there was wood to chop, you'd be the one doing it.
           To swing an axe with all your might — a real show of strength.
-        </p>
-        <p>
-          <b>+${bonus} Strength<b>
-        </p>`
+
+          **+${bonus} Strength**`
         this.game.player.stats.str += bonus
         break
       case "dancer":
         text = `
-        <p>
           A dancer — in your free time you would sneak off to the local tavern and dance to the music.
           You'd put up a show, your sensual movements entrancing the patrons while earning some coin in the process.
-        </p>
-        <p>
-          <b>+${bonus} Charisma<b>
-        </p>`
+
+          **+${bonus} Charisma**`
         this.game.player.stats.char += bonus
         break
       case "farmer":
         text = `
-        <p>
           A farmer — you just wanted to follow in your parent's footsteps and maintain the farm.
           Though physically demanding, it was mentally relaxing and you were up for the task.
-        </p>
-        <p>
-          <b>+${bonus} Stamina<b>
-        </p>`
+
+          **+${bonus} Stamina**`
         this.game.player.stats.stam += bonus
         break
       case "monk":
         text = `
-        <p>
           A monk — whenever you weren't working on the farm, you would be meditating.
           Calming your mind and becoming one with the universe.
-        </p>
-        <p>
-          <b>+${bonus} Willpower<b>
-        </p>`
+
+          **+${bonus} Willpower**`
         this.game.player.stats.will += bonus
         break
       case "hunter":
         text = `
-        <p>
           A hunter — nature had always been your true home.
           You'd go out in the forest for days on end, hunting for game.
-        </p>
-        <p>
-          <b>+${bonus} Dexterity<b>
-        </p>`
+
+          **+${bonus} Dexterity**`
         this.game.player.stats.dex += bonus
         break
     }
@@ -172,18 +157,14 @@ export default class CharacterCreation extends State {
   outro() {
     this.render({
       text: `
-        <p>
           Life was good.
-        </p>
-        <p>
+
           But good things must come to an end, and for you they did in the most drastic of ways.
           It was a dark gloomy day and you were on your way back home from the local village.
           That's when you were abducted by a band of slavers — taken from your home, never to see it again.
           You were to be sold to the highest bidder, and with a young and able body like yours the slavers would have made quite the coin.
-        </p>
-        <p>
-          You remember travelling for several days before eventually embarking on their dreadful ship.
-        </p>`,
+
+          You remember travelling for several days before eventually embarking on their dreadful ship.`,
       responses: [{ state: "outro2" }]
     })
   }
@@ -201,15 +182,12 @@ export default class CharacterCreation extends State {
   outro3() {
     this.render({
       text: `
-        <p>
           But fate is fickle and yours took another unforeseen twist.
-        </p>
-        <p>
+
           You woke up from an uncomfortable sleep, and the ship was violently rocking back and forth — it must've ventured into a serious storm, or so you thought.
           What happened next was over in the blink of an eye — first a loud bang, followed by endless waves of water crashing down inside the ship.
           It sank, pulling you and everything else down with it.
-          The darkness of the abyss swallowing you whole.
-        </p>`,
+          The darkness of the abyss swallowing you whole.`,
       responses: [{ state: "outro4" }]
     })
   }

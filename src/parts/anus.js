@@ -24,7 +24,7 @@ export default class Anus extends Part {
         description = `${this.number} ${this.adjective} ${this.pluralized}`
       }
 
-      return Grammar.trim(`<b>${description}</b> nestled in between.`)
+      return `**${description}** nestled in between.`
     }
 
     return ""
@@ -34,15 +34,11 @@ export default class Anus extends Part {
     const you = this.owner.who
 
     return Grammar.random([
-      `<p>
-        You turn around and place your hands on your hips.
+      `You turn around and place your hands on your hips.
         Looking back over your shoulder, ${you} invitingly sway your bottom back and forth.
-        Then, with a playful smirk on your face, you firmly slap your own ass.
-      </p>`,
-      `<p>
-        You turn around and bend over.
-        Looking at your opponent from between your own legs, you invitingly shake your ass at them.
-      </p>`
+        Then, with a playful smirk on your face, you firmly slap your own ass.`,
+      `You turn around and bend over.
+        Looking at your opponent from between your own legs, you invitingly shake your ass at them.`
     ])
   }
 
@@ -58,7 +54,7 @@ export default class Anus extends Part {
       const is = this.quantity > 1 ? "are" : "is"
       const your_anus = Grammar.capitalize(this.all)
 
-      return `<p><b>${your_anus} ${was} stretched</b> and ${is} now looser.</p>`
+      return `**${your_anus} ${was} stretched** and ${is} now looser.`
     }
   }
 

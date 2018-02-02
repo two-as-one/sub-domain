@@ -19,13 +19,13 @@ export default class Nipples extends Part {
     let text = ""
 
     if (this.stats.quantity === 0 || this.size === 0) {
-      text += `<b>featureless and perfectly smooth</b>, lacking nipples.`
+      text += `**featureless and perfectly smooth**, lacking nipples.`
     } else {
       const a =
         this.stats.quantity === 1 ? "a" : Grammar.number(this.stats.quantity)
-      text += `sporting <b>${a} ${this.adjective} ${this.size} inch ${
+      text += `sporting **${a} ${this.adjective} ${this.size} inch ${
         this.pluralized
-      }</b>.`
+      }**.`
     }
 
     return text

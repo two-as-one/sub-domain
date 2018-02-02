@@ -89,9 +89,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
   get introMessage() {
     const you = this.game.player.who
 
-    return `<p>${Grammar.capitalize(
-      you
-    )} find yourself a nice and comfortable spot to spend some well-deserved <q>alone time</q>.</p>`
+    return `${you} find yourself a nice and comfortable spot to spend some well-deserved <q>alone time</q>.`
   }
 
   get mainMessage() {
@@ -101,15 +99,15 @@ export default class MastrubateEncounter extends DefaultEncounter {
     const your_body = this.game.player.body.your
 
     if (lust < 0.1) {
-      return `<p>You're not really in the mood but with a little stimulation ${you} might get there.</p>`
+      return `You're not really in the mood but with a little stimulation ${you} might get there.`
     } else if (lust < 0.3) {
-      return `<p>You're ${both} feeling a little horny and ${your_body} lusts for more.</p>`
+      return `You're ${both} feeling a little horny and ${your_body} lusts for more.`
     } else if (lust < 0.6) {
-      return `<p>Your body feels warm and tingly and your mind is flooded with dirty images.</p>`
+      return `Your body feels warm and tingly and your mind is flooded with dirty images.`
     } else if (lust < 0.8) {
-      return `<p>All you can think of is sex and ${you} just want to feel that sweet release.</p>`
+      return `All you can think of is sex and ${you} just want to feel that sweet release.`
     } else if (lust < 1) {
-      return `<p>Oh god — You're ${both} so close! You can feel it coming, just a little more…</p>`
+      return `Oh god — You're ${both} so close! You can feel it coming, just a little more…`
     }
   }
 
@@ -120,11 +118,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
       case "finger ass": {
         const your_ass = this.player.anus.one
         return `
-          <p>
             Reaching down between your legs, you let your middle finger trace the contour of ${your_ass}.
             A soft moan escapes your lips as you push your finger inside.
-            You pause for a moment and savour the wonderful sensation, but you can't resist much longer and quickly pick up the pace — continually fingering ${your_ass}.
-          </p>`
+            You pause for a moment and savour the wonderful sensation, but you can't resist much longer and quickly pick up the pace — continually fingering ${your_ass}.`
       }
 
       case "jerk off": {
@@ -132,11 +128,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
         const your_hands = this.player.hands.two
         const it = this.player.penis.multiple ? "them" : "it"
         return `
-          <p>
             You reach down with ${your_hands} at ${your_cock}.
             Groaning as you start jerking ${it} — slowly and steadily.
-            Soon ${your_hands} get all sticky as you drool pre all over them.
-          </p>`
+            Soon ${your_hands} get all sticky as you drool pre all over them.`
       }
 
       case "milk tits": {
@@ -146,11 +140,9 @@ export default class MastrubateEncounter extends DefaultEncounter {
           ? ` as milk drools out of your throbbing nips`
           : ""
         return `
-          <p>
             With ${your_hands} you sensually caress the curves of ${your_tits}.
             Taking your time and easing yourself into the wonderful sensation — occasionally flicking your nipples.
-            It doesn't take long before you find yourself greedily groping and kneading them${extra_milky}.
-          </p>`
+            It doesn't take long before you find yourself greedily groping and kneading them${extra_milky}.`
       }
 
       case "finger pussy": {
@@ -158,10 +150,8 @@ export default class MastrubateEncounter extends DefaultEncounter {
           ? "your many clits"
           : "your sensitive clitty"
         return `
-          <p>
             You reach down between your legs and place a hand against your womanhood — Your fingers exploring your slick folds while your fingers occasionally flick ${your_clit}.
-            You ${both} can't help but moan with delight at the wonderful sensation.
-          </p>`
+            You ${both} can't help but moan with delight at the wonderful sensation.`
       }
     }
   }
@@ -175,14 +165,11 @@ export default class MastrubateEncounter extends DefaultEncounter {
       case "finger ass": {
         const your_ass = Grammar.capitalize(this.player.anus.one)
         return `
-          <p>
             ${your_ass} squirms hungrily as you ceaselessly finger it.
             You ${both} lose yourself to the amazing sensation and cry out with pure ecstasy as an earth-shattering anal orgasm overwhelms ${your_body}.
             Your entire body quivering and shaking while ${you} slowly regain your senses.
-          </p>
-          <p>
-            You smile, licking your fingers with satisfaction as ${you} bask in the glory of the aftermath.
-          </p>`
+
+            You smile, licking your fingers with satisfaction as ${you} bask in the glory of the aftermath.`
       }
 
       case "jerk off": {
@@ -190,14 +177,11 @@ export default class MastrubateEncounter extends DefaultEncounter {
         const it = this.player.penis.multiple ? "them" : "it"
         const throbs = this.player.penis.multiple ? "throb" : "throbs"
         return `
-            <p>
               Your groans get louder and more erratic as ${your_cock} ${throbs} with anticipation.
               You find yourself jerking ${it} furiously — lost in primal sensation.
               Then, as a shiver runs down your spine, you burst out with pure ecstasy — spurting cum all over yourself.
-            </p>
-            <p>
-              Moments pass as ${you} revel in the fading afterglow.
-            </p>`
+
+              Moments pass as ${you} revel in the fading afterglow.`
       }
 
       case "milk tits": {
@@ -209,17 +193,13 @@ export default class MastrubateEncounter extends DefaultEncounter {
           ? `Your nipples bursting out like fountains of milk — spraying it everywhere!`
           : ""
         return `
-            <p>
               You keep rubbing and squeezing ${your_tits}${extra_milky1}.
               The sensation is thrilling and wonderful and you just can't stop tugging on your nipples.
               A warmth emanates from your chest and engulfs your entire body as ${you} cry out with joy.
               ${extra_milky2}
-            </p>
-            <p>
+
               Slowly you regain your senses, still rubbing ${your_tits}, but more slowly now.
-              You can't believe ${you} came just from playing with ${your_tits}.
-            </p>
-          `
+              You can't believe ${you} came just from playing with ${your_tits}.`
       }
 
       case "finger pussy": {
@@ -227,17 +207,13 @@ export default class MastrubateEncounter extends DefaultEncounter {
         const one_of_your_pussies = this.player.vagina.one
         const feels = this.player.vagina.multiple ? "feel" : "feels"
         return `
-          <p>
             You keep rubbing ${your_pussy} — drenching your fingers in girl drool.
             Losing track of time as the euphoric sensation washes over you.
             You just need <i>more</i>, and without any hesitation you shove as many fingers as you can fit into ${one_of_your_pussies}.
             The sensation overwhelms you and you cry out with joy — waves of pure delight coursing through ${your_body} as ${you} ride that orgasm for as long as you can.
-          </p>
-          <p>
+
             Moments pass and you breathe heavily as ${you} recover from your orgasm.
-            You've lost track of time and all you know is that ${your_pussy} ${feels} sore and used - <i>you</i> however, glow with satisfaction.
-          </p>
-        `
+            You've lost track of time and all you know is that ${your_pussy} ${feels} sore and used - <i>you</i> however, glow with satisfaction.`
       }
     }
   }

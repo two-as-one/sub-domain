@@ -56,38 +56,29 @@ export default class LevelUp extends State {
 
   confirmation(choice) {
     this.perk = choice.perk
+    let perkDescription = ""
 
-    let description = `<p>You will gain:</p>`
-
-    switch (this.stat) {
-      case "str":
-        description += `<p><b>+2 Strength</b></p>`
-        break
-      case "dex":
-        description += `<p><b>+2 Dexterity</b></p>`
-        break
-      case "stam":
-        description += `<p><b>+2 Stamina</b></p>`
-        break
-      case "char":
-        description += `<p><b>+2 Charisma</b></p>`
-        break
-      case "will":
-        description += `<p><b>+2 Willpower</b></p>`
-        break
+    const map = {
+      str: "Strength",
+      dex: "Dexterity",
+      stam: "Stamina",
+      char: "Charisma",
+      will: "Willpower"
     }
 
     if (this.perk) {
-      description += `
-        <p>
-          <b>${Grammar.capitalize(this.perk.name)}</b>:
-          <q>${this.perk.description}</q> — ${this.perk.effect}
-        </p>
-      `
+      perkDescription += `
+          **${Grammar.capitalize(this.perk.name)}**:
+          <q>${this.perk.description}</q> — ${this.perk.effect}`
     }
 
     this.render({
-      text: description,
+      text: `
+        You/will gain:
+
+        **+2 ${map[this.stat]}**
+
+        ${perkDescription}`,
       responses: [
         { text: "OK", state: "end" },
         { text: "I've changed my mind", state: "choosePrimaryStats" }

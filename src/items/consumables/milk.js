@@ -7,10 +7,10 @@ export default class Milk extends Consumable {
 
   get description() {
     return `
-        A small bottle of milk — just enough for one portion.
-        It's made out of sturdy glass and sealed shut with a cork.
+      A small bottle of milk — just enough for one portion.
+      It's made out of sturdy glass and sealed shut with a cork.
 
-        **Restores ${this.hunger} hunger.**`
+      **Restores ${this.hunger} hunger.**`
   }
 
   consume(player) {

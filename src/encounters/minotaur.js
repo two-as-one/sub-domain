@@ -27,7 +27,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const player = this.player
 
     // prettier-ignore
-    return `Suddenly a massive axe swings right above ${player.head.all} and cuts through the flora. ${player.who} are ambushed by a <b>${enemy.title}</b>!`
+    return `Suddenly a massive axe swings right above ${player.head.all} and cuts through the flora. ${player.who} are ambushed by a **${enemy.title}**!`
   }
 
   get describeEnemyMessage() {
@@ -60,7 +60,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
 
     if (!this.fucking) {
       // prettier-ignore
-      text = `${player.who} are facing a <b>${enemy.title}</b>.`
+      text = `${player.who} are facing a **${enemy.title}**.`
     } else {
       switch (this.fucking.name) {
         case "anal":
@@ -157,7 +157,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
     const enemy = this.enemy
 
     // prettier-ignore
-    return `<b>${enemy.whose} spunk corrupts your body…</b>`
+    return `**${enemy.whose} spunk corrupts your body…**`
   }
 
   get struggleSuccessMessage() {

@@ -94,7 +94,7 @@ export default class Breasts extends Part {
       const cupSize = this.cupSize
       const tits = this.pluralized
 
-      text += `<b>${number} ${adjective} ${cupSize} ${tits}</b>`
+      text += `**${number} ${adjective} ${cupSize} ${tits}**`
 
       //false if rows are uneven, otherwise returns the amount of breasts per row
       const evenRows = this.stats.config.reduce((a, b) => a === b && b)
@@ -133,7 +133,7 @@ export default class Breasts extends Part {
       if (this.milky) {
         text += ` ${Grammar.capitalize(
           this.all
-        )} ache, feeling <b>full of milk</b>.`
+        )} ache, feeling **full of milk**.`
       }
     } else {
       text = `Your chest is flat and unnoteworthy. Your pecs each ${
@@ -141,7 +141,7 @@ export default class Breasts extends Part {
       }`
     }
 
-    return Grammar.trim(`<p>${text}</p>`)
+    return text
   }
 
   get seductionMessage() {
@@ -150,14 +150,8 @@ export default class Breasts extends Part {
     const your_head = this.owner.head.all
 
     return Grammar.random([
-      `<p>
-        ${Grammar.capitalize(
-          you
-        )} cup ${your_tits} and make them jiggle. You then squeeze them individually before squishing them together.
-      </p>`,
-      `<p>
-        With your hands behind ${your_head}, you shake your bosom. Making ${your_tits} bounce against one another in a delightful display.
-      </p>`
+      `${you} cup ${your_tits} and make them jiggle — squeezing them individually before squishing them together.`,
+      `With your hands behind ${your_head}, you shake your bosom. Making ${your_tits} bounce against one another in a delightfully delicious display.`
     ])
   }
 

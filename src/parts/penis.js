@@ -15,7 +15,7 @@ export default class Penis extends Part {
   }
 
   get description() {
-    let text
+    let text = ""
 
     if (this.has) {
       if (this.owner.lustNormalized < 0.5 || this.owner.perks.has("impotent")) {
@@ -31,14 +31,14 @@ export default class Penis extends Part {
         const size = this.size
         const penis = this.pluralized
 
-        text += `you/have <b>${adjective} ${size} inch ${penis}</b>`
+        text += `you/have **${adjective} ${size} inch ${penis}**`
       } else {
         const number = this.number
         const adjective = this.adjective
         const size = this.size
         const penises = this.pluralized
 
-        text += `you/have <b>${number} ${adjective} ${size} inch ${penises}</b>`
+        text += `you/have **${number} ${adjective} ${size} inch ${penises}**`
       }
 
       if (this.size < 2) {
@@ -48,19 +48,15 @@ export default class Penis extends Part {
       } else {
         text += `.`
       }
-
-      return Grammar.trim(text)
     }
 
-    return ""
+    return text
   }
 
   get seductionMessage() {
     return `
-      <p>
         With a wicked smirk on your face, you firmly grab ${this.one}.
-        Jerking it a few times while humping the air.
-      </p>`
+        Jerking it a few times while humping the air.`
   }
 
   get canSeduce() {

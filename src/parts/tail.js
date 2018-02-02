@@ -25,7 +25,7 @@ export default class Tail extends Part {
     if (this.has) {
       switch (this.stats.type) {
         case "bovine":
-          return `a slender <b>bovine tail</b> — swaying back and forth. It has your sking tone and ends in a tuft of hair.`
+          return `a slender **bovine tail** — swaying back and forth. It has your sking tone and ends in a tuft of hair.`
       }
     }
 

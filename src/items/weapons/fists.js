@@ -6,6 +6,6 @@ export default class Fists extends Weapon {
   }
 
   get equippedDescription() {
-    return `Without any weapons equipped, you resort to using <b>your fists</b>.`
+    return `Without any weapons equipped, you resort to using **your fists**.`
   }
 }

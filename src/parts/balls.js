@@ -39,17 +39,17 @@ export default class Balls extends Part {
         text += `Inside your abdomen sits `
       }
 
-      text += `<b>${Grammar.articlize(this.adjective)} scrotum</b> containing `
+      text += `**${Grammar.articlize(this.adjective)} scrotum** containing `
 
       if (this.quantity === 1) {
-        text += ` <b>a single`
+        text += ` **a single`
       } else if (this.quantity === 2) {
-        text += ` <b>a pair of`
+        text += ` **a pair of`
       } else {
-        text += ` <b>${this.number}`
+        text += ` **${this.number}`
       }
 
-      text += ` ${this.pluralized}</b>`
+      text += ` ${this.pluralized}**`
 
       if (!this.owner.penis.has) {
         if (this.owner.vagina.has) {
@@ -68,10 +68,10 @@ export default class Balls extends Part {
         text += `It's `
       }
 
-      text += `<b>lacking a scrotum</b> and can't produce semen.`
+      text += `**lacking a scrotum** and can't produce semen.`
     }
 
-    return Grammar.trim(text)
+    return text
   }
 
   get all() {

@@ -103,12 +103,12 @@ export default class DefaultEncounter extends CombatState {
     if (this.player.isStarving) {
       starvationMessage = `
 
-        <b>${player.who} are severely weakened due to your starvation!</b>`
+        **${player.who} are severely weakened due to your starvation!**`
     }
     if (this.player.isHungry) {
       starvationMessage = `
 
-        <b>${player.who} are hungry and weakened.</b>`
+        **${player.who} are hungry and weakened.**`
     }
 
     this.render({
@@ -465,7 +465,12 @@ export default class DefaultEncounter extends CombatState {
 
   //combat results, exp, loot, etc...
   endResults() {
-    let text = ""
+    let XPmessage = ""
+    let dilationMessage = ""
+    let succubusMessage = ""
+    let infectionMessage = ""
+    let resultMessage = ""
+    let passOutMessage = ""
 
     //experience gain
     if (!this.player.orgasmed && this.player.alive) {
@@ -477,7 +482,7 @@ export default class DefaultEncounter extends CombatState {
         item = this.player.inventory.loot(this.enemy.loot)
       }
 
-      text += this.gainMessage(xp, item)
+      XPmessage = this.gainMessage(xp, item)
     }
 
     //dilation
@@ -486,7 +491,7 @@ export default class DefaultEncounter extends CombatState {
       const dilation = this.enemy.getDiameter(this.fucking.enemy) || 0
 
       if (typeof playerPart.dilate === "function") {
-        text += playerPart.dilate(dilation) || ""
+        dilationMessage = playerPart.dilate(dilation)
       }
     }
 
@@ -498,7 +503,7 @@ export default class DefaultEncounter extends CombatState {
     ) {
       const hunger = this.player.eat(8)
       const health = this.player.heal(this.player.healthMax / 10)
-      text += this.succubusMessage(hunger, health)
+      succubusMessage = this.succubusMessage(hunger, health)
     }
 
     //infection
@@ -506,32 +511,47 @@ export default class DefaultEncounter extends CombatState {
       const transformation = this.enemy.infect(this.player)
 
       if (transformation) {
-        text += this.infectionMessage
-        text += transformation
+        infectionMessage = `
+          ${this.infectionMessage}
+
+          ${transformation}`
       }
     }
 
     //message
     if (this.player.orgasmed) {
-      text += this.climaxLossMessage
+      resultMessage = this.climaxLossMessage
     } else if (this.enemy.orgasmed) {
-      text += this.climaxVictoryMessage
+      resultMessage = this.climaxVictoryMessage
     } else if (!this.player.alive) {
-      text += this.combatLossMessage
+      resultMessage = this.combatLossMessage
     } else {
-      text += this.combatVictoryMessage
+      resultMessage = this.combatVictoryMessage
     }
 
     if (this.player.orgasmed || !this.player.alive) {
       this.fadeout = true
-      text += `
-
-      Time passes before ${this.player.who} regain your senses.`
+      passOutMessage = `Time passes before ${
+        this.player.who
+      } regain your senses.`
     }
 
     if (this.player.orgasmed) {
       this.player.soothe(999999)
     }
+
+    const text = `
+      ${XPmessage}
+
+      ${dilationMessage}
+
+      ${succubusMessage}
+
+      ${infectionMessage}
+
+      ${resultMessage}
+
+      ${passOutMessage}`
 
     this.render({
       text: text,
@@ -599,16 +619,16 @@ export default class DefaultEncounter extends CombatState {
   attackResultsMessage(damage) {
     return `
 
-    You deal <b>${damage} damage</b>`
+    You deal **${damage} damage**`
   }
 
   attackedResultsMessage(damage, lust) {
     let text = `
 
-      You suffer <b>${damage} damage</b>`
+      You suffer **${damage} damage**`
 
     if (lust) {
-      text += `, it feels good — you gain <b>${lust} lust</b>`
+      text += `, it feels good — you gain **${lust} lust**`
     }
 
     return text
@@ -617,13 +637,13 @@ export default class DefaultEncounter extends CombatState {
   seduceResultsMessage(lust) {
     return `
 
-      ${this.enemy.who} gains <b>${lust} lust</b>`
+      ${this.enemy.who} gains **${lust} lust**`
   }
 
   seducedResultsMessage(lust) {
     return `
 
-      You gain <b>${lust} lust</b>`
+      You gain **${lust} lust**`
   }
 
   get tooHornyMessage() {
@@ -658,7 +678,7 @@ export default class DefaultEncounter extends CombatState {
 
         ${
           player.who
-        } are satiated by all that semen — <b>${hunger} ${and} ${health} restored</b>.`
+        } are satiated by all that semen — **${hunger} ${and} ${health} restored**.`
     } else {
       return ""
     }
@@ -667,10 +687,10 @@ export default class DefaultEncounter extends CombatState {
   gainMessage(xp, item) {
     let text = `
 
-      Gained <b>${xp}xp</b>`
+      Gained **${xp}xp**`
 
     if (item) {
-      text += ` and found <b>${item.name}</b>`
+      text += ` and found **${item.name}**`
     }
 
     return text

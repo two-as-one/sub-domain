@@ -141,28 +141,26 @@ export default class Part extends Saveable {
   }
 
   get your() {
-    return Grammar.trim(
-      `${this.owner.their} ${Grammar.maybe(this.adjective)} ${this.pluralized}`
-    )
+    return `${this.owner.their} ${Grammar.maybe(this.adjective)} ${
+      this.pluralized
+    }`
   }
 
   get all() {
     if (this.quantity === 1) {
       return this.your
     } else if (this.quantity === 2) {
-      return Grammar.trim(`both of ${this.your}`)
+      return `both of ${this.your}`
     } else {
-      return Grammar.trim(`all ${Grammar.maybe(this.number)} of ${this.your}`)
+      return `all ${Grammar.maybe(this.number)} of ${this.your}`
     }
   }
 
   get one() {
     if (this.quantity > 1) {
-      return Grammar.trim(
-        `one of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-          this.adjective
-        )} ${this.pluralized}`
-      )
+      return `one of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
+        this.adjective
+      )} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -170,11 +168,9 @@ export default class Part extends Saveable {
 
   get two() {
     if (this.quantity > 2) {
-      return Grammar.trim(
-        `two of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-          this.adjective
-        )} ${this.pluralized}`
-      )
+      return `two of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
+        this.adjective
+      )} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -182,11 +178,9 @@ export default class Part extends Saveable {
 
   get three() {
     if (this.quantity > 3) {
-      return Grammar.trim(
-        `three of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-          this.adjective
-        )} ${this.pluralized}`
-      )
+      return `three of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
+        this.adjective
+      )} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -194,11 +188,9 @@ export default class Part extends Saveable {
 
   get four() {
     if (this.quantity > 4) {
-      return Grammar.trim(
-        `four of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-          this.adjective
-        )} ${this.pluralized}`
-      )
+      return `four of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
+        this.adjective
+      )} ${this.pluralized}`
     } else {
       return this.all
     }

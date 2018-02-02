@@ -49,13 +49,10 @@ export default class TitleScreen extends State {
 
     this.render({
       text: `
-        <p>
           Your saved game [${save_VERSION}] does not match the latest version of the game [${VERSION}].
           You can still continue but this may cause unexpected bugs.
-        </p>
-        <p>
-          We recommend starting a new game.
-        </p>`,
+
+          It/is recommend to start a new game.`,
       responses: [
         { text: "continue", state: "continue", force: true },
         { text: "cancel", state: "title" }
@@ -66,7 +63,7 @@ export default class TitleScreen extends State {
   new() {
     if (save.hasData) {
       this.render({
-        text: `You will <b>lose any saved progress</b>, are you sure you want to start a <b>new adventure</b>?`,
+        text: `You/will **lose any saved progress**, are you sure you want to start a new adventure?`,
         responses: [
           { text: "New game", state: "confirm" },
           { text: "Cancel", state: "cancel" }

@@ -19,15 +19,15 @@ export default class Vagina extends Part {
 
     if (this.has) {
       if (this.owner.penis.has) {
-        text += `You also have `
+        text += `Further down you also have `
       } else {
         text += `You/have `
       }
 
       if (this.quantity === 1) {
-        text += `<b>${Grammar.articlize(this.adjective)} ${this.pluralized}</b>`
+        text += `**${Grammar.articlize(this.adjective)} ${this.pluralized}**`
       } else {
-        text += `<b>${this.number} ${this.adjective} ${this.pluralized}</b>`
+        text += `**${this.number} ${this.adjective} ${this.pluralized}**`
       }
 
       if (this.owner.penis.has) {
@@ -35,21 +35,17 @@ export default class Vagina extends Part {
       } else {
         text += ` between your legs.`
       }
-
-      return Grammar.trim(text)
     }
 
-    return ""
+    return text
   }
 
   get seductionMessage() {
     const your_pussy = this.all
 
     return `
-      <p>
         You spread your legs lightly while facing your opponent.
-        Placing your hands on your inner thighs and sensually moving them upwards towards ${your_pussy} but never quite reaching it.
-      </p>`
+        Placing your hands on your inner thighs and sensually moving them upwards towards ${your_pussy} but never quite reaching it.`
   }
 
   get canSeduce() {
@@ -64,7 +60,7 @@ export default class Vagina extends Part {
       const is = this.quantity > 1 ? "are" : "is"
       const your_pussy = Grammar.capitalize(this.all)
 
-      return `<p><b>${your_pussy} ${was} stretched</b> and ${is} now looser.</p>`
+      return `**${your_pussy} ${was} stretched** and ${is} now looser.`
     }
   }
 

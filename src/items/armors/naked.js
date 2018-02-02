@@ -6,7 +6,7 @@ export default class Naked extends Weapon {
   }
 
   get equippedDescription() {
-    return `You are not wearing any armor or clothing, you are entirely <b>naked</b>.`
+    return `You are not wearing any armor or clothing, you are entirely **naked**.`
   }
 
   get arousePower() {

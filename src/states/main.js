@@ -1,4 +1,3 @@
-import Grammar from "utils/grammar"
 import State from "./_super"
 
 export default class Main extends State {
@@ -69,19 +68,22 @@ export default class Main extends State {
       text =
         (this.game.player.woundedDescription ||
           this.game.player.arousedDescription ||
-          this.game.player.hungerDescription) + text
+          this.game.player.hungerDescription) +
+        `
+
+          ${text}`
     }
 
     this.render({
       text: text,
       responses: [
         {
-          text: "<b>Level up!</b>",
+          text: "**Level up!**",
           state: "levelUp",
           if: this.game.player.canLvlUp
         },
         {
-          text: `explore <b>${this.area.name}</b>`,
+          text: `explore **${this.area.name}**`,
           state: "explore",
           disabled: this.game.world.night || mortallyWounded || aroused
         },
@@ -161,9 +163,7 @@ export default class Main extends State {
 
   travel(data) {
     this.render({
-      text: `<p>You pack your bags and and travel to the <b>${
-        data.area.name
-      }</b>.</p>`,
+      text: `You pack your bags and and travel to the **${data.area.name}**.`,
       responses: [{ state: "switchArea", area: data.area }]
     })
   }
@@ -194,10 +194,10 @@ export default class Main extends State {
   sunrise() {
     let wetDream = ""
     if (this.game.player.lustNormalized > 0.5) {
-      wetDream = `<p>
-          <b>You had a wet dream</b> — Your loins are on fire and you've made a sticky mess down there.
-          Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.
-        </p>`
+      wetDream = `
+
+          **You had a wet dream** — Your loins are on fire and you've made a sticky mess down there.
+          Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.`
     }
 
     this.game.player.arouse(this.game.player.lust / 2)
@@ -258,13 +258,10 @@ export default class Main extends State {
     const text = this.game.player.perks.listGranted
       .filter(perk => perk.available)
       .map(
-        perk =>
-          `<p>
-            <b>${Grammar.capitalize(perk.name)}</b>:
-            <q>${perk.description}</q> — ${perk.effect}
-          </p>`
-      )
-      .join("")
+        perk => `**${perk.name}**: <q>${perk.description}</q> — ${perk.effect}`
+      ).join(`
+
+      `)
 
     this.render({
       text: text || `You don't have any perks yet.`,

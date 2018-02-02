@@ -3,7 +3,7 @@ import Part from "./_super"
 
 export default class Body extends Part {
   get description() {
-    return `<p>${this.heightDescription} You weigh ${this.weight}.</p>`
+    return `${this.heightDescription} You weigh ${this.weight}.`
   }
 
   get heightDescription() {

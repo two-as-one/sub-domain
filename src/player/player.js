@@ -177,11 +177,11 @@ export default class Player extends Entity {
   //describes how hungry the player is - displayed on main state
   get hungerDescription() {
     if (this.isStarving) {
-      return `<p>You are <b>starving!</b> — You will be weakened until you eat something.</p>`
+      return `You are **starving!** — You will be weakened until you eat something.`
     }
 
     if (this.isHungry) {
-      return `<p>You are <b>hungry</b> and should eat something.</p>`
+      return `You are **hungry** and should eat something.`
     }
 
     return ""
@@ -189,7 +189,7 @@ export default class Player extends Entity {
 
   get woundedDescription() {
     if (this.health <= 1) {
-      return `<p>You are <b>severely wounded</b> and must rest.</p>`
+      return `You are **severely wounded** and must rest.`
     }
 
     return ""
@@ -197,7 +197,7 @@ export default class Player extends Entity {
 
   get arousedDescription() {
     if (this.lust >= this.lustMax - 1) {
-      return `<p>You are <b>too horny</b> to do anything productive.</p>`
+      return `You are **too horny** to do anything productive.`
     }
 
     return ""
@@ -377,25 +377,25 @@ export default class Player extends Entity {
 
   get equipmentDescription() {
     return `
-      <p>
         ${this.weapon.equippedDescription}
-        ${this.armor.equippedDescription}
-      </p>`
+
+        ${this.armor.equippedDescription}`
   }
 
   get bodyDescription() {
     return `
       ${this.body.description}
+
       ${this.breasts.description}
+
       ${this.udder.description}
+
       ${this.genitaliaDescription}
-      ${this.buttDescription}
-    `
+
+      ${this.buttDescription} `
   }
 
   get buttDescription() {
-    const buttDescription =
-      "Your bottom sports a pair of round butt-cheeks with"
     let tailIntro = ""
 
     if (this.tail.has) {
@@ -407,33 +407,25 @@ export default class Player extends Entity {
     }
 
     return `
-      <p>
-        ${buttDescription}
+        Your bottom sports a pair of round butt-cheeks with
         ${this.anus.description}
         ${tailIntro}
-        ${this.tail.description}
-      </p>`
+        ${this.tail.description}`
   }
 
   get genitaliaDescription() {
     if (this.penis.has) {
       return `
-        <p>
           ${this.penis.description}
           ${this.balls.description}
-          ${this.vagina.description}
-        </p>`
+          ${this.vagina.description}`
     } else if (this.vagina.has || this.balls.has) {
       return `
-        <p>
           ${this.vagina.description}
-          ${this.balls.description}
-        </p>`
+          ${this.balls.description}`
     } else {
       return `
-        <p>
-          The area between your legs is smooth and featureless as you <b>lack any form of genitalia</b>.
-        </p>`
+          The area between your legs is smooth and featureless as you **lack any form of genitalia**.`
     }
   }
 

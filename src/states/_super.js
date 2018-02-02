@@ -73,7 +73,7 @@ export default class State {
       response => !response.hasOwnProperty("if") || response.if
     )
 
-    data.text = G.clean(data.text || "")
+    data.text = G.clean(data.text)
 
     data.responses.forEach((response, i) => {
       if (!response.text) {
@@ -96,6 +96,10 @@ export default class State {
 
       response.text =
         response.text.charAt(0).toUpperCase() + response.text.slice(1)
+
+      response.text = G.clean(response.text)
+        .replace(/^<p>/, "")
+        .replace(/<\/p>$/, "")
     })
 
     return data
