@@ -1,4 +1,4 @@
-import DefaultEncounter from "./_super"
+import DefaultEncounter from "./../combat/_super"
 import Grammar from "utils/grammar"
 
 /**

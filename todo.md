@@ -35,15 +35,6 @@ Shrines:
 
 ## areas
 
-travelling has variable duration based on distance - distance to what?? 2d map... ?
-
-Add `Camp` option to `main` state
-- describes camp
-- allows you to do camp stuff
-  - talk with NPC's
-  - ...
-
-
 ## BUGS
  - player lust NaN
 

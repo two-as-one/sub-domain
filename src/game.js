@@ -3,16 +3,12 @@ import CharacterCreation from "states/character-creation"
 import InventoryState from "states/inventory"
 import LevelUpState from "states/level-up"
 import MainState from "states/main"
-import Mastrubate from "encounters/masturbate"
-import MinotaurEncounter from "encounters/minotaur"
+import Mastrubate from "encounters/other/masturbate"
+import MinotaurEncounter from "encounters/combat/minotaur"
 import Player from "player/player"
 import TitleScreen from "states/title-screen"
 import World from "world"
 import save from "save/save"
-
-const ENCOUNTERS = {
-  minotaur: MinotaurEncounter
-}
 
 export default class Game {
   constructor() {
@@ -154,12 +150,6 @@ export default class Game {
     this.world = new World(this)
   }
 
-  /** start an encounter by name */
-  Encounter(name) {
-    const encounter = ENCOUNTERS[name]
-    return new encounter(this)
-  }
-
   /**
    * Switch the game to a different state
    * @param  {String} state - The state name to switch to
@@ -187,6 +177,21 @@ export default class Game {
         return (this.currentState = this.Encounter(...args))
       default:
         throw new Error(`Error: unknown game state: ${state}`)
+    }
+  }
+
+  /** start an encounter by name */
+  Encounter(name) {
+    const encounter = this.ENCOUNTERS[name]
+    return new encounter(this)
+  }
+
+  /**
+   * List of encounters available to this game
+   */
+  get ENCOUNTERS() {
+    return {
+      minotaur: MinotaurEncounter
     }
   }
 }

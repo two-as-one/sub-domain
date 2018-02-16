@@ -1,14 +1,17 @@
+import "styles/combat.less"
+
 import Chance from "chance"
-import CombatState from "states/combat"
 import G from "utils/grammar"
+import State from "states/_super"
+import template from "templates/combat.hbs"
 const chance = new Chance()
 
 /**
- * DefaultEncounter
- * This is the base class from which all encounters must inherit from
+ * CombatEncounter
+ * This is the base class from which all combat encounters must inherit from
  * refer to README.md for instructions on how to make custom encounters
  */
-export default class DefaultEncounter extends CombatState {
+export default class CombatEncounter extends State {
   constructor(game, enemy) {
     super(game)
 
@@ -18,6 +21,19 @@ export default class DefaultEncounter extends CombatState {
     this.fucking = false
 
     this.state.intro()
+  }
+
+  //render combat
+  render(data) {
+    data.static = template({
+      player: this.player,
+      enemy: this.enemy,
+      hideStats: data.hideStats
+    })
+
+    data.classes = "combat"
+
+    super.render(data)
   }
 
   // States & transitions
