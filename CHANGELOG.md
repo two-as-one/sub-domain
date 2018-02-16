@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.7]
+### Added
+- Added travel time between areas based on their coordinates on the map
+- Added `camp` option to main screen, currently shows description of camp and current time - more stuff to be added later
+
+### Removed
+- Removed `frotting` position from `minotaur` encounter
+
 ## [0.4.6] 2018-02-02
 ### Changed
 - Changed mostly behind the scenes stuff, hopefully no new bugs

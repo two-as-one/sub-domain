@@ -41,6 +41,13 @@ export default class World extends Saveable {
     this.areas.forEach(area => area.save())
   }
 
+  get time() {
+    return {
+      day: this.data.day,
+      hour: this.data.hour
+    }
+  }
+
   /** List all areas */
   get areas() {
     return [this.forest, this.beach]
@@ -59,14 +66,19 @@ export default class World extends Saveable {
   /**
    * Change which area we are currently in
    * @param  {Object.Area} to - The new current area
+   * @return {Number}         The amount of time that was advanced
    */
   switchArea(to) {
+    const distance = Math.ceil(this.area.distance(to))
+
     if (this.area) {
       this.area.leave()
     }
 
     to.enter()
-    this.advance()
+    this.advance(distance)
+
+    return distance
   }
 
   /**

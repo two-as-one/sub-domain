@@ -19,6 +19,10 @@ export default class Beach extends Area {
     })
   }
 
+  get position() {
+    return { x: 1, y: 0 }
+  }
+
   get introMessage() {
     const player = this.game.player
 

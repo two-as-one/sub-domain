@@ -48,6 +48,3 @@ Add `Camp` option to `main` state
  - player lust NaN
 
 ## automated testing
-
-## Code upgrades
-refactor positions so that all 5 messages are contained within the position

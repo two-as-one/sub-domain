@@ -27,6 +27,11 @@ export default class Area extends Saveable {
     })
   }
 
+  /** This is the location of the area on the map */
+  get position() {
+    return { x: 0, y: 0 }
+  }
+
   get discovered() {
     return Boolean(this.stats.discovered)
   }
@@ -61,6 +66,16 @@ export default class Area extends Saveable {
   //level up this area
   lvlUp() {
     this.stats.lvl += 1
+  }
+
+  /** get the distance between two areas */
+  distance(other) {
+    return Math.sqrt(
+      Math.abs(
+        Math.pow(this.position.x - other.position.x, 2) +
+          Math.pow(this.position.y - other.position.y, 2)
+      )
+    )
   }
 
   //utility function for chanceJS which expects input as option objects:

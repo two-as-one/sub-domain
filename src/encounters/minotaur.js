@@ -12,8 +12,7 @@ export default class MinotaurEncounter extends DefaultEncounter {
       { name: "anal", player: "anus", enemy: "penis", infects: true },
       { name: "vaginal", player: "vagina", enemy: "penis", infects: true },
       { name: "blowjob", player: "mouth", enemy: "penis", infects: true },
-      { name: "boobjob", player: "breasts", enemy: "penis" },
-      { name: "frotting", player: "penis", enemy: "penis" }
+      { name: "boobjob", player: "breasts", enemy: "penis" }
       // 'hands':    'handjob',
       // 'feet':     'footjob',
     ]
@@ -78,10 +77,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
         case "boobjob":
           // prettier-ignore
           text = `${player.who} have got ${player.breasts.all} squeezed tightly around ${enemy.whose} cock.`
-          break
-        case "frotting":
-          // prettier-ignore
-          text = `${player.who} have got ${player.hands.all} wrapped around the ${enemy.whose} and ${player.penis.all}.`
           break
       }
     }
@@ -221,13 +216,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
           Cupping ${player.breasts.two} and kneading them playfully.
           ${G.verb(enemy.who, 'take')} you up on the offer and ${G.verb(enemy.they, 'jam', false)} ${enemy.their} throbbing cock in between ${player.breasts.all}.`
         break
-      case "frotting":
-        // prettier-ignore
-        text = `
-          ${player.who} carefully approach ${enemy.who} as ${G.verb(enemy.they, 'look')} down at you with a curious gaze.
-          Slowly shuffling closer until ${player.penis.all} pokes against ${enemy.their} inhumanly large bovine cock.
-          ${G.verb(enemy.who, 'snort')} as ${player.who} wrap your fingers around the cocks and slowly start jerking them together.`
-        break
     }
 
     return text
@@ -265,13 +253,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
           ${G.verb(enemy.who, 'overpower')} ${player.who} and ${G.verb(enemy.who, 'pin', false)} you to the floor under ${enemy.their} weight.
           ${G.verb(enemy.they, 'sit')} down on top of ${player.who} with ${enemy.their} cock throbbing between ${player.breasts.all}.`
         break
-      case "frotting":
-        // prettier-ignore
-        text = `
-          ${G.verb(enemy.who, 'trample')} over ${player.who}, pinning you down on the floor underneath ${enemy.their} weight and strength.
-          With ${enemy.their} massive bovine cock throbbing against ${player.penis.all} ${G.verb(enemy.they, 'start')} dry-humping ${player.who}.
-          ${enemy.their} heavy ball sack slapping against your bottom.`
-        break
     }
 
     return text
@@ -304,11 +285,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
         text = `
           ${player.who} squeeze ${player.breasts.two} together around ${enemy.whose} cock.`
         break
-      case "frotting":
-        // prettier-ignore
-        text = `
-          ${player.who} continue to stroke ${player.penis.all} and ${enemy.whose} cock together.`
-        break
     }
 
     return text
@@ -340,11 +316,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
         // prettier-ignore
         text = `
           ${G.verb(enemy.who, 'continue')} to fuck your cleavage.`
-        break
-      case "frotting":
-        // prettier-ignore
-        text = `
-          ${G.verb(enemy.who, 'continue')} dry-humping ${player.penis.all}, pre-cum drooling all over ${player.who}.`
         break
     }
 
@@ -401,14 +372,6 @@ export default class MinotaurEncounter extends DefaultEncounter {
           ${G.verb(enemy.they, 'fuck')} your cleavage over and over like a wild beast.
           ${player.who} even start to feel sore but you can't help but moan out with joy — triggering ${enemy.whose} climax.
           Thick bovine spunk spraying all over ${player.face.all}.`
-        break
-      case "frotting":
-        // prettier-ignore
-        text = `
-          ${G.verb(enemy.who, 'growl')} as ${player.who} keep rubbing ${player.penis.all} against ${enemy.theirs} own.
-          Wrapping ${enemy.their} hands around yours and forcing ${player.who} to continue jerking those cocks.
-          ${player.who} keep at it, slowly picking up the pace until neither of you can resist any longer.
-          ${player.who} and ${enemy.who} climax at the same time — spunk mixing as it lands all over ${player.face.all} and chest.`
         break
     }
 

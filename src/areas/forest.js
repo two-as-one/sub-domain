@@ -9,6 +9,10 @@ export default class Forest extends Area {
     return "forest"
   }
 
+  get position() {
+    return { x: 4, y: 0 }
+  }
+
   get introMessage() {
     const player = this.game.player
 
@@ -35,7 +39,7 @@ export default class Forest extends Area {
   }
 
   get campDescription() {
-    return `You have set up camp inside a massive hollow tree.`
+    return `Your camp is set up on the inside a massive hollow tree.`
   }
 
   get exploreMessage() {

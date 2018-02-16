@@ -27,6 +27,7 @@ export default class Main extends State {
       { name: "sunrise", from: "rest" },
       { name: "heal", from: "main" },
       { name: "self", from: "*" },
+      { name: "camp", from: "*" },
       { name: "masturbate", from: "self" },
       { name: "gear", from: "self" },
       { name: "body", from: "self" },
@@ -98,8 +99,9 @@ export default class Main extends State {
           disabled: this.game.world.day,
           if: !(wounded && this.game.world.day)
         },
-        { text: "inventory", state: "inventory" },
         { text: "self", state: "self" },
+        { text: "inventory", state: "inventory" },
+        { text: "camp", state: "camp" },
         {
           text: "travel",
           state: "chooseArea",
@@ -233,6 +235,27 @@ export default class Main extends State {
         { text: "masturbate", state: "masturbate" },
         { text: "back", state: "main" }
       ]
+    })
+  }
+
+  camp() {
+    let time = this.game.world.time.hour
+    if (time < 12) {
+      time = `${time} am`
+    } else if (time === 12) {
+      time = `noon`
+    } else if (time === 24) {
+      time = `midnight`
+    } else {
+      time = `${time - 12} pm`
+    }
+
+    this.render({
+      text: `
+        It's **${time}**.
+
+        ${this.area.campDescription}`,
+      responses: [{ text: "back", state: "main" }]
     })
   }
 
