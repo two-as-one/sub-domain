@@ -337,6 +337,13 @@ export default class Grammar {
     return `<p>${text}</p>`
   }
 
+  /** finds quotes in text and replaces them with <q> tags */
+  static quote(text = "") {
+    return text
+      .replace(/"(.*?)"/g, (match, inner) => `<q>${inner}</q>`)
+      .replace(/'(.*?)'/g, (match, inner) => `<q>${inner}</q>`)
+  }
+
   /**
    * contracts words such as `does not` into `doesn't`
    * if you want to specifically prevent a word to be contracted, you can separate them with a /
@@ -375,6 +382,7 @@ export default class Grammar {
       .map(text => Grammar.trim(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))
+      .map(text => Grammar.quote(text))
       .map(text => converter.makeHtml(text))
 
     return text.join("")
