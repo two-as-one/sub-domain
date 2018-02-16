@@ -80,7 +80,7 @@ export default class State {
         response.text = "…"
       }
 
-      if (/^(back|cancel)$/i.test(response.text)) {
+      if (/^(back|cancel|leave)$/i.test(response.text)) {
         response.back = true
       }
 
