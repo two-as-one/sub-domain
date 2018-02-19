@@ -17,10 +17,10 @@ export default class BreastMilkier extends Transformation {
     const nipples = this.owner.nipples
 
     breasts.grow()
-    breasts.stats.milk += 1
+    breasts.stored.milk += 1
     breasts.arouse(10)
 
-    const milky = breasts.stats.milk === 1 ? "milky" : "milkier"
+    const milky = breasts.stored.milk === 1 ? "milky" : "milkier"
 
     return `
       Your chest starts aching as ${breasts.all} feel *just so full*.

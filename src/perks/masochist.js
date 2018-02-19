@@ -12,8 +12,4 @@ export default class Masochist extends Perk {
   get effect() {
     return `When taking damage, absorb some of it as lust.`
   }
-
-  get available() {
-    return true
-  }
 }

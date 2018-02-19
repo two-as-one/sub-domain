@@ -21,30 +21,26 @@ export default class PerkManager extends Saveable {
     return "player-perks"
   }
 
-  get savedAttribute() {
-    return "data"
-  }
-
   get defaults() {
     return {}
   }
 
   //check whether the player has a perk
   has(name) {
-    return Boolean(this.exists(name) && this.data[name])
+    return Boolean(this.exists(name) && this.stored[name])
   }
 
   //grant a perk to the player
   grant(name) {
     if (this.exists(name)) {
-      this.data[name] = true
+      this.stored[name] = true
     }
   }
 
   //revoke a perk
   revoke(name) {
     if (this.exists(name)) {
-      delete this.data[name]
+      delete this.stored[name]
     }
   }
 
@@ -57,6 +53,7 @@ export default class PerkManager extends Saveable {
   get listAvailable() {
     return this._PERKS
       .filter(perk => perk.available)
+      .filter(perk => !perk.gift)
       .filter(perk => !this.has(perk.name))
   }
 

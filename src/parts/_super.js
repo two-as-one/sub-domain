@@ -7,10 +7,6 @@ export default class Part extends Saveable {
     this.owner = owner
   }
 
-  get savedAttribute() {
-    return "stats"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 0,
@@ -43,27 +39,27 @@ export default class Part extends Saveable {
   }
 
   get size() {
-    return this.stats.size
+    return this.stored.size
   }
 
   set size(val) {
-    this.stats.size = Math.round(val * 100) / 100
+    this.stored.size = Math.round(val * 100) / 100
   }
 
   get quantity() {
-    return this.stats.quantity
+    return this.stored.quantity
   }
 
   set quantity(val) {
-    this.stats.quantity = Math.floor(val)
+    this.stored.quantity = Math.floor(val)
   }
 
   get sensitivity() {
-    return this.stats.sensitivity
+    return this.stored.sensitivity
   }
 
   set sensitivity(val) {
-    this.stats.sensitivity = val
+    this.stored.sensitivity = val
   }
 
   /**

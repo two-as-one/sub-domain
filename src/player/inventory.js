@@ -6,16 +6,12 @@ export default class Inventory extends Saveable {
     super()
     this.player = player
 
-    this.equipWeapon(this.data.weapon)
-    this.equipArmor(this.data.armor)
+    this.equipWeapon(this.stored.weapon)
+    this.equipArmor(this.stored.armor)
   }
 
   get saveKey() {
     return "player-inventory"
-  }
-
-  get savedAttribute() {
-    return "data"
   }
 
   //extend this with any default values you want to be set on this class when it's restored
@@ -28,30 +24,30 @@ export default class Inventory extends Saveable {
   }
 
   get all() {
-    return Object.keys(this.data.bag)
-      .filter(key => Number(this.data.bag[key]) > 0)
+    return Object.keys(this.stored.bag)
+      .filter(key => Number(this.stored.bag[key]) > 0)
       .map(fileName => Item.create(fileName))
       .sort()
   }
 
   //returns the number of items held
   quantity(fileName) {
-    return this.data.bag[fileName] || 0
+    return this.stored.bag[fileName] || 0
   }
 
   //finds an item with name
   find(fileName) {
-    if (this.data.bag[fileName]) {
+    if (this.stored.bag[fileName]) {
       return Item.create(fileName)
     }
   }
 
   //add an item to the inventory
   loot(fileName) {
-    if (this.data.bag[fileName]) {
-      this.data.bag[fileName] += 1
+    if (this.stored.bag[fileName]) {
+      this.stored.bag[fileName] += 1
     } else {
-      this.data.bag[fileName] = 1
+      this.stored.bag[fileName] = 1
     }
 
     return Item.create(fileName)
@@ -59,11 +55,11 @@ export default class Inventory extends Saveable {
 
   //remove an item from the inventory
   discard(fileName) {
-    if (this.data.bag[fileName]) {
-      this.data.bag[fileName] -= 1
+    if (this.stored.bag[fileName]) {
+      this.stored.bag[fileName] -= 1
 
-      if (this.data.bag[fileName] === 0) {
-        delete this.data.bag[fileName]
+      if (this.stored.bag[fileName] === 0) {
+        delete this.stored.bag[fileName]
       }
     }
   }
@@ -74,11 +70,11 @@ export default class Inventory extends Saveable {
     const weapon = name || "fists"
     this.equippedWeapon = Item.create(weapon)
 
-    if (this.data.weapon && this.data.weapon !== "fists") {
-      this.loot(this.data.weapon)
+    if (this.stored.weapon && this.stored.weapon !== "fists") {
+      this.loot(this.stored.weapon)
     }
 
-    this.data.weapon = weapon
+    this.stored.weapon = weapon
   }
 
   //equip armor by name
@@ -87,10 +83,10 @@ export default class Inventory extends Saveable {
     const armor = name || "naked"
     this.equippedArmor = Item.create(armor)
 
-    if (this.data.armor && this.data.armor !== "naked") {
-      this.loot(this.data.armor)
+    if (this.stored.armor && this.stored.armor !== "naked") {
+      this.loot(this.stored.armor)
     }
 
-    this.data.armor = armor
+    this.stored.armor = armor
   }
 }

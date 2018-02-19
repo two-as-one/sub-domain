@@ -1,6 +1,6 @@
 {{#unless hideStats}}
   <div class="player">
-    <span class="name">{{player.name}} <span class="nowrap">[LVL {{player.stats.lvl}}]</span></span>
+    <span class="name">{{player.name}} <span class="nowrap">[LVL {{player.stored.lvl}}]</span></span>
 
     {{> stat-bar
         class="health"
@@ -18,7 +18,7 @@
   </div>
 
   <div class="opponent">
-    <span class="name">{{#if enemy.name}}{{enemy.name}}{{else}}{{enemy.title}}{{/if}} <span class="nowrap">[LVL {{enemy.stats.lvl}}]</span></span>
+    <span class="name">{{#if enemy.name}}{{enemy.name}}{{else}}{{enemy.title}}{{/if}} <span class="nowrap">[LVL {{enemy.stored.lvl}}]</span></span>
 
     {{> stat-bar
         class="health"

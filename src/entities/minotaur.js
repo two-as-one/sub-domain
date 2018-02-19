@@ -4,12 +4,12 @@ export default class Minotaur extends Entity {
   constructor() {
     super()
 
-    this.stats.lvl = 3
+    this.stored.lvl = 3
 
     this.title = "minotaur"
     this.gender = "none" /* it/its/itself */
 
-    this.giveRandomStats(this.stats.lvl * 2, ["str", "stam"])
+    this.giveRandomStats(this.stored.lvl * 2, ["str", "stam"])
 
     this.loot = "minotaur-spunk"
   }

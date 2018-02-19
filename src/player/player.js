@@ -128,7 +128,7 @@ export default class Player extends Entity {
   //determines sensitivity based on parts
   sensitivity(name) {
     if (this.has(name)) {
-      return this.getPart(name).stats.sensitivity
+      return this.getPart(name).stored.sensitivity
     } else {
       return 0.25
     }
@@ -155,7 +155,7 @@ export default class Player extends Entity {
   //returns a value by which all offensive base stats will be modified with based on hunger level
   get hungerModifier() {
     if (this.isStarving) {
-      return -this.stats.lvl - 5
+      return -this.stored.lvl - 5
     }
 
     if (this.isHungry) {
@@ -217,36 +217,36 @@ export default class Player extends Entity {
   }
 
   get isStarving() {
-    return this.stats.hunger === 0
+    return this.stored.hunger === 0
   }
 
   get isHungry() {
-    return !this.isStarving && this.stats.hunger < 10
+    return !this.isStarving && this.stored.hunger < 10
   }
 
   get isWellFed() {
-    return this.stats.hunger > 20
+    return this.stored.hunger > 20
   }
 
   //allows the player to regain an amount of hunger
   eat(amount) {
     amount = amount || 1
-    const previous = this.stats.hunger
+    const previous = this.stored.hunger
 
-    this.stats.hunger += Math.ceil(amount)
+    this.stored.hunger += Math.ceil(amount)
 
     //prevent hunger from going above 24
-    this.stats.hunger = Math.min(this.stats.hunger, 24)
+    this.stored.hunger = Math.min(this.stored.hunger, 24)
 
-    return this.stats.hunger - previous
+    return this.stored.hunger - previous
   }
 
   //makes the player lose some hunger
   metabolize() {
-    this.stats.hunger -= 1
+    this.stored.hunger -= 1
 
     //prevent from going below 0
-    this.stats.hunger = Math.max(this.stats.hunger, 0)
+    this.stored.hunger = Math.max(this.stored.hunger, 0)
   }
 
   // LVLing Up
@@ -255,7 +255,7 @@ export default class Player extends Entity {
   //determines how much exp is required for the next level
   get expRequired() {
     let required = 0
-    for (let i = 0; i <= this.stats.lvl; i += 1) {
+    for (let i = 0; i <= this.stored.lvl; i += 1) {
       required += i * 100
     }
 
@@ -264,12 +264,12 @@ export default class Player extends Entity {
 
   //determines if a level up is available
   get canLvlUp() {
-    return this.expRequired < this.stats.xp
+    return this.expRequired < this.stored.xp
   }
 
   //give some exp to the player
   giveXP(amount) {
-    this.stats.xp += amount
+    this.stored.xp += amount
   }
 
   // Equipment
@@ -320,13 +320,13 @@ export default class Player extends Entity {
       <p class="block">
         ${statBarTemplate({
           label: "Level",
-          current: this.stats.lvl
+          current: this.stored.lvl
         })}
         ${statBarTemplate({
           label: "XP",
-          current: this.stats.xp,
+          current: this.stored.xp,
           max: this.expRequired,
-          percentage: this.stats.xp / this.expRequired * 100
+          percentage: this.stored.xp / this.expRequired * 100
         })}
         ${statBarTemplate({
           label: "HP",
@@ -342,9 +342,9 @@ export default class Player extends Entity {
         })}
         ${statBarTemplate({
           label: "Hunger",
-          current: this.stats.hunger,
+          current: this.stored.hunger,
           max: 24,
-          percentage: this.stats.hunger / 24 * 100,
+          percentage: this.stored.hunger / 24 * 100,
           modifier: this.hungerStatus
         })}
       </p>

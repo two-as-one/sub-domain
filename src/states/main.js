@@ -45,12 +45,12 @@ export default class Main extends State {
 
     //if the player 'died', restore them back to 1 hp
     if (this.game.player.health < 1) {
-      this.game.player.stats.dmg = this.game.player.healthMax - 1
+      this.game.player.stored.dmg = this.game.player.healthMax - 1
     }
 
     //if the player is at max lust, reduce it by 1 to allow them to masturbate for release
     if (this.game.player.lustNormalized === 1) {
-      this.game.player.stats.lust = this.game.player.lustMax - 1
+      this.game.player.stored.lust = this.game.player.lustMax - 1
     }
 
     const wounded = this.game.player.healthNormalized < 1
@@ -293,6 +293,6 @@ export default class Main extends State {
   }
 
   get availableTravelAreas() {
-    return this.game.world.availableAreas.filter(area => !area.stats.current)
+    return this.game.world.availableAreas.filter(area => !area.stored.current)
   }
 }

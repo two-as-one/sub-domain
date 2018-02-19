@@ -15,10 +15,6 @@ export default class Area extends Saveable {
     this.game = game
   }
 
-  get savedAttribute() {
-    return "stats"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       lvl: 0,
@@ -33,19 +29,19 @@ export default class Area extends Saveable {
   }
 
   get discovered() {
-    return Boolean(this.stats.discovered)
+    return Boolean(this.stored.discovered)
   }
 
   set discovered(val) {
-    this.stats.discovered = Boolean(val)
+    this.stored.discovered = Boolean(val)
   }
 
   get lvl() {
-    return this.stats.lvl
+    return this.stored.lvl
   }
 
   set lvl(val) {
-    this.stats.lvl = val
+    this.stored.lvl = val
   }
 
   //discover this area
@@ -55,17 +51,17 @@ export default class Area extends Saveable {
 
   //leave this area
   leave() {
-    this.stats.current = false
+    this.stored.current = false
   }
 
   //enter this area
   enter() {
-    this.stats.current = true
+    this.stored.current = true
   }
 
   //level up this area
   lvlUp() {
-    this.stats.lvl += 1
+    this.stored.lvl += 1
   }
 
   /** get the distance between two areas */
@@ -90,9 +86,9 @@ export default class Area extends Saveable {
 
   //determines how familiar the player is with this area
   get familiarity() {
-    if (this.stats.lvl < 5) {
+    if (this.stored.lvl < 5) {
       return "lost"
-    } else if (this.stats.lvl < 20) {
+    } else if (this.stored.lvl < 20) {
       return "familiar"
     } else {
       return "at home"

@@ -14,16 +14,16 @@ export default class Tail extends Part {
   }
 
   get type() {
-    return this.stats.type
+    return this.stored.type
   }
 
   set type(val) {
-    this.stats.type = val
+    this.stored.type = val
   }
 
   get description() {
     if (this.has) {
-      switch (this.stats.type) {
+      switch (this.stored.type) {
         case "bovine":
           return `a slender **bovine tail** — swaying back and forth. It has your sking tone and ends in a tuft of hair.`
       }

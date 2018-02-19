@@ -19,7 +19,7 @@ export default class Balls extends Part {
     let text = ""
 
     if (this.has) {
-      if (this.stats.external) {
+      if (this.stored.external) {
         if (this.owner.penis.has) {
           if (this.owner.penis.quantity > 1) {
             text += `They are accompanied by `
@@ -101,7 +101,7 @@ export default class Balls extends Part {
   }
 
   get adjective() {
-    if (!this.stats.external) {
+    if (!this.stored.external) {
       return "internal"
     }
 

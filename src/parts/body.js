@@ -7,15 +7,15 @@ export default class Body extends Part {
   }
 
   get heightDescription() {
-    if (this.stats.size < 150) {
+    if (this.stored.size < 150) {
       return `You are self-conscious about your diminutive size of ${
         this.height
       }.`
-    } else if (this.stats.size < 160) {
+    } else if (this.stored.size < 160) {
       return `You are not particularly tall at ${this.height} in height.`
-    } else if (this.stats.size < 180) {
+    } else if (this.stored.size < 180) {
       return `You are an average ${this.height} tall.`
-    } else if (this.stats.size < 200) {
+    } else if (this.stored.size < 200) {
       return `You are taller than most people at ${this.height}.`
     } else {
       return `People have to look up at your towering height of ${this.height}.`
@@ -57,10 +57,10 @@ export default class Body extends Part {
   }
 
   get height() {
-    return Grammar.toFt(this.stats.size)
+    return Grammar.toFt(this.stored.size)
   }
 
   get weight() {
-    return Grammar.toLbs(this.stats.weight)
+    return Grammar.toLbs(this.stored.weight)
   }
 }

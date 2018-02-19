@@ -18,11 +18,11 @@ export default class Nipples extends Part {
   get description() {
     let text = ""
 
-    if (this.stats.quantity === 0 || this.size === 0) {
+    if (this.stored.quantity === 0 || this.size === 0) {
       text += `**featureless and perfectly smooth**, lacking nipples.`
     } else {
       const a =
-        this.stats.quantity === 1 ? "a" : Grammar.number(this.stats.quantity)
+        this.stored.quantity === 1 ? "a" : Grammar.number(this.stored.quantity)
       text += `sporting **${a} ${this.adjective} ${this.size} inch ${
         this.pluralized
       }**.`

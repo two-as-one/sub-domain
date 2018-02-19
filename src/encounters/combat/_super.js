@@ -141,7 +141,7 @@ export default class CombatEncounter extends State {
     //up to 50% bonus damage based on how much lust the player has
     if (this.player.perks.has("sadist")) {
       bonus = Math.round(damage * this.player.lustNormalized * 0.5)
-      this.enemy.stats.dmg += bonus
+      this.enemy.stored.dmg += bonus
     }
 
     this.render({
@@ -294,7 +294,7 @@ export default class CombatEncounter extends State {
     //player unable to resist, the enemy can have their way with them
     if (!this.player.alive || this.player.orgasmed) {
       if (this.fucking) {
-        enemy.stats.lust = enemy.lustMax
+        enemy.stored.lust = enemy.lustMax
         return this.state.end()
       } else if (wantsToFuck) {
         return this.state.getForceSubmitted()
@@ -331,8 +331,8 @@ export default class CombatEncounter extends State {
       lust = Math.ceil(damage * 0.25)
       damage = Math.floor(damage * 0.75)
 
-      this.player.stats.dmg -= lust
-      this.player.stats.lust += lust
+      this.player.stored.dmg -= lust
+      this.player.stored.lust += lust
     }
 
     this.render({

@@ -112,7 +112,7 @@ export default class CharacterCreation extends State {
           To swing an axe with all your might — a real show of strength.
 
           **+${bonus} Strength**`
-        this.game.player.stats.str += bonus
+        this.game.player.stored.str += bonus
         break
       case "dancer":
         text = `
@@ -120,7 +120,7 @@ export default class CharacterCreation extends State {
           You'd put up a show, your sensual movements entrancing the patrons while earning some coin in the process.
 
           **+${bonus} Charisma**`
-        this.game.player.stats.char += bonus
+        this.game.player.stored.char += bonus
         break
       case "farmer":
         text = `
@@ -128,7 +128,7 @@ export default class CharacterCreation extends State {
           Though physically demanding, it was mentally relaxing and you were up for the task.
 
           **+${bonus} Stamina**`
-        this.game.player.stats.stam += bonus
+        this.game.player.stored.stam += bonus
         break
       case "monk":
         text = `
@@ -136,7 +136,7 @@ export default class CharacterCreation extends State {
           Calming your mind and becoming one with the universe.
 
           **+${bonus} Willpower**`
-        this.game.player.stats.will += bonus
+        this.game.player.stored.will += bonus
         break
       case "hunter":
         text = `
@@ -144,7 +144,7 @@ export default class CharacterCreation extends State {
           You'd go out in the forest for days on end, hunting for game.
 
           **+${bonus} Dexterity**`
-        this.game.player.stats.dex += bonus
+        this.game.player.stored.dex += bonus
         break
     }
 

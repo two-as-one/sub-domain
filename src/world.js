@@ -24,10 +24,6 @@ export default class World extends Saveable {
     return "world"
   }
 
-  get savedAttribute() {
-    return "data"
-  }
-
   get defaults() {
     return {
       day: 1,
@@ -43,8 +39,8 @@ export default class World extends Saveable {
 
   get time() {
     return {
-      day: this.data.day,
-      hour: this.data.hour
+      day: this.stored.day,
+      hour: this.stored.hour
     }
   }
 
@@ -55,12 +51,12 @@ export default class World extends Saveable {
 
   /** List of areas available to the player */
   get availableAreas() {
-    return this.areas.filter(area => area.stats.discovered)
+    return this.areas.filter(area => area.stored.discovered)
   }
 
   /** The current area */
   get area() {
-    return this.areas.find(area => area.stats.current)
+    return this.areas.find(area => area.stored.current)
   }
 
   /**
@@ -96,10 +92,10 @@ export default class World extends Saveable {
         this.game.player.heal(Math.ceil(this.game.player.healthMax / 10))
       }
 
-      this.data.hour += 1
-      if (this.data.hour >= MIDNIGHT) {
-        this.data.hour = 0
-        this.data.day += 1
+      this.stored.hour += 1
+      if (this.stored.hour >= MIDNIGHT) {
+        this.stored.hour = 0
+        this.stored.day += 1
       }
     }
 
@@ -113,7 +109,7 @@ export default class World extends Saveable {
 
   /** advances time until dawn */
   advanceToDawn() {
-    const hours = MIDNIGHT - this.data.hour + DAWN
+    const hours = MIDNIGHT - this.stored.hour + DAWN
     this.advance(hours, true)
   }
 
@@ -129,7 +125,7 @@ export default class World extends Saveable {
 
   /** true if the world is at night time */
   get night() {
-    return this.data.hour < DAWN || this.data.hour > DUSK
+    return this.stored.hour < DAWN || this.stored.hour > DUSK
   }
 
   /** true if the world is at day time */

@@ -38,10 +38,6 @@ export default class Entity extends Saveable {
     this.multiple = false
   }
 
-  get savedAttribute() {
-    return "stats"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       lvl: 1,
@@ -65,7 +61,7 @@ export default class Entity extends Saveable {
    * pinDefence        50%
    */
   get strength() {
-    return this.stats.str + this.stats.lvl * LEVEL_STAT_SCALE
+    return this.stored.str + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   /**
@@ -74,7 +70,7 @@ export default class Entity extends Saveable {
    * lustMax           25%
    */
   get stamina() {
-    return this.stats.stam + this.stats.lvl * LEVEL_STAT_SCALE
+    return this.stored.stam + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   /**
@@ -82,7 +78,7 @@ export default class Entity extends Saveable {
    * arousePower      100%
    */
   get charisma() {
-    return this.stats.char + this.stats.lvl * LEVEL_STAT_SCALE
+    return this.stored.char + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   /**
@@ -91,7 +87,7 @@ export default class Entity extends Saveable {
    * healthMax             25%
    */
   get willpower() {
-    return this.stats.will + this.stats.lvl * LEVEL_STAT_SCALE
+    return this.stored.will + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   /**
@@ -103,7 +99,7 @@ export default class Entity extends Saveable {
    * pinDefence       100%
    */
   get dexterity() {
-    return this.stats.dex + this.stats.lvl * LEVEL_STAT_SCALE
+    return this.stored.dex + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   // Life totals
@@ -116,7 +112,7 @@ export default class Entity extends Saveable {
   get health() {
     return Math.min(
       this.healthMax,
-      Math.max(0, this.healthMax - this.stats.dmg)
+      Math.max(0, this.healthMax - this.stored.dmg)
     )
   }
 
@@ -130,7 +126,7 @@ export default class Entity extends Saveable {
       if (val > this.healthMax) {
         val = this.healthMax
       }
-      this.stats.dmg = this.healthMax - val
+      this.stored.dmg = this.healthMax - val
     }
   }
 
@@ -154,7 +150,7 @@ export default class Entity extends Saveable {
    * @type {Number}
    */
   get lust() {
-    return this.stats.lust
+    return this.stored.lust
   }
 
   set lust(val) {
@@ -167,7 +163,7 @@ export default class Entity extends Saveable {
       if (val > this.lustMax) {
         val = this.lustMax
       }
-      this.stats.lust = val
+      this.stored.lust = val
     }
   }
 
@@ -484,8 +480,8 @@ export default class Entity extends Saveable {
     for (let i = 0; i < number; i++) {
       const stat = chance.pickone(list)
 
-      if (stat in this.stats) {
-        this.stats[stat] += 1
+      if (stat in this.stored) {
+        this.stored[stat] += 1
       }
     }
   }

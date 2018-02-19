@@ -73,7 +73,7 @@ export default class Forest extends Area {
   }
 
   explore() {
-    const lvl = this.stats.lvl
+    const lvl = this.stored.lvl
 
     super.explore()
 

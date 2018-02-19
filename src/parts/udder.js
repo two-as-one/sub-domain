@@ -16,11 +16,11 @@ export default class Udder extends Part {
   }
 
   get teats() {
-    return this.stats.teats
+    return this.stored.teats
   }
 
   set teats(number) {
-    this.stats.teats = number
+    this.stored.teats = number
   }
 
   get description() {

@@ -87,8 +87,8 @@ export default class LevelUp extends State {
   }
 
   end() {
-    this.game.player.stats[this.stat] += 2
-    this.game.player.stats.lvl += 1
+    this.game.player.stored[this.stat] += 2
+    this.game.player.stored.lvl += 1
 
     if (this.perk) {
       this.game.player.perks.grant(this.perk.name)

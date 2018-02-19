@@ -17,7 +17,7 @@ export default class Perk {
    * @return {Boolean} true if available
    */
   get available() {
-    return false
+    return true
   }
 
   /**

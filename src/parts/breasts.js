@@ -53,14 +53,14 @@ export default class Breasts extends Part {
   }
 
   get quantity() {
-    return this.stats.config.reduce((a, b) => a + b, 0)
+    return this.stored.config.reduce((a, b) => a + b, 0)
   }
 
   set quantity(val) {
     const options = BREAST_CONFIGS.filter(
       list => list.reduce((a, b) => a + b) === val
     )
-    this.stats.config = chance.pickone(options).filter(row => row)
+    this.stored.config = chance.pickone(options).filter(row => row)
   }
 
   get sensitivity() {
@@ -76,7 +76,7 @@ export default class Breasts extends Part {
    * @type {Boolean}
    */
   get milky() {
-    return this.stats.milk > 0
+    return this.stored.milk > 0
   }
 
   get description() {
@@ -97,20 +97,20 @@ export default class Breasts extends Part {
       text += `**${number} ${adjective} ${cupSize} ${tits}**`
 
       //false if rows are uneven, otherwise returns the amount of breasts per row
-      const evenRows = this.stats.config.reduce((a, b) => a === b && b)
+      const evenRows = this.stored.config.reduce((a, b) => a === b && b)
 
       if (this.quantity > 3) {
-        if (this.stats.config.length === 1) {
+        if (this.stored.config.length === 1) {
           text += ` — all in a single row and each `
         } else if (evenRows) {
-          const row_number = Grammar.number(this.stats.config.length)
+          const row_number = Grammar.number(this.stored.config.length)
           const number = Grammar.number(evenRows)
           text += ` — ${row_number} rows of ${number}. Each `
         } else {
-          const row_number = Grammar.number(this.stats.config.length)
+          const row_number = Grammar.number(this.stored.config.length)
           text += `. Spread over ${row_number} rows —`
 
-          this.stats.config.forEach((row, i, list) => {
+          this.stored.config.forEach((row, i, list) => {
             text += ` ${Grammar.number(row)} on the ${Grammar.ordinal(i + 1)}`
 
             if (list[i + 2]) {

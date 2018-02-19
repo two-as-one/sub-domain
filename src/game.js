@@ -4,7 +4,6 @@ import InventoryState from "states/inventory"
 import LevelUpState from "states/level-up"
 import MainState from "states/main"
 import Mastrubate from "encounters/other/masturbate"
-import MinotaurEncounter from "encounters/combat/minotaur"
 import Player from "player/player"
 import TitleScreen from "states/title-screen"
 import World from "world"
@@ -191,7 +190,8 @@ export default class Game {
    */
   get ENCOUNTERS() {
     return {
-      minotaur: MinotaurEncounter
+      minotaur: require("encounters/combat/minotaur").default,
+      "phallic shrine": require("encounters/dialogue/phallic-shrine").default
     }
   }
 }

@@ -40,7 +40,7 @@ export default class Saveable {
 
   //extend this with the attribute that needs to be saved
   get savedAttribute() {
-    return ""
+    return "stored"
   }
 
   //extend this with any default values you want to be set on this class when it's restored

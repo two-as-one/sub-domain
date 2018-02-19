@@ -339,9 +339,7 @@ export default class Grammar {
 
   /** finds quotes in text and replaces them with <q> tags */
   static quote(text = "") {
-    return text
-      .replace(/"(.*?)"/g, (match, inner) => `<q>${inner}</q>`)
-      .replace(/'(.*?)'/g, (match, inner) => `<q>${inner}</q>`)
+    return text.replace(/"(.*?)"/g, (match, inner) => `<q>${inner}</q>`)
   }
 
   /**
