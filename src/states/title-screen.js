@@ -24,7 +24,7 @@ export default class TitleScreen extends State {
   title() {
     const data = { responses: [] }
 
-    data.text = titleScreen()
+    data.static = titleScreen()
     data.classes = "title-screen"
 
     if (save.hasData) {

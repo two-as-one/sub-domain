@@ -11,10 +11,7 @@ module.exports = function(env) {
 
   const config = {
     resolve: {
-      modules: [path.resolve("./src"), "node_modules"],
-      alias: {
-        handlebars: "handlebars/dist/handlebars.js"
-      }
+      modules: [path.resolve("./src"), "node_modules"]
     },
 
     entry: {
