@@ -1,4 +1,5 @@
 import "styles/index.less"
+import { clear, save } from "save/saveable"
 import CharacterCreation from "states/character-creation"
 import InventoryState from "states/inventory"
 import LevelUpState from "states/level-up"
@@ -7,7 +8,6 @@ import Mastrubate from "encounters/other/masturbate"
 import Player from "player/player"
 import TitleScreen from "states/title-screen"
 import World from "world"
-import save from "save/save"
 
 export default class Game {
   constructor() {
@@ -133,13 +133,12 @@ export default class Game {
 
   /** saves the game */
   save() {
-    this.player.save()
-    this.world.save()
+    save()
   }
 
   /** clears all progress */
   clear() {
-    save.clear()
+    clear()
     this.init()
   }
 

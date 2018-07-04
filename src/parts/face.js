@@ -2,11 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Face extends Part {
-  //face doesn't get saved, it's derived via other body parts
-  get saveKey() {
-    return null
-  }
-
   get size() {
     return this.owner.head.size
   }

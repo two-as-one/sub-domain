@@ -1,8 +1,7 @@
-import Saveable from "save/saveable"
+import { persist } from "save/saveable"
 
-export default class PerkManager extends Saveable {
+export default class PerkManager {
   constructor(owner) {
-    super()
     this.owner = owner
 
     this._PERKS = []
@@ -15,14 +14,8 @@ export default class PerkManager extends Saveable {
     })
 
     this._PERKS.sort((a, b) => a.name < b.name)
-  }
 
-  get saveKey() {
-    return "player-perks"
-  }
-
-  get defaults() {
-    return {}
+    persist(this, "player-perks")
   }
 
   //check whether the player has a perk

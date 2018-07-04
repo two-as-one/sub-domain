@@ -5,11 +5,10 @@ Areas are hub zones. From there, the player can; do whatever they would at their
 ### Area
 
 To make your own area, create a new class that extends from `_super`. You can use the `forest` area as an example.
-`Area` extends from `Saveable` — any data that should persist through saving must be stored on `this.stored`
+Make sure to `import` and `persist` your custom area
 
 #### 1. extend `name` and `saveKey`
   - `name` - used to identify the area
-  - `saveKey` - used to store progress of area, make sure this does not collide with any other save keys
 
 #### 2. extend `explore`
 This function **must** return either a string or another state.

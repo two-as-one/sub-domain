@@ -1,8 +1,11 @@
 import Area from "./_super"
+import { persist } from "save/saveable"
 
 export default class Forest extends Area {
-  get saveKey() {
-    return "area-forest"
+  constructor(game) {
+    super(game)
+
+    persist(this, "area-forest")
   }
 
   get name() {

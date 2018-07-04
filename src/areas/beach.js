@@ -1,11 +1,14 @@
 import Area from "./_super"
 import Chance from "chance"
+import { persist } from "save/saveable"
 
 const chance = new Chance()
 
 export default class Beach extends Area {
-  get saveKey() {
-    return "area-beach"
+  constructor(game) {
+    super(game)
+
+    persist(this, "area-beach")
   }
 
   get name() {

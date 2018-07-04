@@ -1,26 +1,28 @@
 import Chance from "chance"
-import Saveable from "save/saveable"
 const chance = new Chance()
 
 /**
  * Area
- * @augments Saveable
  * This is the base class from which all areas must inherit from
  * refer to README.md for instructions on how to make custom areas
+ *
+ * @abstract - this class cannot be instantiated directly and must be extended
  */
-export default class Area extends Saveable {
+export default class Area {
   constructor(game) {
-    super()
+    if (new.target === Area) {
+      throw new TypeError("Cannot construct Area instances directly")
+    }
 
     this.game = game
   }
 
   get defaults() {
-    return Object.assign(super.defaults, {
+    return {
       lvl: 0,
       current: false,
       discovered: false
-    })
+    }
   }
 
   /** This is the location of the area on the map */
@@ -121,11 +123,6 @@ export default class Area extends Saveable {
   //the name of the area
   get name() {
     return "super"
-  }
-
-  //the key that will be used to save the state, make sure this doesn't collide with any other keys
-  get saveKey() {
-    return "area-super"
   }
 
   //this message is shown the first time the player enters this area

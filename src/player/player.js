@@ -17,6 +17,7 @@ import Tail from "parts/tail"
 import TransformationManager from "transformations/_manager"
 import Udder from "parts/udder"
 import Vagina from "parts/vagina"
+import { persist } from "save/saveable"
 import statBarTemplate from "templates/stat-bar.hbs"
 
 export default class Player extends Entity {
@@ -47,7 +48,14 @@ export default class Player extends Entity {
       vagina: new Vagina(this)
     }
 
+    // make parts directly accessible on player, ie player.hands
     Object.keys(this.parts).forEach(key => (this[key] = this.parts[key]))
+
+    // restore & persist state of player and parts
+    persist(this, "player-stats")
+    Object.keys(this.parts).forEach(key =>
+      persist(this[key], `player-part-${key}`)
+    )
 
     this.transform = new TransformationManager(this)
     this.perks = new PerkManager(this)
@@ -78,33 +86,6 @@ export default class Player extends Entity {
       xp: 0,
       hunger: 11 //starts at 11 so that it takes 2 explorations to become hungry
     })
-  }
-
-  get saveKey() {
-    return "player-stats"
-  }
-
-  save() {
-    super.save()
-    ;[
-      "inventory",
-      "perks",
-
-      "anus",
-      "balls",
-      "body",
-      "breasts",
-      "face",
-      "feet",
-      "hands",
-      "head",
-      "mouth",
-      "nipples",
-      "penis",
-      "tail",
-      "udder",
-      "vagina"
-    ].forEach(part => this[part].save())
   }
 
   // Base Stats

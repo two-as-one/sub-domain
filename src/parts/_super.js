@@ -1,18 +1,19 @@
 import Grammar from "grammar/grammar"
-import Saveable from "save/saveable"
 
-export default class Part extends Saveable {
-  constructor(owner) {
-    super()
+export default class Part {
+  constructor(owner, config = {}) {
     this.owner = owner
+
+    this.stored = Object.assign({}, this.defaults, config)
   }
 
+  // default values for this body part
   get defaults() {
-    return Object.assign(super.defaults, {
+    return {
       quantity: 0,
       size: 0,
       sensitivity: 0.25
-    })
+    }
   }
 
   get person() {

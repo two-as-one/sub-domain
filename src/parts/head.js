@@ -2,10 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Head extends Part {
-  get saveKey() {
-    return "player-part-head"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       size: 1

@@ -2,10 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Penis extends Part {
-  get saveKey() {
-    return "player-part-penis"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       size: 6, //in inches

@@ -1,58 +1,50 @@
+import SAVE from "save/save"
+
+const ITEMS = {}
+
 /**
- * Saveable
- * Extend from this class to persists state through page loads
+ * Allows an object to have data that persists
+ * The object will be given a `.stored` property that contains an object with all the stored data
+ * The object will be given a `.save()` method that must be triggered to save the state of the `.stored` property
  *
- * 1. extend `saveKey`          - the key against which `savedAttribute` will be stored in localstorage
- * 2. extend `savedAttribute`   - the attribute that will be stored
- * 3. extend `defaults`         - default values if no data is available in localstorage
+ * @param  {*}        instance - the object to be given a persistent state
+ * @param  {String}   key      - the (unique) key that will be used to store the data against
  */
-
-import save from "save/save"
-
-export default class Saveable {
-  constructor() {
-    this.restore()
+export function persist(instance, key) {
+  if (typeof key !== "string") {
+    throw new Error("key must be of type String")
   }
 
-  save() {
-    if (this.savedAttribute && this.saveKey) {
-      const data = {}
-      data[this.saveKey] = JSON.parse(JSON.stringify(this[this.savedAttribute]))
-      save.store(data)
-    }
+  if (ITEMS[key]) {
+    throw new Error(`key ${key} already in use`)
   }
 
-  restore() {
-    if (this.savedAttribute && this.saveKey && save.fetch()[this.saveKey]) {
-      this[this.savedAttribute] = Object.assign(
-        this.defaults,
-        save.fetch()[this.saveKey]
-      )
-    } else {
-      this[this.savedAttribute] = this.defaults
-    }
+  // restore defaults
+  instance.stored = Object.assign(
+    {},
+    instance.defaults,
+    instance.stored,
+    SAVE.fetch()[key]
+  )
+
+  // keep track of key so we can guarantee no duplicates
+  ITEMS[key] = instance
+}
+
+// saves everything
+export function save() {
+  for (const key in ITEMS) {
+    const item = ITEMS[key]
+    const data = JSON.parse(JSON.stringify(item.stored))
+    SAVE.store({ [key]: data })
+  }
+}
+
+// clears all saved data
+export function clear() {
+  for (const key in ITEMS) {
+    delete ITEMS[key]
   }
 
-  //extend this with the key you want to save on
-  get saveKey() {
-    return ""
-  }
-
-  //extend this with the attribute that needs to be saved
-  get savedAttribute() {
-    return "stored"
-  }
-
-  //extend this with any default values you want to be set on this class when it's restored
-  get defaults() {
-    return {}
-  }
-
-  get serialized() {
-    if (this.savedAttribute) {
-      return JSON.parse(JSON.stringify(this[this.savedAttribute]))
-    } else {
-      return null
-    }
-  }
+  SAVE.clear()
 }

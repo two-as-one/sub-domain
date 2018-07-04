@@ -2,10 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Vagina extends Part {
-  get saveKey() {
-    return "player-part-vagina"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       size: 0.8, //diameter of opening

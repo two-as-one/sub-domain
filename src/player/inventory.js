@@ -1,17 +1,14 @@
 import Item from "items/item"
-import Saveable from "save/saveable"
+import { persist } from "save/saveable"
 
-export default class Inventory extends Saveable {
+export default class Inventory {
   constructor(player) {
-    super()
     this.player = player
+
+    persist(this, "player-inventory")
 
     this.equipWeapon(this.stored.weapon)
     this.equipArmor(this.stored.armor)
-  }
-
-  get saveKey() {
-    return "player-inventory"
   }
 
   //extend this with any default values you want to be set on this class when it's restored

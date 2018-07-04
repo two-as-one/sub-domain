@@ -1,6 +1,5 @@
 import Chance from "chance"
 import Grammar from "grammar/grammar"
-import Saveable from "save/saveable"
 
 const chance = new Chance()
 
@@ -12,10 +11,8 @@ const HP_SCALE = 5
  * This is the base class from which all entities must inherit from
  * refer to README.md for instructions on how to make custom entities
  */
-export default class Entity extends Saveable {
-  constructor() {
-    super()
-
+export default class Entity {
+  constructor(config = {}) {
     //name is used by specific NPC's, leave this blank if an entity has no known name
     //eg: 'Bob', 'Alice'
     this.name = ""
@@ -36,10 +33,12 @@ export default class Entity extends Saveable {
 
     //whether this entity is actually multiple people
     this.multiple = false
+
+    this.stored = Object.assign({}, this.defaults, config)
   }
 
   get defaults() {
-    return Object.assign(super.defaults, {
+    return {
       lvl: 1,
       str: 5,
       stam: 5,
@@ -48,7 +47,7 @@ export default class Entity extends Saveable {
       dex: 5,
       dmg: 0,
       lust: 0
-    })
+    }
   }
 
   // Base stats

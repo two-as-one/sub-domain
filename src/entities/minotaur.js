@@ -2,9 +2,9 @@ import Entity from "./_super"
 
 export default class Minotaur extends Entity {
   constructor() {
-    super()
-
-    this.stored.lvl = 3
+    super({
+      lvl: 3
+    })
 
     this.title = "minotaur"
     this.gender = "none" /* it/its/itself */

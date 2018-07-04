@@ -2,10 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Udder extends Part {
-  get saveKey() {
-    return "player-part-udder"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 0,

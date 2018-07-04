@@ -33,10 +33,6 @@ for (let a = 0; a <= 4; a += 1) {
 BREAST_CONFIGS.push([1, 0, 0, 0]) //make an exception for a single breast
 
 export default class Breasts extends Part {
-  get saveKey() {
-    return "player-part-breasts"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       size: 5, //in bust inches

@@ -2,10 +2,6 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Balls extends Part {
-  get saveKey() {
-    return "player-part-balls"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       size: 1, //length in inches

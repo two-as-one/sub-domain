@@ -22,10 +22,6 @@ export default class Body extends Part {
     }
   }
 
-  get saveKey() {
-    return "player-part-body"
-  }
-
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 1,

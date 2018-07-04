@@ -1,27 +1,21 @@
-import Saveable from "save/saveable"
-
-/* eslint-disable sort-imports */
 import Beach from "areas/beach"
 import Forest from "areas/forest"
-/* eslint-enable  sort-imports */
+
+import { persist } from "save/saveable"
 
 const DAWN = 8
 const DUSK = 20
 const MIDNIGHT = 24
 
-export default class World extends Saveable {
+export default class World {
   constructor(game) {
-    super()
-
     this.game = game
     this.transitioned = false //keep track of when the world transitions between day/nigh so that we can show a relevant message
 
+    persist(this, "world")
+
     this.forest = new Forest(game)
     this.beach = new Beach(game)
-  }
-
-  get saveKey() {
-    return "world"
   }
 
   get defaults() {
