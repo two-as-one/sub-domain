@@ -507,7 +507,7 @@ export default class CombatEncounter extends State {
       const dilation = this.enemy.getDiameter(this.fucking.enemy) || 0
 
       if (typeof playerPart.dilate === "function") {
-        dilationMessage = playerPart.dilate(dilation)
+        dilationMessage = playerPart.dilate(dilation) || ""
       }
     }
 

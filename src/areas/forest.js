@@ -21,7 +21,7 @@ export default class Forest extends Area {
 
     // prettier-ignore
     return `
-      ${player.who} have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
+      ${player.who}/have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
       Hardly any sunlight manages to make its way through the ominous canopy.
       Strange exotic sounds echo through the wilds, keeping you on your toes.
 
@@ -42,7 +42,7 @@ export default class Forest extends Area {
   }
 
   get campDescription() {
-    return `Your camp is set up on the inside a massive hollow tree.`
+    return `Your camp is set up on the inside of a massive hollow tree.`
   }
 
   get exploreMessage() {

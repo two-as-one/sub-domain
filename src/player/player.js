@@ -162,7 +162,7 @@ export default class Player extends Entity {
     }
 
     if (this.isHungry) {
-      return `You are **hungry** and should eat something.`
+      return `You are **hungry**.`
     }
 
     return ""

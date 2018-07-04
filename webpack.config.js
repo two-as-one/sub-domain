@@ -43,7 +43,10 @@ module.exports = function(env) {
         },
         {
           test: /\.hbs$/,
-          use: "handlebars-loader"
+          loader: "handlebars-loader",
+          options: {
+            runtime: 'handlebars/dist/handlebars.runtime.js'
+          }
         },
         {
           test: /\.pug$/,
@@ -80,7 +83,7 @@ module.exports = function(env) {
         loader: "babel-loader",
         options: {
           ignore: ["underscore", "conjugate"],
-          presets: ["env"]
+          presets: ["@babel/preset-env"]
         }
       }
     })

@@ -196,7 +196,7 @@ export default class CharacterCreation extends State {
     this.fade().then(() => {
       this.render({
         classes: "title-screen animated",
-        text: titleScreen(),
+        static: titleScreen(),
         responses: [{ state: "end" }]
       })
       this.finishTyping()

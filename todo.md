@@ -33,9 +33,23 @@ Shrines:
 - Player can choose to pray to receive a `gift`
 
 
+add: 'you continue to' to masturbate
+create sexual positions class/helper
+  * player initiate
+  * enemy initiate
+  * player continue
+  * enemy continue
+  * climax
+
 ## areas
 
 ## BUGS
  - player lust NaN
 
 ## automated testing
+
+
+## design choices
+always let player choose what kind of encounter they want fight/snusnu
+redesign intro - bring power back to the player
+add guardian of phallus that must be satisfied before shrine
