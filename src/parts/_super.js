@@ -1,4 +1,4 @@
-import Grammar from "utils/grammar"
+import Grammar from "grammar/grammar"
 import Saveable from "save/saveable"
 
 export default class Part extends Saveable {

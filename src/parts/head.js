@@ -1,4 +1,4 @@
-import Grammar from "utils/grammar"
+import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Head extends Part {

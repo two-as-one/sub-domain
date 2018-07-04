@@ -1,12 +1,15 @@
-import G from "utils/grammar"
+import G from "grammar/grammar"
+import Saveable from "save/saveable"
 import StateMachine from "javascript-state-machine"
 import TypeWriter from "cool-typewriter"
 import template from "templates/main.hbs"
 
 const typeWriter = new TypeWriter()
 
-export default class State {
+export default class State extends Saveable {
   constructor(game) {
+    super()
+
     this.game = game
     this.locked = false
 

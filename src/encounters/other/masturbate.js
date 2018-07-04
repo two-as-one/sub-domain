@@ -1,5 +1,5 @@
 import DefaultEncounter from "./../combat/_super"
-import Grammar from "utils/grammar"
+import Grammar from "grammar/grammar"
 
 /**
  * Masturbate encounter - lets the player blow off some steam

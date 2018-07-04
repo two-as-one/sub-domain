@@ -1,5 +1,5 @@
 import DefaultEncounter from "./_super"
-import G from "utils/grammar"
+import G from "grammar/grammar"
 import Minotaur from "entities/minotaur"
 
 export default class MinotaurEncounter extends DefaultEncounter {

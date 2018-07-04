@@ -1,4 +1,4 @@
-import Grammar from "utils/grammar"
+import Grammar from "grammar/grammar"
 import Perk from "./_super"
 
 export default class Impotent extends Perk {

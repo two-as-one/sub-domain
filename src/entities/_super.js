@@ -1,5 +1,5 @@
 import Chance from "chance"
-import Grammar from "utils/grammar"
+import Grammar from "grammar/grammar"
 import Saveable from "save/saveable"
 
 const chance = new Chance()

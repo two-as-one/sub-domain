@@ -1,7 +1,7 @@
 import "styles/combat.less"
 
 import Chance from "chance"
-import G from "utils/grammar"
+import G from "grammar/grammar"
 import State from "states/_super"
 import template from "templates/combat.hbs"
 const chance = new Chance()
