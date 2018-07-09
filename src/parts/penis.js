@@ -10,6 +10,14 @@ export default class Penis extends Part {
     })
   }
 
+  get functional() {
+    if (this.owner.perks && this.owner.perks.has("impotent")) {
+      return false
+    }
+
+    return true
+  }
+
   get description() {
     let text = ""
 

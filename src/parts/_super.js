@@ -110,6 +110,11 @@ export default class Part {
     return this.quantity > 0 && this.size > 0
   }
 
+  // determine whether this part is functional, perks or other conditions may affect whether a part is functional or not
+  get functional() {
+    return true
+  }
+
   //determine by how much this part grows or shrinks
   get growth() {
     return 1
