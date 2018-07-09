@@ -78,6 +78,11 @@ export default class Player extends Entity {
     }
   }
 
+  // shortcut to player.who, allows dynamic text to be written more clearly `${p.you}`
+  get you() {
+    return this.who
+  }
+
   // Saving
   //-------
 
