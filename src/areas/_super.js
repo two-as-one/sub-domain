@@ -1,4 +1,5 @@
 import Chance from "chance"
+import { abstract } from "utils/abstract"
 const chance = new Chance()
 
 /**
@@ -13,6 +14,19 @@ export default class Area {
     if (new.target === Area) {
       throw new TypeError("Cannot construct Area instances directly")
     }
+
+    abstract(
+      this,
+      "name",
+      "introMessage",
+      "exploreMessage",
+      "dayDescription",
+      "nightDescription",
+      "campDescription",
+      "sleepMessage",
+      "sunsetMessage",
+      "sunriseMessage"
+    )
 
     this.game = game
   }
