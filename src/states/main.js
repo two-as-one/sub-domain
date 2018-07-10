@@ -232,7 +232,7 @@ export default class Main extends State {
         { text: "examine body", state: "body" },
         { text: "gear", state: "gear" },
         { text: "perks", state: "perks" },
-        { text: "masturbate", state: "masturbate" },
+        { text: "masturbate", state: "masturbate", disabled: true },
         { text: "back", state: "main" }
       ]
     })

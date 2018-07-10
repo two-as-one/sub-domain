@@ -45,6 +45,7 @@ create sexual positions class/helper
 
 ## BUGS
  - player lust NaN
+ - fix masturbate encounter
 
 ## automated testing
 

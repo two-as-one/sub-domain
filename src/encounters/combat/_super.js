@@ -3,6 +3,7 @@ import "styles/combat.less"
 import Chance from "chance"
 import G from "grammar/grammar"
 import State from "states/_super"
+import { abstract } from "utils/abstract"
 import template from "templates/combat.hbs"
 const chance = new Chance()
 
@@ -15,10 +16,35 @@ export default class CombatEncounter extends State {
   constructor(game, enemy) {
     super(game)
 
+    abstract(
+      this,
+      "introMessage",
+      "mainMessage",
+      "describeEnemyMessage",
+      "playerAttackedMessage",
+      "combatLossMessage",
+      "combatVictoryMessage",
+      "climaxLossMessage",
+      "climaxVictoryMessage",
+      "infectionMessage",
+      "pullOutMessage",
+      "struggleSuccessMessage",
+      "struggleFailureMessage",
+      "seducedMessage",
+      "notInterestedMessage",
+      "grappleFailureMessage",
+      "climaxMessage"
+    )
+
     this.player = game.player
     this.enemy = enemy
 
     this.fucking = false
+    this.position = null
+
+    this.consent = false
+
+    this.positions = []
 
     this.state.intro()
   }
@@ -78,7 +104,7 @@ export default class CombatEncounter extends State {
   //encounter intro text
   intro() {
     this.render({
-      text: this.introMessage,
+      text: this.introMessage(this.player, this.enemy),
       hideStats: true,
       responses: [{ state: "main" }]
     })
@@ -97,13 +123,16 @@ export default class CombatEncounter extends State {
     const totalSub = this.player.perks.has("total sub")
 
     let actions
+    let message
     if (this.fucking) {
+      message = this.position.get("idle")
       actions = [
         { text: "keep fucking", state: "fuck" },
         { text: "change position", state: "submit", if: !totalSub },
         { text: "struggle", state: "struggle", if: !totalSub }
       ]
     } else {
+      message = this.mainMessage(this.player, this.enemy)
       actions = [
         { text: "attack", state: "attack" },
         { text: "seduce", state: "seduce" },
@@ -114,21 +143,19 @@ export default class CombatEncounter extends State {
       ]
     }
 
-    const player = this.player
-    let starvationMessage = ""
     if (this.player.isStarving) {
-      starvationMessage = `
+      message += `
 
-        **${player.who} are severely weakened due to your starvation!**`
+        **${this.player.you} are severely weakened due to your starvation!**`
     }
     if (this.player.isHungry) {
-      starvationMessage = `
+      message += `
 
-        **${player.who} are hungry and weakened.**`
+        **${this.player.you} are hungry and weakened.**`
     }
 
     this.render({
-      text: this.mainMessage + starvationMessage,
+      text: message,
       responses: actions
     })
   }
@@ -145,7 +172,9 @@ export default class CombatEncounter extends State {
     }
 
     this.render({
-      text: this.attackMessage + this.attackResultsMessage(damage + bonus),
+      text:
+        this.attackMessage(this.player, this.enemy) +
+        this.attackResultsMessage(damage + bonus),
       responses: [{ state: "enemyAction" }]
     })
   }
@@ -153,7 +182,7 @@ export default class CombatEncounter extends State {
   //examine enemy
   examine() {
     this.render({
-      text: this.describeEnemyMessage,
+      text: this.describeEnemyMessage(this.player, this.enemy),
       responses: [{ text: "back", state: "main" }]
     })
   }
@@ -211,17 +240,19 @@ export default class CombatEncounter extends State {
     })
   }
 
-  //player submit attempt results
+  // player submit attempt results
   submitResults(data) {
+    this.consent = true
+
     const totalSub = this.player.perks.has("total sub")
     let success
 
     if (totalSub) {
-      //total sub, submitting always possible but enemy chooses position
+      // total sub, submitting always possible but enemy chooses position
       success = true
       data.position = this.enemyChoosePosition()
     } else if (this.player.perks.has("subbie")) {
-      //to attempts if the player has this perk
+      // two attempts if the player has this perk
       success =
         this.enemy.submit(data.position) || this.enemy.submit(data.position)
     } else {
@@ -229,17 +260,18 @@ export default class CombatEncounter extends State {
     }
 
     if (success) {
-      this.fucking = data.position
+      this.fucking = true
+      this.position = data.position
 
       this.render({
         text: totalSub
-          ? this.enemyInitiatePositionMessage
-          : this.playerInitiatePositionMessage,
+          ? this.position.get("enemy.start")
+          : this.position.get("player.start"),
         responses: [{ state: "fuck" }]
       })
     } else {
       this.render({
-        text: this.notInterestedMessage,
+        text: this.notInterestedMessage(this.player, this.enemy),
         responses: [{ state: "enemyAction" }]
       })
     }
@@ -249,13 +281,14 @@ export default class CombatEncounter extends State {
   fuck() {
     const damage = this.player.fuck(
       this.enemy,
-      this.fucking.player,
-      this.fucking.enemy
+      this.position.focus.player,
+      this.position.focus.enemy
     )
 
     this.render({
       text:
-        this.playerContinuePositionMessage + this.seduceResultsMessage(damage),
+        this.position.get("player.continue") +
+        this.seduceResultsMessage(damage),
       responses: [{ state: "enemyAction" }]
     })
   }
@@ -266,14 +299,15 @@ export default class CombatEncounter extends State {
 
     if (success) {
       this.fucking = false
+      this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage,
+        text: this.struggleSuccessMessage(this.player, this.enemy),
         responses: [{ state: "main" }]
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage,
+        text: this.struggleFailureMessage(this.player, this.enemy),
         responses: [{ state: "enemyAction" }]
       })
     }
@@ -285,7 +319,7 @@ export default class CombatEncounter extends State {
   //enemy turn - this is essentially the enemy AI
   enemyAction(data) {
     const enemy = this.enemy
-    const wantsToFuck = enemy.wantsToFuck
+    const wantsToFuck = enemy.wantsToFuck && this.consent
 
     if (this.enemy.orgasmed || !this.enemy.alive) {
       return this.state.end()
@@ -337,7 +371,8 @@ export default class CombatEncounter extends State {
 
     this.render({
       text:
-        this.playerAttackdeMessage + this.attackedResultsMessage(damage, lust),
+        this.playerAttackedMessage(this.player, this.enemy) +
+        this.attackedResultsMessage(damage, lust),
       responses: [{ state: "main" }]
     })
   }
@@ -347,7 +382,9 @@ export default class CombatEncounter extends State {
     const damage = this.enemy.seduce(this.player)
 
     this.render({
-      text: this.seducedMessage + this.seducedResultsMessage(damage),
+      text:
+        this.seducedMessage(this.player, this.enemy) +
+        this.seducedResultsMessage(damage),
       responses: [{ state: "main" }]
     })
   }
@@ -355,7 +392,9 @@ export default class CombatEncounter extends State {
   //player is unable to resist
   unableToResist() {
     this.render({
-      text: this.player.orgasmed ? this.tooHornyMessage : this.tooWeakMessage,
+      text: this.player.orgasmed
+        ? this.tooHornyMessage(this.player)
+        : this.tooWeakMessage(this.player),
       responses: [{ state: "enemyAction" }]
     })
   }
@@ -366,15 +405,16 @@ export default class CombatEncounter extends State {
       this.enemy.grapple(this.player) && this.enemyChoosePosition()
 
     if (position) {
-      this.fucking = position
+      this.fucking = true
+      this.position = position
 
       this.render({
-        text: this.enemyInitiatePositionMessage,
+        text: this.position.get("enemy.start"),
         responses: [{ state: "enemyAction", initiated: true }]
       })
     } else {
       this.render({
-        text: this.grappleFailureMessage,
+        text: this.grappleFailureMessage(this.player, this.enemy),
         responses: [{ state: "main" }]
       })
     }
@@ -386,25 +426,27 @@ export default class CombatEncounter extends State {
     const position = this.enemyChoosePosition()
     if (
       !initiated &&
-      this.enemy.likes(position.player) > this.enemy.likes(this.fucking.player)
+      this.enemy.likes(position.focus.player) >
+        this.enemy.likes(this.position.focus.player)
     ) {
-      this.fucking = position
+      this.fucking = true
+      this.position = position
 
       this.render({
-        text: this.enemyInitiatePositionMessage,
+        text: this.position.get("enemy.start"),
         responses: [{ state: "enemyAction" }]
       })
     } else {
       const enemy = this.enemy
       const damage = enemy.fuck(
         this.player,
-        this.fucking.enemy,
-        this.fucking.player
+        this.position.focus.enemy,
+        this.position.focus.player
       )
 
       this.render({
         text:
-          this.enemyContinuePositionMessage +
+          this.position.get("enemy.continue") +
           this.seducedResultsMessage(damage),
         responses: [{ state: "main" }]
       })
@@ -420,12 +462,12 @@ export default class CombatEncounter extends State {
 
     if (success) {
       this.render({
-        text: this.fleeSuccessMessage,
+        text: this.fleeSuccessMessage(this.player, this.enemy),
         responses: [{ state: "exit" }]
       })
     } else {
       this.render({
-        text: this.fleeFailureMessage,
+        text: this.fleeFailureMessage(this.player, this.enemy),
         responses: [{ state: "enemyAction" }]
       })
     }
@@ -438,7 +480,7 @@ export default class CombatEncounter extends State {
         return this.state.climax()
       } else {
         this.render({
-          text: this.pullOutMessage,
+          text: this.pullOutMessage(this.player, this.enemy),
           responses: [
             { text: "pull out", state: "pullOut" },
             { text: "keep going", state: "climax" }
@@ -458,14 +500,15 @@ export default class CombatEncounter extends State {
 
     if (success) {
       this.fucking = false
+      this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage,
+        text: this.struggleSuccessMessage(this.player, this.enemy),
         responses: [{ state: "climax" }]
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage,
+        text: this.struggleFailureMessage(this.player, this.enemy),
         responses: [{ state: "climax" }]
       })
     }
@@ -473,8 +516,12 @@ export default class CombatEncounter extends State {
 
   //climax
   climax() {
+    const message = this.fucking
+      ? this.position.get("climax")
+      : this.climaxMessage(this.player, this.enemy)
+
     this.render({
-      text: this.climaxMessage,
+      text: message,
       responses: [{ state: "endResults" }]
     })
   }
@@ -503,8 +550,8 @@ export default class CombatEncounter extends State {
 
     //dilation
     if (this.fucking) {
-      const playerPart = this.player.getPart(this.fucking.player)
-      const dilation = this.enemy.getDiameter(this.fucking.enemy) || 0
+      const playerPart = this.player.getPart(this.position.focus.player)
+      const dilation = this.enemy.getDiameter(this.position.focus.enemy) || 0
 
       if (typeof playerPart.dilate === "function") {
         dilationMessage = playerPart.dilate(dilation) || ""
@@ -528,7 +575,7 @@ export default class CombatEncounter extends State {
 
       if (transformation) {
         infectionMessage = `
-          ${this.infectionMessage}
+          ${this.infectionMessage(this.player, this.enemy)}
 
           ${transformation}`
       }
@@ -536,13 +583,13 @@ export default class CombatEncounter extends State {
 
     //message
     if (this.player.orgasmed) {
-      resultMessage = this.climaxLossMessage
+      resultMessage = this.climaxLossMessage(this.player, this.enemy)
     } else if (this.enemy.orgasmed) {
-      resultMessage = this.climaxVictoryMessage
+      resultMessage = this.climaxVictoryMessage(this.player, this.enemy)
     } else if (!this.player.alive) {
-      resultMessage = this.combatLossMessage
+      resultMessage = this.combatLossMessage(this.player, this.enemy)
     } else {
-      resultMessage = this.combatVictoryMessage
+      resultMessage = this.combatVictoryMessage(this.player, this.enemy)
     }
 
     if (this.player.orgasmed || !this.player.alive) {
@@ -590,37 +637,22 @@ export default class CombatEncounter extends State {
   // Enemy choices
   //--------------
 
-  //available positions for this encounter - extend this
-  get positions() {
-    return [
-      //example data
-      //{name: 'anal',    player: 'anus',    enemy: 'penis'}
-    ]
+  // add a position to this encounter
+  addPosition(Position) {
+    this.positions.push(new Position(this.player, this.enemy))
   }
 
   get availablePositions() {
-    const positions = this.positions
-      .filter(
-        position =>
-          this.player.has(position.player) && this.enemy.has(position.enemy)
-      )
-      .filter(position => !position.hasOwnProperty("if") || position.if)
-      .sort((a, b) => a.name > b.name)
-
-    positions.forEach(position => {
-      if (position.player === "penis" && this.player.perks.has("impotent")) {
-        position.disabled = true
-      }
-    })
-
-    return positions
+    return this.positions.filter(position => position.available)
   }
 
   enemyChoosePosition() {
     const choices = this.availablePositions.filter(
       position => !position.disabled
     )
-    const weights = choices.map(position => this.enemy.likes(position.player))
+    const weights = choices.map(position =>
+      this.enemy.likes(position.focus.player)
+    )
 
     if (!choices.length) {
       return false
@@ -662,24 +694,17 @@ export default class CombatEncounter extends State {
       You gain **${lust} lust**`
   }
 
-  get tooHornyMessage() {
-    const player = this.game.player
-
+  tooHornyMessage(p) {
     return `
 
-      ${
-        player.who
-      } are overwhelmed with lust and unable to control your actions.`
+      ${p.you} are overwhelmed with lust and unable to control your actions.`
   }
 
-  get tooWeakMessage() {
-    const player = this.game.player
-
+  tooWeakMessage(p) {
     return `
 
-      ${player.who} have lost all strength in ${
-      player.body.your
-    } and are unable to resist.`
+      ${p.you} have lost all strength in ${p.body.your} and are unable to
+      resist.`
   }
 
   succubusMessage(hunger, health) {
@@ -692,9 +717,8 @@ export default class CombatEncounter extends State {
 
       return `
 
-        ${
-          player.who
-        } are satiated by all that semen — **${hunger} ${and} ${health} restored**.`
+        ${player.who} are satiated by all that semen — **${hunger} ${and}
+        ${health} restored**.`
     } else {
       return ""
     }
@@ -712,122 +736,86 @@ export default class CombatEncounter extends State {
     return text
   }
 
-  get attackMessage() {
-    const player = this.game.player
-    const enemy = this.enemy
-
+  attackMessage(p, e) {
     return `
 
-      ${player.who} swing ${player.weapon.name} at ${enemy.who}.`
+      ${p.you} swing ${p.weapon.name} at ${e.who}.`
   }
 
-  get fleeSuccessMessage() {
-    const player = this.game.player
-    const enemy = this.enemy
-
+  fleeSuccessMessage(p, e) {
     return `
-      ${player.who} manage to run away from ${enemy.who}!`
+      ${p.you} manage to run away from ${e.who}!`
   }
 
-  get fleeFailureMessage() {
-    const player = this.game.player
-    const enemy = this.enemy
-
+  fleeFailureMessage(p, e) {
     return `
-      ${player.who} try to flee but ${enemy.who} stops you in your tracks!`
+      ${p.you} try to flee but ${e.who} stops you in your tracks!`
   }
 
   // Messages - extend these with encounter specific messages
   //---------------------------------------------------------
 
-  // Combat messages
-  //----------------
-
-  get introMessage() {
+  introMessage(p, e) {
     return ""
   }
 
-  get describeEnemyMessage() {
+  mainMessage(p, e) {
     return ""
   }
 
-  get mainMessage() {
+  describeEnemyMessage(p, e) {
     return ""
   }
 
-  get playerAttackdeMessage() {
+  playerAttackedMessage(p, e) {
     return ""
   }
 
-  get combatLossMessage() {
+  combatLossMessage(p, e) {
     return ""
   }
 
-  get combatVictoryMessage() {
+  combatVictoryMessage(p, e) {
     return ""
   }
 
-  get climaxLossMessage() {
+  climaxLossMessage(p, e) {
     return ""
   }
 
-  get climaxVictoryMessage() {
+  climaxVictoryMessage(p, e) {
     return ""
   }
 
-  get infectionMessage() {
+  infectionMessage(p, e) {
     return ""
   }
 
-  get pullOutMessage() {
+  pullOutMessage(p, e) {
     return ""
   }
 
-  get struggleSuccessMessage() {
+  struggleSuccessMessage(p, e) {
     return ""
   }
 
-  get struggleFailureMessage() {
+  struggleFailureMessage(p, e) {
     return ""
   }
 
-  // Seduction messages
-  //-----------------
-
-  get seducedMessage() {
+  seducedMessage(p, e) {
     return ""
   }
 
-  get notInterestedMessage() {
+  notInterestedMessage(p, e) {
     return ""
   }
 
-  get grappleFailureMessage() {
+  grappleFailureMessage(p, e) {
     return ""
   }
 
-  // Fucking messages
-  //-----------------
-
-  //These need to be able to return a message for each available position
-
-  get playerInitiatePositionMessage() {
-    return ""
-  }
-
-  get enemyInitiatePositionMessage() {
-    return ""
-  }
-
-  get playerContinuePositionMessage() {
-    return ""
-  }
-
-  get enemyContinuePositionMessage() {
-    return ""
-  }
-
-  get climaxMessage() {
+  climaxMessage(p, e) {
     return ""
   }
 
@@ -836,61 +824,72 @@ export default class CombatEncounter extends State {
 
   /** output all static text strings */
   get debugStatic() {
+    const p = this.player
+    const e = this.enemy
     return G.trim(`
       ${G.clean(this.attackResultsMessage(10))}
       ${G.clean(this.attackedResultsMessage(10))}
       ${G.clean(this.attackedResultsMessage(10, 10))}
       ${G.clean(this.seduceResultsMessage(10))}
-      ${G.clean(this.tooHornyMessage)}
-      ${G.clean(this.tooWeakMessage)}
+      ${G.clean(this.seducedResultsMessage(10))}
+      ${G.clean(this.tooHornyMessage(p, e))}
+      ${G.clean(this.tooWeakMessage(p, e))}
       ${G.clean(this.succubusMessage(10, 10))}
       ${G.clean(this.gainMessage(10))}
       ${G.clean(this.gainMessage(10, { name: "Dummy" }))}
-      ${G.clean(this.attackMessage)}
-      ${G.clean(this.fleeSuccessMessage)}
-      ${G.clean(this.fleeFailureMessage)}
-      ${G.clean(this.introMessage)}
-      ${G.clean(this.describeEnemyMessage)}
-      ${G.clean(this.playerAttackdeMessage)}
-      ${G.clean(this.combatLossMessage)}
-      ${G.clean(this.combatVictoryMessage)}
-      ${G.clean(this.climaxLossMessage)}
-      ${G.clean(this.climaxVictoryMessage)}
-      ${G.clean(this.seducedMessage)}
-      ${G.clean(this.notInterestedMessage)}
-      ${G.clean(this.grappleFailureMessage)}
-      ${G.clean(this.infectionMessage)}
-      ${G.clean(this.pullOutMessage)}
-      ${G.clean(this.struggleSuccessMessage)}
-      ${G.clean(this.struggleFailureMessage)}
+      ${G.clean(this.attackMessage(p, e))}
+      ${G.clean(this.fleeSuccessMessage(p, e))}
+      ${G.clean(this.fleeFailureMessage(p, e))}
+    `)
+  }
+
+  get debugExtended() {
+    const p = this.player
+    const e = this.enemy
+    return G.trim(`
+      ${G.clean(this.introMessage(p, e))}
+      ${G.clean(this.mainMessage(p, e))}
+      ${G.clean(this.describeEnemyMessage(p, e))}
+      ${G.clean(this.playerAttackedMessage(p, e))}
+      ${G.clean(this.combatLossMessage(p, e))}
+      ${G.clean(this.combatVictoryMessage(e, p))}
+      ${G.clean(this.climaxLossMessage(p, e))}
+      ${G.clean(this.climaxVictoryMessage(p, e))}
+      ${G.clean(this.infectionMessage(p, e))}
+      ${G.clean(this.seducedMessage(p, e))}
+      ${G.clean(this.pullOutMessage(p, e))}
+      ${G.clean(this.struggleSuccessMessage(p, e))}
+      ${G.clean(this.struggleFailureMessage(p, e))}
+      ${G.clean(this.grappleFailureMessage(p, e))}
+      ${G.clean(this.notInterestedMessage(p, e))}
+      ${G.clean(this.climaxMessage(p, e))}
     `)
   }
 
   /** output dynamic strings */
+  // TODO - work with new position system
   get debugDynamic() {
-    const fucking = this.fucking
-    const text = this.positions
-      .map(position => {
-        this.fucking = position
-
-        return `
-        ## ${position.name} ##
-        ${G.clean(this.playerInitiatePositionMessage)}
-        ${G.clean(this.enemyInitiatePositionMessage)}
-        ${G.clean(this.playerContinuePositionMessage)}
-        ${G.clean(this.enemyContinuePositionMessage)}
-        ${G.clean(this.climaxMessage)}
+    return G.trim(
+      this.positions
+        .map(
+          p => `
+        ## ${p.name} ##
+        ${G.clean(p.get("idle"))}
+        ${G.clean(p.get("player.start"))}
+        ${G.clean(p.get("enemy.start"))}
+        ${G.clean(p.get("player.continue"))}
+        ${G.clean(p.get("enemy.continue"))}
+        ${G.clean(p.get("climax"))}
       `
-      })
-      .join("")
-
-    this.fucking = fucking
-    return G.trim(text)
+        )
+        .join("")
+    )
   }
 
   get debug() {
     return G.trim(`
       ${this.debugStatic}
+      ${this.debugExtended}
       ${this.debugDynamic}
     `)
   }
