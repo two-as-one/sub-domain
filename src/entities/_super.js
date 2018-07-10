@@ -251,7 +251,10 @@ export default class Entity {
     return 0.2
   }
 
-  /** true if the entity intends to fuck */
+  /**
+   * true if the entity intends to fuck
+   * @random
+   */
   get wantsToFuck() {
     return Math.random() < this.lustNormalized
   }
@@ -331,14 +334,15 @@ export default class Entity {
   submit(position) {
     return (
       this.lustNormalized *
-        this.likes(position.player) *
-        this.sensitivity(position.enemy) >
+        this.likes(position.focus.player) *
+        this.sensitivity(position.focus.enemy) >
       0.2
     )
   }
 
   /**
    * Grapple a target
+   * @random
    * @param  {Entity} target   - The entity to grapple
    * @return {Boolean}         true if the grapple was successful
    */
@@ -350,29 +354,32 @@ export default class Entity {
 
     return (
       Math.random() <
-      this.pinAttackPower / (this.pinAttackPower + target.pinDefence)
+      Entity.skillChallenge(this.pinAttackPower, target.pinDefence)
     )
   }
 
   /**
    * Struggle out of a grapple
+   * @random
    * @param  {Entity} target   - The entity to struggle against
    * @return {Boolean}         true if the struggle was successful
    */
   struggle(target) {
     return (
-      Math.random() <
-      this.pinDefence / (this.pinAttackPower + target.pinDefence)
+      Math.random() < Entity.skillChallenge(this.pinDefence, target.pinDefence)
     )
   }
 
   /**
    * attempt to flee from a target
+   * @random
    * @param  {Entity} target   - The entity to flee from
    * @return {Boolean}         true if fleeing was successful
    */
   flee(target) {
-    return Math.random() < this.dexterity / (this.dexterity + target.dexterity)
+    return (
+      Math.random() < Entity.skillChallenge(this.dexterity, target.dexterity)
+    )
   }
 
   /**
@@ -503,6 +510,16 @@ export default class Entity {
     return Math.random() * (variance * 2) + (1 - variance)
   }
 
+  /**
+   * Formula for comparing skills
+   * @param  {Number} a - The value of the skill from entity a
+   * @param  {Number} b - The value of the skill from entity a
+   * @return {Number} a number between 0 and 1, will be 0.5 if a and b are equal
+   */
+  static skillChallenge(a, b) {
+    return a / (a + b)
+  }
+
   // Capability flags
   //-----------------
 
@@ -512,7 +529,3 @@ export default class Entity {
 }
 
 Grammar.mix(Entity)
-
-if (process.env.dev) {
-  window.Entity = Entity
-}
