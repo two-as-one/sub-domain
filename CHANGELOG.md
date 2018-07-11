@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - plenty of under the hood improvements
+- Changed Masturbate encounter
+  - added more copy to each position
+  - temporarily disabled `jerk off` `milk tits` and `finger pussy` as copy needs to be written
 
 ### Removed
 - Removed `frotting` position from `minotaur` encounter
