@@ -34,12 +34,6 @@ Shrines:
 
 
 add: 'you continue to' to masturbate
-create sexual positions class/helper
-  * player initiate
-  * enemy initiate
-  * player continue
-  * enemy continue
-  * climax
 
 ## areas
 
@@ -51,6 +45,5 @@ create sexual positions class/helper
 
 
 ## design choices
-always let player choose what kind of encounter they want fight/snusnu
 redesign intro - bring power back to the player
 add guardian of phallus that must be satisfied before shrine
