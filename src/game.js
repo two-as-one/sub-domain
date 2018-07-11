@@ -189,8 +189,8 @@ export default class Game {
    */
   get ENCOUNTERS() {
     return {
-      minotaur: require("encounters/combat/minotaur").default,
-      "phallic shrine": require("encounters/dialogue/phallic-shrine").default
+      minotaur: require("encounters/combat/minotaur").default
+      //"phallic shrine": require("encounters/dialogue/phallic-shrine").default
     }
   }
 }
