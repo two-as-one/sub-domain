@@ -1,5 +1,4 @@
-## SUB DOMAIN: a spunky story
-
+## SUB DOMAIN: a spunky story [![Build Status](https://travis-ci.org/two-as-one/sub-domain.svg?branch=master)](https://travis-ci.org/two-as-one/sub-domain)
 
 ### For players
 ##### Online
