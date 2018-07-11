@@ -21,7 +21,6 @@ Everything is bundled into this html file so you can play it while offline.
 1. `eslint`
 2. `prettier`
 
-
 ##### versioning
 This app uses [semantic versioning](http://semver.org/).
 The savegame is the public API, this means that if a change is made that would break saved data, the major or minor version must be incremented. Otherwise new versions can be released as patches.

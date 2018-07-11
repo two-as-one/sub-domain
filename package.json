@@ -4,6 +4,7 @@
   "description": "SUB DOMAIN: a spunky story - an adult themed text adventure",
   "main": "app.js",
   "scripts": {
+    "version": "npm run build && git add -A dist",
     "start": "node ./bin/www",
     "build": "webpack --env.dist",
     "dev": "webpack-dev-server --content-base dist/ --port 3000 --open",
