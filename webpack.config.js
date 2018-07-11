@@ -79,16 +79,21 @@ module.exports = function(env) {
     //add babel translate to dist
     config.module.rules.push({
       test: /\.js$/,
+      include: [
+        path.resolve(__dirname, 'src'),
+        path.resolve(__dirname, 'node_modules/contractions'),
+        path.resolve(__dirname, 'node_modules/cool-typewriter'),
+        path.resolve(__dirname, 'node_modules/rpg-dialogue')
+      ],
       use: {
         loader: "babel-loader",
         options: {
-          ignore: ["underscore", "conjugate"],
           presets: ["@babel/preset-env"]
         }
       }
     })
 
-    //minify scripts in dist
+    // minify scripts in dist
     config.plugins.unshift(
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
