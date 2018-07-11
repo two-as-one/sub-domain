@@ -6,7 +6,7 @@
 Visit the [live version](https://sub-domain.herokuapp.com/)
 
 ##### Download
-Download the distributable `/dist/sub-domain.html` and open it in your browser.
+Download the distributable `/dist/index.html` and open it in your browser.
 Everything is bundled into this html file so you can play it while offline.
 
 

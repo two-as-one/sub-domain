@@ -2,6 +2,7 @@
 
 var path = require("path")
 var HtmlWebpackPlugin = require("html-webpack-plugin")
+var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 var webpack = require("webpack")
 
 module.exports = function(env) {
@@ -71,7 +72,12 @@ module.exports = function(env) {
       new webpack.DefinePlugin({
         VERSION: JSON.stringify(require("./package.json").version),
         "process.env": env
-      })
+      }),
+      new HtmlWebpackPlugin({
+        inlineSource: '.js$',
+        template: "./src/templates/layout.pug"
+      }),
+      new HtmlWebpackInlineSourcePlugin()
     ]
   }
 
@@ -99,29 +105,11 @@ module.exports = function(env) {
         compress: { warnings: false }
       })
     )
-
-    // dist index file
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        filename: "sub-domain.html",
-        inject: false,
-        cache: false,
-        template: "./src/templates/layout-dist.pug"
-      })
-    )
   } else {
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
-
-    // dev index file
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        filename: "index.html",
-        inject: false,
-        cache: false,
-        template: "./src/templates/layout-dev.pug"
-      })
-    )
   }
+
+  config.plugins.push()
 
   return config
 }
