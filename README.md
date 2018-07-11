@@ -21,9 +21,6 @@ Everything is bundled into this html file so you can play it while offline.
 #### commit hooks
 1. `eslint`
 2. `prettier`
-3. `build`
-
-You should stash your unstaged files before making a commit because otherwise those changes will be part of the build.
 
 
 ##### versioning

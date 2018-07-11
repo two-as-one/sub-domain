@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node ./bin/www",
     "build": "webpack --env.dist",
-    "build:add": "git add dist/sub-domain.html",
     "dev": "webpack-dev-server --content-base dist/ --port 3000 --open",
     "lint-staged": "lint-staged"
   },
@@ -60,8 +59,6 @@
     ]
   },
   "pre-commit": [
-    "lint-staged",
-    "build",
-    "build:add"
+    "lint-staged"
   ]
 }
