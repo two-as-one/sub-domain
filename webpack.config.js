@@ -100,7 +100,7 @@ module.exports = function(env) {
       })
     )
 
-    //dist index file
+    // dist index file
     config.plugins.push(
       new HtmlWebpackPlugin({
         filename: "sub-domain.html",
@@ -112,7 +112,7 @@ module.exports = function(env) {
   } else {
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
-    //dev index file
+    // dev index file
     config.plugins.push(
       new HtmlWebpackPlugin({
         filename: "index.html",
