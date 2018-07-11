@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.8]
+### Fixed
+- Fixed 404 when hosted on heroku
+
 ## [0.4.7]
 ### Added
 - Added travel time between areas based on their coordinates on the map
