@@ -18,6 +18,13 @@ Everything is bundled into this html file so you can play it while offline.
 
 `/src` contains all the source code for the game. Each folder should have its own README.md file with additional documentation
 
+#### commit hooks
+1. `eslint`
+2. `prettier`
+3. `build`
+
+You should stash your unstaged files before making a commit because otherwise those changes will be part of the build.
+
 
 ##### versioning
 This app uses [semantic versioning](http://semver.org/).
