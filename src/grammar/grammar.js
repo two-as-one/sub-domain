@@ -221,14 +221,17 @@ export default class Grammar {
 
     /** conjugate a verb for this entity */
     SuperClass.prototype.verb = function(verb, full) {
-      return Grammar.conjugate(this.they, verb, full)
+      return Grammar.verb(this.they, verb, full)
     }
   }
 
   /** conjugates a verb based on noun/pronoun */
   static verb(who, verb, full = true) {
+    who = who.trim()
+
     if (!Grammar.isPronoun(who)) {
-      let out = conjugate("he", verb)
+      const pronoun = pluralize.isPlural(who) ? "they" : "he"
+      let out = conjugate(pronoun, verb)
       if (full) {
         out = `${who} ${out}`
       }
@@ -236,9 +239,6 @@ export default class Grammar {
     }
 
     return conjugate(who, verb, full)
-  }
-  static conjugate(who, verb, full) {
-    return Grammar.verb(who, verb, full)
   }
 
   /** check whether a word is a pronoun */
@@ -295,17 +295,6 @@ export default class Grammar {
     return chance.pickone(list)
   }
 
-  /**
-   * outputs a word some of the time
-   * @param  {String} text - the word to condition
-   * @param  {Number} [chance] - the chance that the word to be outputted
-   * example:
-   *   `Your ${Grammar.maybe('mighty')} fists`
-   */
-  static maybe(text = "", chance = 0.5) {
-    return Math.random() > chance ? text : ""
-  }
-
   /** converts cm into feet and inches as a string */
   static toFt(cm = 0) {
     const realFeet = cm * 0.3937 / 12
@@ -342,6 +331,11 @@ export default class Grammar {
     return text.replace(/"(.*?)"/g, (match, inner) => `<q>${inner}</q>`)
   }
 
+  /** removes `undefined` */
+  static unundefined(text = "") {
+    return text.replace("undefined", "")
+  }
+
   /**
    * contracts words such as `does not` into `doesn't`
    * if you want to specifically prevent a word to be contracted, you can separate them with a /
@@ -367,6 +361,55 @@ export default class Grammar {
   }
 
   /**
+   * Leaves out words a percentage of time
+   * Gives a percentage chance for a word to appear
+   * examples:
+   *    "You 50%silly sod" -> 50% chance of "You sod" or "You silly sod"
+   */
+  static maybe(text = "") {
+    return text.replace(/(\w*)%(\w*)/g, (match, chance, word) => {
+      chance = Number(chance)
+      if (Number.isNaN(chance)) {
+        return match
+      }
+
+      chance /= 100
+
+      return Math.random() < chance ? word : ""
+    })
+  }
+
+  /**
+   * conjugates all verbs in a blob of text
+   * mark the subject by trailing it with a `~`
+   * mark the verb by prepending it with `>`
+   * When conjugating a simple subject and verb` you can just use `subject~>verb`
+   * A single subject can conjugate multiple verbs
+   * examples:
+   *     "he~>walk"                        -> "he walks"
+   *     "they~>walk"                      -> "they walk"
+   *     "the minotaur~ viscously >slam"   -> "the minotaur viscously slams"
+   *     "the minotaurs~ viscously >slam"  -> "the minotaurs viscously slam"
+   */
+  static conjugate(text = "") {
+    let subject
+    return text
+      .replace(/>(\w*)/g, (match, verb, i, string) => {
+        string = string.slice(0, i).match(/\w*~/g)
+        if (string) {
+          subject = string.pop().replace(/~$/, "")
+        }
+
+        if (subject) {
+          return Grammar.verb(subject, verb, false)
+        } else {
+          return verb
+        }
+      })
+      .replace(/(\w*)~/g, (match, subject) => subject + " ")
+  }
+
+  /**
    * grammatically cleans up text and wraps it in paragraphs
    * use a double new line to introduce a new paragraph
    * @param  {String} text - the text to clean up
@@ -376,7 +419,10 @@ export default class Grammar {
     text = text.split(/\n\n|\r\r/)
     text = text
       .map(text => Grammar.collapse(text))
+      .map(text => Grammar.unundefined(text))
       .filter(text => text)
+      .map(text => Grammar.conjugate(text))
+      .map(text => Grammar.maybe(text))
       .map(text => Grammar.trim(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))

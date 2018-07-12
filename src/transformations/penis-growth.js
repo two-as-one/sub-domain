@@ -19,8 +19,7 @@ export default class PenisGrowth extends Transformation {
     penis.arouse(10)
 
     return `
-      ${penis.all} ${penis.verb("throb", false)} as ${penis.verb(
-      "grow"
-    )} thicker and longer — **${penis.verb("have")} grown!**`
+      ${penis.all}~>throb as ${penis.they}~>grow thicker and longer —
+      **${penis.all}~>have grown!**`
   }
 }

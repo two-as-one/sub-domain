@@ -143,9 +143,7 @@ export default class Part {
   }
 
   get your() {
-    return `${this.owner.their} ${Grammar.maybe(this.adjective)} ${
-      this.pluralized
-    }`
+    return `${this.owner.their} 50%${this.adjective} ${this.pluralized}`
   }
 
   get all() {
@@ -154,15 +152,14 @@ export default class Part {
     } else if (this.quantity === 2) {
       return `both of ${this.your}`
     } else {
-      return `all ${Grammar.maybe(this.number)} of ${this.your}`
+      return `all 50%${this.number} of ${this.your}`
     }
   }
 
   get one() {
     if (this.quantity > 1) {
-      return `one of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-        this.adjective
-      )} ${this.pluralized}`
+      return `
+        one of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -170,9 +167,8 @@ export default class Part {
 
   get two() {
     if (this.quantity > 2) {
-      return `two of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-        this.adjective
-      )} ${this.pluralized}`
+      return `
+        two of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -180,9 +176,8 @@ export default class Part {
 
   get three() {
     if (this.quantity > 3) {
-      return `three of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-        this.adjective
-      )} ${this.pluralized}`
+      return `
+        three of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
     } else {
       return this.all
     }
@@ -190,9 +185,8 @@ export default class Part {
 
   get four() {
     if (this.quantity > 4) {
-      return `four of your ${Grammar.maybe(this.number)} ${Grammar.maybe(
-        this.adjective
-      )} ${this.pluralized}`
+      return `
+        four of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
     } else {
       return this.all
     }

@@ -1,5 +1,4 @@
 import DefaultEncounter from "./_super"
-import G from "grammar/grammar"
 import Minotaur from "entities/minotaur"
 import { Position } from "../position"
 
@@ -12,26 +11,22 @@ class Anal extends Position {
 
   idle(p, e) {
     return `
-      ${G.verb(e.who, "have")} ${e.their} cock lodged deep inside
-      ${p.anus.one}.`
+      ${e.who}~>have ${e.their} cock lodged deep inside ${p.anus.one}.`
   }
 
   playerStart(p, e) {
     return `
       ${p.you} turn your back towards ${e.who}, shaking your ass a few times
-      before bending over. On all fours and with your ass pointing up,
-      ${p.you} look back over your shoulders at ${e.who}.
-      ${G.verb(e.they, "snort")}, unable to resist and with one hand on
-      ${e.their} cock and the other on your ass ${e.they} brutally
-      ${G.verb(e.they, "ram", false)} ${e.their} bovine cock deep into
-      ${p.anus.one}.`
+      before bending over. On all fours and with your ass pointing up, ${p.you}
+      look back over your shoulders at ${e.who}. ${e.they}~>snort, unable to
+      resist and with one hand on ${e.their} cock and the other on your ass
+      ${e.they}~ brutally >ram ${e.their} bovine cock deep into ${p.anus.one}.`
   }
 
   enemyStart(p, e) {
     return `
-      ${G.verb(e.who, "grab")} you by your wrist then
-      ${G.verb(e.who, "pin", false)} ${p.you} face first down against the
-      ground. Snorting hungrily like a bull, ${G.verb(e.they, "look")} down at
+      ${e.who}~>grab you by your wrist then >pin ${p.you} face first down
+      against the ground. Snorting hungrily like a bull, ${e.they}~>look down at
       your ass before brutally ramming ${e.their} cock into ${p.anus.one}.`
   }
 
@@ -42,21 +37,20 @@ class Anal extends Position {
   }
 
   enemyContinue(p, e) {
-    return `${G.verb(e.who, "continue")} to ravage your ass.`
+    return `${e.who}~>continue to ravage your ass.`
   }
 
   climax(p, e) {
     return `
-      ${G.verb(e.who, "roar")} out loudly as ${G.verb(e.they, "be")} close to
-      orgasm. With both hands around your waist ${e.they} furiously
-      ${G.verb(e.they, "ravage", false)} your ass until ${e.they} finally
-      ${G.verb(e.they, "explode", false)} into it. Thick bovine cum slathering
+      ${e.who}~>roar out loudly as ${e.they}~>be close to orgasm. With both
+      hands around your waist ${e.they} furiously ${e.they}~>ravage your ass
+      until ${e.they} finally >explode into it. Thick bovine cum slathering
       your insides and dribbling out of ${p.anus.all}. Overwhelmed with
-      satisfaction, ${G.verb(e.who, "fall")} down on ${e.their} back — pulling
-      ${p.who} down with ${e.them}, impaling you on ${e.their} shaft. As the
-      beast recovers from its ordeal, ${p.who} slowly and carefully get up.
-      Feeling that massive cock sliding out of your abused hole while beads of
-      cum trickle down your thighs.`
+      satisfaction, ${e.who}~>fall down on ${e.their} back — pulling ${p.who}
+      down with ${e.them}, impaling you on ${e.their} shaft. As the beast
+      recovers from its ordeal, ${p.who} slowly and carefully get up. Feeling
+      that massive cock sliding out of your abused hole while beads of cum
+      trickle down your thighs.`
   }
 }
 
@@ -76,17 +70,15 @@ class Vaginal extends Position {
       ${p.you} turn your back towards ${e.who}, shaking your ass a few times
       before bending over. On all fours and with your ass pointing up, ${p.you}
       look back at ${e.who} from between your legs. Without any hesitation,
-      ${G.verb(e.who, "grab")} you by your hips and
-      ${G.verb(e.they, "ram", false)} ${e.their} monstrous cock into
+      ${e.who}~>grab you by your hips and >ram ${e.their} monstrous cock into
       ${p.vagina.one}.`
   }
 
   enemyStart(p, e) {
     return `
-      ${e.whose} mighty hands grab ${p.you} by the waist as
-      ${G.verb(e.they, "force")} you to turn around and bend over. Grunting as
-      ${G.verb(e.they, "look")} down at ${p.vagina.all} and then
-      ${G.verb(e.they, "ram", false)} ${e.their} brutish cock into
+      ${e.whose} mighty hands grab ${p.you} by the waist as ${e.they}~>force you
+      to turn around and bend over. Grunting as ${e.they}~>look down at
+      ${p.vagina.all} and then >ram ${e.their} brutish cock into
       ${p.vagina.multiple ? "one of them" : "it"}.`
   }
 
@@ -95,20 +87,20 @@ class Vaginal extends Position {
   }
 
   enemyContinue(p, e) {
-    return `${G.verb(e.who, "pound")} vigorously at ${p.vagina.one}.`
+    return `${e.who}~>pound vigorously at ${p.vagina.one}.`
   }
 
   climax(p, e) {
     return `
-      ${G.verb(e.who, "pick")} up the pace, ${e.their} monstrous cock sliding
-      in and out of ${p.vagina.one}. ${p.you} greedily squeeze down on it,
-      moaning with pleasure. It doesn't take long for the monster to roar out
-      and unload into ${p.vagina.one}. Hot bovine spunk building up inside of
-      ${p.you} and finally spurting out under its own pressure — dripping down
-      your inner thighs. Snorting one last time and filled with satisfaction —
-      ${G.verb(e.who, "fall")} asleep, pinning ${p.you} under ${e.their} weight.
-      With some effort ${p.you} manage to dislodge the cock while wriggling out
-      from under the sleeping beast.`
+      ${e.who}~>pick up the pace, ${e.their} monstrous cock sliding in and out
+      of ${p.vagina.one}. ${p.you} greedily squeeze down on it, moaning with
+      pleasure. It doesn't take long for the monster to roar out and unload into
+      ${p.vagina.one}. Hot bovine spunk building up inside of ${p.you} and
+      finally spurting out under its own pressure — dripping down your inner
+      thighs. Snorting one last time and filled with satisfaction —
+      ${e.who}~>fall asleep, pinning ${p.you} under ${e.their} weight. With some
+      effort ${p.you} manage to dislodge the cock while wriggling out from under
+      the sleeping beast.`
   }
 }
 
@@ -133,10 +125,10 @@ class Blowjob extends Position {
 
   enemyStart(p, e) {
     return `
-      ${G.verb(e.who, "punch")} ${p.you} in the gut. As soon as ${p.mouth.one}
-      opens to cry out in pain, ${G.verb(e.they, "shove")} ${e.their} massive
-      cock through your lips. The thick bovine shaft drilling into
-      ${p.mouth.one} and forcing itself down your throat.`
+      ${e.who}~>punch ${p.you} in the gut. As soon as ${p.mouth.one} opens to
+      cry out in pain, ${e.they}~>shove ${e.their} massive cock through your
+      lips. The thick bovine shaft drilling into ${p.mouth.one} and forcing
+      itself down your throat.`
   }
 
   playerContinue(p, e) {
@@ -147,21 +139,20 @@ class Blowjob extends Position {
 
   enemyContinue(p, e) {
     return `
-      ${G.verb(e.who, "keep")} fucking your face. ${e.their} hand on the back of
-      your head, preventing you from escaping.`
+      ${e.who}~>keep fucking your face. ${e.their} hand on the back of your
+      head, preventing you from escaping.`
   }
 
   climax(p, e) {
     return `
-      ${G.verb(e.who, "place")} ${e.their} hand against the back of your head,
-      then ${G.verb(e.who, "thrust", false)} vigorously — ${e.their} thick shaft
-      sliding all the way down your throat, making it bulge visibly.
-      ${G.verb(e.they, "keep")} pounding away at your face, tears rolling down
-      your cheeks. ${p.you} almost faint, but luckily the brute reaches
-      ${e.their} orgasm first. Thick salty cum filling your insides — rushing
-      down your throat and spurting through your nose. ${e.whose} grip weakening
-      — you pull back quickly, feeling that monster cock sliding out of your
-      throat before being able to gasp for air.`
+      ${e.who}~>place ${e.their} hand against the back of your head, then
+      >thrust vigorously — ${e.their} thick shaft sliding all the way down your
+      throat, making it bulge visibly. ${e.they}~>keep pounding away at your
+      face, tears rolling down your cheeks. ${p.you} almost faint, but luckily
+      the brute reaches ${e.their} orgasm first. Thick salty cum filling your
+      insides — rushing down your throat and spurting through your nose.
+      ${e.whose} grip weakening — you pull back quickly, feeling that monster
+      cock sliding out of your throat before being able to gasp for air.`
   }
 }
 
@@ -181,16 +172,15 @@ class Boobjob extends Position {
   playerStart(p, e) {
     return `
       ${p.you} get down on your knees in front of ${e.who}. Cupping
-      ${p.breasts.two} and kneading them playfully. ${G.verb(e.who, "take")} you
-      up on the offer and ${G.verb(e.they, "jam", false)} ${e.their} throbbing
-      cock in between ${p.breasts.all}.`
+      ${p.breasts.two} and kneading them playfully. ${e.who}~>take you up on the
+      offer and >jam ${e.their} throbbing cock in between ${p.breasts.all}.`
   }
 
   enemyStart(p, e) {
     return `
-      ${G.verb(e.who, "overpower")} ${p.you} and ${G.verb(e.who, "pin", false)}
-      you to the floor under ${e.their} weight. ${G.verb(e.they, "sit")} down on
-      top of ${p.you} with ${e.their} cock throbbing between ${p.breasts.all}.`
+      ${e.who}~>overpower ${p.you} and >pin you to the floor under ${e.their}
+      weight. ${e.they}~>sit down on top of ${p.you} with ${e.their} cock
+      throbbing between ${p.breasts.all}.`
   }
 
   playerContinue(p, e) {
@@ -198,17 +188,16 @@ class Boobjob extends Position {
   }
 
   enemyContinue(p, e) {
-    return `${G.verb(e.who, "continue")} to fuck your cleavage.`
+    return `${e.who}~>continue to fuck your cleavage.`
   }
 
   climax(p, e) {
     return `
-      ${G.verb(e.who, "groan")} and ${G.verb(e.who, "growl", false)} with
-      ${e.their} monstrous cock throbbing between ${p.breasts.all}.
-      ${G.verb(e.they, "fuck")} your cleavage over and over like a wild beast.
-      ${p.you} even start to feel sore but you can't help but moan out with joy
-      — triggering ${e.whose} climax. Thick bovine spunk spraying all over
-      ${p.face.all}.`
+      ${e.who}~>groan and >growl with ${e.their} monstrous cock throbbing
+      between ${p.breasts.all}. ${e.they}~>fuck your cleavage over and over like
+      a wild beast. ${p.you} even start to feel sore but you can't help but moan
+      out with joy — triggering ${e.whose} climax. Thick bovine spunk spraying
+      all over ${p.face.all}.`
   }
 }
 
@@ -256,51 +245,48 @@ export default class MinotaurEncounter extends DefaultEncounter {
   }
 
   playerAttackedMessage(p, e) {
-    return `${G.verb(e.who, "swing")} ${e.their} massive axe at ${p.you}.`
+    return `${e.who}~>swing ${e.their} massive axe at ${p.you}.`
   }
 
   combatLossMessage(p, e) {
     return `
-      ${G.verb(e.who, "roar")} victoriously, swinging ${e.their} axe in the air
-      a few times before walking away. Leaving your —almost lifeless— body
-      behind.`
+      ${e.who}~>roar victoriously, swinging ${e.their} axe in the air a few
+      times before walking away. Leaving your —almost lifeless— body behind.`
   }
 
   combatVictoryMessage(p, e) {
-    return `${G.verb(e.who, "succumb")} to ${e.their} wounds.`
+    return `${e.who}~>succumb to ${e.their} wounds.`
   }
 
   climaxLossMessage(p, e) {
     return `
-      Satisfied from the fucking, ${G.verb(e.who, "leave")} ${e.their} bitch
-      —${p.you}— behind as ${G.verb(e.they, "shuffle")} back into the
-      wilderness.`
+      Satisfied from the fucking, ${e.who}~>leave ${e.their} bitch —${p.you}—
+      behind as ${e.they}~>shuffle back into the wilderness.`
   }
 
   climaxVictoryMessage(p, e) {
     return `
-      ${p.you} sneak off as ${G.verb(e.who, "have")} become docile from
-      ${e.their} recent orgasm.`
+      ${p.you} sneak off as ${e.who}~>have become docile from ${e.their} recent
+      orgasm.`
   }
 
   seducedMessage(p, e) {
     return `
-      ${G.verb(e.who, "stroke")} ${e.their} massive bovine cock — Pre-cum
-      dribbling down from ${e.their} tip and filling the air with overpowering
-      musk.`
+      ${e.who}~>stroke ${e.their} massive bovine cock — Pre-cum dribbling down
+      from ${e.their} tip and filling the air with overpowering musk.`
   }
 
   // TODO add gradations of disinterest ?
   notInterestedMessage(p, e) {
     return `
-      ${G.verb(e.who, "slap")} ${p.you} in the face as you try to approach
-      ${e.them} — clearly not impressed by what you're offering.`
+      ${e.who}~>slap ${p.you} in the face as you try to approach ${e.them} —
+      clearly not impressed by what you're offering.`
   }
 
   grappleFailureMessage(p, e) {
     return `
-      ${G.verb(e.who, "be")} horny as fuck and ${G.verb(e.who, "try", false)}
-      to pin ${p.you} down, but you manage to dodge ${e.their} assault.`
+      ${e.who}~>be horny as fuck and >try to pin ${p.you} down, but you manage
+      to dodge ${e.their} assault.`
   }
 
   infectionMessage(p, e) {
@@ -313,21 +299,20 @@ export default class MinotaurEncounter extends DefaultEncounter {
 
   struggleFailureMessage(p, e) {
     return `
-      ${p.you} attempt to struggle free but ${G.verb(e.who, "keep")} you firmly
-      pinned down.`
+      ${p.you} attempt to struggle free but ${e.who}~>keep you firmly pinned
+      down.`
   }
 
   pullOutMessage(p, e) {
     return `
-      ${G.verb(e.who, "be")} about to climax — pull out at the last moment?`
+      ${e.who}~>be about to climax — pull out at the last moment?`
   }
 
   climaxMessage(p, e) {
     return `
-      ${G.verb(e.who, "roar")} out with both hands around ${e.their} cock,
-      jerking ${e.themself} off until ${G.verb(e.they, "explode")} into an
-      overwhelming orgasm. Cum spurting all over the place with a few drops
-      managing to land on ${p.face.all}. Half unconscious
-      ${G.verb(e.who, "fall")} down to the ground.`
+      ${e.who}~>roar out with both hands around ${e.their} cock, jerking
+      ${e.themself} off until ${e.they}~>explode into an overwhelming orgasm.
+      Cum spurting all over the place with a few drops managing to land on
+      ${p.face.all}. Half unconscious ${e.who}~>fall down to the ground.`
   }
 }

@@ -19,11 +19,9 @@ export default class UdderGrowth extends Transformation {
     udder.arouse(10)
 
     return `
-      Your teats start dripping with milk as ${udder.all} ${udder.verb(
-      "feel",
-      false
-    )} full to the brim.
+      Your teats start dripping with milk as ${udder.all}~>feel full to the
+      brim.
 
-      **${udder.all} ${udder.verb("have", false)} swollen permanently!**`
+      **${udder.all}~>have swollen permanently!**`
   }
 }

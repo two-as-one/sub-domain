@@ -12,11 +12,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.4.8]
+## [0.4.9] - 2018-xx-xx
+### Added
+- Added documentation for the parser
+
+### Changed
+- Grammar.verb can now conjugate for any subject, not just pronouns
+- Grammar.clean now automatically conjugates verbs (when using `~` and `>` to mark subject and verb)
+- Grammar.clean can now automatically omit words with a percentage chance ~ `your 50%sexy cock`
+- Grammar.clean now gets rid of `undefined`
+
+## [0.4.8] - 2018-07-11
 ### Fixed
 - Fixed 404 when hosted on heroku
 
-## [0.4.7]
+## [0.4.7] - 2018-07-11
 ### Added
 - Added travel time between areas based on their coordinates on the map
 - Added `camp` option to main screen, currently shows description of camp and current time - more stuff to be added later
