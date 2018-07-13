@@ -232,7 +232,7 @@ export default class Main extends State {
         { text: "examine body", state: "body" },
         { text: "gear", state: "gear" },
         { text: "perks", state: "perks" },
-        { text: "masturbate", state: "masturbate", disabled: true },
+        { text: "masturbate", state: "masturbate" },
         { text: "back", state: "main" }
       ]
     })
@@ -280,9 +280,8 @@ export default class Main extends State {
   perks() {
     const text = this.game.player.perks.listGranted
       .filter(perk => perk.available)
-      .map(
-        perk => `**${perk.name}**: <q>${perk.description}</q> — ${perk.effect}`
-      ).join(`
+      .map(perk => `**${perk.name}**: "${perk.description}" — ${perk.effect}`)
+      .join(`
 
       `)
 

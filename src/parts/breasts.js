@@ -141,13 +141,11 @@ export default class Breasts extends Part {
   }
 
   get seductionMessage() {
-    const your_tits = this.all
-    const you = this.owner.who
-    const your_head = this.owner.head.all
-
     return Grammar.random([
-      `${you} cup ${your_tits} and make them jiggle — squeezing them individually before squishing them together.`,
-      `With your hands behind ${your_head}, you shake your bosom. Making ${your_tits} bounce against one another in a delightfully delicious display.`
+      `[you] cup [your.breasts] and make [them] jiggle — squeezing [them]
+       playfully.`,
+      `With [your.hands] behind [your.head], you shake your bosom. Making
+       [your.breasts] jiggle in a delightfully delicious display.`
     ])
   }
 

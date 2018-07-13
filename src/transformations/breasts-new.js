@@ -20,11 +20,9 @@ export default class BreastsNew extends Transformation {
     breasts.arouse(10)
 
     return `
-      Your chest feels tingly and hot.
-      ${this.owner.who} look down and quickly realize why.
+      Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      Your chest has swollen and **you now have ${breasts.number} ${
-      breasts.adjective
-    } ${breasts.pluralized}!**`
+      Your chest has swollen and **you now have [your.breasts.number]
+      50%[adjective] [pluralized]!**`
   }
 }

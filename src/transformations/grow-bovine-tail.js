@@ -17,7 +17,8 @@ export default class BreastGrowth extends Transformation {
     this.owner.tail.type = "bovine"
 
     return `
-      You have an itching sensation in your lower back and as you reach down to scratch you realize where it's coming from…
+      You have an itching sensation in your lower back and as you reach down to
+      scratch you realize where it's coming from…
 
       **You now have a bovine tail!**`
   }

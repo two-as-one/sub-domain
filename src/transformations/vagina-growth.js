@@ -18,10 +18,10 @@ export default class VaginaGrowth extends Transformation {
     vagina.arouse(10)
 
     return `
-        ${this.owner.who} feel a warmth radiating from your nether regions —
-        followed by a trickle down your inner thighs. You grow hot and horny and
-        reach down between your legs to find out why.
+        [you] feel a warmth radiating from your nether regions — followed by a
+        trickle down your inner thighs. You grow hot and horny and reach down
+        between your legs to find out why.
 
-        **${vagina.all}~>have grown plumper!**`
+        **[your.vagina]~>have grown plumper!**`
   }
 }

@@ -36,7 +36,7 @@ export default class LevelUp extends State {
     this.stat = choice.stat
 
     const responses = this.game.player.perks.listAvailable.map(perk => ({
-      text: `${perk.name} — <q>${perk.description}</q>`,
+      text: `${perk.name} — "${perk.description}"`,
       state: "confirmation",
       perk: perk
     }))
@@ -69,7 +69,7 @@ export default class LevelUp extends State {
     if (this.perk) {
       perkDescription += `
           **${Grammar.capitalize(this.perk.name)}**:
-          <q>${this.perk.description}</q> — ${this.perk.effect}`
+          "${this.perk.description}" — ${this.perk.effect}`
     }
 
     this.render({

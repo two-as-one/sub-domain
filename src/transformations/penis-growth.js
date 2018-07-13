@@ -19,7 +19,7 @@ export default class PenisGrowth extends Transformation {
     penis.arouse(10)
 
     return `
-      ${penis.all}~>throb as ${penis.they}~>grow thicker and longer —
-      **${penis.all}~>have grown!**`
+      [your.penis]~>throb as [they]~>grow thicker and longer —
+      **[your.penis]~>have grown!**`
   }
 }

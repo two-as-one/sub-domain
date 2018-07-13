@@ -17,16 +17,13 @@ export default class Forest extends Area {
   }
 
   get introMessage() {
-    const player = this.game.player
-
-    // prettier-ignore
     return `
-      ${player.who}/have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
+      [you]/have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation.
       Hardly any sunlight manages to make its way through the ominous canopy.
       Strange exotic sounds echo through the wilds, keeping you on your toes.
 
       After a couple of hours, you find a small opening in the vegetation with a hollow tree in the middle.
-      Exhausted and needing a rest, ${player.who} decide to set up camp here.`
+      Exhausted and needing a rest, [you] decide to set up camp here.`
   }
 
   get dayDescription() {
@@ -46,19 +43,14 @@ export default class Forest extends Area {
   }
 
   get exploreMessage() {
-    const player = this.game.player
-
     return `
-      ${player.who} cautiously creep through the dense foliage.
+      [you] cautiously creep through the dense foliage.
       Thick vines and branches constantly getting in your way and slowing you down.`
   }
 
   get sleepMessage() {
-    const player = this.game.player
-
-    // prettier-ignore
     return `
-      ${player.who} curl up on a bed of leaves and doze off to the sound of crickets and owls.`
+      [you] curl up on a bed of leaves and doze off to the sound of crickets and owls.`
   }
 
   get sunsetMessage() {
@@ -67,12 +59,9 @@ export default class Forest extends Area {
   }
 
   get sunriseMessage() {
-    const player = this.game.player
-
-    // prettier-ignore
     return `
-      ${player.who} wake up from an uncomfortable night of sleep, due to the high temperature and humidity.
-      A bright ray of sunshine pierces through the canopy and shines straight on ${player.face.all}.`
+      [you] wake up from an uncomfortable night of sleep, due to the high temperature and humidity.
+      A bright ray of sunshine pierces through the canopy and shines straight on [your.face].`
   }
 
   explore() {
@@ -115,7 +104,7 @@ export default class Forest extends Area {
     player.giveXP(xp)
 
     return `
-      About an hour later ${player.who} end up back at your camp.
+      About an hour later [you] end up back at your camp.
       You had no idea you were going in a circle, but you've learned a little about this place.
 
       You gain **${xp}xp**`

@@ -17,9 +17,8 @@ export default class NippleExtra extends Transformation {
     this.owner.nipples.arouse(10)
 
     return `
-      Your chest feels tingly and hot.
-      ${this.owner.who} look down and quickly realize why.
+      Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **${this.owner.breasts.all} have grown an additional nipple!**`
+      **[your.breasts]~>have grown an additional nipple!**`
   }
 }

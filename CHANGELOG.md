@@ -17,10 +17,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added documentation for the parser
 
 ### Changed
-- Grammar.verb can now conjugate for any subject, not just pronouns
-- Grammar.clean now automatically conjugates verbs (when using `~` and `>` to mark subject and verb)
-- Grammar.clean can now automatically omit words with a percentage chance ~ `your 50%sexy cock`
-- Grammar.clean now gets rid of `undefined`
+- significant upgrades were made to the parser
+  - verbs can now conjugate for any subject, not just pronouns
+  - now automatically conjugates verbs (when using `~` and `>` to mark subject and verb)
+  - now automatically omit words with a percentage chance ~ `your 50%sexy cock`
+  - now gets rid of `undefined`
+  - can now access global properties via `[]` (more docs on this soon™)
 
 ## [0.4.8] - 2018-07-11
 ### Fixed

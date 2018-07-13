@@ -1,6 +1,9 @@
 # sub domain parser
 The parser allows you to write dynamic text without having to care about grammatical detail all while keeping said text readable. Using a mixture of es6 template literals with additional syntactic sugar.
 
+### es6 template literals
+All text can be written as es6 template literals. This gives you access to object properties and allows you to embed as much logic as needed, though the latter should be used sparingly as it makes it hard to read the code.
+
 ### what gets parsed?
 Any text that is rendered on screen goes through the parser. This includes both regular text and player-selectable options. The only exception is `static` text, as this is used to display raw html.
 
@@ -13,6 +16,7 @@ A limited set of symbols are reserved by the parser and caution is advised when 
 * `>`
 * `/`
 * `%`
+* `[` and `]`
 
 ## parser syntax
 In this section we will explain additional syntax that can be used when writing text.

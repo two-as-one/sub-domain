@@ -1,8 +1,12 @@
+import Grammar from "grammar/grammar"
+
 export default class Item {
   constructor() {
     this.isConsumable = false
     this.isWeapon = false
     this.isArmor = false
+    this.person = "third"
+    this.gender = "none"
   }
 
   get description() {
@@ -33,3 +37,5 @@ export default class Item {
     return item
   }
 }
+
+Grammar.mix(Item)

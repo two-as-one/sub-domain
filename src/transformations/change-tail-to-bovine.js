@@ -16,9 +16,8 @@ export default class BreastGrowth extends Transformation {
     this.owner.tail.type = "bovine"
 
     return `
-      As you start walking, you immediately lose balance.
-      It's as if your centre of gravity has changed.
-      ${this.owner.who} examine yourself to find out why…
+      As you start walking, you immediately lose balance. It's as if your centre
+      of gravity has changed. [you] examine yourself to find out why…
 
       **Your tail has turned into a bovine one!**`
   }

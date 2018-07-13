@@ -59,8 +59,8 @@ export default class Penis extends Part {
 
   get seductionMessage() {
     return `
-        With a wicked smirk on your face, you firmly grab ${this.one}.
-        Jerking it a few times while humping the air.`
+        With a wicked smirk on [your.face], [you] firmly grab [your.penis].
+        Jerking [them] a few times while humping the air.`
   }
 
   get canSeduce() {

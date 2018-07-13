@@ -19,11 +19,8 @@ export default class BreastsQuartet extends Transformation {
     breasts.arouse(10)
 
     return `
-      Your chest feels tingly and hot.
-      You look down and quickly realize why.
+      Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **You now have ${breasts.number} ${breasts.adjective} ${
-      breasts.pluralized
-    }!**`
+      **you now have [your.breasts.number] 50%[adjective] [pluralized]!**`
   }
 }

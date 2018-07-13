@@ -12,8 +12,9 @@ export default class Mouth extends Part {
 
   get seductionMessage() {
     return `
-        You spread ${this.one} wide open with your tongue sticking out.
-        Bringing two fingers to your lips and closing them around it, you hungrily suckle them.`
+      You spread [your.mouth] wide open with your tongue sticking out. Bringing
+      two fingers to your lips and closing them around it, you hungrily suckle
+      them.`
   }
 
   get canSeduce() {

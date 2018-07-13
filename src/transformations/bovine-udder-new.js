@@ -18,8 +18,8 @@ export default class BovineUdderGrowth extends Transformation {
     this.owner.udder.arouse(10)
 
     return `
-      Your tummy feels sensitive and bloated.
-      ${this.owner.who} examine yourself to find out why.
+      Your tummy feels sensitive and bloated. [you] examine yourself to find out
+      why.
 
       You have grown **a perky udder** with **four sensitive teats**!`
   }

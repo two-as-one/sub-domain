@@ -16,6 +16,10 @@ export default class Part {
     }
   }
 
+  get name() {
+    return this.all
+  }
+
   get person() {
     return "third"
   }

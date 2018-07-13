@@ -32,12 +32,11 @@ export default class VaginaExtra extends Transformation {
     vagina.arouse(30)
 
     return `
-      You/have an uncontrollable itch between your legs and the sensation builds up until you reach some sort of pseudo-orgasm.
-      You feel a trickle down your inner thigh.
-      Gasping — ${this.owner.who} look down and notice why.
+      You/have an uncontrollable itch between your legs and the sensation builds
+      up until you reach some sort of pseudo-orgasm. You feel a trickle down
+      your inner thigh. Gasping — [you] look down and notice why.
 
-      **You have grown a ${Grammar.ordinal(vagina.quantity - 1)} ${
-      vagina.singular
-    }!**`
+      **You have grown a ${Grammar.ordinal(vagina.quantity - 1)}
+      [your.vagina.singular]!**`
   }
 }

@@ -7,9 +7,8 @@ export default class Rock extends Consumable {
 
   get description() {
     return `
-      It's just a rock.
-      You're not quite sure why you even picked it up.
-      There's nothing particularly interesting about it.`
+      It's just a rock. You're not quite sure why you even picked it up. There's
+      nothing particularly interesting about it.`
   }
 
   get hunger() {

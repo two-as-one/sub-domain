@@ -7,8 +7,8 @@ export default class Milk extends Consumable {
 
   get description() {
     return `
-      A small bottle of milk — just enough for one portion.
-      It's made out of sturdy glass and sealed shut with a cork.
+      A small bottle of milk — just enough for one portion. It's made out of
+      sturdy glass and sealed shut with a cork.
 
       **Restores ${this.hunger} hunger.**`
   }
@@ -17,7 +17,7 @@ export default class Milk extends Consumable {
     super.consume(player)
 
     return `
-      You uncork the bottle and down its contents. The sweet milk soothes you.
+      You uncork the bottle and down its contents. The sweet milk soothes [you].
 
       ${player.transform.pickOne([
         "increase breast size",

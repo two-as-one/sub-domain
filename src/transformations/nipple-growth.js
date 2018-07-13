@@ -20,9 +20,9 @@ export default class NippleGrowth extends Transformation {
     this.owner.nipples.arouse(10)
 
     return `
-      Your chest feels tingly and hot.
-      ${this.owner.who} look down and quickly realize why.
+      Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **Your nipples have swollen and permanently grown longer and thicker!**`
+      **[your.nipples]~>have swollen and permanently >grow longer and
+      thicker!**`
   }
 }

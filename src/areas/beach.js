@@ -27,16 +27,13 @@ export default class Beach extends Area {
   }
 
   get introMessage() {
-    const player = this.game.player
-
-    // prettier-ignore
     return `
-      ${player.who} open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
+      [you] open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
       The peaceful sound of waves crashing against the shore reminding you of home.
 
       You're still alive … and somehow free.
 
-      ${player.who} try to get up but ${player.body.your} hurts all over — maybe you'll just lay down for a little longer.`
+      [you] try to get up but [your.body] hurts all over — maybe you'll just lay down for a little longer.`
   }
 
   get dayDescription() {
@@ -46,7 +43,7 @@ export default class Beach extends Area {
 
   get nightDescription() {
     return `
-      A beautiful starry sky blankets over the ocean with the pale moon reflecting on the water and illuminating the shore.
+      A beautiful starry sky blankets the ocean. The pale moon reflecting on the water and illuminating the shore.
       The temperature has dropped drastically.`
   }
 
@@ -56,21 +53,16 @@ export default class Beach extends Area {
   }
 
   get exploreMessage() {
-    const player = this.game.player
-
-    // prettier-ignore
     return chance.pickone([
-      `The soft sand caresses ${player.feet.all} as ${player.who} explore the **beach**.`,
+      `The soft sand caresses [your.feet] as [you] explore the **beach**.`,
       `You/have a long walk along the **beach**.`
     ])
   }
 
   get sleepMessage() {
-    const player = this.game.player
-
     return `
       You lay down on the cool sand.
-      Gazing up to the sky, ${player.who} count the stars until you drift off.`
+      Gazing up to the sky, [you] count the stars until you drift off.`
   }
 
   get sunsetMessage() {
@@ -79,10 +71,8 @@ export default class Beach extends Area {
   }
 
   get sunriseMessage() {
-    const player = this.game.player
-
     return `
-      ${player.who} wake up to the sound of crashing waves.
+      [you] wake up to the sound of crashing waves.
       The sun has already begun its ascend across the sky.`
   }
 
@@ -146,7 +136,7 @@ export default class Beach extends Area {
 
     // prettier-ignore
     return `
-      After a long and uneventful stroll along the coast, ${player.who} decide to head back to camp.
+      After a long and uneventful stroll along the coast, [you] decide to head back to camp.
 
       You gain **${xp}xp**`
   }

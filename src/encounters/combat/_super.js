@@ -594,9 +594,8 @@ export default class CombatEncounter extends State {
 
     if (this.player.orgasmed || !this.player.alive) {
       this.fadeout = true
-      passOutMessage = `Time passes before ${
-        this.player.who
-      } regain your senses.`
+      passOutMessage = `
+        Time passes before [you] regain your senses.`
     }
 
     if (this.player.orgasmed) {
@@ -685,7 +684,7 @@ export default class CombatEncounter extends State {
   seduceResultsMessage(lust) {
     return `
 
-      ${this.enemy.who} gains **${lust} lust**`
+      [foe] gains **${lust} lust**`
   }
 
   seducedResultsMessage(lust) {
@@ -697,19 +696,16 @@ export default class CombatEncounter extends State {
   tooHornyMessage(p) {
     return `
 
-      ${p.you} are overwhelmed with lust and unable to control your actions.`
+      [you] are overwhelmed with lust and unable to control your actions.`
   }
 
   tooWeakMessage(p) {
     return `
 
-      ${p.you} have lost all strength in ${p.body.your} and are unable to
-      resist.`
+      [you] have lost all strength in [your.body] and are unable to resist.`
   }
 
   succubusMessage(hunger, health) {
-    const player = this.game.player
-
     if (hunger || health) {
       const and = health && hunger ? "and" : ""
       hunger = hunger ? `${hunger} hunger` : ""
@@ -717,10 +713,8 @@ export default class CombatEncounter extends State {
 
       return `
 
-        ${player.who} are satiated by all that semen — **${hunger} ${and}
-        ${health} restored**.`
-    } else {
-      return ""
+        [you] are satiated by all that semen — **${hunger} ${and} ${health}
+        restored**.`
     }
   }
 
@@ -739,17 +733,17 @@ export default class CombatEncounter extends State {
   attackMessage(p, e) {
     return `
 
-      ${p.you} swing ${p.weapon.name} at ${e.who}.`
+      [you] swing [your.weapon] at [foe].`
   }
 
   fleeSuccessMessage(p, e) {
     return `
-      ${p.you} manage to run away from ${e.who}!`
+      [you] manage to run away from [foe]!`
   }
 
   fleeFailureMessage(p, e) {
     return `
-      ${p.you} try to flee but ${e.who} stops you in your tracks!`
+      [you] try to flee but [foe]~>stop you in your tracks!`
   }
 
   // Messages - extend these with encounter specific messages

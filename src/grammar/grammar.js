@@ -3,6 +3,7 @@ import Chance from "chance"
 import { Contractions } from "contractions"
 import conjugate from "conjugate"
 import number from "number-to-words"
+import { parse } from "./parse"
 import pluralize from "pluralize"
 import showdown from "showdown"
 
@@ -418,6 +419,7 @@ export default class Grammar {
   static clean(text = "") {
     text = text.split(/\n\n|\r\r/)
     text = text
+      .map(text => parse(text))
       .map(text => Grammar.collapse(text))
       .map(text => Grammar.unundefined(text))
       .filter(text => text)

@@ -37,11 +37,10 @@ export default class Vagina extends Part {
   }
 
   get seductionMessage() {
-    const your_pussy = this.all
-
     return `
-        You spread your legs lightly while facing your opponent.
-        Placing your hands on your inner thighs and sensually moving them upwards towards ${your_pussy} but never quite reaching it.`
+        You spread your legs lightly while facing [foe]. Placing [your.hands] on
+        your inner thighs and sensually moving [them] upwards towards
+        [your.vagina] but never quite reaching [them].`
   }
 
   get canSeduce() {
@@ -52,11 +51,7 @@ export default class Vagina extends Part {
     if (this.size < size) {
       this.grow()
 
-      const was = this.quantity > 1 ? "were" : "was"
-      const is = this.quantity > 1 ? "are" : "is"
-      const your_pussy = Grammar.capitalize(this.all)
-
-      return `**${your_pussy} ${was} stretched** and ${is} now looser.`
+      return `**[your.vagina]~>have been stretched** and >be now looser.`
     }
   }
 

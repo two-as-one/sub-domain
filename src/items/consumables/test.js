@@ -6,7 +6,8 @@ export default class TestItem extends Consumable {
   }
 
   get description() {
-    return `[DEV ITEM] This is a test item, it can be used to test transformations.`
+    return `
+      [DEV ITEM] This is a test item, it can be used to test transformations.`
   }
 
   consume(player) {

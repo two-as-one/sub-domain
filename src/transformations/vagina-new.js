@@ -19,12 +19,10 @@ export default class VaginaNew extends Transformation {
     vagina.arouse(99999)
 
     return `
-        You feel a warmth radiating from your nether regions.
-        It quickly grows stronger and starts feeling good — *really good*.
-        The sensation overwhelms ${
-          this.owner.who
-        } and you soon find yourself crying out with joy.
+        You feel a warmth radiating from your nether regions. It quickly grows
+        stronger and starts feeling good — *really good*. The sensation
+        overwhelms [you] and you soon find yourself crying out with joy.
 
-        **You have grown a brand new ${vagina.singular}!**`
+        **You have grown a brand new [your.vagina.singular]!**`
   }
 }
