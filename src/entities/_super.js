@@ -3,6 +3,7 @@ import Grammar from "grammar/grammar"
 
 const chance = new Chance()
 
+const STAT_BASE = 5
 const LEVEL_STAT_SCALE = 1
 const HP_SCALE = 5
 
@@ -40,11 +41,11 @@ export default class Entity {
   get defaults() {
     return {
       lvl: 1,
-      str: 5,
-      stam: 5,
-      will: 5,
-      char: 5,
-      dex: 5,
+      str: STAT_BASE,
+      stam: STAT_BASE,
+      will: STAT_BASE,
+      char: STAT_BASE,
+      dex: STAT_BASE,
       dmg: 0,
       lust: 0
     }
@@ -65,7 +66,7 @@ export default class Entity {
 
   /**
    * STAMINA - Main attribute for physical fortitude, allows you to last longer in a fisticuffs
-   * healthMax            100%
+   * healthMax        100%
    * lustMax           25%
    */
   get stamina() {
@@ -83,7 +84,7 @@ export default class Entity {
   /**
    * WILLPOWER - Main attribute for mental fortitude, allows you to last longer in the game of love
    * lustMax          100%
-   * healthMax             25%
+   * healthMax         25%
    */
   get willpower() {
     return this.stored.will + this.stored.lvl * LEVEL_STAT_SCALE

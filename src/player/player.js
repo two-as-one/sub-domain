@@ -414,16 +414,4 @@ export default class Player extends Entity {
           The area between your legs is smooth and featureless as you **lack any form of genitalia**.`
     }
   }
-
-  // Other
-  //------
-
-  struggle(target) {
-    if (this.perks.has("slippery when wet")) {
-      //grant two attempts if the player has this perk
-      return super.struggle(target) || super.struggle(target)
-    } else {
-      return super.struggle(target)
-    }
-  }
 }

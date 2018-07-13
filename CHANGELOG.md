@@ -12,6 +12,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.10]
+### Added
+### Changed
+- The player no longer gains perks when leveling up - perks will only be obtainable via in-game events
+
+### Deprecated
+### Removed
+- Removed perks that didn't fit with the game direction
+- removed `slippery when wet` perk
+- removed `subbie` perk
+- removed `total sub` perk
+- removed `succubus` perk
+
+### Fixed
+### Security
+
 ## [0.4.9] - 2018-07-13
 ### Added
 - Added documentation for the parser

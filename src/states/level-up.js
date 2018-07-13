@@ -1,5 +1,37 @@
-import Grammar from "grammar/grammar"
 import State from "./_super"
+
+const STATS = [
+  {
+    key: "str",
+    name: "Strength",
+    label: "Physical prowess",
+    desc: ""
+  },
+  {
+    key: "stam",
+    name: "Stamina",
+    label: "Physical endurance",
+    desc: ""
+  },
+  {
+    key: "dex",
+    name: "Dexterity",
+    label: "Flexibility and grace",
+    desc: ""
+  },
+  {
+    key: "char",
+    name: "Charisma",
+    label: "Persuasiveness",
+    desc: ""
+  },
+  {
+    key: "will",
+    name: "Willpower",
+    label: "Mental fortitude",
+    desc: ""
+  }
+]
 
 export default class LevelUp extends State {
   constructor(game) {
@@ -7,14 +39,12 @@ export default class LevelUp extends State {
 
     this.state.choosePrimaryStats()
     this.stat = null
-    this.perk = null
   }
 
   get FSMStates() {
     return [
       { name: "choosePrimaryStats", from: "*" },
-      { name: "choosePerk", from: "choosePrimaryStats" },
-      { name: "confirmation", from: "choosePerk" },
+      { name: "confirmation", from: "choosePrimaryStats" },
       { name: "end", from: "confirmation" }
     ]
   }
@@ -22,77 +52,32 @@ export default class LevelUp extends State {
   choosePrimaryStats() {
     this.render({
       text: `You feel stronger — choose which stat to increase.`,
-      responses: [
-        { text: "Strength", stat: "str", state: "choosePerk" },
-        { text: "Dexterity", stat: "dex", state: "choosePerk" },
-        { text: "Stamina", stat: "stam", state: "choosePerk" },
-        { text: "Charisma", stat: "char", state: "choosePerk" },
-        { text: "Willpower", stat: "will", state: "choosePerk" }
-      ]
+      responses: STATS.map(stat => ({
+        text: `${stat.name} — "${stat.label}"`,
+        stat: stat,
+        state: "confirmation"
+      }))
     })
   }
 
-  choosePerk(choice) {
-    this.stat = choice.stat
-
-    const responses = this.game.player.perks.listAvailable.map(perk => ({
-      text: `${perk.name} — "${perk.description}"`,
-      state: "confirmation",
-      perk: perk
-    }))
-
-    if (responses.length) {
-      this.render({
-        text: `Choose a perk.`,
-        responses: responses
-      })
-    } else {
-      this.render({
-        text: `Choose a perk — No eligible perks!`,
-        responses: [{ state: "confirmation" }]
-      })
-    }
-  }
-
   confirmation(choice) {
-    this.perk = choice.perk
-    let perkDescription = ""
-
-    const map = {
-      str: "Strength",
-      dex: "Dexterity",
-      stam: "Stamina",
-      char: "Charisma",
-      will: "Willpower"
-    }
-
-    if (this.perk) {
-      perkDescription += `
-          **${Grammar.capitalize(this.perk.name)}**:
-          "${this.perk.description}" — ${this.perk.effect}`
-    }
+    this.stat = choice.stat
 
     this.render({
       text: `
-        You/will gain:
+        Level up and gain **+2 ${this.stat.name}**?
 
-        **+2 ${map[this.stat]}**
-
-        ${perkDescription}`,
+        ${this.stat.desc}`,
       responses: [
-        { text: "OK", state: "end" },
+        { text: "Yes please!", state: "end" },
         { text: "I've changed my mind", state: "choosePrimaryStats" }
       ]
     })
   }
 
   end() {
-    this.game.player.stored[this.stat] += 2
+    this.game.player.stored[this.stat.key] += 2
     this.game.player.stored.lvl += 1
-
-    if (this.perk) {
-      this.game.player.perks.grant(this.perk.name)
-    }
 
     this.game.switchState("main")
   }

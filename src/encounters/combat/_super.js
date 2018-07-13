@@ -120,24 +120,21 @@ export default class CombatEncounter extends State {
       return this.state.unableToResist()
     }
 
-    const totalSub = this.player.perks.has("total sub")
-
     let actions
     let message
     if (this.fucking) {
       message = this.position.get("idle")
       actions = [
         { text: "keep fucking", state: "fuck" },
-        { text: "change position", state: "submit", if: !totalSub },
-        { text: "struggle", state: "struggle", if: !totalSub }
+        { text: "change position", state: "submit" },
+        { text: "struggle", state: "struggle" }
       ]
     } else {
       message = this.mainMessage(this.player, this.enemy)
       actions = [
         { text: "attack", state: "attack" },
         { text: "seduce", state: "seduce" },
-        { text: "submit", state: "submit", if: !totalSub },
-        { text: "submit", state: "submitResults", if: totalSub },
+        { text: "submit", state: "submit" },
         { text: "examine", state: "examine" },
         { text: "flee", state: "flee" }
       ]
@@ -244,29 +241,12 @@ export default class CombatEncounter extends State {
   submitResults(data) {
     this.consent = true
 
-    const totalSub = this.player.perks.has("total sub")
-    let success
-
-    if (totalSub) {
-      // total sub, submitting always possible but enemy chooses position
-      success = true
-      data.position = this.enemyChoosePosition()
-    } else if (this.player.perks.has("subbie")) {
-      // two attempts if the player has this perk
-      success =
-        this.enemy.submit(data.position) || this.enemy.submit(data.position)
-    } else {
-      success = this.enemy.submit(data.position)
-    }
-
-    if (success) {
+    if (this.enemy.submit(data.position)) {
       this.fucking = true
       this.position = data.position
 
       this.render({
-        text: totalSub
-          ? this.position.get("enemy.start")
-          : this.position.get("player.start"),
+        text: this.position.get("player.start"),
         responses: [{ state: "fuck" }]
       })
     } else {
@@ -476,7 +456,7 @@ export default class CombatEncounter extends State {
   //encounter is about to end
   end() {
     if (this.fucking) {
-      if (this.player.orgasmed || this.player.perks.has("total sub")) {
+      if (this.player.orgasmed) {
         return this.state.climax()
       } else {
         this.render({
@@ -530,7 +510,6 @@ export default class CombatEncounter extends State {
   endResults() {
     let XPmessage = ""
     let dilationMessage = ""
-    let succubusMessage = ""
     let infectionMessage = ""
     let resultMessage = ""
     let passOutMessage = ""
@@ -556,17 +535,6 @@ export default class CombatEncounter extends State {
       if (typeof playerPart.dilate === "function") {
         dilationMessage = playerPart.dilate(dilation) || ""
       }
-    }
-
-    //succubus perk
-    if (
-      this.fucking &&
-      this.fucking.infects &&
-      this.player.perks.has("succubus")
-    ) {
-      const hunger = this.player.eat(8)
-      const health = this.player.heal(this.player.healthMax / 10)
-      succubusMessage = this.succubusMessage(hunger, health)
     }
 
     //infection
@@ -606,8 +574,6 @@ export default class CombatEncounter extends State {
       ${XPmessage}
 
       ${dilationMessage}
-
-      ${succubusMessage}
 
       ${infectionMessage}
 
@@ -703,19 +669,6 @@ export default class CombatEncounter extends State {
     return `
 
       [you] have lost all strength in [your.body] and are unable to resist.`
-  }
-
-  succubusMessage(hunger, health) {
-    if (hunger || health) {
-      const and = health && hunger ? "and" : ""
-      hunger = hunger ? `${hunger} hunger` : ""
-      health = health ? `${health} health` : ""
-
-      return `
-
-        [you] are satiated by all that semen — **${hunger} ${and} ${health}
-        restored**.`
-    }
   }
 
   gainMessage(xp, item) {
