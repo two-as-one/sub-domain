@@ -13,11 +13,6 @@ export default class Transformation {
     return false
   }
 
-  //the chance that this particular transformation will be applied once picked
-  get chance() {
-    return 0.5
-  }
-
   //must apply the transformation and return a string describing the process
   apply() {
     return ""

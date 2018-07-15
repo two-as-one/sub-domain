@@ -51,6 +51,6 @@ export default class Minotaur extends Entity {
   }
 
   infect(player) {
-    return player.transform.pickOne(["minotaur cum"])
+    return player.transform.pickOne(["minotaur cum"], 0.9)
   }
 }

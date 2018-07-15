@@ -12,12 +12,12 @@ export default class State {
 
     this._currentOptions = []
 
-    //this is the internal state of this game state
+    // this is the internal state of this game state
     const states = this.FSMStates
     states.forEach(state => (state.to = state.name))
     this.state = new StateMachine({ transitions: states })
 
-    //when entering a state, call the function that maps to the current state (in a deferred timeout so that states are able to automatically move on to a different one)
+    // when entering a state, call the function that maps to the current state (in a deferred timeout so that states are able to automatically move on to a different one)
     this.state.observe("onEnterState", () =>
       setTimeout(() => this[this.state.state](this.choice), 0)
     )

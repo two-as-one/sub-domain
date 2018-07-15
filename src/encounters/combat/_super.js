@@ -781,7 +781,6 @@ export default class CombatEncounter extends State {
       ${G.clean(this.seducedResultsMessage(10))}
       ${G.clean(this.tooHornyMessage(p, e))}
       ${G.clean(this.tooWeakMessage(p, e))}
-      ${G.clean(this.succubusMessage(10, 10))}
       ${G.clean(this.gainMessage(10))}
       ${G.clean(this.gainMessage(10, { name: "Dummy" }))}
       ${G.clean(this.attackMessage(p, e))}

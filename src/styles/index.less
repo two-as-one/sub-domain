@@ -1,8 +1,8 @@
 @import './variables';
 
 html, body {
-  background-color: @dark;
-  color: @light;
+  background-color: @color-background;
+  color: @color-foreground;
   padding: 0;
   margin: 0;
   user-select: none;
@@ -12,7 +12,7 @@ html, body {
 }
 
 html {
-  background-color: #000;
+  background-color: @color-off-stage;
 }
 
 body {
@@ -31,7 +31,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f00;
+    color: @color-error;
   }
 
   & > * {
@@ -58,13 +58,13 @@ body {
   right: 4px;
 
   a {
-    color: rgba(255,255,255,.25);
+    color: @color-version;
     font-size: 12px;
     font-family: monospace;
     text-decoration: none;
 
     &:hover{
-      color: rgba(255,255,255,.75);
+      color: @color-version-hover;
     }
   }
 }

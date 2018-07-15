@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Changed
 - The player no longer gains perks when leveling up - perks will only be obtainable via in-game events
+- Text parser now supports conditions in the form of `[condition?foo|bar]`
+- Minotaur-spunk now has `0.9` transformation chance, up from `0.25`
 
 ### Deprecated
 ### Removed

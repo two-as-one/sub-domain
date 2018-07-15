@@ -9,7 +9,7 @@ import Player from "player/player"
 import TitleScreen from "states/title-screen"
 import World from "world"
 
-export default class Game {
+class Game {
   constructor() {
     this.init()
 
@@ -148,6 +148,11 @@ export default class Game {
     this.world = new World(this)
   }
 
+  /** shortcut to the current state */
+  get scene() {
+    return this.currentState
+  }
+
   /**
    * Switch the game to a different state
    * @param  {String} state - The state name to switch to
@@ -194,3 +199,5 @@ export default class Game {
     }
   }
 }
+
+export default new Game()

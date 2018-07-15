@@ -118,8 +118,6 @@ export default class Breasts extends Part {
 
           text += `. Each `
         }
-      } else if (this.quantity === 2) {
-        text += ` — both `
       } else {
         text += ` — each `
       }

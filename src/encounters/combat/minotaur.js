@@ -77,7 +77,7 @@ class Vaginal extends Position {
       [foe.whose] mighty hands grab [you] by the waist as [foe.they]~>force you
       to turn around and bend over. Grunting as [they]~>look down at
       [your.vagina] and then >ram [foe.their] brutish cock into
-      ${p.vagina.multiple ? "one of them" : "it"}.`
+      [your.vagina.multiple?one of them|it].`
   }
 
   playerContinue(p, e) {

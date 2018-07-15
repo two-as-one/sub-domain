@@ -19,6 +19,6 @@ export default class MinotaurSpunk extends Consumable {
       You uncork the vial and immediately get overwhelmed by a potent musk.
       Quickly and without any hesitation you down its contents — Yuck!
 
-      ${player.transform.pickOne(["minotaur cum"])}`
+      ${player.transform.pickOne(["minotaur cum"], 0.9)}`
   }
 }
