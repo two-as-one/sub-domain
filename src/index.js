@@ -1,8 +1,7 @@
 /**
  * This file is a commonJs module so that `game` is available as a global variable instead of on `game.default`
  */
-var Game = require("game").default
-var game = new Game()
+var game = require("game").default
 game.switchState("start")
 game.VERSION = VERSION
 
