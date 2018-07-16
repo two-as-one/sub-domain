@@ -194,7 +194,7 @@ export default class CombatEncounter extends State {
 
       responses.push({
         state: "seduceResults",
-        text: `with ${part.your}`,
+        text: `with ${part.name}`,
         part: name,
         if: part.canSeduce && part.has
       })

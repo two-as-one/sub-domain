@@ -17,7 +17,7 @@ export default class Part {
   }
 
   get name() {
-    return this.all
+    return `${this.owner.their} 50%${this.adjective} ${this.pluralized}`
   }
 
   get person() {
@@ -146,20 +146,18 @@ export default class Part {
     return "sexy"
   }
 
-  get your() {
-    return `${this.owner.their} 50%${this.adjective} ${this.pluralized}`
-  }
-
+  // refers to specifically ALL of this part
   get all() {
     if (this.quantity === 1) {
-      return this.your
+      return this.name
     } else if (this.quantity === 2) {
-      return `both of ${this.your}`
+      return `both of ${this.name}`
     } else {
-      return `all 50%${this.number} of ${this.your}`
+      return `all 50%${this.number} of ${this.name}`
     }
   }
 
+  // refers to specifically 1 of this part (or the closest available quantity)
   get one() {
     if (this.quantity > 1) {
       return `
@@ -169,6 +167,7 @@ export default class Part {
     }
   }
 
+  // refers to specifically 2 of this part (or the closest available quantity)
   get two() {
     if (this.quantity > 2) {
       return `
@@ -178,6 +177,7 @@ export default class Part {
     }
   }
 
+  // refers to specifically 3 of this part (or the closest available quantity)
   get three() {
     if (this.quantity > 3) {
       return `
@@ -187,6 +187,7 @@ export default class Part {
     }
   }
 
+  // refers to specifically 4 of this part (or the closest available quantity)
   get four() {
     if (this.quantity > 4) {
       return `
