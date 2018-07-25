@@ -1,8 +1,8 @@
 import "styles/title-screen.less"
-import State from "./_super"
+import Scene from "./_super"
 import titleScreen from "templates/title.hbs"
 
-export default class CharacterCreation extends State {
+export default class CharacterCreation extends Scene {
   constructor(game) {
     super(game)
 
@@ -207,6 +207,6 @@ export default class CharacterCreation extends State {
   }
 
   end() {
-    this.game.switchState("main")
+    this.game.setScene("main")
   }
 }

@@ -31,18 +31,13 @@ export default class Penis extends Part {
       text += `between your legs, `
 
       if (this.quantity === 1) {
-        const adjective = Grammar.articlize(this.adjective)
-        const size = this.size
-        const penis = this.pluralized
-
-        text += `you/have **${adjective} ${size} inch ${penis}**`
+        text += `
+          you/have **[a] ${this.adjective} ${this.size} inch
+          ${this.pluralized}**`
       } else {
-        const number = this.number
-        const adjective = this.adjective
-        const size = this.size
-        const penises = this.pluralized
-
-        text += `you/have **${number} ${adjective} ${size} inch ${penises}**`
+        text += `
+          you/have **${this.number} ${this.adjective} ${this.size} inch
+          ${this.pluralized}**`
       }
 
       if (this.size < 2) {

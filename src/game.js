@@ -1,12 +1,12 @@
 import "styles/index.less"
 import { clear, save } from "save/saveable"
-import CharacterCreation from "states/character-creation"
-import InventoryState from "states/inventory"
-import LevelUpState from "states/level-up"
-import MainState from "states/main"
+import CharacterCreation from "scenes/character-creation"
+import InventoryScene from "scenes/inventory"
+import LevelUpScene from "scenes/level-up"
+import MainScene from "scenes/main"
 import Mastrubate from "encounters/other/masturbate"
 import Player from "player/player"
-import TitleScreen from "states/title-screen"
+import TitleScreen from "scenes/title-screen"
 import World from "world"
 
 class Game {
@@ -44,8 +44,8 @@ class Game {
     Game.mouseControl(true)
     const target = e.target.closest(".option")
 
-    if (this.currentState.isTyping) {
-      this.currentState.finishTyping()
+    if (this.scene.isTyping) {
+      this.scene.finishTyping()
     } else if (target) {
       this._pickOption(target)
     }
@@ -74,8 +74,8 @@ class Game {
     }
 
     //complete typing animation
-    if (this.currentState.isTyping) {
-      return this.currentState.finishTyping()
+    if (this.scene.isTyping) {
+      return this.scene.finishTyping()
     }
 
     //number keys
@@ -128,7 +128,7 @@ class Game {
       return
     }
 
-    this.currentState.interact(el.getAttribute("choice"))
+    this.scene.interact(el.getAttribute("choice"))
   }
 
   /** saves the game */
@@ -148,38 +148,33 @@ class Game {
     this.world = new World(this)
   }
 
-  /** shortcut to the current state */
-  get scene() {
-    return this.currentState
-  }
-
   /**
-   * Switch the game to a different state
-   * @param  {String} state - The state name to switch to
-   * @param {...args} - Any extra parameters to pass on to the state constructor
+   * Switch the game to a different scene
+   * @param  {String} scene - The scene name to switch to
+   * @param {...args} - Any extra parameters to pass on to the scene constructor
    */
-  switchState(state, ...args) {
-    if (this.currentState) {
-      this.currentState.kill()
+  setScene(scene, ...args) {
+    if (this.scene) {
+      this.scene.kill()
     }
 
-    switch (state) {
+    switch (scene) {
       case "start":
-        return (this.currentState = new TitleScreen(this))
+        return (this.scene = new TitleScreen(this))
       case "new-game":
-        return (this.currentState = new CharacterCreation(this))
+        return (this.scene = new CharacterCreation(this))
       case "inventory":
-        return (this.currentState = new InventoryState(this))
+        return (this.scene = new InventoryScene(this))
       case "main":
-        return (this.currentState = new MainState(this))
+        return (this.scene = new MainScene(this))
       case "level-up":
-        return (this.currentState = new LevelUpState(this))
+        return (this.scene = new LevelUpScene(this))
       case "masturbate":
-        return (this.currentState = new Mastrubate(this))
+        return (this.scene = new Mastrubate(this))
       case "encounter":
-        return (this.currentState = this.Encounter(...args))
+        return (this.scene = this.Encounter(...args))
       default:
-        throw new Error(`Error: unknown game state: ${state}`)
+        throw new Error(`Error: unknown game scene: ${scene}`)
     }
   }
 

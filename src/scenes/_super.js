@@ -5,7 +5,7 @@ import template from "templates/main.hbs"
 
 const typeWriter = new TypeWriter()
 
-export default class State {
+export default class Scene {
   constructor(game) {
     this.game = game
     this.locked = false
@@ -17,7 +17,8 @@ export default class State {
     states.forEach(state => (state.to = state.name))
     this.state = new StateMachine({ transitions: states })
 
-    // when entering a state, call the function that maps to the current state (in a deferred timeout so that states are able to automatically move on to a different one)
+    // when entering a state, call the function that maps to the current state
+    // in a deferred timeout so that states are able to automatically move on to a different one
     this.state.observe("onEnterState", () =>
       setTimeout(() => this[this.state.state](this.choice), 0)
     )
@@ -54,7 +55,7 @@ export default class State {
     }
   }
 
-  //this function can be extended with any code that should happen when the state is exited
+  //this function can be extended with any code that should happen when the scene is exited
   kill() {}
 
   pruneResponses(data) {

@@ -1,3 +1,4 @@
+import Grammar from "./grammar"
 import game from "../game"
 
 // finds a target
@@ -77,9 +78,17 @@ function condition(snip, subject) {
 
 export function parse(text = "") {
   let subject
-  return text.replace(
+
+  // parse selectors and conditions
+  let out = text.replace(
     /(\[)([^\]]*)(\])/g,
     (match, openBracket, snip, closeBracket) => {
+      // ignore [a] and [an]
+      // these are special parsers
+      if (snip === "a" || snip === "[an]") {
+        return match
+      }
+
       try {
         let out = null
         ;[out, subject] = condition(snip, subject)
@@ -92,4 +101,11 @@ export function parse(text = "") {
       }
     }
   )
+
+  // articlize
+  out = out.replace(/\[(a|an)\] (\w+)/, (match, article, word) =>
+    Grammar.articlize(word)
+  )
+
+  return out
 }

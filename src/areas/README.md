@@ -11,15 +11,15 @@ Make sure to `import` and `persist` your custom area
   - `name` - used to identify the area
 
 #### 2. extend `explore`
-This function **must** return either a string or another state.
-  - if a string is returned, it will be displayed, then the game will switch back to the `main` state
-  - if a state is returned, the game will switch to that state. Generally this state should be an encounter state.
+This function **must** return either a string or another scene.
+  - if a string is returned, it will be displayed, then the game will switch back to the `main` scene
+  - if a scene is returned, the game will switch to that scene. Generally this scene should be an encounter scene.
 
 #### 3. extend `description`, `exploreMessage` and `sleepMessage`
   - `introMessage` - the message shown when the player enters this area for the first time
   - `exploreMessage` - the message shown when the player explores this area before determining what actually happens
-  - `dayDescription` - the description of the area during the day, this is displayed on the `main` state
-  - `nightDescription` - the description of the area during at night, this is displayed on the `main` state
+  - `dayDescription` - the description of the area during the day, this is displayed on the `main` scene
+  - `nightDescription` - the description of the area during at night, this is displayed on the `main` scene
   - `campDescription` - describes the player's camp
   - `sleepMessage` - the message shown when the player sleeps through the night
   - `sunsetMessage` - the message shown when sun sets

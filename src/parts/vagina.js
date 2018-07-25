@@ -21,7 +21,7 @@ export default class Vagina extends Part {
       }
 
       if (this.quantity === 1) {
-        text += `**${Grammar.articlize(this.adjective)} ${this.pluralized}**`
+        text += `**[a] ${this.adjective} ${this.pluralized}**`
       } else {
         text += `**${this.number} ${this.adjective} ${this.pluralized}**`
       }

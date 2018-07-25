@@ -35,7 +35,7 @@ export default class Balls extends Part {
         text += `Inside your abdomen sits `
       }
 
-      text += `**${Grammar.articlize(this.adjective)} scrotum** containing `
+      text += `**[a] ${this.adjective} scrotum** containing `
 
       if (this.quantity === 1) {
         text += ` **a single`

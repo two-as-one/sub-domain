@@ -15,7 +15,7 @@ export default class Anus extends Part {
 
     if (this.has) {
       if (this.quantity === 1) {
-        description = Grammar.a(`${this.adjective} ${this.pluralized}`)
+        description = `[a] ${this.adjective} ${this.pluralized}`
       } else {
         description = `${this.number} ${this.adjective} ${this.pluralized}`
       }

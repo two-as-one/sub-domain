@@ -76,7 +76,7 @@ export default class Forest extends Area {
     } else {
       return Area.weighted([
         {
-          option: () => this.game.switchState("encounter", "minotaur"),
+          option: () => this.game.setScene("encounter", "minotaur"),
           weight: 1
         },
         { option: this.findMeatyMushroom, weight: 1 },

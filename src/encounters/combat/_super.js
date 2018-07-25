@@ -2,7 +2,7 @@ import "styles/combat.less"
 
 import Chance from "chance"
 import G from "grammar/grammar"
-import State from "states/_super"
+import Scene from "scenes/_super"
 import { abstract } from "utils/abstract"
 import template from "templates/combat.hbs"
 const chance = new Chance()
@@ -12,7 +12,7 @@ const chance = new Chance()
  * This is the base class from which all combat encounters must inherit from
  * refer to README.md for instructions on how to make custom encounters
  */
-export default class CombatEncounter extends State {
+export default class CombatEncounter extends Scene {
   constructor(game, enemy) {
     super(game)
 
@@ -588,14 +588,14 @@ export default class CombatEncounter extends State {
     })
   }
 
-  //go back to main state
+  //go back to main scene
   exit() {
     this.game.world.advance()
 
     if (this.fadeout) {
-      this.fade().then(() => this.game.switchState("main"))
+      this.fade().then(() => this.game.setScene("main"))
     } else {
-      this.game.switchState("main")
+      this.game.setScene("main")
     }
   }
 

@@ -160,7 +160,7 @@ export default class Player extends Entity {
     return Math.max(Math.floor(stat + this.hungerModifier), 1)
   }
 
-  //describes how hungry the player is - displayed on main state
+  //describes how hungry the player is - displayed on main scene
   get hungerDescription() {
     if (this.isStarving) {
       return `You are **starving!** — You will be weakened until you eat something.`

@@ -1,4 +1,4 @@
-import State from "./_super"
+import Scene from "./_super"
 
 const STATS = [
   {
@@ -33,7 +33,7 @@ const STATS = [
   }
 ]
 
-export default class LevelUp extends State {
+export default class LevelUp extends Scene {
   constructor(game) {
     super(game)
 
@@ -79,6 +79,6 @@ export default class LevelUp extends State {
     this.game.player.stored[this.stat.key] += 2
     this.game.player.stored.lvl += 1
 
-    this.game.switchState("main")
+    this.game.setScene("main")
   }
 }

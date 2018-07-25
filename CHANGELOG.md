@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.11]
+### Added
+- The parser now supports `[a]` and `[an]`
+
 ## [0.4.10] 2018-07-16
 ### Changed
 - Version number is now a link and points to this document

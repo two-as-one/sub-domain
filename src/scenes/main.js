@@ -1,6 +1,6 @@
-import State from "./_super"
+import Scene from "./_super"
 
-export default class Main extends State {
+export default class Main extends Scene {
   constructor(game) {
     super(game)
 
@@ -122,7 +122,7 @@ export default class Main extends State {
   }
 
   levelUp() {
-    this.game.switchState("level-up")
+    this.game.setScene("level-up")
   }
 
   explore() {
@@ -172,7 +172,7 @@ export default class Main extends State {
 
   switchArea(data) {
     this.game.world.switchArea(data.area)
-    this.fade().then(() => this.game.switchState("main"))
+    this.fade().then(() => this.game.setScene("main"))
   }
 
   rest() {
@@ -222,7 +222,7 @@ export default class Main extends State {
   }
 
   inventory() {
-    this.game.switchState("inventory")
+    this.game.setScene("inventory")
   }
 
   self() {
@@ -260,7 +260,7 @@ export default class Main extends State {
   }
 
   masturbate() {
-    this.game.switchState("masturbate")
+    this.game.setScene("masturbate")
   }
 
   gear() {

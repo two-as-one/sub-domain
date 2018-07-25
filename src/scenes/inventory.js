@@ -1,6 +1,6 @@
-import State from "./_super"
+import Scene from "./_super"
 
-export default class Inventory extends State {
+export default class Inventory extends Scene {
   constructor(game) {
     super(game)
 
@@ -96,6 +96,6 @@ export default class Inventory extends State {
   }
 
   exit() {
-    this.game.switchState("main")
+    this.game.setScene("main")
   }
 }

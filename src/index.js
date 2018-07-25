@@ -2,7 +2,7 @@
  * This file is a commonJs module so that `game` is available as a global variable instead of on `game.default`
  */
 var game = require("game").default
-game.switchState("start")
+game.setScene("start")
 game.VERSION = VERSION
 
 module.exports = game

@@ -30,16 +30,10 @@ export default class Udder extends Part {
       }
 
       if (this.quantity === 1) {
-        const adjective = Grammar.articlize(this.adjective)
-        const udder = this.pluralized
-
-        text += `you/have **${adjective} ${udder}**`
+        text += `you/have **[a] ${this.adjective} ${this.pluralized}**`
       } else {
-        const number = this.number
-        const adjective = this.adjective
-        const udders = this.pluralized
-
-        text += `you/have **${number} ${adjective} ${udders}**`
+        text += `
+          you/have **${this.number} ${this.adjective} ${this.pluralized}**`
       }
 
       text += ` with **${Grammar.number(this.teats)} teats**`

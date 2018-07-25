@@ -10,7 +10,9 @@ const MIDNIGHT = 24
 export default class World {
   constructor(game) {
     this.game = game
-    this.transitioned = false //keep track of when the world transitions between day/nigh so that we can show a relevant message
+
+    // keep track of when the world transitions between day/nigh so that we can show a relevant message
+    this.transitioned = false
 
     persist(this, "world")
 
@@ -95,7 +97,7 @@ export default class World {
 
     this.game.save()
 
-    //store whether the world state has transitioned between day/night so that we can play a fade animation
+    // store whether the world state has transitioned between day/night so that we can play a fade animation
     if (this.day !== current) {
       this.transitioned = true
     }

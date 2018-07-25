@@ -1,9 +1,9 @@
 import "styles/title-screen.less"
-import State from "./_super"
+import Scene from "./_super"
 import save from "save/save"
 import titleScreen from "templates/title.hbs"
 
-export default class TitleScreen extends State {
+export default class TitleScreen extends Scene {
   constructor(game) {
     super(game)
 
@@ -40,7 +40,7 @@ export default class TitleScreen extends State {
     if (save.isOutOfDate && !options.force) {
       this.state.outOfDate()
     } else {
-      this.game.switchState("main")
+      this.game.setScene("main")
     }
   }
 
@@ -70,12 +70,12 @@ export default class TitleScreen extends State {
         ]
       })
     } else {
-      this.game.switchState("new-game")
+      this.game.setScene("new-game")
     }
   }
 
   confirm() {
-    this.game.switchState("new-game")
+    this.game.setScene("new-game")
   }
 
   cancel() {
