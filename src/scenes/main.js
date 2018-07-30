@@ -121,8 +121,9 @@ export default class Main extends Scene {
     })
   }
 
-  levelUp() {
-    this.game.setScene("level-up")
+  async levelUp() {
+    await this.game.subScene("level-up")
+    this.state.main()
   }
 
   explore() {
@@ -221,8 +222,9 @@ export default class Main extends Scene {
     })
   }
 
-  inventory() {
-    this.game.setScene("inventory")
+  async inventory() {
+    await this.game.subScene("inventory")
+    this.state.main()
   }
 
   self() {
@@ -259,8 +261,9 @@ export default class Main extends Scene {
     })
   }
 
-  masturbate() {
-    this.game.setScene("masturbate")
+  async masturbate() {
+    await this.game.subScene("masturbate")
+    this.state.main()
   }
 
   gear() {

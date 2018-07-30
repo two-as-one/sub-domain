@@ -207,6 +207,6 @@ export default class CharacterCreation extends Scene {
   }
 
   end() {
-    this.game.setScene("main")
+    super.end()
   }
 }

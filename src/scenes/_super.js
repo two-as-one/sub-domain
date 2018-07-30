@@ -12,6 +12,9 @@ export default class Scene {
 
     this._currentOptions = []
 
+    // allow outside code to await scene.completed
+    this.completed = new Promise(r => (this._resolve = r))
+
     // this is the internal state of this game state
     const states = this.FSMStates
     states.forEach(state => (state.to = state.name))
@@ -24,7 +27,7 @@ export default class Scene {
     )
   }
 
-  //must be extended with internal state transitions
+  // must be extended with internal state transitions
   get FSMStates() {
     return []
   }
@@ -34,7 +37,7 @@ export default class Scene {
       return
     }
 
-    //map interaction choice to choice object
+    // map interaction choice to choice object
     const choice = this._currentOptions.find(option => option.id == id)
     const state = choice && choice.state
 
@@ -55,21 +58,25 @@ export default class Scene {
     }
   }
 
-  //this function can be extended with any code that should happen when the scene is exited
-  kill() {}
+  // ends this scene
+  // if this was a sub-scene, its promise will be resolved
+  // otherwise the game will switch back to the main scene
+  end() {
+    this._resolve()
+  }
 
   pruneResponses(data) {
-    //make sure we have responses
+    // make sure we have responses
     if (!data.responses) {
       data.responses = []
     }
 
-    //make sure there is at least one
+    // make sure there is at least one
     if (!data.responses.length) {
       data.responses.push({})
     }
 
-    //filter by conditions
+    // filter by conditions
     data.responses = data.responses.filter(
       response => !response.hasOwnProperty("if") || response.if
     )
@@ -118,24 +125,25 @@ export default class Scene {
   }
 
   /** renders content (unlocks the interface) */
-  render(data) {
+  render(data = {}) {
     typeWriter.stop()
 
     data = this.pruneResponses(data)
 
-    //store currently available options
+    // store currently available options
     this._currentOptions = data.responses
     data.VERSION = VERSION
 
-    //remove all classes
+    // remove all classes
     while (document.body.classList.length) {
       document.body.classList.remove(document.body.classList.item(0))
     }
 
+    // render html
     document.body.innerHTML = this.template(data)
     window.scrollTo(0, 0)
 
-    //add new classes
+    // add new classes
     if (typeof data.classes === "string") {
       data.classes.split(/\s+/).forEach(c => document.body.classList.add(c))
     }

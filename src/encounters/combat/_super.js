@@ -593,9 +593,9 @@ export default class CombatEncounter extends Scene {
     this.game.world.advance()
 
     if (this.fadeout) {
-      this.fade().then(() => this.game.setScene("main"))
+      this.fade().then(() => super.end())
     } else {
-      this.game.setScene("main")
+      super.end()
     }
   }
 

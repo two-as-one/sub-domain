@@ -79,6 +79,6 @@ export default class LevelUp extends Scene {
     this.game.player.stored[this.stat.key] += 2
     this.game.player.stored.lvl += 1
 
-    this.game.setScene("main")
+    super.end()
   }
 }

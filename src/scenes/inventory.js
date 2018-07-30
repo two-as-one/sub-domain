@@ -15,7 +15,7 @@ export default class Inventory extends Scene {
       { name: "use", from: "inspect" },
       { name: "discard", from: "inspect" },
 
-      { name: "exit", from: "*" }
+      { name: "end", from: "*" }
     ]
   }
 
@@ -30,7 +30,7 @@ export default class Inventory extends Scene {
       )}`
     }))
 
-    responses.push({ text: "back", state: "exit" })
+    responses.push({ text: "back", state: "end" })
 
     let text
     if (items.length === 0) {
@@ -93,9 +93,5 @@ export default class Inventory extends Scene {
       text: `You tossed away ${item.name} × ${i}`,
       responses: [{ state: "list" }]
     })
-  }
-
-  exit() {
-    this.game.setScene("main")
   }
 }

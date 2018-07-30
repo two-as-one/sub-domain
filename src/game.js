@@ -150,35 +150,55 @@ class Game {
 
   /**
    * Switch the game to a different scene
-   * @param  {String} scene - The scene name to switch to
+   * when the scene ends, the game will go back to the main scene
+   * @param  {String} name - The scene name to switch to
    * @param {...args} - Any extra parameters to pass on to the scene constructor
    */
-  setScene(scene, ...args) {
-    if (this.scene) {
-      this.scene.kill()
-    }
+  async setScene(name, ...args) {
+    this.scene = this._createScene(name, ...args)
+    await this.scene.completed
+    this.setScene("main")
+  }
 
-    switch (scene) {
+  /**
+   * switch to a sub-scene
+   * similar to `setScene` except that it returns a promise that resolves once the scene is completed
+   * You ideally want to use async/await for this:
+   *   await game.subScene(...
+   */
+  async subScene(scene, ...args) {
+    const prev = this.scene
+    this.scene = this._createScene(scene, ...args)
+    await this.scene.completed
+    this.scene = prev
+  }
+
+  /**
+   * creates a scene
+   * @private
+   */
+  _createScene(name, ...args) {
+    switch (name) {
       case "start":
-        return (this.scene = new TitleScreen(this))
+        return new TitleScreen(this)
       case "new-game":
-        return (this.scene = new CharacterCreation(this))
+        return new CharacterCreation(this)
       case "inventory":
-        return (this.scene = new InventoryScene(this))
+        return new InventoryScene(this)
       case "main":
-        return (this.scene = new MainScene(this))
+        return new MainScene(this)
       case "level-up":
-        return (this.scene = new LevelUpScene(this))
+        return new LevelUpScene(this)
       case "masturbate":
-        return (this.scene = new Mastrubate(this))
+        return new Mastrubate(this)
       case "encounter":
-        return (this.scene = this.Encounter(...args))
+        return this.Encounter(...args)
       default:
-        throw new Error(`Error: unknown game scene: ${scene}`)
+        throw new Error(`Error: unknown game scene: ${name}`)
     }
   }
 
-  /** start an encounter by name */
+  /** create an encounter by name */
   Encounter(name) {
     const encounter = this.ENCOUNTERS[name]
     return new encounter(this)
