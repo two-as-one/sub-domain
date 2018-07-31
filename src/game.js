@@ -2,6 +2,7 @@ import "styles/index.less"
 import { clear, save } from "save/saveable"
 import CharacterCreation from "scenes/character-creation"
 import InventoryScene from "scenes/inventory"
+import ItemScene from "scenes/item"
 import LevelUpScene from "scenes/level-up"
 import MainScene from "scenes/main"
 import Mastrubate from "encounters/other/masturbate"
@@ -180,17 +181,19 @@ class Game {
   _createScene(name, ...args) {
     switch (name) {
       case "start":
-        return new TitleScreen(this)
+        return new TitleScreen(this, ...args)
       case "new-game":
-        return new CharacterCreation(this)
+        return new CharacterCreation(this, ...args)
       case "inventory":
-        return new InventoryScene(this)
+        return new InventoryScene(this, ...args)
+      case "item":
+        return new ItemScene(this, ...args)
       case "main":
-        return new MainScene(this)
+        return new MainScene(this, ...args)
       case "level-up":
-        return new LevelUpScene(this)
+        return new LevelUpScene(this, ...args)
       case "masturbate":
-        return new Mastrubate(this)
+        return new Mastrubate(this, ...args)
       case "encounter":
         return this.Encounter(...args)
       default:

@@ -2,7 +2,7 @@ import "styles/title-screen.less"
 import Scene from "./_super"
 import titleScreen from "templates/title.hbs"
 
-export default class CharacterCreation extends Scene {
+export default class CharacterCreationScene extends Scene {
   constructor(game) {
     super(game)
 

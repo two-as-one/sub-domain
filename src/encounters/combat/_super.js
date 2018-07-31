@@ -72,6 +72,7 @@ export default class CombatEncounter extends Scene {
       { name: "main", from: "*" },
 
       { name: "attack", from: "main" },
+      { name: "inventory", from: "main" },
       { name: "seduce", from: "main" },
       { name: "submit", from: "main" },
       { name: "flee", from: "main" },
@@ -151,10 +152,20 @@ export default class CombatEncounter extends Scene {
         **${this.player.you} are hungry and weakened.**`
     }
 
+    // disabled for now... need to make a decision on whether the player can use items during combat
+    // actions.push({
+    //   text: 'inventory', state: 'inventory'
+    // })
+
     this.render({
       text: message,
       responses: actions
     })
+  }
+
+  async inventory() {
+    await this.game.subScene("inventory")
+    this.state.main()
   }
 
   //player attacks enemy

@@ -3,7 +3,7 @@ import Scene from "./_super"
 import save from "save/save"
 import titleScreen from "templates/title.hbs"
 
-export default class TitleScreen extends Scene {
+export default class TitleScreenScene extends Scene {
   constructor(game) {
     super(game)
 

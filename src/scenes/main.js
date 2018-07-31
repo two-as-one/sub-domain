@@ -1,6 +1,6 @@
 import Scene from "./_super"
 
-export default class Main extends Scene {
+export default class MainScene extends Scene {
   constructor(game) {
     super(game)
 

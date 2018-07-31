@@ -1,6 +1,6 @@
 import Scene from "./_super"
 
-export default class Inventory extends Scene {
+export default class InventoryScene extends Scene {
   constructor(game) {
     super(game)
 
@@ -10,11 +10,7 @@ export default class Inventory extends Scene {
   get FSMStates() {
     return [
       { name: "list", from: "*" },
-
-      { name: "inspect", from: ["list", "use"] },
-      { name: "use", from: "inspect" },
-      { name: "discard", from: "inspect" },
-
+      { name: "inspect", from: "*" },
       { name: "end", from: "*" }
     ]
   }
@@ -45,53 +41,10 @@ export default class Inventory extends Scene {
     })
   }
 
-  inspect(data) {
+  async inspect(data) {
     const item = data.item
 
-    this.render({
-      text: item.description,
-      responses: [
-        { text: "use", state: "use", item: item, if: item.isConsumable },
-        { text: "discard", state: "discard", item: item },
-        { text: "back", state: "list" }
-      ]
-    })
-  }
-
-  use(data) {
-    const item = data.item
-
-    const result = item.consume(this.game.player)
-    this.game.player.inventory.discard(item.fileName)
-
-    let next
-    const more = this.game.player.inventory.find(item.fileName)
-
-    if (more) {
-      next = { state: "inspect", item: more }
-    } else {
-      next = { state: "list" }
-    }
-
-    this.render({
-      text: result,
-      responses: [next]
-    })
-  }
-
-  discard(data) {
-    const item = data.item
-    let i = 0
-
-    //discard all items of given name
-    while (this.game.player.inventory.find(item.fileName)) {
-      this.game.player.inventory.discard(item.fileName)
-      i += 1
-    }
-
-    this.render({
-      text: `You tossed away ${item.name} × ${i}`,
-      responses: [{ state: "list" }]
-    })
+    await this.game.subScene("item", item)
+    this.state.list()
   }
 }

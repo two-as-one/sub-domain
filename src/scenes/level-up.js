@@ -33,7 +33,7 @@ const STATS = [
   }
 ]
 
-export default class LevelUp extends Scene {
+export default class LevelUpScene extends Scene {
   constructor(game) {
     super(game)
 
