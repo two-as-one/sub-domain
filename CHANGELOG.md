@@ -12,9 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.4.11]
+## [0.4.11] 2018-07-31
 ### Added
 - The parser now supports `[a]` and `[an]`
+- The game now supports sub-scenes, these are mini-scenes that can be reused and injected into the current scene without interrupting it
+  - ie, inspecting an item or opening the player inventory
 
 ## [0.4.10] 2018-07-16
 ### Changed
