@@ -16,7 +16,7 @@ module.exports = function(env) {
     },
 
     entry: {
-      scripts: "./src/index.js"
+      scripts: ["babel-polyfill", "./src/index.js"]
     },
 
     devServer: {

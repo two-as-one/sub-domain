@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.0.0-beta.51",
     "articles": "^0.2.2",
     "babel-loader": "^8.0.0-beta.4",
+    "babel-polyfill": "^6.26.0",
     "chance": "^1.0.10",
     "conjugate": "^1.0.3",
     "contractions": "0.0.7",

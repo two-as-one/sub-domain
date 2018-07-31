@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.12] 2018-07-31
+### Fixed
+- fixed critical bug that prevented the game from running
+
 ## [0.4.11] 2018-07-31
 ### Added
 - The parser now supports `[a]` and `[an]`
