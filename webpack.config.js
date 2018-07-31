@@ -25,6 +25,10 @@ module.exports = function(env) {
       stats: "minimal"
     },
 
+    performance: {
+      hints: false
+    },
+
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "[name].js",
@@ -37,9 +41,9 @@ module.exports = function(env) {
         {
           test: /\.less$/,
           use: [
-            "style-loader",
-            { loader: "css-loader", options: { importLoaders: 1 } },
-            "less-loader"
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'less-loader' }
           ]
         },
         {
@@ -98,18 +102,11 @@ module.exports = function(env) {
         }
       }
     })
-
-    // minify scripts in dist
-    config.plugins.unshift(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false }
-      })
-    )
+    config.mode = 'production'
   } else {
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
+    config.mode = 'development'
   }
-
-  config.plugins.push()
 
   return config
 }

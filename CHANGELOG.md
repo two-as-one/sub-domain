@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.13] 2018-07-31
+### Fixed
+- fixed security vulnerabilities by upgrading dependencies
+
 ## [0.4.12] 2018-07-31
 ### Fixed
 - fixed critical bug that prevented the game from running
