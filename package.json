@@ -1,6 +1,6 @@
 {
   "name": "sub-domain-ass",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "description": "SUB DOMAIN: a spunky story - an adult themed text adventure",
   "main": "app.js",
   "scripts": {
