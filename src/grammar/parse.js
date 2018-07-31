@@ -103,7 +103,7 @@ export function parse(text = "") {
   )
 
   // articlize
-  out = out.replace(/\[(a|an)\] (\w+)/, (match, article, word) =>
+  out = out.replace(/\[(a|an)\] (\w+)/g, (match, article, word) =>
     Grammar.articlize(word)
   )
 
