@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.14] 2018-08-02
+### Fixed
+- fixed security vulnerability by upgrading dependencies
+- fixed parser only parsing first occurrence of `[a]` in a blob of text
+
 ## [0.4.13] 2018-07-31
 ### Fixed
 - fixed security vulnerabilities by upgrading dependencies
