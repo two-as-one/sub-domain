@@ -35,7 +35,7 @@ BREAST_CONFIGS.push([1, 0, 0, 0]) //make an exception for a single breast
 export default class Breasts extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
-      size: 5, //in bust inches
+      size: 0, //in bust inches
       sensitivity: 0.5,
       quantity: 2,
       milk: 0, //milk production

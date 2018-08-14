@@ -1,6 +1,22 @@
 import Chance from "chance"
 import Grammar from "grammar/grammar"
 
+import Anus from "parts/anus"
+import Balls from "parts/balls"
+import Body from "parts/body"
+import Breasts from "parts/breasts"
+import Face from "parts/face"
+import Feet from "parts/feet"
+import Hands from "parts/hands"
+import Head from "parts/head"
+import Mouth from "parts/mouth"
+import Nipples from "parts/nipples"
+import Penis from "parts/penis"
+import Tail from "parts/tail"
+import Udder from "parts/udder"
+import Vagina from "parts/vagina"
+
+
 const chance = new Chance()
 
 const STAT_BASE = 5
@@ -36,6 +52,26 @@ export default class Entity {
     this.multiple = false
 
     this.stored = Object.assign({}, this.defaults, config)
+
+    this.parts = {
+      anus: new Anus(this),
+      balls: new Balls(this),
+      body: new Body(this),
+      breasts: new Breasts(this),
+      face: new Face(this),
+      feet: new Feet(this),
+      hands: new Hands(this),
+      head: new Head(this),
+      mouth: new Mouth(this),
+      nipples: new Nipples(this),
+      penis: new Penis(this),
+      tail: new Tail(this),
+      udder: new Udder(this),
+      vagina: new Vagina(this)
+    }
+
+    // make parts directly accessible on entity, ie `entity.hands`
+    Object.keys(this.parts).forEach(key => (this[key] = this.parts[key]))
   }
 
   get defaults() {
@@ -309,7 +345,7 @@ export default class Entity {
     return target.arouse(
       this.arousePower *
         target.likes(ownPart) *
-        target.sensitivity(targetPart) *
+        target[targetPart].sensitivity *
         2
     )
   }
@@ -336,7 +372,7 @@ export default class Entity {
     return (
       this.lustNormalized *
         this.likes(position.focus.player) *
-        this.sensitivity(position.focus.enemy) >
+        this[position.focus.enemy].sensitivity >
       0.2
     )
   }
@@ -424,26 +460,6 @@ export default class Entity {
   }
 
   /**
-   * Determines how sensitive a given part is
-   * Extend this with a custom function when implementing bespoke entities
-   * @param  {Part} part - The part to check
-   * @return {Number}    A multiplier to be applied where relevant
-   */
-  sensitivity(part) {
-    return 0.5
-  }
-
-  /**
-   * Find the diameter of a given part, used by dilation
-   * Extend this with a custom function when implementing bespoke entities
-   * @param  {Part} part - The part to check
-   * @return {Number}    The diameter of the part
-   */
-  getDiameter(part) {
-    return 0
-  }
-
-  /**
    * Method that applies a transformation to the player
    * Extend this with a custom function when implementing bespoke entities
    * @param  {Entity} player - The player to infect
@@ -524,8 +540,12 @@ export default class Entity {
   // Capability flags
   //-----------------
 
-  has(part) {
-    return false
+  get has() {
+    const out = {}
+
+    Object.keys(this.parts).forEach(key => out[key] = this[key].has)
+
+    return out
   }
 }
 

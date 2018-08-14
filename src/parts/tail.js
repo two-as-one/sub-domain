@@ -4,17 +4,8 @@ import Part from "./_super"
 export default class Tail extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
-      quantity: 0,
-      type: "human"
+      quantity: 0
     })
-  }
-
-  get type() {
-    return this.stored.type
-  }
-
-  set type(val) {
-    this.stored.type = val
   }
 
   get description() {

@@ -1,22 +1,8 @@
-import Anus from "parts/anus"
-import Balls from "parts/balls"
-import Body from "parts/body"
-import Breasts from "parts/breasts"
 import Entity from "entities/_super"
-import Face from "parts/face"
-import Feet from "parts/feet"
 import G from "grammar/grammar"
-import Hands from "parts/hands"
-import Head from "parts/head"
 import Inventory from "./inventory"
-import Mouth from "parts/mouth"
-import Nipples from "parts/nipples"
-import Penis from "parts/penis"
 import PerkManager from "perks/_manager"
-import Tail from "parts/tail"
 import TransformationManager from "transformations/_manager"
-import Udder from "parts/udder"
-import Vagina from "parts/vagina"
 import { persist } from "save/saveable"
 import statBarTemplate from "templates/stat-bar.hbs"
 
@@ -31,26 +17,6 @@ export default class Player extends Entity {
 
     this.inventory = new Inventory(this)
 
-    this.parts = {
-      anus: new Anus(this),
-      balls: new Balls(this),
-      body: new Body(this),
-      breasts: new Breasts(this),
-      face: new Face(this),
-      feet: new Feet(this),
-      hands: new Hands(this),
-      head: new Head(this),
-      mouth: new Mouth(this),
-      nipples: new Nipples(this),
-      penis: new Penis(this),
-      tail: new Tail(this),
-      udder: new Udder(this),
-      vagina: new Vagina(this)
-    }
-
-    // make parts directly accessible on player, ie player.hands
-    Object.keys(this.parts).forEach(key => (this[key] = this.parts[key]))
-
     // restore & persist state of player and parts
     persist(this, "player-stats")
     Object.keys(this.parts).forEach(key =>
@@ -62,13 +28,8 @@ export default class Player extends Entity {
   }
 
   /**
-   * Allows the formation of sentences describing the player or the player and their conjoined twin if applicable
-   * Use with caution and just use 'you' where applicable
-   * when to use:
-   *   When performing an action: `${player.who} swing your fists at the opponent`
-   * when NOT to use:
-   *   When referring to the player directly: 'You gained ${xp}XP'
-   *   When it would overload the sentence: '${player.who} talked while you took a shower'
+   * hook for the text parser
+   * describes `you` or `both of you` in case of conjoinment
    */
   get who() {
     if (this.head.quantity === 2) {
@@ -78,7 +39,7 @@ export default class Player extends Entity {
     }
   }
 
-  // shortcut to player.who, allows dynamic text to be written more clearly `${p.you}`
+  // shortcut to player.who
   get you() {
     return this.who
   }
@@ -110,15 +71,6 @@ export default class Player extends Entity {
 
   // Derived Stats
   //--------------
-
-  //determines sensitivity based on parts
-  sensitivity(name) {
-    if (this.has(name)) {
-      return this.getPart(name).stored.sensitivity
-    } else {
-      return 0.25
-    }
-  }
 
   //let weapon modify attack power
   get attackPower() {
@@ -271,22 +223,25 @@ export default class Player extends Entity {
 
   // Parts
   //------
+  //
+  /**
+   * map of things the player has
+   * works for: parts, perks
+   * ie: `player.has.penis`
+   *
+   * NOTE: do not use this functionality within parts or perks as it causes circular dependencies
+   */
+  get has() {
+    const out = super.has
 
-  getPart(name) {
-    return this[name] || {}
+    this.perks._PERKS.forEach(perk => out[perk.name] = this.perks.has(perk.name))
+
+    return out
   }
 
-  /**
-   * Check whether the player has a specific part
-   * @param  {String|Array}  name - A single part name or an Array of part names
-   * @return {Boolean}       returns true if the player has said part, if an array was passed only true will be returned if the player has all the parts asked for
-   */
-  has(name) {
-    if (Array.isArray(name)) {
-      return name.map(part => this.has(part)).every(result => result)
-    }
-
-    return Boolean(this.getPart(name).has)
+  // shorcut to `player.has` for where it makes more grammatical sense
+  get have () {
+    return this.has
   }
 
   // Player description

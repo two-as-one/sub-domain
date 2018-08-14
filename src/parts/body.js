@@ -43,7 +43,7 @@ export default class Body extends Part {
   get adjective() {
     const list = []
 
-    if (this.owner.perks.has("conjoined")) {
+    if (this.owner.perks && this.owner.perks.has("conjoined")) {
       list.push("shared")
     }
 

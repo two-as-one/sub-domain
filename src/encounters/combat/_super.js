@@ -174,7 +174,7 @@ export default class CombatEncounter extends Scene {
     let bonus = 0
 
     //up to 50% bonus damage based on how much lust the player has
-    if (this.player.perks.has("sadist")) {
+    if (this.player.has.sadist) {
       bonus = Math.round(damage * this.player.lustNormalized * 0.5)
       this.enemy.stored.dmg += bonus
     }
@@ -352,7 +352,7 @@ export default class CombatEncounter extends Scene {
     let lust = 0
 
     //if the player is a masochist, convert 25% damage to lust
-    if (this.player.perks.has("masochist")) {
+    if (this.player.has.masochist) {
       lust = Math.ceil(damage * 0.25)
       damage = Math.floor(damage * 0.75)
 
@@ -540,8 +540,8 @@ export default class CombatEncounter extends Scene {
 
     //dilation
     if (this.fucking) {
-      const playerPart = this.player.getPart(this.position.focus.player)
-      const dilation = this.enemy.getDiameter(this.position.focus.enemy) || 0
+      const playerPart = this.player[this.position.focus.player]
+      const dilation = this.enemy[this.position.focus.enemy].diameter || 0
 
       if (typeof playerPart.dilate === "function") {
         dilationMessage = playerPart.dilate(dilation) || ""
@@ -824,7 +824,6 @@ export default class CombatEncounter extends Scene {
   }
 
   /** output dynamic strings */
-  // TODO - work with new position system
   get debugDynamic() {
     return G.trim(
       this.positions

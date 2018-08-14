@@ -69,8 +69,8 @@ export class Position {
 
   // check whether this position is available for use
   get available() {
-    const player = this.playerParts.every(part => this.player.has(part))
-    const enemy = this.enemyParts.every(part => this.enemy.has(part))
+    const player = this.playerParts.every(part => this.player.has[part])
+    const enemy = this.enemyParts.every(part => this.enemy.has[part])
 
     return Boolean(player && enemy)
   }
@@ -86,7 +86,7 @@ export class Position {
   // check whether this position is enabled
   // this is different from available because it will still be visible in the interface but not be selectable by the player
   get enabled() {
-    return this.playerParts.every(part => this.player.getPart(part).functional)
+    return this.playerParts.every(part => this.player[part].functional)
   }
 
   get disabled() {

@@ -12,7 +12,8 @@ export default class Part {
     return {
       quantity: 0,
       size: 0,
-      sensitivity: 0.25
+      sensitivity: 0.25,
+      type: 'human'
     }
   }
 
@@ -28,17 +29,17 @@ export default class Part {
     return "none"
   }
 
-  //only return a description if the player has this part
+  // only return a description if the player has this part
   get description() {
     return ""
   }
 
-  //define a message for when the player attempts to seduce using this part
+  // define a message for when the player attempts to seduce using this part
   get seductionMessage() {
     return ""
   }
 
-  //return true if the player can seduce with this part
+  // return true if the player can seduce with this part
   get canSeduce() {
     return false
   }
@@ -49,6 +50,19 @@ export default class Part {
 
   set size(val) {
     this.stored.size = Math.round(val * 100) / 100
+  }
+
+  // extend this with some part-specific formula to determine diameter
+  get diameter() {
+    return 0
+  }
+
+  get type() {
+    return this.stored.type
+  }
+
+  set type(val) {
+    this.stored.type = val
   }
 
   get quantity() {
@@ -119,17 +133,17 @@ export default class Part {
     return true
   }
 
-  //determine by how much this part grows or shrinks
+  // determine by how much this part grows or shrinks
   get growth() {
     return 1
   }
 
-  //define one or more singulars of this part
+  // define one or more singulars of this part
   get singular() {
     return "part"
   }
 
-  //define one or more plurals for this part
+  // define one or more plurals for this part
   get plural() {
     return "parts"
   }
@@ -199,6 +213,10 @@ export default class Part {
 
   get number() {
     return Grammar.number(this.quantity)
+  }
+
+  get that() {
+    return this.quantity === 1 ? 'that' : 'those'
   }
 }
 

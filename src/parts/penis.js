@@ -6,7 +6,7 @@ export default class Penis extends Part {
     return Object.assign(super.defaults, {
       size: 6, //in inches
       sensitivity: 0.75,
-      quantity: 1
+      quantity: 0
     })
   }
 
@@ -18,11 +18,16 @@ export default class Penis extends Part {
     return true
   }
 
+  // TODO - better formula
+  get diameter () {
+    return this.size / 5
+  }
+
   get description() {
     let text = ""
 
     if (this.has) {
-      if (this.owner.lustNormalized < 0.5 || this.owner.perks.has("impotent")) {
+      if (this.owner.lustNormalized < 0.5 || !this.functional) {
         text = `Dangling `
       } else {
         text = `Throbbing with arousal `
@@ -69,7 +74,6 @@ export default class Penis extends Part {
       "dong",
       "cock",
       "shaft",
-      "member",
       "pecker",
       "phallus"
     ])
@@ -82,7 +86,6 @@ export default class Penis extends Part {
       "dongs",
       "cocks",
       "shafts",
-      "members",
       "peckers",
       "phalluses"
     ])
@@ -91,7 +94,7 @@ export default class Penis extends Part {
   get adjective() {
     let adjectives
 
-    if (this.owner.perks.has("impotent")) {
+    if (!this.functional) {
       return Grammar.random(["limp", "useless"])
     }
 
@@ -112,6 +115,10 @@ export default class Penis extends Part {
     } else {
       adjectives.push("throbbing")
       adjectives.push("erect")
+    }
+
+    if (this.type !== 'human') {
+      adjectives.push(this.type)
     }
 
     return Grammar.random(adjectives)

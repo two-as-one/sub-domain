@@ -9,7 +9,7 @@ export default class Head extends Part {
   }
 
   get quantity() {
-    if (this.owner.perks.has("conjoined")) {
+    if (this.owner.perks && this.owner.perks.has("conjoined")) {
       return 2
     } else {
       return 1

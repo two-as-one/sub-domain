@@ -12,6 +12,11 @@ export default class Minotaur extends Entity {
     this.giveRandomStats(this.stored.lvl * 2, ["str", "stam"])
 
     this.loot = "minotaur-spunk"
+
+    this.penis.size = 16
+    this.penis.quantity = 2
+    this.penis.type = 'bovine'
+    this.balls.quantity = 2
   }
 
   likes(part) {
@@ -26,27 +31,6 @@ export default class Minotaur extends Entity {
         return 0.25
       default:
         return 0.5
-    }
-  }
-
-  has(part) {
-    switch (part) {
-      case "penis":
-      case "anus":
-      case "hands":
-      case "mouth":
-        return true
-      default:
-        return false
-    }
-  }
-
-  getDiameter(partName) {
-    switch (partName) {
-      case "penis":
-        return 3.5
-      default:
-        return 0
     }
   }
 

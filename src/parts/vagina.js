@@ -6,7 +6,7 @@ export default class Vagina extends Part {
     return Object.assign(super.defaults, {
       size: 0.8, //diameter of opening
       sensitivity: 0.75,
-      quantity: 1
+      quantity: 0
     })
   }
 

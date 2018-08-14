@@ -52,14 +52,14 @@ export default class CharacterCreationScene extends Scene {
     switch (data.sex) {
       case "man":
         gender = "boy"
-        this.game.player.breasts.size = 0
-        this.game.player.vagina.quantity = 0
+        this.game.player.penis.quantity = 1
+        this.game.player.balls.quantity = 2
         break
       case "woman":
         gender = "girl"
-        this.game.player.penis.quantity = 0
-        this.game.player.balls.quantity = 0
+        this.game.player.breasts.size = 5
         this.game.player.nipples.size = 0.4
+        this.game.player.vagina.quantity = 1
         break
     }
 
