@@ -22,9 +22,9 @@ export default class BreastMilkier extends Transformation {
     const milky = breasts.stored.milk === 1 ? "milky" : "milkier"
 
     return `
-      Your chest starts aching as [your.breasts] feel *just so full*.
-      [you] look down and notice beads of milk forming around [your.nipples].
+      Your chest starts aching as [your:adjective:breasts] feel *just so full*.
+      [you] look down and notice beads of milk forming around [your:nipples].
 
-      **[your.breasts]~>have grown ${milky}!**`
+      **[all of:your:breasts]~>have grown ${milky}!**`
   }
 }

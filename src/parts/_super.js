@@ -13,12 +13,16 @@ export default class Part {
       quantity: 0,
       size: 0,
       sensitivity: 0.25,
-      type: 'human'
+      type: "human"
     }
   }
 
   get name() {
-    return `${this.owner.their} 50%${this.adjective} ${this.pluralized}`
+    if (this.quantity === 1) {
+      return this.singular
+    } else {
+      return this.plural
+    }
   }
 
   get person() {
@@ -148,34 +152,46 @@ export default class Part {
     return "parts"
   }
 
-  get pluralized() {
-    if (this.quantity === 1) {
-      return this.singular
+  // picks a random adjective from the list of available adjectives
+  get adjective() {
+    let adjectives = this.adjectives
+    if (!Array.isArray(adjectives)) {
+      adjectives = [adjectives]
+    }
+
+    if (adjectives.length) {
+      return Grammar.random(adjectives) || ""
     } else {
-      return this.plural
+      return adjectives[0] || ""
     }
   }
 
-  get adjective() {
-    return "sexy"
+  get adjectives() {
+    const adjectives = []
+
+    // adds type to adjectives if its noteworthy
+    if (this.type !== "human") {
+      adjectives.push(this.type)
+    }
+
+    return adjectives
   }
 
   // refers to specifically ALL of this part
   get all() {
     if (this.quantity === 1) {
-      return this.name
+      return ""
     } else if (this.quantity === 2) {
-      return `both of ${this.name}`
+      return "both of"
     } else {
-      return `all 50%${this.number} of ${this.name}`
+      return `all ${this.number} of`
     }
   }
 
   // refers to specifically 1 of this part (or the closest available quantity)
   get one() {
     if (this.quantity > 1) {
-      return `
-        one of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
+      return "one of"
     } else {
       return this.all
     }
@@ -184,8 +200,7 @@ export default class Part {
   // refers to specifically 2 of this part (or the closest available quantity)
   get two() {
     if (this.quantity > 2) {
-      return `
-        two of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
+      return "two of"
     } else {
       return this.all
     }
@@ -194,8 +209,7 @@ export default class Part {
   // refers to specifically 3 of this part (or the closest available quantity)
   get three() {
     if (this.quantity > 3) {
-      return `
-        three of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
+      return "three of"
     } else {
       return this.all
     }
@@ -204,8 +218,7 @@ export default class Part {
   // refers to specifically 4 of this part (or the closest available quantity)
   get four() {
     if (this.quantity > 4) {
-      return `
-        four of your 50%${this.number} 50%${this.adjective} ${this.pluralized}`
+      return "four of"
     } else {
       return this.all
     }
@@ -216,7 +229,7 @@ export default class Part {
   }
 
   get that() {
-    return this.quantity === 1 ? 'that' : 'those'
+    return this.quantity === 1 ? "that" : "those"
   }
 }
 

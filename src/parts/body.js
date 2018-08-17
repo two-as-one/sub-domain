@@ -40,16 +40,14 @@ export default class Body extends Part {
     return "bodies"
   }
 
-  get adjective() {
+  get adjectives() {
     const list = []
 
     if (this.owner.perks && this.owner.perks.has("conjoined")) {
       list.push("shared")
     }
 
-    list.push("")
-
-    return Grammar.random(list)
+    return list
   }
 
   get height() {

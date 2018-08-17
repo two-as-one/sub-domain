@@ -28,8 +28,4 @@ export default class Mouth extends Part {
   get plural() {
     return Grammar.random(["mouths"])
   }
-
-  get adjective() {
-    return ""
-  }
 }

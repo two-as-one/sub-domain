@@ -26,8 +26,4 @@ export default class Tail extends Part {
   get plural() {
     return Grammar.random(["tails"])
   }
-
-  get adjective() {
-    return ""
-  }
 }

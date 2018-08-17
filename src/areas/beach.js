@@ -33,7 +33,7 @@ export default class Beach extends Area {
 
       You're still alive … and somehow free.
 
-      [you] try to get up but [your.body] hurts all over — maybe you'll just lay down for a little longer.`
+      [you] try to get up but [your:body] hurts all over — maybe you'll just lay down for a little longer.`
   }
 
   get dayDescription() {
@@ -54,7 +54,7 @@ export default class Beach extends Area {
 
   get exploreMessage() {
     return chance.pickone([
-      `The soft sand caresses [your.feet] as [you] explore the **beach**.`,
+      `The soft sand caresses [your:feet] as [you] explore the **beach**.`,
       `You/have a long walk along the **beach**.`
     ])
   }

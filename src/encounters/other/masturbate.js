@@ -9,33 +9,33 @@ class FingerAss extends Position {
   }
 
   idle(p) {
-    return `You're fingering [your.anus.one].`
+    return `You're fingering [one of:your:adjective:anus].`
   }
 
   playerStart(p) {
     return `
       Reaching down between your legs, you let your middle finger trace the
-      contour of [your.anus.one]. A soft moan escapes your lips as you push your
-      finger inside. Pausing for a moment to savour the wonderful sensation,
-      but you can't resist much longer and quickly pick up the pace —
-      continually fingering [your.anus.one].`
+      contour of [one of:your:adjective:anus]. A soft moan escapes your lips as
+      you push your finger inside. Pausing for a moment to savour the wonderful
+      sensation. Though you can't resist much longer and quickly pick up the
+      pace — continually fingering [that:adjective:anus] of yours.`
   }
 
   playerContinue(p) {
     return `
-      With [your.hands.one] between your legs, you playfully finger
-      [your.anus.one] — your middle finger sliding in and out. It occasionally
-      pops all the way out, but you eagerly slide it back in.`
+      With [your:hands] between your legs, you playfully finger
+      [one of:your:adjective:anus]. Your middle finger sliding in and out of
+      it, occasionally popping all the way out before eagerly sliding back in.`
   }
 
   climax(p) {
     return `
-      [your.anus.one]~>squirm hungrily as you ceaselessly finger it. [you] lose
-      yourself to the amazing sensation and cry out with pure ecstasy as an
-      earth-shattering anal orgasm overwhelms [your.body]. Your entire body
+      [your:adjective:anus]~>squirm hungrily as you ceaselessly finger [them].
+      Losing yourself to the amazing sensation and crying out with pure ecstasy
+      as an earth-shattering anal orgasm overwhelms [you]. Your entire body
       quivering and shaking while [you] slowly regain your senses.
 
-      [you] smile, licking your fingers with satisfaction while you bask in the
+      You smile, licking your fingers with satisfaction while you bask in the
       glory of the aftermath.`
   }
 
@@ -52,15 +52,14 @@ class JerkOff extends Position {
   }
 
   idle(p) {
-    return `You're jerking [your.penis].`
+    return `You're jerking [two of:your:adjective:penis].`
   }
 
   playerStart(p) {
     return `
-      You reach down for [your.penis] with [your.hands.two] and groan as you
-      start jerking [your.penis.them] — slowly and steadily. Soon
-      [your.hands.two]~>get all sticky as you drool pre all over
-      [your.hands.them].`
+      Reaching down between your legs, you grab [two of:your:adjective:penis]
+      and groan as you start jerking [them] — slowly and steadily. Soon
+      [all of:your:hands]~>get sticky as you drool pre all over [them].`
   }
 
   // TODO - text missing
@@ -70,10 +69,10 @@ class JerkOff extends Position {
 
   climax(p) {
     return `
-      Your groans get louder and more erratic as [your.penis]~>throb with
-      anticipation. You find yourself jerking [them] furiously — lost
-      in primal sensation. Then, as a shiver runs down your spine, you burst out
-      with pure ecstasy — spurting cum all over yourself.
+      Your groans get louder and more erratic as [your:adjective:penis]~>throb
+      with anticipation. You find yourself jerking [them] furiously — lost in
+      the primal sensation. Then, as a shiver runs down your spine, [you] burst
+      out with pure ecstasy — spurting cum all over yourself.
 
       Moments pass as [you] revel in the fading afterglow.`
   }
@@ -201,7 +200,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
         might get there.`
     } else if (lust < 0.3) {
       return `
-        You're feeling a little horny and [your.body] lusts for more.`
+        You're feeling a little horny and [your:body] lusts for more.`
     } else if (lust < 0.6) {
       return `
         Your body feels warm and tingly and your mind is flooded with dirty

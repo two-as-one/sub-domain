@@ -30,10 +30,10 @@ export default class Udder extends Part {
       }
 
       if (this.quantity === 1) {
-        text += `you/have **[a] ${this.adjective} ${this.pluralized}**`
+        text += `you/have **[a] ${this.adjective} ${this.name}**`
       } else {
         text += `
-          you/have **${this.number} ${this.adjective} ${this.pluralized}**`
+          you/have **${this.number} ${this.adjective} ${this.name}**`
       }
 
       text += ` with **${Grammar.number(this.teats)} teats**`
@@ -62,15 +62,19 @@ export default class Udder extends Part {
     return Grammar.random(["udders"])
   }
 
-  get adjective() {
+  get adjectives() {
+    const adjectives = super.adjectives
+
     if (this.size < 4) {
-      return Grammar.random(["small", "little", "perky"])
+      adjectives.push("small", "little", "perky")
     } else if (this.size < 8) {
-      return Grammar.random(["modest", "sizable"])
+      adjectives.push("modest", "sizable")
     } else if (this.size < 12) {
-      return Grammar.random(["hefty", "heavy", "large"])
+      adjectives.push("hefty", "heavy", "large")
     } else {
-      return Grammar.random(["humongous", "enormous", "massive", "imposing"])
+      adjectives.push("humongous", "enormous", "massive", "imposing")
     }
+
+    return adjectives
   }
 }

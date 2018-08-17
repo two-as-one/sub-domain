@@ -22,7 +22,7 @@ export default class BreastsNew extends Transformation {
     return `
       Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      Your chest has swollen and **you now have [your.breasts.number]
-      50%[adjective] [pluralized]!**`
+      Your chest has swollen and **you now have
+      [number:adjective:breasts(your)]!**`
   }
 }

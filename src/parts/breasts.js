@@ -88,7 +88,7 @@ export default class Breasts extends Part {
       const number = this.number
       const adjective = this.adjective
       const cupSize = this.cupSize
-      const tits = this.pluralized
+      const tits = this.name
 
       text += `**${number} ${adjective} ${cupSize} ${tits}**`
 
@@ -179,30 +179,30 @@ export default class Breasts extends Part {
     return Grammar.random(choices)
   }
 
-  get adjective() {
-    const list = []
+  get adjectives() {
+    const adjectives = super.adjectives
 
     if (this.size === 0) {
       return "flat"
     }
 
     if (this.size < 4) {
-      list.push("small", "little", "perky")
+      adjectives.push("small", "little", "perky")
     } else if (this.size < 8) {
-      list.push("modest", "sizeable")
+      adjectives.push("modest", "sizeable")
     } else if (this.size < 12) {
-      list.push("hefty", "heavy", "large")
+      adjectives.push("hefty", "heavy", "large")
     } else {
-      list.push("humongous", "enormous", "massive", "imposing")
+      adjectives.push("humongous", "enormous", "massive", "imposing")
     }
 
     if (this.milky) {
-      list.push("milky", "bountiful")
+      adjectives.push("milky", "bountiful")
     }
 
-    list.push("sensitive")
+    adjectives.push("sensitive", "soft")
 
-    return Grammar.random(list)
+    return adjectives
   }
 
   get cupSize() {

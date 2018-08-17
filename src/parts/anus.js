@@ -15,9 +15,9 @@ export default class Anus extends Part {
 
     if (this.has) {
       if (this.quantity === 1) {
-        description = `[a] ${this.adjective} ${this.pluralized}`
+        description = `[a] ${this.adjective} ${this.name}`
       } else {
-        description = `${this.number} ${this.adjective} ${this.pluralized}`
+        description = `${this.number} ${this.adjective} ${this.name}`
       }
 
       return `**${description}** nestled in between.`
@@ -60,20 +60,24 @@ export default class Anus extends Part {
     return Grammar.random(["anuses", "buttholes", "rectums", "rosebuds"])
   }
 
-  get adjective() {
+  get adjectives() {
+    const adjectives = super.adjectives
+
     if (this.size < 1) {
-      return Grammar.random(["tight", "firm"])
+      adjectives.push("tight", "firm")
     } else if (this.size < 3) {
-      return Grammar.random(["used", "sloppy", "loose"])
+      adjectives.push("used", "sloppy", "loose")
     } else {
-      return Grammar.random([
+      adjectives.push(
         "ravenous",
         "greedy",
         "wide",
         "gluttonous",
         "gaping",
         "cavernous"
-      ])
+      )
     }
+
+    return adjectives
   }
 }

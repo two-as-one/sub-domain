@@ -21,6 +21,6 @@ export default class PenisNew extends Transformation {
       Your groin feels hot and itchy — as you reach down to scratch, [you]
       notice something unusual.
 
-      **You have grown a tiny new [your.penis.singular]!**`
+      **You have grown a tiny new [penis]!**`
   }
 }

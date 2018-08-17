@@ -16,8 +16,4 @@ export default class Hands extends Part {
   get plural() {
     return Grammar.random(["hands"])
   }
-
-  get adjective() {
-    return ""
-  }
 }

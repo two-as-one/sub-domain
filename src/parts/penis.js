@@ -19,7 +19,7 @@ export default class Penis extends Part {
   }
 
   // TODO - better formula
-  get diameter () {
+  get diameter() {
     return this.size / 5
   }
 
@@ -38,11 +38,11 @@ export default class Penis extends Part {
       if (this.quantity === 1) {
         text += `
           you/have **[a] ${this.adjective} ${this.size} inch
-          ${this.pluralized}**`
+          ${this.name}**`
       } else {
         text += `
           you/have **${this.number} ${this.adjective} ${this.size} inch
-          ${this.pluralized}**`
+          ${this.name}**`
       }
 
       if (this.size < 2) {
@@ -91,36 +91,29 @@ export default class Penis extends Part {
     ])
   }
 
-  get adjective() {
-    let adjectives
-
-    if (!this.functional) {
-      return Grammar.random(["limp", "useless"])
-    }
+  get adjectives() {
+    const adjectives = super.adjectives
 
     if (this.size < 2) {
-      adjectives = ["minuscule"]
+      adjectives.push("minuscule")
     } else if (this.size < 4) {
-      adjectives = ["cute", "tiny", "useless"]
+      adjectives.push("cute", "tiny", "useless")
     } else if (this.size < 7) {
-      adjectives = ["average", "medium", "ordinary", "unexceptional"]
+      adjectives.push("average", "medium", "ordinary", "unexceptional")
     } else if (this.size < 12) {
-      adjectives = ["large", "impressive", "generous", "hefty"]
+      adjectives.push("large", "impressive", "generous", "hefty")
     } else {
-      adjectives = ["monstrous", "giant", "humongous"]
+      adjectives.push("monstrous", "giant", "humongous")
     }
 
-    if (this.owner.lustNormalized < 0.5) {
+    if (!this.functional) {
+      adjectives.push("limp", "useless")
+    } else if (this.owner.lustNormalized < 0.5) {
       adjectives.push("flaccid")
     } else {
-      adjectives.push("throbbing")
-      adjectives.push("erect")
+      adjectives.push("throbbing", "erect")
     }
 
-    if (this.type !== 'human') {
-      adjectives.push(this.type)
-    }
-
-    return Grammar.random(adjectives)
+    return adjectives
   }
 }

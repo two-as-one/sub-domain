@@ -6,12 +6,12 @@ export default class Impotent extends Perk {
   }
 
   get description() {
-    return `[your.penis]~>be limp and useless.`
+    return `[all of:your:penis]~>be limp and useless.`
   }
 
   get effect() {
     return `
-      You can't get hard and [your.penis] can't be used for any sexual moves.`
+      You can't get hard and [your:penis] can't be used for any sexual moves.`
   }
 
   get available() {

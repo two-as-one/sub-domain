@@ -45,11 +45,11 @@ export default class Balls extends Part {
         text += ` **${this.number}`
       }
 
-      text += ` ${this.pluralized}**`
+      text += ` ${this.name}**`
 
       if (!this.owner.penis.has) {
         if (this.owner.vagina.has) {
-          const your_pussy = this.owner.vagina.pluralized
+          const your_pussy = this.owner.vagina.name
           text += ` — it somehow allows your ${your_pussy} to squirt semen.`
         } else {
           text += ` — without any outlet for semen, you are constantly aroused.`
@@ -74,11 +74,11 @@ export default class Balls extends Part {
     let text = `your ${this.adjective} scrotum`
 
     if (this.quantity === 1) {
-      text += ` with its singular ${this.pluralized}`
+      text += ` with its singular ${this.name}`
     } else if (this.quantity === 2) {
-      text += ` with both of its ${this.pluralized}`
+      text += ` with both of its ${this.name}`
     } else {
-      text += ` with all of its ${this.pluralized}`
+      text += ` with all of its ${this.name}`
     }
 
     return text
@@ -96,17 +96,19 @@ export default class Balls extends Part {
     return this.quantity * this.size
   }
 
-  get adjective() {
+  get adjectives() {
+    const adjectives = super.adjectives
+
     if (!this.stored.external) {
-      return "internal"
+      adjectives.push("internal")
+    } else if (this.scrotumSize < 4) {
+      adjectives.push("tight")
+    } else if (this.scrotumSize < 8) {
+      adjectives.push("heavy", "saggy")
+    } else {
+      adjectives.push("monstrous")
     }
 
-    if (this.scrotumSize < 4) {
-      return "tight"
-    } else if (this.scrotumSize < 8) {
-      return Grammar.random(["heavy", "saggy"])
-    } else {
-      return `monstrous`
-    }
+    return adjectives
   }
 }

@@ -33,7 +33,7 @@ export default class Player extends Entity {
    */
   get who() {
     if (this.head.quantity === 2) {
-      return G.random(["both of you", "you both", "you"])
+      return G.random(["both of you", "you both", "you", "you", "you"])
     } else {
       return super.who
     }
@@ -234,13 +234,15 @@ export default class Player extends Entity {
   get has() {
     const out = super.has
 
-    this.perks._PERKS.forEach(perk => out[perk.name] = this.perks.has(perk.name))
+    this.perks._PERKS.forEach(
+      perk => (out[perk.name] = this.perks.has(perk.name))
+    )
 
     return out
   }
 
   // shorcut to `player.has` for where it makes more grammatical sense
-  get have () {
+  get have() {
     return this.has
   }
 

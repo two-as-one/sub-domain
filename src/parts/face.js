@@ -23,8 +23,4 @@ export default class Face extends Part {
   get plural() {
     return Grammar.random(["faces"])
   }
-
-  get adjective() {
-    return ""
-  }
 }

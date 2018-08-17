@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.15]
+### Changed
+- big changes made to the parser, refer to PARSER.md for documentation
+- all entities now have parts like the player, allowing them to be used by the parser
+
 ## [0.4.14] 2018-08-02
 ### Fixed
 - fixed security vulnerability by upgrading dependencies

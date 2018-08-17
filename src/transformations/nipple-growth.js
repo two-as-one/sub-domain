@@ -22,7 +22,7 @@ export default class NippleGrowth extends Transformation {
     return `
       Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **[your.nipples]~>have swollen and permanently >grow longer and
+      **[your:nipples]~>have swollen and permanently >grow longer and
       thicker!**`
   }
 }

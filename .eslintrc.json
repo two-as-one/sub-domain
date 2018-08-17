@@ -91,6 +91,7 @@
         "no-caller": "error",
         "no-catch-shadow": "off",
         "no-confusing-arrow": "error",
+        "no-console": "off",
         "no-constant-condition": [
             "error",
             {

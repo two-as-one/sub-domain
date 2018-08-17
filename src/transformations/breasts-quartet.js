@@ -21,6 +21,6 @@ export default class BreastsQuartet extends Transformation {
     return `
       Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **you now have [your.breasts.number] 50%[adjective] [pluralized]!**`
+      **you now have [number:adjective:breasts(your)]**`
   }
 }

@@ -61,7 +61,7 @@ export default class Forest extends Area {
   get sunriseMessage() {
     return `
       [you] wake up from an uncomfortable night of sleep, due to the high temperature and humidity.
-      A bright ray of sunshine pierces through the canopy and shines straight on [your.face].`
+      A bright ray of sunshine pierces through the canopy and shines straight on [your:face].`
   }
 
   explore() {

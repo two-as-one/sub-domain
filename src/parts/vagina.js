@@ -21,9 +21,9 @@ export default class Vagina extends Part {
       }
 
       if (this.quantity === 1) {
-        text += `**[a] ${this.adjective} ${this.pluralized}**`
+        text += `**[a] ${this.adjective} ${this.name}**`
       } else {
-        text += `**${this.number} ${this.adjective} ${this.pluralized}**`
+        text += `**${this.number} ${this.adjective} ${this.name}**`
       }
 
       if (this.owner.penis.has) {
@@ -74,20 +74,24 @@ export default class Vagina extends Part {
     ])
   }
 
-  get adjective() {
+  get adjectives() {
+    const adjectives = super.adjectives
+
     if (this.size < 1) {
-      return Grammar.random(["tight", "firm"])
+      adjectives.push("tight", "firm")
     } else if (this.size < 3) {
-      return Grammar.random(["used", "sloppy", "loose", "plump"])
+      adjectives.push("used", "sloppy", "loose", "plump")
     } else {
-      return Grammar.random([
+      adjectives.push(
         "ravenous",
         "greedy",
         "wide",
         "gluttonous",
         "gaping",
         "cavernous"
-      ])
+      )
     }
+
+    return adjectives
   }
 }

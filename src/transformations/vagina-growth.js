@@ -22,6 +22,6 @@ export default class VaginaGrowth extends Transformation {
         trickle down your inner thighs. You grow hot and horny and reach down
         between your legs to find out why.
 
-        **[your.vagina]~>have grown plumper!**`
+        **[all of:your:adjective:vagina]~>have grown plumper!**`
   }
 }

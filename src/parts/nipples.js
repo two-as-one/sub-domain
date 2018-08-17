@@ -20,7 +20,7 @@ export default class Nipples extends Part {
       const a =
         this.stored.quantity === 1 ? "a" : Grammar.number(this.stored.quantity)
       text += `sporting **${a} ${this.adjective} ${this.size} inch ${
-        this.pluralized
+        this.name
       }**.`
     }
 
@@ -39,17 +39,17 @@ export default class Nipples extends Part {
     return Grammar.random(["nipples", "nips"])
   }
 
-  get adjective() {
-    const list = []
+  get adjectives() {
+    const adjectives = super.adjectives
 
     if (this.size < 0.4) {
-      list.push("small", "modest", "perky")
+      adjectives.push("small", "modest", "perky")
     } else if (this.size < 2) {
-      list.push("prominent", "noticeable", "sizeable")
+      adjectives.push("prominent", "noticeable", "sizeable")
     } else {
-      list.push("teat-like")
+      adjectives.push("teat-like")
     }
 
-    return Grammar.random(list)
+    return adjectives
   }
 }

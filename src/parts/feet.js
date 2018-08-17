@@ -16,8 +16,4 @@ export default class Feet extends Part {
   get plural() {
     return Grammar.random(["feet"])
   }
-
-  get adjective() {
-    return ""
-  }
 }

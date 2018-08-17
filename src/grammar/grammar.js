@@ -362,25 +362,6 @@ export default class Grammar {
   }
 
   /**
-   * Leaves out words a percentage of time
-   * Gives a percentage chance for a word to appear
-   * examples:
-   *    "You 50%silly sod" -> 50% chance of "You sod" or "You silly sod"
-   */
-  static maybe(text = "") {
-    return text.replace(/(\w*)%(\w*)/g, (match, chance, word) => {
-      chance = Number(chance)
-      if (Number.isNaN(chance)) {
-        return match
-      }
-
-      chance /= 100
-
-      return Math.random() < chance ? word : ""
-    })
-  }
-
-  /**
    * conjugates all verbs in a blob of text
    * mark the subject by trailing it with a `~`
    * mark the verb by prepending it with `>`
@@ -417,14 +398,13 @@ export default class Grammar {
    * @return {String}      the cleaned up text
    */
   static clean(text = "") {
-    text = text.split(/\n\n|\r\r/)
-    text = text
+    text = parse(text)
+      .split(/\n\n|\r\r/)
       .map(text => parse(text))
       .map(text => Grammar.collapse(text))
       .map(text => Grammar.unundefined(text))
       .filter(text => text)
       .map(text => Grammar.conjugate(text))
-      .map(text => Grammar.maybe(text))
       .map(text => Grammar.trim(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))

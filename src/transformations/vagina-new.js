@@ -23,6 +23,6 @@ export default class VaginaNew extends Transformation {
         stronger and starts feeling good — *really good*. The sensation
         overwhelms [you] and you soon find yourself crying out with joy.
 
-        **You have grown a brand new [your.vagina.singular]!**`
+        **You have grown a brand new pussy!**`
   }
 }

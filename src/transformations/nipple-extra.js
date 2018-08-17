@@ -19,6 +19,6 @@ export default class NippleExtra extends Transformation {
     return `
       Your chest feels tingly and hot. [you] look down and quickly realize why.
 
-      **[your.breasts]~>have grown an additional nipple!**`
+      **[each of:your:breasts]~>have grown an additional nipple!**`
   }
 }

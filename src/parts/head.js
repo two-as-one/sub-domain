@@ -26,8 +26,4 @@ export default class Head extends Part {
   get plural() {
     return Grammar.random(["heads"])
   }
-
-  get adjective() {
-    return ""
-  }
 }
