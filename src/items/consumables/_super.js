@@ -18,4 +18,8 @@ export default class Consumable extends Item {
 
     return ""
   }
+
+  get description() {
+    return `**Restores ${this.hunger} hunger.**`
+  }
 }

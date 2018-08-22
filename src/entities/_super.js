@@ -16,7 +16,6 @@ import Tail from "parts/tail"
 import Udder from "parts/udder"
 import Vagina from "parts/vagina"
 
-
 const chance = new Chance()
 
 const STAT_BASE = 5
@@ -319,6 +318,8 @@ export default class Entity {
     amount = Entity.damageFormula(amount, this.deflection, this.variance)
     this.health -= Math.ceil(amount)
 
+    this.damaged = amount
+
     return amount
   }
 
@@ -359,6 +360,8 @@ export default class Entity {
   arouse(amount = 0) {
     amount = Entity.damageFormula(amount, this.numbness, this.variance)
     this.lust += Math.ceil(amount)
+
+    this.aroused = amount
 
     return amount
   }
@@ -543,7 +546,7 @@ export default class Entity {
   get has() {
     const out = {}
 
-    Object.keys(this.parts).forEach(key => out[key] = this[key].has)
+    Object.keys(this.parts).forEach(key => (out[key] = this[key].has))
 
     return out
   }

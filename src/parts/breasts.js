@@ -140,10 +140,11 @@ export default class Breasts extends Part {
 
   get seductionMessage() {
     return Grammar.random([
-      `[you] cup [your.breasts] and make [them] jiggle — squeezing [them]
-       playfully.`,
-      `With [your.hands] behind [your.head], you shake your bosom. Making
-       [your.breasts] jiggle in a delightfully delicious display.`
+      `you cup [two of:your:adjective:breasts] and make [them] jiggle — squeezing
+      [them] playfully.`,
+      `With [your:hands] behind [your:head], you shake your bosom. Making
+       [all of:your:adjective:breasts] jiggle in a delightfully delicious
+       display.`
     ])
   }
 
@@ -152,31 +153,38 @@ export default class Breasts extends Part {
   }
 
   get singular() {
-    let choices = ["breast", "boob", "tit", "mammary"]
-
     if (this.size === 0) {
-      return "pec"
+      return ["pec"]
     }
+
+    const choices = ["breast", "boob", "tit", "mammary"]
 
     if (this.size > 8) {
-      choices = choices.concat(["knocker", "jug", "melon"])
+      choices.push("knocker", "jug", "melon")
     }
 
-    return Grammar.random(choices)
+    return choices
   }
 
   get plural() {
-    let choices = ["breasts", "boobs", "boobies", "tits", "mammaries"]
-
     if (this.size === 0) {
-      return "pecs"
+      return ["pecs"]
     }
+
+    const choices = [
+      "breasts",
+      "boobs",
+      "boobies",
+      "tits",
+      "titties",
+      "mammaries"
+    ]
 
     if (this.size > 8) {
-      choices = choices.concat(["knockers", "jugs", "melons"])
+      choices.push("knockers", "jugs", "melons")
     }
 
-    return Grammar.random(choices)
+    return choices
   }
 
   get adjectives() {

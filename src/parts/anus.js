@@ -28,9 +28,9 @@ export default class Anus extends Part {
 
   get seductionMessage() {
     return Grammar.random([
-      `You turn around and place [your.hands] on your hips.
+      `You turn around and place [your:hands] on your hips.
         Looking back over your shoulder, [you] invitingly sway your bottom back and forth.
-        Then, with a playful smirk on [your.face], you firmly slap your own ass.`,
+        Then, with a playful smirk on [your:face], you firmly slap your own ass.`,
       `You turn around and bend over.
         Looking at [foe] from between your own legs, you invitingly shake your ass at [them].`
     ])
@@ -44,7 +44,7 @@ export default class Anus extends Part {
     if (this.size < size) {
       this.grow()
 
-      return `**[your.anus]~>have been stretched** and >be now looser.`
+      return `**[your:adjective:anus]~>have been stretched** and >be now looser.`
     }
   }
 
@@ -53,11 +53,11 @@ export default class Anus extends Part {
   }
 
   get singular() {
-    return Grammar.random(["anus", "butthole", "rectum", "rosebud"])
+    return ["anus", "butthole", "rectum", "rosebud"]
   }
 
   get plural() {
-    return Grammar.random(["anuses", "buttholes", "rectums", "rosebuds"])
+    return ["anuses", "buttholes", "rectums", "rosebuds"]
   }
 
   get adjectives() {

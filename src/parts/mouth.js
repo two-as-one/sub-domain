@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Mouth extends Part {
@@ -22,10 +21,10 @@ export default class Mouth extends Part {
   }
 
   get singular() {
-    return Grammar.random(["mouth"])
+    return ["mouth"]
   }
 
   get plural() {
-    return Grammar.random(["mouths"])
+    return ["mouths"]
   }
 }

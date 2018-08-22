@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Feet extends Part {
@@ -10,10 +9,10 @@ export default class Feet extends Part {
   }
 
   get singular() {
-    return Grammar.random(["foot"])
+    return ["foot"]
   }
 
   get plural() {
-    return Grammar.random(["feet"])
+    return ["feet"]
   }
 }

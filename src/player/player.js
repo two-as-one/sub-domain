@@ -207,6 +207,8 @@ export default class Player extends Entity {
 
   //give some exp to the player
   giveXP(amount) {
+    this.xpGained = amount
+
     this.stored.xp += amount
   }
 

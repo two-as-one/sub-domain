@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Balls extends Part {
@@ -85,11 +84,11 @@ export default class Balls extends Part {
   }
 
   get singular() {
-    return Grammar.random(["ball", "testicle"])
+    return ["ball", "testicle"]
   }
 
   get plural() {
-    return Grammar.random(["balls", "testicles"])
+    return ["balls", "testicles"]
   }
 
   get scrotumSize() {

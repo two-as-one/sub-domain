@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Face extends Part {
@@ -17,10 +16,10 @@ export default class Face extends Part {
   set quantity(val) {}
 
   get singular() {
-    return Grammar.random(["face"])
+    return ["face"]
   }
 
   get plural() {
-    return Grammar.random(["faces"])
+    return ["faces"]
   }
 }

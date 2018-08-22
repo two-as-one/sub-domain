@@ -33,11 +33,11 @@ export default class Body extends Part {
   }
 
   get singular() {
-    return "body"
+    return ["body"]
   }
 
   get plural() {
-    return "bodies"
+    return ["bodies"]
   }
 
   get adjectives() {

@@ -86,7 +86,7 @@ export default class Forest extends Area {
   }
 
   findMeatyMushroom() {
-    const item = this.game.player.inventory.loot("meaty-mushroom")
+    this.game.scene.item = this.game.player.inventory.loot("meaty-mushroom")
 
     return `
       You find an odd mushroom.
@@ -94,7 +94,7 @@ export default class Forest extends Area {
       It kinda looks and feels like a cock.
       You pick it up, and bring it back to camp.
 
-      **${item.name}** added to inventory.`
+      **[item]** added to inventory.`
   }
 
   nothingHappened() {
@@ -107,6 +107,6 @@ export default class Forest extends Area {
       About an hour later [you] end up back at your camp.
       You had no idea you were going in a circle, but you've learned a little about this place.
 
-      You gain **${xp}xp**`
+      You gain **[xp]**`
   }
 }

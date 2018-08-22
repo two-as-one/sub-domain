@@ -34,12 +34,11 @@ Gifts:
 Shrines:
 - Rare encounters when exploring
 - Player can choose to pray to receive a `gift`
-
+- Gifts should unlock things that the player would normally not have access to, ie: `hyper shrine`
 
 ## areas
 
 ## BUGS
- - player lust NaN
  - fix masturbate encounter
 
 ## automated testing
@@ -47,6 +46,11 @@ Shrines:
 
 ## design choices
 redesign intro - bring power back to the player
-add guardian of phallus that must be satisfied before shrine
+get rid of hunger mechanic, it's lame. what to do with consumables? (increase stats, give exp, heal?)
 
-change `50%word` to `[50%word]`
+
+add seductionMessage for udder
+
+
+## parser
+add [weapon(yours)] and [armor(yours)]

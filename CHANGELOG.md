@@ -12,6 +12,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.16] 2018-08-22
+### Added
+- added `[item]`, `[xp]`, `[damage]` and `[lust]` support to the parser
+  - `[item]` describes the last item interacted with
+  - `[xp]` describes the last amount of exp gained by the subject, (may need to specify with `(you)`)
+  - `[damage]` describes the last amount of damage received by the subject, (may need to specify with `(you)` or  `(foe)`)
+  - `[lust]` describes the last amount of lust received by the subject, (may need to specify with `(you)` or `(foe)`)
+- added fallback entities for the parser to use if the current scene lacks them
+  - `(foe)` falls back to `nobody`
+  - `(item)` falls back to `a rock`
+
+### Fixed
+- fixed infections not working
+
 ## [0.4.15] 2018-08-17
 ### Changed
 - big changes made to the parser, refer to PARSER.md for documentation
@@ -43,7 +57,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Text parser now supports conditions in the form of `[condition?foo|bar]`
 
 ### Removed
-- Removed perks that didn't fit with the game direction
+- removed perks that didn't fit with the game direction
 - removed `slippery when wet` perk
 - removed `subbie` perk
 - removed `total sub` perk

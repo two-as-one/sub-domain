@@ -10,7 +10,7 @@ export default class MeatyMushroom extends Consumable {
       A mushroom with a long, thick stalk and a small pinkish cap. It has a
       skin-like texture and throbs inexplicably when you touch it — weird!
 
-      **Restores ${this.hunger} hunger.**`
+      ${super.description}`
   }
 
   consume(player) {

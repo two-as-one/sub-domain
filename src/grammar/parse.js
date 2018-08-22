@@ -98,6 +98,7 @@ class Parser {
         }
       })
       .join(" ")
+      .trim()
 
     // TODO: prevent duplicate adjectives showing up
     // TODO: prevent type being used as adjective, if type is also part of the frag
@@ -124,11 +125,13 @@ class Parser {
     switch (key) {
       case "foe":
       case "their":
-        return game.scene.enemy
+        return game.scene.enemy || game.nobody
       case "you":
       case "your":
       case "yours":
         return game.player
+      case "item":
+        return game.scene.item || game.rock
     }
 
     return null
@@ -140,6 +143,22 @@ class Parser {
 
   an() {
     return "[an]"
+  }
+
+  item(subject) {
+    return subject.name
+  }
+
+  damage(subject) {
+    return `${Number(subject.damaged) || 0} damage`
+  }
+
+  lust(subject) {
+    return `${Number(subject.aroused) || 0} lust`
+  }
+
+  xp() {
+    return `${Number(game.player.xpGained) || 0}xp`
   }
 
   title(subject) {
@@ -159,11 +178,11 @@ class Parser {
   }
 
   "each of"(subject) {
-    return subject.quantity > 1 ? "each of" : ""
+    return subject.quantity > 2 ? "each of" : subject.all
   }
 
   "every one of"(subject) {
-    return subject.quantity > 1 ? "every one of" : ""
+    return subject.quantity > 2 ? "every one of" : subject.all
   }
 
   "all of"(subject) {
@@ -239,16 +258,16 @@ class Parser {
     }
   }
 
-  you() {
-    return game.player.who
+  you(subject) {
+    return subject.who
   }
 
   your() {
     return "your"
   }
 
-  foe() {
-    return game.scene.enemy.who
+  foe(subject) {
+    return subject.who
   }
 }
 

@@ -36,10 +36,13 @@ In this section we will explain additional syntax that can be used when writing 
 
 2. [conditionals](#conditionals-condition)
 3. [`[a]` and `[an]`](#a-and-an)
-4. [verb conjugation](#verb-conjugation-)
-5. [contractions](#contractions-)
-6. [markdown](#markdown)
-7. [cleanup](#cleanup)
+4. [`[item]`](#item) TODO
+5. [`[damage]` and `[lust]`](#damage-and-lust) TODO
+6. [`[xp]`](#xp) TODO
+7. [verb conjugation](#verb-conjugation-)
+8. [contractions](#contractions-)
+9. [markdown](#markdown)
+10. [cleanup](#cleanup)
     1. [trim text](#trim-text)
     2. [capitalize](#capitalize)
     3. [undefined](#undefined)

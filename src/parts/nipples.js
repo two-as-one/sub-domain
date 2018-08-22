@@ -19,9 +19,8 @@ export default class Nipples extends Part {
     } else {
       const a =
         this.stored.quantity === 1 ? "a" : Grammar.number(this.stored.quantity)
-      text += `sporting **${a} ${this.adjective} ${this.size} inch ${
-        this.name
-      }**.`
+      text += `
+        sporting **${a} ${this.adjective} ${this.size} inch ${this.name}**.`
     }
 
     return text
@@ -32,11 +31,11 @@ export default class Nipples extends Part {
   }
 
   get singular() {
-    return Grammar.random(["nipple", "nip"])
+    return ["nipple", "nip"]
   }
 
   get plural() {
-    return Grammar.random(["nipples", "nips"])
+    return ["nipples", "nips"]
   }
 
   get adjectives() {

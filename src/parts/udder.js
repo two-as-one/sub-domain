@@ -55,11 +55,11 @@ export default class Udder extends Part {
   }
 
   get singular() {
-    return Grammar.random(["udder"])
+    return ["udder"]
   }
 
   get plural() {
-    return Grammar.random(["udders"])
+    return ["udders"]
   }
 
   get adjectives() {

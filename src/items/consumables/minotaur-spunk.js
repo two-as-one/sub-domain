@@ -9,7 +9,7 @@ export default class MinotaurSpunk extends Consumable {
     return `
       An elongated vial containing what appears to be goopy cream.
 
-      **Restores ${this.hunger} hunger.**`
+      ${super.description}`
   }
 
   consume(player) {

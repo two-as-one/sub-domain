@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Transformation from "./_super"
 
 /**
@@ -31,13 +30,11 @@ export default class VaginaExtra extends Transformation {
     vagina.add()
     vagina.arouse(30)
 
-    const ordinal = Grammar.ordinal(vagina.quantity - 1)
-
     return `
       You/have an uncontrollable itch between your legs and the sensation builds
       up until you reach some sort of pseudo-orgasm. You feel a trickle down
       your inner thigh. Gasping — [you] look down and notice why.
 
-      **You have grown a ${ordinal} pussy!**`
+      **You have grown an extra pussy!**`
   }
 }

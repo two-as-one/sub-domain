@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Penis extends Part {
@@ -59,8 +58,9 @@ export default class Penis extends Part {
 
   get seductionMessage() {
     return `
-        With a wicked smirk on [your.face], [you] firmly grab [your.penis].
-        Jerking [them] a few times while humping the air.`
+        With [your.face.multiple?wicked smirks|a wicked smirk] on [your:face],
+        [you] firmly grab [one of:your:adjective:penis]. Jerking it a few times
+        while humping the air.`
   }
 
   get canSeduce() {
@@ -68,27 +68,23 @@ export default class Penis extends Part {
   }
 
   get singular() {
-    return Grammar.random([
-      "penis",
-      "dick",
-      "dong",
-      "cock",
-      "shaft",
-      "pecker",
-      "phallus"
-    ])
+    const words = ["penis", "dick", "dong", "cock", "shaft", "phallus"]
+
+    if (this.size < 4) {
+      words.push("pecker")
+    }
+
+    return words
   }
 
   get plural() {
-    return Grammar.random([
-      "penises",
-      "dicks",
-      "dongs",
-      "cocks",
-      "shafts",
-      "peckers",
-      "phalluses"
-    ])
+    const words = ["penises", "dicks", "dongs", "cocks", "shafts", "phalluses"]
+
+    if (this.size < 4) {
+      words.push("peckers")
+    }
+
+    return words
   }
 
   get adjectives() {
@@ -108,8 +104,10 @@ export default class Penis extends Part {
 
     if (!this.functional) {
       adjectives.push("limp", "useless")
-    } else if (this.owner.lustNormalized < 0.5) {
+    } else if (this.owner.lustNormalized < 0.15) {
       adjectives.push("flaccid")
+    } else if (this.owner.lustNormalized < 0.3) {
+      adjectives.push("semi-erect")
     } else {
       adjectives.push("throbbing", "erect")
     }

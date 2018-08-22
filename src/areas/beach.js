@@ -108,25 +108,25 @@ export default class Beach extends Area {
   }
 
   findClam() {
-    const item = this.game.player.inventory.loot("clam")
+    this.game.scene.item = this.game.player.inventory.loot("clam")
 
     return `
       You find a peculiar looking clam laying on the beach.
 
       You pick it up, then head back to camp.
 
-      **${item.name}** added to inventory.`
+      **[item]** added to inventory.`
   }
 
   findMilk() {
-    const item = this.game.player.inventory.loot("milk")
+    this.game.scene.item = this.game.player.inventory.loot("milk")
 
     return `
       You stumble upon a half-buried bottle in the sand.
 
       You pick it up, then head back to camp.
 
-      **${item.name}** added to inventory.`
+      **[item]** added to inventory.`
   }
 
   nothingHappened() {
@@ -138,6 +138,6 @@ export default class Beach extends Area {
     return `
       After a long and uneventful stroll along the coast, [you] decide to head back to camp.
 
-      You gain **${xp}xp**`
+      You gain **[xp]**`
   }
 }

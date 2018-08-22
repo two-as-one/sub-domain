@@ -9,6 +9,8 @@ import Mastrubate from "encounters/other/masturbate"
 import Player from "player/player"
 import TitleScreen from "scenes/title-screen"
 import World from "world"
+import Nobody from "entities/nobody"
+import Rock from "items/consumables/rock"
 
 class Game {
   constructor() {
@@ -147,6 +149,12 @@ class Game {
   init() {
     this.player = new Player()
     this.world = new World(this)
+
+    // fallback [foe] for the parser
+    this.nobody = new Nobody()
+
+    // fallback [item] for the parser
+    this.rock = new Rock()
   }
 
   /**

@@ -11,7 +11,7 @@ class Anal extends Position {
 
   idle(p, e) {
     return `
-      [foe]~>have [their:adjective:penis] lodged deep inside
+      [foe]~>have [all of:their:adjective:penis] lodged deep inside
       [your:adjective:anus].`
   }
 
@@ -20,22 +20,23 @@ class Anal extends Position {
       [you] turn your back towards [foe], shaking your ass a few times before
       bending over. On all fours and with your ass pointing up, [you] look back
       over your shoulders at [foe]. [they]~>snort, unable to resist and with
-      one hand on [their:penis] and the other on your ass, [they]~ brutally
-      >ram [their:adjective:penis] deep into [one of:your:adjective:anus].`
+      one hand on [their:penis] and the other on your ass, [they(foe)]~ brutally
+      >ram [all of:their:adjective:penis] deep into
+      [one of:your:adjective:anus].`
   }
 
   enemyStart(p, e) {
     return `
       [foe]~>grab you by your wrist then >pin [you] face first down against the
       ground. Snorting hungrily like a bull, [foe]~>look down at your ass
-      before brutally ramming [their:adjective:penis] into
+      before brutally ramming [all of:their:adjective:penis] into
       [one of:your:adjective:anus].`
   }
 
   playerContinue(p, e) {
     return `
-      [you] squeeze down on [that:adjective:penis(foe)]~ that ceaselessly >keep
-      pounding away at your ass.`
+      [you] squeeze down on [all of:that:adjective:penis(foe)]~ that ceaselessly
+      >keep pounding away at your ass.`
   }
 
   enemyContinue(p, e) {
@@ -51,8 +52,8 @@ class Anal extends Position {
       [foe]~>fall down on [their] back — pulling [you] down with [them(foe)],
       impaling you on [their:adjective:penis]. As the beast recovers from its
       ordeal, [you] slowly and carefully get up. Feeling
-      [that:adjective:penis(foe)] sliding out of your abused hole while beads of
-      cum trickle down your thighs.`
+      [all of:that:adjective:penis(foe)] sliding out of your abused hole while
+      beads of cum trickle down your thighs.`
   }
 }
 

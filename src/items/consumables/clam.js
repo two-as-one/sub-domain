@@ -10,7 +10,7 @@ export default class Clam extends Consumable {
       A large fist-sized clam. It stays open, even as you poke the fleshy and
       moist insides — quite unlike any clam you've ever seen.
 
-      **Restores ${this.hunger} hunger.**`
+      ${super.description}`
   }
 
   consume(player) {

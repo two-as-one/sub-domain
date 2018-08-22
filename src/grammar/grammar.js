@@ -417,4 +417,5 @@ export default class Grammar {
 
 if (process.env.dev) {
   window.Grammar = Grammar
+  window.parse = parse
 }

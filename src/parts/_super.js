@@ -19,9 +19,9 @@ export default class Part {
 
   get name() {
     if (this.quantity === 1) {
-      return this.singular
+      return Grammar.random(this.singular)
     } else {
-      return this.plural
+      return Grammar.random(this.plural)
     }
   }
 

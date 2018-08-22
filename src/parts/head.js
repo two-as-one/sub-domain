@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Head extends Part {
@@ -20,10 +19,10 @@ export default class Head extends Part {
   set quantity(val) {}
 
   get singular() {
-    return Grammar.random(["head"])
+    return ["head"]
   }
 
   get plural() {
-    return Grammar.random(["heads"])
+    return ["heads"]
   }
 }

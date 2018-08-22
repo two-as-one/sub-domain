@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Vagina extends Part {
@@ -38,9 +37,9 @@ export default class Vagina extends Part {
 
   get seductionMessage() {
     return `
-        You spread your legs lightly while facing [foe]. Placing [your.hands] on
+        You spread your legs lightly while facing [foe]. Placing [your:hands] on
         your inner thighs and sensually moving [them] upwards towards
-        [your.vagina] but never quite reaching [them].`
+        [your:adjective:vagina] but never quite reaching [them].`
   }
 
   get canSeduce() {
@@ -51,7 +50,7 @@ export default class Vagina extends Part {
     if (this.size < size) {
       this.grow()
 
-      return `**[your.vagina]~>have been stretched** and >be now looser.`
+      return `**[your:adjective:vagina]~>have been stretched** and >be now looser.`
     }
   }
 
@@ -60,18 +59,11 @@ export default class Vagina extends Part {
   }
 
   get singular() {
-    return Grammar.random(["vagina", "pussy", "cunt", "cunny", "slit", "vulva"])
+    return ["vagina", "pussy", "cunt", "cunny", "slit", "vulva"]
   }
 
   get plural() {
-    return Grammar.random([
-      "vaginas",
-      "pussies",
-      "cunts",
-      "cunnies",
-      "slits",
-      "vulvae"
-    ])
+    return ["vaginas", "pussies", "cunts", "cunnies", "slits", "vulvae"]
   }
 
   get adjectives() {

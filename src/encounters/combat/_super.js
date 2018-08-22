@@ -144,12 +144,12 @@ export default class CombatEncounter extends Scene {
     if (this.player.isStarving) {
       message += `
 
-        **${this.player.you} are severely weakened due to your starvation!**`
+        **[you] are severely weakened due to your starvation!**`
     }
     if (this.player.isHungry) {
       message += `
 
-        **${this.player.you} are hungry and weakened.**`
+        **[you] are hungry and weakened.**`
     }
 
     // disabled for now... need to make a decision on whether the player can use items during combat
@@ -214,7 +214,7 @@ export default class CombatEncounter extends Scene {
     responses.push({ state: "main", text: "back" })
 
     this.render({
-      text: `How do you want to try to seduce ${this.enemy.who}?`,
+      text: `How do you want to try to seduce [foe]?`,
       responses: responses
     })
   }
@@ -549,7 +549,7 @@ export default class CombatEncounter extends Scene {
     }
 
     //infection
-    if (this.fucking && this.fucking.infects) {
+    if (this.fucking && this.position.infects) {
       const transformation = this.enemy.infect(this.player)
 
       if (transformation) {
@@ -643,16 +643,16 @@ export default class CombatEncounter extends Scene {
   attackResultsMessage(damage) {
     return `
 
-    You deal **${damage} damage**`
+    You deal **[damage(foe)]**`
   }
 
   attackedResultsMessage(damage, lust) {
     let text = `
 
-      You suffer **${damage} damage**`
+      You suffer **[damage(you)]**`
 
     if (lust) {
-      text += `, it feels good — you gain **${lust} lust**`
+      text += `, it feels good — you gain **[lust(you)]**`
     }
 
     return text
@@ -661,13 +661,13 @@ export default class CombatEncounter extends Scene {
   seduceResultsMessage(lust) {
     return `
 
-      [foe] gains **${lust} lust**`
+      [foe] gains **[lust(foe)]**`
   }
 
   seducedResultsMessage(lust) {
     return `
 
-      You gain **${lust} lust**`
+      You gain **[lust(you)]**`
   }
 
   tooHornyMessage(p) {
@@ -679,16 +679,18 @@ export default class CombatEncounter extends Scene {
   tooWeakMessage(p) {
     return `
 
-      [you] have lost all strength in [your.body] and are unable to resist.`
+      [you] have lost all strength in [your:body] and are unable to resist.`
   }
 
   gainMessage(xp, item) {
     let text = `
 
-      Gained **${xp}xp**`
+      Gained **[xp]**`
 
     if (item) {
-      text += ` and found **${item.name}**`
+      this.game.scene.item = item
+
+      text += ` and found **[item]**`
     }
 
     return text

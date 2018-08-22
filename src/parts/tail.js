@@ -1,4 +1,3 @@
-import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Tail extends Part {
@@ -10,9 +9,9 @@ export default class Tail extends Part {
 
   get description() {
     if (this.has) {
-      switch (this.stored.type) {
+      switch (this.type) {
         case "bovine":
-          return `a slender **bovine tail** — swaying back and forth. It has your sking tone and ends in a tuft of hair.`
+          return `a slender **bovine tail** — swaying back and forth. It has your skin tone and ends in a tuft of hair.`
       }
     }
 
@@ -20,10 +19,10 @@ export default class Tail extends Part {
   }
 
   get singular() {
-    return Grammar.random(["tail"])
+    return ["tail"]
   }
 
   get plural() {
-    return Grammar.random(["tails"])
+    return ["tails"]
   }
 }
