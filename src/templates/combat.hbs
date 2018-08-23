@@ -1,6 +1,6 @@
 {{#unless hideStats}}
   <div class="player">
-    <span class="name">{{player.name}} <span class="nowrap">[LVL {{player.stored.lvl}}]</span></span>
+    <span class="name"><span class="nowrap">[LVL {{player.stored.lvl}}]</span> you</span>
 
     {{> stat-bar
         class="health"
@@ -18,18 +18,22 @@
   </div>
 
   <div class="opponent">
-    <span class="name">{{#if enemy.name}}{{enemy.name}}{{else}}{{enemy.title}}{{/if}} <span class="nowrap">[LVL {{enemy.stored.lvl}}]</span></span>
+    <span class="name"><span class="nowrap">[LVL {{enemy.stored.lvl}}]</span> {{#if enemy.name}}{{enemy.name}}{{else}}{{enemy.title}}{{/if}}</span>
 
     {{> stat-bar
         class="health"
         label="HP"
-        hidden=true
+        current=enemy.health
+        max=enemy.healthMax
+        hidden=hideEnemyNumbers
         percentage=enemy.healthPercentage}}
 
     {{> stat-bar
         class="lust"
         label="Lust"
-        hidden=true
+        current=enemy.lust
+        max=enemy.lustMax
+        hidden=hideEnemyNumbers
         percentage=enemy.lustPercentage}}
   </div>
 {{/unless}}

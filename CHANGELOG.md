@@ -12,7 +12,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [0.4.16] 2018-08-22
+## [0.4.17] - 2018-08-23
+### Added
+- added `perception` stat
+  - grants additional information to the player
+    - see opponent hp/lust
+    - see opponent stats when examining
+  - not fully implemented
+
+### Changed
+- removed hunger mechanic and all code related to it (hunger is a lame mechanic)
+- consuming items now always has an effect
+- chance to gain exp added to the list of possible effects
+- `gear` and `perks` removed from the `self` menu until these mechanics become relevant
+
+### Fixed
+- fixed minotaur having two dicks
+- fixed layout of player/enemy health/lust bars during combat
+
+## [0.4.16] - 2018-08-22
 ### Added
 - added `[item]`, `[xp]`, `[damage]` and `[lust]` support to the parser
   - `[item]` describes the last item interacted with
@@ -26,31 +44,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - fixed infections not working
 
-## [0.4.15] 2018-08-17
+## [0.4.15] - 2018-08-17
 ### Changed
 - big changes made to the parser, refer to PARSER.md for documentation
 - all entities now have parts like the player, allowing them to be used by the parser
 
-## [0.4.14] 2018-08-02
+## [0.4.14] - 2018-08-02
 ### Fixed
 - fixed security vulnerability by upgrading dependencies
 - fixed parser only parsing first occurrence of `[a]` in a blob of text
 
-## [0.4.13] 2018-07-31
+## [0.4.13] - 2018-07-31
 ### Fixed
 - fixed security vulnerabilities by upgrading dependencies
 
-## [0.4.12] 2018-07-31
+## [0.4.12] - 2018-07-31
 ### Fixed
 - fixed critical bug that prevented the game from running
 
-## [0.4.11] 2018-07-31
+## [0.4.11] - 2018-07-31
 ### Added
 - The parser now supports `[a]` and `[an]`
 - The game now supports sub-scenes, these are mini-scenes that can be reused and injected into the current scene without interrupting it
   - ie, inspecting an item or opening the player inventory
 
-## [0.4.10] 2018-07-16
+## [0.4.10] - 2018-07-16
 ### Changed
 - Version number is now a link and points to this document
 - The player no longer gains perks when leveling up - perks will only be obtainable via in-game events

@@ -16,7 +16,7 @@ export default class TransformationManager {
   }
 
   //picks a random transformation out of a list of transformation names
-  pickOne(list, potency = 0.5) {
+  pickOne(list, potency = 1) {
     list = list
       .map(name => this._TRANSFORMATIONS.find(item => item.name === name))
       .filter(item => item)

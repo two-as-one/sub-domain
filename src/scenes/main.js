@@ -66,11 +66,9 @@ export default class MainScene extends Scene {
     let text = this.area.description
 
     if (this.game.world.day) {
-      text =
-        (this.game.player.woundedDescription ||
-          this.game.player.arousedDescription ||
-          this.game.player.hungerDescription) +
-        `
+      text = `
+          ${this.game.player.woundedDescription ||
+            this.game.player.arousedDescription}
 
           ${text}`
     }
@@ -232,8 +230,10 @@ export default class MainScene extends Scene {
       static: this.game.player.statsDescription,
       responses: [
         { text: "examine body", state: "body" },
-        { text: "gear", state: "gear" },
-        { text: "perks", state: "perks" },
+        // DISABLED UNTIL MORE GEAR
+        // { text: "gear", state: "gear" },
+        // DISABLED UNTIL USEFUL PERKS
+        // { text: "perks", state: "perks" },
         { text: "masturbate", state: "masturbate" },
         { text: "back", state: "main" }
       ]

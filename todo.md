@@ -43,9 +43,14 @@ Shrines:
 
 ## automated testing
 
+## challenge rating
+instead of [LVL], show challenge rating in combat
+
+trivial > easy > challenging > difficult > impossible
+
 
 ## design choices
-redesign intro - bring power back to the player
+redesign intro - bring power back to the player, group professions so they grant bonuses to multiple stats
 get rid of hunger mechanic, it's lame. what to do with consumables? (increase stats, give exp, heal?)
 
 
@@ -54,3 +59,18 @@ add seductionMessage for udder
 
 ## parser
 add [weapon(yours)] and [armor(yours)]
+
+## parts to add
+- hips (derived)
+- legs
+- arms
+- butt
+- shoulders (derived)
+
+## stats
+## intelligence
+player.int > foe.int / 2 -> see hp/lust
+player.int > foe.int -> see actual stats when inspecting
+player.int > foe.int * 2 -> see percentage chance against each action (or damage/lust ranges)
+
+

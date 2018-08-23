@@ -14,8 +14,8 @@ export default class Minotaur extends Entity {
     this.loot = "minotaur-spunk"
 
     this.penis.size = 16
-    this.penis.quantity = 2
-    this.penis.type = 'bovine'
+    this.penis.quantity = 1
+    this.penis.type = "bovine"
     this.balls.quantity = 2
   }
 

@@ -84,7 +84,7 @@ export default class Beach extends Area {
     //always discover forest first
     if (!this.game.world.forest.discovered) {
       return this.discoverForest()
-      //guarantee finding a clam at lvl 1 - since the player will have just gone hungry, it teaches them they can find food by exploring
+      //guarantee finding a clam at lvl 1 - teaches the player about consumables
     } else if (lvl === 2) {
       return this.findClam()
     } else {

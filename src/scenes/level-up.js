@@ -30,6 +30,12 @@ const STATS = [
     name: "Willpower",
     label: "Mental fortitude",
     desc: ""
+  },
+  {
+    key: "prc",
+    name: "Perception",
+    label: "Situational awareness",
+    desc: ""
   }
 ]
 

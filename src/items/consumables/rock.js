@@ -11,10 +11,6 @@ export default class Rock extends Consumable {
       nothing particularly interesting about it.`
   }
 
-  get hunger() {
-    return 0
-  }
-
   consume(player) {
     super.consume(player)
 

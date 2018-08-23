@@ -8,9 +8,7 @@ export default class Clam extends Consumable {
   get description() {
     return `
       A large fist-sized clam. It stays open, even as you poke the fleshy and
-      moist insides — quite unlike any clam you've ever seen.
-
-      ${super.description}`
+      moist insides — quite unlike any clam you've ever seen.`
   }
 
   consume(player) {
@@ -21,6 +19,7 @@ export default class Clam extends Consumable {
       it slip effortlessly down your throat. It tastes salty like sea water.
 
       ${player.transform.pickOne([
+        "gain minor xp",
         "increase vagina size",
         "grow a new vagina"
       ])}`

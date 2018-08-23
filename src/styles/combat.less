@@ -2,9 +2,9 @@
 
 .combat {
   .static {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
     align-items: flex-start;
     margin-bottom: 20px;
     font-size: @font-size;
@@ -12,21 +12,12 @@
 
   .player,
   .opponent {
-    max-width: 45vw;
-    min-width: 250px;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
     overflow: hidden;
-
-    @media (max-width: 516px) {
-      min-width: 50%;
-
-      &.opponent {
-        margin-left: 16px;
-      }
-    }
   }
 
   .name {
@@ -34,5 +25,7 @@
     border-bottom: 2px solid @color-foreground;
     margin-bottom: 4px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

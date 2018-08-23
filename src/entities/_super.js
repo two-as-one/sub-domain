@@ -81,6 +81,7 @@ export default class Entity {
       will: STAT_BASE,
       char: STAT_BASE,
       dex: STAT_BASE,
+      prc: STAT_BASE,
       dmg: 0,
       lust: 0
     }
@@ -135,6 +136,13 @@ export default class Entity {
    */
   get dexterity() {
     return this.stored.dex + this.stored.lvl * LEVEL_STAT_SCALE
+  }
+
+  /**
+   * PERCEPTION - gives information about actions
+   */
+  get perception() {
+    return this.stored.prc + this.stored.lvl * LEVEL_STAT_SCALE
   }
 
   // Life totals
@@ -517,17 +525,22 @@ export default class Entity {
    * @param  {Number} attack   - the incoming attack damage
    * @param  {Number} defence  - the level of defence
    * @param  {Number} variance - a level of variance
+   * @param  {Number} rand     - use a specific value instead of a random one
    * @return {Number}          The actual damage inflicted
    */
-  static damageFormula(attack = 0, defence = 0, variance = 0) {
+  static damageFormula(attack = 0, defence = 0, variance = 0, rand) {
     return Math.round(
-      attack * (attack / (attack + defence)) * Entity.vary(variance)
+      attack * (attack / (attack + defence)) * Entity.vary(variance, rand)
     )
   }
 
   /** Formula that varies a number */
-  static vary(variance) {
-    return Math.random() * (variance * 2) + (1 - variance)
+  static vary(variance, rand) {
+    if (typeof rand != "number") {
+      rand = Math.random()
+    }
+
+    return rand * (variance * 2) + (1 - variance)
   }
 
   /**

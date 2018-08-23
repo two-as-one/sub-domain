@@ -49,24 +49,8 @@ export default class Player extends Entity {
 
   get defaults() {
     return Object.assign(super.defaults, {
-      xp: 0,
-      hunger: 11 //starts at 11 so that it takes 2 explorations to become hungry
+      xp: 0
     })
-  }
-
-  // Base Stats
-  //-----------
-
-  get strength() {
-    return this.applyHungerToStat(super.strength)
-  }
-
-  get charisma() {
-    return this.applyHungerToStat(super.charisma)
-  }
-
-  get dexterity() {
-    return this.applyHungerToStat(super.dexterity)
   }
 
   // Derived Stats
@@ -87,44 +71,6 @@ export default class Player extends Entity {
     return super.arousePower + this.armor.arousePower
   }
 
-  // Hunger
-  //-------
-
-  //returns a value by which all offensive base stats will be modified with based on hunger level
-  get hungerModifier() {
-    if (this.isStarving) {
-      return -this.stored.lvl - 5
-    }
-
-    if (this.isHungry) {
-      return -1
-    }
-
-    if (this.isWellFed) {
-      return 1
-    }
-
-    return 0
-  }
-
-  //modifies a stat based on hunger level
-  applyHungerToStat(stat) {
-    return Math.max(Math.floor(stat + this.hungerModifier), 1)
-  }
-
-  //describes how hungry the player is - displayed on main scene
-  get hungerDescription() {
-    if (this.isStarving) {
-      return `You are **starving!** — You will be weakened until you eat something.`
-    }
-
-    if (this.isHungry) {
-      return `You are **hungry**.`
-    }
-
-    return ""
-  }
-
   get woundedDescription() {
     if (this.health <= 1) {
       return `You are **severely wounded** and must rest.`
@@ -139,52 +85,6 @@ export default class Player extends Entity {
     }
 
     return ""
-  }
-
-  //describes player hunger in a single word
-  get hungerStatus() {
-    if (this.isStarving) {
-      return "starving"
-    } else if (this.isHungry) {
-      return "hungry"
-    } else if (this.isWellFed) {
-      return "well fed"
-    } else {
-      return "normal"
-    }
-  }
-
-  get isStarving() {
-    return this.stored.hunger === 0
-  }
-
-  get isHungry() {
-    return !this.isStarving && this.stored.hunger < 10
-  }
-
-  get isWellFed() {
-    return this.stored.hunger > 20
-  }
-
-  //allows the player to regain an amount of hunger
-  eat(amount) {
-    amount = amount || 1
-    const previous = this.stored.hunger
-
-    this.stored.hunger += Math.ceil(amount)
-
-    //prevent hunger from going above 24
-    this.stored.hunger = Math.min(this.stored.hunger, 24)
-
-    return this.stored.hunger - previous
-  }
-
-  //makes the player lose some hunger
-  metabolize() {
-    this.stored.hunger -= 1
-
-    //prevent from going below 0
-    this.stored.hunger = Math.max(this.stored.hunger, 0)
   }
 
   // LVLing Up
@@ -252,15 +152,6 @@ export default class Player extends Entity {
   //-------------------
 
   get statsDescription() {
-    let statModifier = this.hungerModifier
-    if (statModifier > 0) {
-      statModifier = `+${statModifier}`
-    } else if (statModifier < 0) {
-      statModifier = `${statModifier}`
-    } else {
-      statModifier = ""
-    }
-
     return `
       <p class="block">
         ${statBarTemplate({
@@ -285,19 +176,11 @@ export default class Player extends Entity {
           max: this.lustMax,
           percentage: this.lust / this.lustMax * 100
         })}
-        ${statBarTemplate({
-          label: "Hunger",
-          current: this.stored.hunger,
-          max: 24,
-          percentage: this.stored.hunger / 24 * 100,
-          modifier: this.hungerStatus
-        })}
       </p>
       <p class="block">
         ${statBarTemplate({
           label: "Strength",
-          current: this.strength,
-          modifier: statModifier
+          current: this.strength
         })}
         ${statBarTemplate({
           label: "Stamina",
@@ -305,8 +188,7 @@ export default class Player extends Entity {
         })}
         ${statBarTemplate({
           label: "Charisma",
-          current: this.charisma,
-          modifier: statModifier
+          current: this.charisma
         })}
         ${statBarTemplate({
           label: "Willpower",
@@ -314,8 +196,7 @@ export default class Player extends Entity {
         })}
         ${statBarTemplate({
           label: "Dexterity",
-          current: this.dexterity,
-          modifier: statModifier
+          current: this.dexterity
         })}
       </p>`
   }

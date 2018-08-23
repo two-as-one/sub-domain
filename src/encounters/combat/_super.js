@@ -54,6 +54,7 @@ export default class CombatEncounter extends Scene {
     data.static = template({
       player: this.player,
       enemy: this.enemy,
+      hideEnemyNumbers: this.player.perception < this.enemy.perception / 2,
       hideStats: data.hideStats
     })
 
@@ -141,17 +142,6 @@ export default class CombatEncounter extends Scene {
       ]
     }
 
-    if (this.player.isStarving) {
-      message += `
-
-        **[you] are severely weakened due to your starvation!**`
-    }
-    if (this.player.isHungry) {
-      message += `
-
-        **[you] are hungry and weakened.**`
-    }
-
     // disabled for now... need to make a decision on whether the player can use items during combat
     // actions.push({
     //   text: 'inventory', state: 'inventory'
@@ -189,8 +179,16 @@ export default class CombatEncounter extends Scene {
 
   //examine enemy
   examine() {
+    let text = this.describeEnemyMessage(this.player, this.enemy)
+
+    if (this.player.perception > this.enemy.perception) {
+      text += `
+
+        ${this.inspectStats(this.player, this.enemy)}`
+    }
+
     this.render({
-      text: this.describeEnemyMessage(this.player, this.enemy),
+      text: text,
       responses: [{ text: "back", state: "main" }]
     })
   }
@@ -710,6 +708,12 @@ export default class CombatEncounter extends Scene {
   fleeFailureMessage(p, e) {
     return `
       [you] try to flee but [foe]~>stop you in your tracks!`
+  }
+
+  inspectStats(p, e) {
+    return `
+      STR:${e.strength} | STAM:${e.stamina} | CHAR:${e.charisma} |
+      WILL:${e.willpower} | DEX:${e.dexterity}`
   }
 
   // Messages - extend these with encounter specific messages

@@ -82,8 +82,6 @@ export default class World {
     const current = this.day
 
     for (let i = 0; i < number; i++) {
-      this.game.player.metabolize()
-
       if (resting) {
         this.game.player.heal(Math.ceil(this.game.player.healthMax / 10))
       }
