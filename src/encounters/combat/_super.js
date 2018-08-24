@@ -9,12 +9,12 @@ const chance = new Chance()
 
 import {
   Attack,
-  Seduce,
+  Flee,
   Fuck,
   Grapple,
-  Struggle,
-  Flee,
-  Interested
+  Interested,
+  Seduce,
+  Struggle
 } from "mechanics/formulas"
 
 /**
@@ -132,6 +132,20 @@ export default class CombatEncounter extends Scene {
       return this.state.unableToResist()
     }
 
+    let attackLabel = "attack"
+    let fleeLabel = "flee"
+    let struggleLabel = "struggle"
+    if (this.player.perception > this.enemy.perception * 2) {
+      let formula = new Attack(this.player, this.enemy)
+      attackLabel += ` (${formula.min}-${formula.max})`
+
+      formula = new Flee(this.player, this.enemy)
+      fleeLabel += ` (${formula.chance})`
+
+      formula = new Struggle(this.player, this.enemy)
+      struggleLabel += ` (${formula.chance})`
+    }
+
     let actions
     let message
     if (this.fucking) {
@@ -139,16 +153,16 @@ export default class CombatEncounter extends Scene {
       actions = [
         { text: "keep fucking", state: "fuck" },
         { text: "change position", state: "submit" },
-        { text: "struggle", state: "struggle" }
+        { text: struggleLabel, state: "struggle" }
       ]
     } else {
       message = this.mainMessage(this.player, this.enemy)
       actions = [
-        { text: "attack", state: "attack" },
+        { text: attackLabel, state: "attack" },
         { text: "seduce", state: "seduce" },
         { text: "submit", state: "submit" },
         { text: "examine", state: "examine" },
-        { text: "flee", state: "flee" }
+        { text: fleeLabel, state: "flee" }
       ]
     }
 
@@ -206,10 +220,16 @@ export default class CombatEncounter extends Scene {
 
     parts.forEach(name => {
       const part = this.player[name]
+      let label = `with ${part.name}`
+
+      if (this.player.perception > this.enemy.perception * 2) {
+        const formula = new Seduce(part, this.enemy)
+        label += ` (${formula.min}-${formula.max})`
+      }
 
       responses.push({
         state: "seduceResults",
-        text: `with ${part.name}`,
+        text: label,
         part: name,
         if: part.canSeduce && part.has
       })
@@ -259,7 +279,13 @@ export default class CombatEncounter extends Scene {
   submitResults(data) {
     this.consent = true
 
-    if (this.enemy.submit(data.position)) {
+    const accepted =
+      this.enemy.lustNormalized *
+        this.enemy.likes(data.position.focus.player) *
+        data.position.focus.enemy.sensitivity >
+      0.2
+
+    if (accepted) {
       this.fucking = true
       this.position = data.position
 
@@ -278,8 +304,8 @@ export default class CombatEncounter extends Scene {
   //player fucks enemy
   fuck() {
     const formula = new Fuck(
-      this.player[this.position.focus.player],
-      this.enemy[this.position.focus.enemy]
+      this.position.focus.player,
+      this.position.focus.enemy
     )
 
     const amount = formula.roll()
@@ -439,8 +465,8 @@ export default class CombatEncounter extends Scene {
       })
     } else {
       const formula = new Fuck(
-        this.enemy[this.position.focus.enemy],
-        this.player[this.position.focus.player]
+        this.position.focus.enemy,
+        this.position.focus.player
       )
 
       const amount = formula.roll()
@@ -553,8 +579,8 @@ export default class CombatEncounter extends Scene {
 
     //dilation
     if (this.fucking) {
-      const playerPart = this.player[this.position.focus.player]
-      const dilation = this.enemy[this.position.focus.enemy].diameter || 0
+      const playerPart = this.position.focus.player
+      const dilation = this.position.focus.enemy.diameter || 0
 
       if (typeof playerPart.dilate === "function") {
         dilationMessage = playerPart.dilate(dilation) || ""
@@ -656,19 +682,13 @@ export default class CombatEncounter extends Scene {
   attackResultsMessage(damage) {
     return `
 
-    You deal **[damage(foe)]**`
+      You deal **[damage(foe)]**`
   }
 
-  attackedResultsMessage(damage, lust) {
-    let text = `
+  attackedResultsMessage(damage) {
+    return `
 
       You suffer **[damage(you)]**`
-
-    if (lust) {
-      text += `, it feels good — you gain **[lust(you)]**`
-    }
-
-    return text
   }
 
   seduceResultsMessage(lust) {

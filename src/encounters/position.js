@@ -78,8 +78,8 @@ export class Position {
   // get the body parts that are the focus of this position
   get focus() {
     return {
-      player: this.playerParts[0],
-      enemy: this.enemyParts[0]
+      player: this.player[this.playerParts[0]],
+      enemy: this.enemy[this.enemyParts[0]]
     }
   }
 

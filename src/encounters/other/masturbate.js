@@ -147,6 +147,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
     this.fucking = true
     this.position = data.position
 
+    // TODO - USE FORMULA
     const lust = this.player.fuck(
       this.player,
       this.position.focus.player,

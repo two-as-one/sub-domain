@@ -1,4 +1,5 @@
 import Entity from "./_super"
+import { Anus, Vagina, Breasts, Mouth, Penis } from "parts/_all"
 
 export default class Minotaur extends Entity {
   constructor() {
@@ -20,18 +21,19 @@ export default class Minotaur extends Entity {
   }
 
   likes(part) {
-    switch (part) {
-      case "anus":
-      case "vagina":
-        return 1
-      case "breasts":
-      case "mouth":
-        return 0.75
-      case "penis":
-        return 0.25
-      default:
-        return 0.5
+    if (part instanceof Anus || part instanceof Vagina) {
+      return 1
     }
+
+    if (part instanceof Breasts || part instanceof Mouth) {
+      return 0.75
+    }
+
+    if (part instanceof Penis) {
+      return 0.25
+    }
+
+    return 0.5
   }
 
   infect(player) {

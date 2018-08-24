@@ -1,20 +1,22 @@
 import Chance from "chance"
 import Grammar from "grammar/grammar"
 
-import Anus from "parts/anus"
-import Balls from "parts/balls"
-import Body from "parts/body"
-import Breasts from "parts/breasts"
-import Face from "parts/face"
-import Feet from "parts/feet"
-import Hands from "parts/hands"
-import Head from "parts/head"
-import Mouth from "parts/mouth"
-import Nipples from "parts/nipples"
-import Penis from "parts/penis"
-import Tail from "parts/tail"
-import Udder from "parts/udder"
-import Vagina from "parts/vagina"
+import {
+  Anus,
+  Balls,
+  Body,
+  Breasts,
+  Face,
+  Feet,
+  Hands,
+  Head,
+  Mouth,
+  Nipples,
+  Penis,
+  Tail,
+  Udder,
+  Vagina
+} from "parts/_all"
 
 const chance = new Chance()
 
@@ -314,20 +316,6 @@ export default class Entity {
     this.aroused = amount
 
     return amount
-  }
-
-  /**
-   * check whether this entity accepts a specific position that was submitted
-   * @param  {Object} position - Position object provided by the encounter
-   * @return {Boolean}         true if the position was accepted
-   */
-  submit(position) {
-    return (
-      this.lustNormalized *
-        this.likes(position.focus.player) *
-        this[position.focus.enemy].sensitivity >
-      0.2
-    )
   }
 
   /**

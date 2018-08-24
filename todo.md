@@ -51,7 +51,11 @@ trivial > easy > challenging > difficult > impossible
 
 ## design choices
 redesign intro - bring power back to the player, group professions so they grant bonuses to multiple stats
-get rid of hunger mechanic, it's lame. what to do with consumables? (increase stats, give exp, heal?)
+
+## discrepancy between submitting and force submit
+it's possible for the opponent to reject submit and then immediately force submit the player
+should be more like a switch instead of having randomness involved
+this also allows it to be used as a formula for displaying chance
 
 
 add seductionMessage for udder
