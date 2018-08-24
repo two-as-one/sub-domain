@@ -230,7 +230,7 @@ export default class Entity {
 
   /** damage inflicted by physical attacks */
   get attackPower() {
-    return this.strength + this.dexterity * 0.25
+    return (this.strength + this.dexterity * 0.25) * this.lustPowerPenality
   }
 
   /**
@@ -290,85 +290,27 @@ export default class Entity {
     )
   }
 
-  /** Introduce a level of randomness to certain moves */
-  get variance() {
-    return 0.2
-  }
-
-  /**
-   * true if the entity intends to fuck
-   * @random
-   */
-  get wantsToFuck() {
-    return Math.random() < this.lustNormalized
-  }
-
   // Methods
   //--------
 
   /**
-   * Attack another entity and damage it
-   * Damage reduced by current lust
-   * @param  {Entity} target - The entity to attack
-   * @return {Number}        The amount of damage that was dealt
-   */
-  attack(target) {
-    return target.damage(this.attackPower * this.lustPowerPenality)
-  }
-
-  /**
    * Damage this entity
-   * Damage reduced by deflection and variance
    * @param  {Number} amount - The damage to apply
-   * @return {Number}        The actual damage that was applied
    */
   damage(amount = 0) {
-    amount = Entity.damageFormula(amount, this.deflection, this.variance)
     this.health -= Math.ceil(amount)
-
     this.damaged = amount
 
     return amount
   }
 
   /**
-   * Seduce another entity and arouse it
-   * Arousal influenced by how much they like the body part used
-   * @param  {Entity} target - The entity to seduce
-   * @param  {Part} part     - The body part used to seduce
-   * @return {Number}        The amount of lust inflicted
-   */
-  seduce(target, part) {
-    return target.arouse(this.arousePower * target.likes(part))
-  }
-
-  /**
-   * Fuck another entity
-   * Arousal influenced by how much the other entity like the body part used and how sensitive their own body part is
-   * @param  {Entity} target   - The entity to fuck
-   * @param  {Part} ownPart    - The body part used to fuck
-   * @param  {Part} targetPart - The body part that was fucked
-   * @return {Number}          The amount of lust inflicted
-   */
-  fuck(target, ownPart, targetPart) {
-    return target.arouse(
-      this.arousePower *
-        target.likes(ownPart) *
-        target[targetPart].sensitivity *
-        2
-    )
-  }
-
-  /**
    * Arouse this entity by an amount
-   * Arousal reduced by numbness and variance
    * @param  {Number} amount - The amount of lust to arouse by
    * @return {Number}        The actual lust that was inflicted
    */
   arouse(amount = 0) {
-    amount = Entity.damageFormula(amount, this.numbness, this.variance)
     this.lust += Math.ceil(amount)
-
     this.aroused = amount
 
     return amount
@@ -385,48 +327,6 @@ export default class Entity {
         this.likes(position.focus.player) *
         this[position.focus.enemy].sensitivity >
       0.2
-    )
-  }
-
-  /**
-   * Grapple a target
-   * @random
-   * @param  {Entity} target   - The entity to grapple
-   * @return {Boolean}         true if the grapple was successful
-   */
-  grapple(target) {
-    //unable to resist
-    if (target.orgasmed || !target.alive) {
-      return true
-    }
-
-    return (
-      Math.random() <
-      Entity.skillChallenge(this.pinAttackPower, target.pinDefence)
-    )
-  }
-
-  /**
-   * Struggle out of a grapple
-   * @random
-   * @param  {Entity} target   - The entity to struggle against
-   * @return {Boolean}         true if the struggle was successful
-   */
-  struggle(target) {
-    return (
-      Math.random() < Entity.skillChallenge(this.pinDefence, target.pinDefence)
-    )
-  }
-
-  /**
-   * attempt to flee from a target
-   * @random
-   * @param  {Entity} target   - The entity to flee from
-   * @return {Boolean}         true if fleeing was successful
-   */
-  flee(target) {
-    return (
-      Math.random() < Entity.skillChallenge(this.dexterity, target.dexterity)
     )
   }
 
@@ -518,39 +418,6 @@ export default class Entity {
         this.stored[stat] += 1
       }
     }
-  }
-
-  /**
-   * Formula for calculating damage
-   * @param  {Number} attack   - the incoming attack damage
-   * @param  {Number} defence  - the level of defence
-   * @param  {Number} variance - a level of variance
-   * @param  {Number} rand     - use a specific value instead of a random one
-   * @return {Number}          The actual damage inflicted
-   */
-  static damageFormula(attack = 0, defence = 0, variance = 0, rand) {
-    return Math.round(
-      attack * (attack / (attack + defence)) * Entity.vary(variance, rand)
-    )
-  }
-
-  /** Formula that varies a number */
-  static vary(variance, rand) {
-    if (typeof rand != "number") {
-      rand = Math.random()
-    }
-
-    return rand * (variance * 2) + (1 - variance)
-  }
-
-  /**
-   * Formula for comparing skills
-   * @param  {Number} a - The value of the skill from entity a
-   * @param  {Number} b - The value of the skill from entity a
-   * @return {Number} a number between 0 and 1, will be 0.5 if a and b are equal
-   */
-  static skillChallenge(a, b) {
-    return a / (a + b)
   }
 
   // Capability flags

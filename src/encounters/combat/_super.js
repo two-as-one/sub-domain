@@ -7,6 +7,16 @@ import { abstract } from "utils/abstract"
 import template from "templates/combat.hbs"
 const chance = new Chance()
 
+import {
+  Attack,
+  Seduce,
+  Fuck,
+  Grapple,
+  Struggle,
+  Flee,
+  Interested
+} from "mechanics/formulas"
+
 /**
  * CombatEncounter
  * This is the base class from which all combat encounters must inherit from
@@ -160,19 +170,15 @@ export default class CombatEncounter extends Scene {
 
   //player attacks enemy
   attack() {
-    const damage = this.player.attack(this.enemy)
-    let bonus = 0
+    const formula = new Attack(this.player, this.enemy)
+    const amount = formula.roll()
 
-    //up to 50% bonus damage based on how much lust the player has
-    if (this.player.has.sadist) {
-      bonus = Math.round(damage * this.player.lustNormalized * 0.5)
-      this.enemy.stored.dmg += bonus
-    }
+    this.enemy.damage(amount)
 
     this.render({
       text:
         this.attackMessage(this.player, this.enemy) +
-        this.attackResultsMessage(damage + bonus),
+        this.attackResultsMessage(amount),
       responses: [{ state: "enemyAction" }]
     })
   }
@@ -219,12 +225,15 @@ export default class CombatEncounter extends Scene {
 
   //results of seduction attempt
   seduceResults(data) {
-    const damage = this.player.seduce(this.enemy, data.part)
+    const formula = new Seduce(this.player[data.part], this.enemy)
+    const amount = formula.roll()
+
+    this.enemy.arouse(amount)
 
     this.render({
       text:
         this.player[data.part].seductionMessage +
-        this.seduceResultsMessage(damage),
+        this.seduceResultsMessage(amount),
       responses: [{ state: "enemyAction" }]
     })
   }
@@ -268,23 +277,27 @@ export default class CombatEncounter extends Scene {
 
   //player fucks enemy
   fuck() {
-    const damage = this.player.fuck(
-      this.enemy,
-      this.position.focus.player,
-      this.position.focus.enemy
+    const formula = new Fuck(
+      this.player[this.position.focus.player],
+      this.enemy[this.position.focus.enemy]
     )
+
+    const amount = formula.roll()
+
+    this.enemy.arouse(amount)
 
     this.render({
       text:
         this.position.get("player.continue") +
-        this.seduceResultsMessage(damage),
+        this.seduceResultsMessage(amount),
       responses: [{ state: "enemyAction" }]
     })
   }
 
   //player attempts to struggle free
   struggle() {
-    const success = this.player.struggle(this.enemy)
+    const formula = new Struggle(this.player, this.enemy)
+    const success = formula.roll()
 
     if (success) {
       this.fucking = false
@@ -308,7 +321,8 @@ export default class CombatEncounter extends Scene {
   //enemy turn - this is essentially the enemy AI
   enemyAction(data) {
     const enemy = this.enemy
-    const wantsToFuck = enemy.wantsToFuck && this.consent
+    const formula = new Interested(enemy)
+    const wantsToFuck = formula.roll() && this.consent
 
     if (this.enemy.orgasmed || !this.enemy.alive) {
       return this.state.end()
@@ -346,34 +360,30 @@ export default class CombatEncounter extends Scene {
 
   //player gets hit
   getHit() {
-    let damage = this.enemy.attack(this.player)
-    let lust = 0
+    const formula = new Attack(this.enemy, this.player)
+    const amount = formula.roll()
 
-    //if the player is a masochist, convert 25% damage to lust
-    if (this.player.has.masochist) {
-      lust = Math.ceil(damage * 0.25)
-      damage = Math.floor(damage * 0.75)
-
-      this.player.stored.dmg -= lust
-      this.player.stored.lust += lust
-    }
+    this.player.damage(amount)
 
     this.render({
       text:
         this.playerAttackedMessage(this.player, this.enemy) +
-        this.attackedResultsMessage(damage, lust),
+        this.attackedResultsMessage(amount),
       responses: [{ state: "main" }]
     })
   }
 
   //player gets seduced
   getSeduced() {
-    const damage = this.enemy.seduce(this.player)
+    const formula = new Seduce(this.enemy.body, this.player)
+    const amount = formula.roll()
+
+    this.player.arouse(amount)
 
     this.render({
       text:
         this.seducedMessage(this.player, this.enemy) +
-        this.seducedResultsMessage(damage),
+        this.seducedResultsMessage(amount),
       responses: [{ state: "main" }]
     })
   }
@@ -390,8 +400,10 @@ export default class CombatEncounter extends Scene {
 
   //enemy attempts to force submit player
   getForceSubmitted() {
-    const position =
-      this.enemy.grapple(this.player) && this.enemyChoosePosition()
+    const formula = new Grapple(this.enemy, this.player)
+    const success = formula.roll()
+
+    const position = success && this.enemyChoosePosition()
 
     if (position) {
       this.fucking = true
@@ -426,17 +438,19 @@ export default class CombatEncounter extends Scene {
         responses: [{ state: "enemyAction" }]
       })
     } else {
-      const enemy = this.enemy
-      const damage = enemy.fuck(
-        this.player,
-        this.position.focus.enemy,
-        this.position.focus.player
+      const formula = new Fuck(
+        this.enemy[this.position.focus.enemy],
+        this.player[this.position.focus.player]
       )
+
+      const amount = formula.roll()
+
+      this.player.arouse(amount)
 
       this.render({
         text:
           this.position.get("enemy.continue") +
-          this.seducedResultsMessage(damage),
+          this.seducedResultsMessage(amount),
         responses: [{ state: "main" }]
       })
     }
@@ -445,9 +459,10 @@ export default class CombatEncounter extends Scene {
   // Encounter end states
   //---------------------
 
-  //player attempts to flee
+  // player attempts to flee
   flee() {
-    const success = this.player.flee(this.enemy)
+    const formula = new Flee(this.player, this.enemy)
+    const success = formula.roll()
 
     if (success) {
       this.render({
