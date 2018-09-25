@@ -54,10 +54,6 @@ module.exports = function(env) {
           }
         },
         {
-          test: /\.pug$/,
-          use: "pug-loader"
-        },
-        {
           test: /\.json$/,
           use: "json-loader"
         },

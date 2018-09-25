@@ -1,6 +1,6 @@
 import "styles/index.less"
 import { clear, save } from "save/saveable"
-import CharacterCreation from "scenes/character-creation"
+import CharacterCreation from "encounters/dialogue/character-creation/scene"
 import InventoryScene from "scenes/inventory"
 import ItemScene from "scenes/item"
 import LevelUpScene from "scenes/level-up"

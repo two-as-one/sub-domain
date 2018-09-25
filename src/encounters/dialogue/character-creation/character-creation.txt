@@ -1,0 +1,45 @@
+This story began a long time ago in a land far, far away …
+  Maplereach was a small fishing town that had grown along the bountiful river Ermys.
+
+  It wasn't a particularly interesting place nor was it quite large enough to be called a city, but to you it was home.
+    You had just come of age and were your parent's only …
+      -> 1
+      -> 2
+
+1. son [ACTION=pick_male]
+  Oh yes, that's right, you were just a regular human boy back then!
+
+  My, my, how things have changed — just look at you now.
+    -> 3
+
+2. daughter [ACTION=pick_female]
+  Oh yes, that's right, you were just a regular human girl back then!
+
+  My, my, how things have changed — just look at you now.
+    -> 3
+
+3. Even though you were brought up in a family of farmers, you had always aspired to be a …
+  -> 4
+  -> 5
+  -> 6
+
+4. blacksmith — **STR & STAM** [ACTION=pick_blacksmith]
+  Mixing craftsmanship with physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
+
+  **+2 Strength** & **+2 Stamina**
+    -> 7
+
+5. Thief — **DEX & PRC** [ACTION=pick_thief]
+  Not the most appreciated career but certainly one with a big potential payout.
+
+  **+2 Dexterity** & **+2 Perception**
+    -> 7
+
+6. Dancer — **CHAR & WILL** [ACTION=pick_dancer]
+  You had quite the body and didn't shy away from showing it off. Mesmerising the inebriated patrons at the local tavern to earn a living.
+
+  **+2 Charisma** & **+2 Willpower**
+    -> 7
+
+7. blah blah
+  [ACTION=outro]
