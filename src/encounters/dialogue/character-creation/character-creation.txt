@@ -1,7 +1,7 @@
 This story began a long time ago in a land far, far away …
-  ...Maplereach was a small town by the bountiful river Ermys.
+  ...Maplereach was a small town by the bountiful river Emrys.
 
-  It wasn't particularly interesting nor was it quite large enough to be a city, but to you it was home.
+  It wasn't particularly interesting nor was it quite large enough to be called a city, but to you it was home.
     ...The population was self-sufficient with a majority of fishers, though all the traditional professions were covered; farmers, traders, innkeepers, guards, …
 
     As with any community at the time, people were weary of outsiders and strangers.
@@ -31,7 +31,7 @@ This story began a long time ago in a land far, far away …
   -> 6
 
 4. blacksmith — **\[STR & STAM]** [ACTION=pick_blacksmith]
-  A combination of craftsmanship and physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
+  Combining craftsmanship with physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
 
   **+2 Strength** & **+2 Stamina**
     -> 7
@@ -43,10 +43,24 @@ This story began a long time ago in a land far, far away …
     -> 7
 
 6. Dancer — **\[CHAR & WILL]** [ACTION=pick_dancer]
-  You had quite the body and didn't shy away from showing it off. The tavern was your second home, the place where you mesmerised the inebriated patrons to earn a living.
+  You had quite the body and didn't shy away from showing it off. The tavern was your second home, there you mesmerised the inebriated patrons to earn a living.
 
   **+2 Charisma** & **+2 Willpower**
     -> 7
 
-7. ...blah blah
-  [ACTION=outro]
+7. ...Life in Maplereach was peaceful. You/would've called it boring. Thankfully there was the occasional excitement of a bar brawl or travelling merchant to shake things up.
+
+And today was you lucky day …
+  ...You were going about your daily life when you noticed some commotion at the town square. As you pushed your way through the crowd, you quickly found out what the fuzz was all about …
+    ...A wizard! You had never thought you'd get to see one with your own eyes. Especially not one as gorgeous as this one — She had a flowing purple dress with a matching pointy hat, but it was her face that was so striking. Silky smooth skin with mesmerizing jade eyes. Did she use magic to be this pretty or was it all natural? — You wondered.
+      ...You just stared at her, losing track of time, entranced by her endless beauty. Until suddenly her gaze met yours! She smiled back at you and extended her hand, motioning for you to come forward.
+
+      You broke eye contact, looking around. Surely it wasn't you she was after? But before you could muster coherent thoughts, the crowd had pushed you out and towards the wizard.
+        ...She grabbed your hand, smiling endlessly before she turned her attention back at the crowd and said — "And for my next magic trick, I/will make this pretty [boy(you)] disappear!"
+
+        She looked back at you, winked and then whispered. "Don't worry cute one, it won't hurt, I promise. Just sit still in this chest over here —" You blushed at her compliments, and without second thoughts climbed into the ornate chest.
+          ...The lid closed above you with a solid thud as the pitch black darkness engulfed you. Suddenly a cold chill ran down your spine — Uneasy thoughts rushing through your mind; Did you just climb into a stranger's box? Were you being kidnapped? Then, before any more thoughts could form, you lost conciousness.
+            ...Outside, the wizard opened the lid and revealed an empty chest. "Ta-dah!" She exclaimed as the crowd cheered.
+
+            But what had happened to you?
+              ...[ACTION=outro]

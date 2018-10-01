@@ -29,11 +29,11 @@ export default class Beach extends Area {
   get introMessage() {
     return `
       [you] open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
-      The peaceful sound of waves crashing against the shore reminding you of home.
+      Waking up to the peaceful sound of waves crashing against the shore.
 
-      You're still alive … and somehow free.
+      Just long did you sleep? Your thoughts pausing, more importantly — Where the heck were you?
 
-      [you] try to get up but [your:body] hurts all over — maybe you'll just lay down for a little longer.`
+      [you] try to get up but [your:body] is sore and weak — maybe you'll just lay down for a little longer.`
   }
 
   get dayDescription() {

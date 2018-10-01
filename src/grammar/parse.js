@@ -38,7 +38,7 @@ class Parser {
       const parsed = this.__parse(snip, subject, specific)
       subject = parsed[1]
 
-      return parsed[0]
+      return a.replace("/", "") + parsed[0]
     })
 
     // articlize [a] and [an]
@@ -268,6 +268,18 @@ class Parser {
 
   foe(subject) {
     return subject.who
+  }
+
+  boy(subject, target, specific) {
+    if (specific) {
+      subject = specific
+    }
+
+    return subject.gender === "female" ? "girl" : "boy"
+  }
+
+  girl(subject, target, specific) {
+    return this.boy(subject, target, specific)
   }
 }
 

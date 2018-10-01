@@ -26,10 +26,12 @@ export default class CharacterCreation extends DialogueEncounter {
   get functions() {
     return {
       pick_male: () => {
+        this.game.player.gender = "male"
         this.game.player.penis.quantity = 1
         this.game.player.balls.quantity = 2
       },
       pick_female: () => {
+        this.game.player.gender = "female"
         this.game.player.breasts.size = 5
         this.game.player.nipples.size = 0.4
         this.game.player.vagina.quantity = 1
