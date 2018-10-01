@@ -51,6 +51,7 @@ trivial > easy > challenging > difficult > impossible
 
 ## design choices
 redesign intro - bring power back to the player, group professions so they grant bonuses to multiple stats
+whenever an npc uses him/her for the player, allow the player to correct the npc to use the right gender (this updates the gender of the player, instead of needing an options menu)
 
 ## discrepancy between submitting and force submit
 it's possible for the opponent to reject submit and then immediately force submit the player

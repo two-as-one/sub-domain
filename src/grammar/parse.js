@@ -5,11 +5,11 @@ import game from "../game"
 
 class Parser {
   constructor(string, subject) {
-    const regex = /(\[)([^\]]*)(\])/g
+    const regex = /(^|[^\\])(\[)([^\]]*)(\])/g
     const whoRegex = /(.*)\((.*)\)$/
     const conditionRegex = /(.*)(\?|!)(.*)\|(.*)$/
 
-    this.parsed = string.replace(regex, (match, a, snip) => {
+    this.parsed = string.replace(regex, (match, a, b, snip) => {
       // check if the selector has a specific target
       let specific = snip.match(whoRegex)
       if (specific) {

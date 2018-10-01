@@ -4,6 +4,8 @@ const REGEX_ID = /^(\d+)\.\s/
 const REGEX_POINTER = /->\s(\d+)/
 // grab the indentation at the start of a line
 const REGEX_INDENTATION = /^\s*/
+// test for linear text
+const REGEX_LINEAR = /^(\.\.\.)/
 // grabs the action
 const REGEX_ACTION = /\[ACTION=([a-zA-Z_]+)\]/
 // grabs the requirement
@@ -78,18 +80,33 @@ export class Dialogue {
     this.current = branch.id
 
     // if we're currently on a branching path, move straight to the next option
+    // this prevents player choices from becoming their own entries
     if (prev && prev.next.length > 1) {
       return this.interact(branch.next[0])
     }
 
-    // generate responses
-    const responses = next
-      .map(item => ({
-        id: item.id,
-        disabled: item.disabled ? this.map[item.disabled]() : false,
-        text: next.length === 1 ? "…" : item.text
-      }))
-      .filter(this.requiredFilter)
+    // calculate player responses
+    let responses
+    if (branch.next.length === 1 && next[0].linear) {
+      // linear dialogue
+      // create a '…' option for the player to move to the next dialogue entry
+      responses = [
+        {
+          id: next[0].id,
+          text: "…"
+        }
+      ]
+    } else {
+      // branching dialogue
+      // create an option for each branch
+      responses = next
+        .map(item => ({
+          id: item.id,
+          disabled: item.disabled ? this.map[item.disabled]() : false,
+          text: item.text
+        }))
+        .filter(this.requiredFilter)
+    }
 
     return {
       text: branch.text,
@@ -201,25 +218,37 @@ export class Dialogue {
         ? item.text.match(REGEX_POINTER)[1]
         : null
 
+      // identify linear dialogue
+      item.text = item.text
+        .replace(REGEX_LINEAR, str => {
+          item.linear = true
+          return ""
+        })
+        .trim()
+
       // identify actions
-      item.text = item.text.replace(REGEX_ACTION, (str, fn) => {
-        item.action = fn
-        return ""
-      })
+      item.text = item.text
+        .replace(REGEX_ACTION, (str, fn) => {
+          item.action = fn
+          return ""
+        })
+        .trim()
 
       // identify requirements
-      item.text = item.text.replace(REGEX_REQUIRED, (str, fn) => {
-        item.required = fn
-        return ""
-      })
+      item.text = item.text
+        .replace(REGEX_REQUIRED, (str, fn) => {
+          item.required = fn
+          return ""
+        })
+        .trim()
 
       // identify disabled
-      item.text = item.text.replace(REGEX_DISABLED, (str, fn) => {
-        item.disabled = fn
-        return ""
-      })
-
-      item.text = item.text.trim()
+      item.text = item.text
+        .replace(REGEX_DISABLED, (str, fn) => {
+          item.disabled = fn
+          return ""
+        })
+        .trim()
     })
 
     // add NEXT options to each entry

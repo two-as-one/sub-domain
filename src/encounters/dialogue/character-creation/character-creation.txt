@@ -1,10 +1,17 @@
 This story began a long time ago in a land far, far away …
-  Maplereach was a small fishing town that had grown along the bountiful river Ermys.
+  ...Maplereach was a small town by the bountiful river Ermys.
 
-  It wasn't a particularly interesting place nor was it quite large enough to be called a city, but to you it was home.
-    You had just come of age and were your parent's only …
-      -> 1
-      -> 2
+  It wasn't particularly interesting nor was it quite large enough to be a city, but to you it was home.
+    ...The population was self-sufficient with a majority of fishers, though all the traditional professions were covered; farmers, traders, innkeepers, guards, …
+
+    As with any community at the time, people were weary of outsiders and strangers.
+      ...Growing up in a large family of farmers wasn't the best. Money was always lacking and you didn't get half of the attention you deserved.
+
+      Luckily you had just come of age and were ready to move out!
+
+      You were your parent's youngest …
+        -> 1
+        -> 2
 
 1. son [ACTION=pick_male]
   Oh yes, that's right, you were just a regular human boy back then!
@@ -18,28 +25,28 @@ This story began a long time ago in a land far, far away …
   My, my, how things have changed — just look at you now.
     -> 3
 
-3. Even though you were brought up in a family of farmers, you had always aspired to be a …
+3. ...Even though you were brought up in a family of farmers, you had always wanted to be a …
   -> 4
   -> 5
   -> 6
 
-4. blacksmith — **STR & STAM** [ACTION=pick_blacksmith]
-  Mixing craftsmanship with physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
+4. blacksmith — **\[STR & STAM]** [ACTION=pick_blacksmith]
+  A combination of craftsmanship and physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
 
   **+2 Strength** & **+2 Stamina**
     -> 7
 
-5. Thief — **DEX & PRC** [ACTION=pick_thief]
-  Not the most appreciated career but certainly one with a big potential payout.
+5. Thief — **\[DEX & PRC]** [ACTION=pick_thief]
+  Not the most appreciated career but certainly one with a big potential payout. You were tired of living in poverty and determined to change the situation by any means necessary.
 
   **+2 Dexterity** & **+2 Perception**
     -> 7
 
-6. Dancer — **CHAR & WILL** [ACTION=pick_dancer]
-  You had quite the body and didn't shy away from showing it off. Mesmerising the inebriated patrons at the local tavern to earn a living.
+6. Dancer — **\[CHAR & WILL]** [ACTION=pick_dancer]
+  You had quite the body and didn't shy away from showing it off. The tavern was your second home, the place where you mesmerised the inebriated patrons to earn a living.
 
   **+2 Charisma** & **+2 Willpower**
     -> 7
 
-7. blah blah
+7. ...blah blah
   [ACTION=outro]

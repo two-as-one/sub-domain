@@ -56,6 +56,10 @@ Expressions are the bread and butter of dynamic text.
 * `[modifier:subject]`
 * `[modifier:modifier:subject(target)]`
 
+Expressions can be escaped with `\` to have have it output as raw text.
+
+* `\[STR]` => `[STR]`
+
 #### Basic expression `[subject]`
 These are the most basic expressions. It will output who or what the subject of the selector is.
 
