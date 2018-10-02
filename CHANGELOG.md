@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.18] - 2018-10-02
+### Added
+- new dialogue parser
+- having a high enough perception now allows the player to see success chance or damage range of actions during combat
+
+### Changed
+- combat formulas separated out into their own file for better control/overview of game mechanics
+- totally redesigned character creation and intro story
+
 ## [0.4.17] - 2018-08-23
 ### Added
 - added `perception` stat
