@@ -31,9 +31,9 @@ export default class Beach extends Area {
       [you] open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
       Waking up to the peaceful sound of waves crashing against the shore.
 
-      Just long did you sleep? Your thoughts pausing, more importantly — Where the heck were you?
+      Where are you? Just long did you sleep? More importantly — What the heck happened?
 
-      [you] try to get up but [your:body] is sore and weak — maybe you'll just lay down for a little longer.`
+      [you] try to get up but [your:body] is sore and weak — maybe you'll just lay down for a little longer, coming to grips with your situation.`
   }
 
   get dayDescription() {

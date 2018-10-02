@@ -1,17 +1,14 @@
 This story began a long time ago in a land far, far away …
-  ...Maplereach was a small town by the bountiful river Emrys.
+  ...Maplereach was a small town by the bountiful river Emrys. It wasn't particularly interesting nor was it quite large enough to be called a city, but to you it was home.
 
-  It wasn't particularly interesting nor was it quite large enough to be called a city, but to you it was home.
-    ...The population was self-sufficient with a majority of fishers, though all the traditional professions were covered; farmers, traders, innkeepers, guards, …
+  Its population was self-sufficient. With a majority of fishers, it still covered all the traditional professions; farmers, traders, innkeepers, guards, …
 
-    As with any community at the time, people were weary of outsiders and strangers.
-      ...Growing up in a large family of farmers wasn't the best. Money was always lacking and you didn't get half of the attention you deserved.
+  And as with any community at the time — people were weary of outsiders and strangers.
+    ...Growing up in a large family of farmers wasn't the best. Money was always lacking and you didn't get half of the attention you deserved.
 
-      Luckily you had just come of age and were ready to move out!
-
-      You were your parent's youngest …
-        -> 1
-        -> 2
+    Luckily you had just come of age and were ready to move out! You were your parent's youngest …
+      -> 1
+      -> 2
 
 1. son [ACTION=pick_male]
   Oh yes, that's right, you were just a regular human boy back then!
@@ -31,36 +28,44 @@ This story began a long time ago in a land far, far away …
   -> 6
 
 4. blacksmith — **\[STR & STAM]** [ACTION=pick_blacksmith]
-  Combining craftsmanship with physical prowess. Blacksmithing was a demanding profession but it provided a lot of satisfaction.
+  Blacksmithing combined craftsmanship with physical prowess. It was a demanding profession that provided ample satisfaction.
 
   **+2 Strength** & **+2 Stamina**
     -> 7
 
 5. Thief — **\[DEX & PRC]** [ACTION=pick_thief]
-  Not the most appreciated career but certainly one with a big potential payout. You were tired of living in poverty and determined to change the situation by any means necessary.
+  Thieving wasn't the most appreciated career, though certainly one with a big potential payout. You were tired of living in poverty and determined to change your situation by any means necessary.
 
   **+2 Dexterity** & **+2 Perception**
     -> 7
 
 6. Dancer — **\[CHAR & WILL]** [ACTION=pick_dancer]
-  You had quite the body and didn't shy away from showing it off. The tavern was your second home, there you mesmerised the inebriated patrons to earn a living.
+  Dancing was your forte. You had quite the body and didn't shy away from showing it off. The tavern was your second home, a place to mesmerise the inebriated patrons and earn a living.
 
   **+2 Charisma** & **+2 Willpower**
     -> 7
 
-7. ...Life in Maplereach was peaceful. You/would've called it boring. Thankfully there was the occasional excitement of a bar brawl or travelling merchant to shake things up.
+7. ...Life in Maplereach was peaceful — You/would even go as far as to call it boring. The monotony of farm life only occasionally spiced up by a tavern brawl or travelling merchant.
 
-And today was you lucky day …
-  ...You were going about your daily life when you noticed some commotion at the town square. As you pushed your way through the crowd, you quickly found out what the fuzz was all about …
-    ...A wizard! You had never thought you'd get to see one with your own eyes. Especially not one as gorgeous as this one — She had a flowing purple dress with a matching pointy hat, but it was her face that was so striking. Silky smooth skin with mesmerizing jade eyes. Did she use magic to be this pretty or was it all natural? — You wondered.
-      ...You just stared at her, losing track of time, entranced by her endless beauty. Until suddenly her gaze met yours! She smiled back at you and extended her hand, motioning for you to come forward.
+And today was your lucky day …
+  ...As you were going about your daily life, you noticed a large crowd had gathered around the town square. The "oohs" and "aahs" audible from far away.
 
-      You broke eye contact, looking around. Surely it wasn't you she was after? But before you could muster coherent thoughts, the crowd had pushed you out and towards the wizard.
-        ...She grabbed your hand, smiling endlessly before she turned her attention back at the crowd and said — "And for my next magic trick, I/will make this pretty [boy(you)] disappear!"
+  Your view to the center of attention blocked by the crowd, you were determined to push way through it and find out what all the fuzz was about. Pushing and tugging on the people, you finally managed to squeeze through and …
+    ...A wizard! Wow! You had never thought you'd get to see one with your own eyes. Especially not one as gorgeous as this one.
 
-        She looked back at you, winked and then whispered. "Don't worry cute one, it won't hurt, I promise. Just sit still in this chest over here —" You blushed at her compliments, and without second thoughts climbed into the ornate chest.
-          ...The lid closed above you with a solid thud as the pitch black darkness engulfed you. Suddenly a cold chill ran down your spine — Uneasy thoughts rushing through your mind; Did you just climb into a stranger's box? Were you being kidnapped? Then, before any more thoughts could form, you lost conciousness.
-            ...Outside, the wizard opened the lid and revealed an empty chest. "Ta-dah!" She exclaimed as the crowd cheered.
+    Standing in front of an ornate carriage stood the most beautiful woman you had ever seen. She had a flowing purple dress with a matching pointy hat. Her proportions just perfect. Though it was her face that was so striking — silky smooth skin, pale as a pearl with two mesmerizing jade eyes.
+
+    You stared at her, losing track of time. Lost in your own thoughts — how could someone be this pretty, did she use magic maybe?
+      ...Then suddenly, her gaze met yours! You instantly snapped out of your trance. She smiled back at you and extended her hand, motioning for you to come forward.
+
+      You broke eye contact, looking around. Surely it wasn't you she was after? What would a beautiful wizard like this want with a farmer [boy(you)]? But before you could muster any coherent thoughts, the crowd had pushed you out and towards her.
+        ...She grabbed your hand, her skin as soft as it looked. She smiled endlessly before turning her attention back at the crowd and with a surprisingly imposing voice said — "And for my next magic trick, I/will make this pretty [boy(you)] disappear!"
+
+        She looked back at you with those perfect eyes of her, winked and then whispered softly — "Don't worry cute one. It won't hurt, I promise. Just climb in this chest over here and sit still, will you?" You blushed at her compliments and without thinking twice, followed her command. Climbing in the ornate man-sized chest that was on the floor in front of you both.
+          ...With you inside, the lid closed with a solid thud. Pitch black darkness engulfing you. You couldn't hear the outside crowd any more, it was as if you were in a different place.
+
+          Suddenly a cold chill ran down your spine as you realized what situation you were in; Did you just climb into a stranger's box? Were you being kidnapped? This happened all so quickly. … Then all of a sudden, before you could form any more thoughts, you lost conciousness.
+            ...Outside, the wizard opened the lid and revealed an empty chest. "Ta-dah!" She exclaimed with a faint smirk on her face. All while the crowd cheered loudly and endlessly.
 
             But what had happened to you?
               ...[ACTION=outro]

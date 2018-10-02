@@ -48,9 +48,11 @@ instead of [LVL], show challenge rating in combat
 
 trivial > easy > challenging > difficult > impossible
 
+## beach
+add first exploration that builds up on the story of the intro, explaining just how lost the player is in this unfamiliar place
+
 
 ## design choices
-redesign intro - bring power back to the player, group professions so they grant bonuses to multiple stats
 whenever an npc uses him/her for the player, allow the player to correct the npc to use the right gender (this updates the gender of the player, instead of needing an options menu)
 
 ## discrepancy between submitting and force submit
@@ -64,6 +66,8 @@ add seductionMessage for udder
 
 ## parser
 add [weapon(yours)] and [armor(yours)]
+add [male] and [female]
+add [man] and [woman]
 
 ## parts to add
 - hips (derived)
