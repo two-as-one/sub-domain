@@ -5,8 +5,8 @@ allow enemies to submit
 
 introduce 'submissiveness' stat to entities
 
-- reduces the likelihood that the enemy will force submit the player
-- increases the likelihood that they will accept sex
+-   reduces the likelihood that the enemy will force submit the player
+-   increases the likelihood that they will accept sex
 
 add dom/sub to sexual positions
 certain enemies may be more likely to accept one or the other
@@ -28,20 +28,20 @@ nipple penetration perk/position
 
 Gifts:
 
-- Gifts are like perks except that they are gained by other means
-- They can immediately grow/remove parts and prevent them from being removed or growing in the future
+-   Gifts are like perks except that they are gained by other means
+-   They can immediately grow/remove parts and prevent them from being removed or growing in the future
 
 Shrines:
 
-- Rare encounters when exploring
-- Player can choose to pray to receive a `gift`
-- Gifts should unlock things that the player would normally not have access to, ie: `hyper shrine`
+-   Rare encounters when exploring
+-   Player can choose to pray to receive a `gift`
+-   Gifts should unlock things that the player would normally not have access to, ie: `hyper shrine`
 
 ## areas
 
 ## BUGS
 
-- fix masturbate encounter
+-   fix masturbate encounter
 
 ## automated testing
 
@@ -75,11 +75,11 @@ add [man] and [woman]
 
 ## parts to add
 
-- hips (derived)
-- legs
-- arms
-- butt
-- shoulders (derived)
+-   hips (derived)
+-   legs
+-   arms
+-   butt
+-   shoulders (derived)
 
 ## stats
 
