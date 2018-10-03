@@ -15,7 +15,7 @@ import {
   Penis,
   Tail,
   Udder,
-  Vagina
+  Vagina,
 } from "parts/_all"
 
 const chance = new Chance()
@@ -68,7 +68,7 @@ export default class Entity {
       penis: new Penis(this),
       tail: new Tail(this),
       udder: new Udder(this),
-      vagina: new Vagina(this)
+      vagina: new Vagina(this),
     }
 
     // make parts directly accessible on entity, ie `entity.hands`
@@ -85,7 +85,7 @@ export default class Entity {
       dex: STAT_BASE,
       prc: STAT_BASE,
       dmg: 0,
-      lust: 0
+      lust: 0,
     }
   }
 

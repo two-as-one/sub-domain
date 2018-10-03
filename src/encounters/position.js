@@ -79,7 +79,7 @@ export class Position {
   get focus() {
     return {
       player: this.player[this.playerParts[0]],
-      enemy: this.enemy[this.enemyParts[0]]
+      enemy: this.enemy[this.enemyParts[0]],
     }
   }
 

@@ -17,7 +17,7 @@ export default class TitleScreenScene extends Scene {
       { name: "outOfDate", from: "continue" },
       { name: "new", from: "title" },
       { name: "confirm", from: "new" },
-      { name: "cancel", from: "new" }
+      { name: "cancel", from: "new" },
     ]
   }
 
@@ -55,8 +55,8 @@ export default class TitleScreenScene extends Scene {
           It/is recommend to start a new game.`,
       responses: [
         { text: "continue", state: "continue", force: true },
-        { text: "cancel", state: "title" }
-      ]
+        { text: "cancel", state: "title" },
+      ],
     })
   }
 
@@ -66,8 +66,8 @@ export default class TitleScreenScene extends Scene {
         text: `You/will **lose any saved progress**, are you sure you want to start a new adventure?`,
         responses: [
           { text: "New game", state: "confirm" },
-          { text: "Cancel", state: "cancel" }
-        ]
+          { text: "Cancel", state: "cancel" },
+        ],
       })
     } else {
       this.game.setScene("new-game")

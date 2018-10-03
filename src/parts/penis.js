@@ -5,7 +5,7 @@ export default class Penis extends Part {
     return Object.assign(super.defaults, {
       size: 6, //in inches
       sensitivity: 0.75,
-      quantity: 0
+      quantity: 0,
     })
   }
 

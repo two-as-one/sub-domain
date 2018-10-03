@@ -23,7 +23,7 @@ export default class World {
   get defaults() {
     return {
       day: 1,
-      hour: 12
+      hour: 12,
     }
   }
 
@@ -36,7 +36,7 @@ export default class World {
   get time() {
     return {
       day: this.stored.day,
-      hour: this.stored.hour
+      hour: this.stored.hour,
     }
   }
 

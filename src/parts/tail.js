@@ -3,7 +3,7 @@ import Part from "./_super"
 export default class Tail extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
-      quantity: 0
+      quantity: 0,
     })
   }
 

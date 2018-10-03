@@ -93,8 +93,8 @@ export class Dialogue {
       responses = [
         {
           id: next[0].id,
-          text: "…"
-        }
+          text: "…",
+        },
       ]
     } else {
       // branching dialogue
@@ -103,14 +103,14 @@ export class Dialogue {
         .map(item => ({
           id: item.id,
           disabled: item.disabled ? this.map[item.disabled]() : false,
-          text: item.text
+          text: item.text,
         }))
         .filter(this.requiredFilter)
     }
 
     return {
       text: branch.text,
-      responses
+      responses,
     }
   }
 
@@ -160,7 +160,7 @@ export class Dialogue {
 
       dialogue.push({
         id,
-        raw: [line]
+        raw: [line],
       })
     }
 

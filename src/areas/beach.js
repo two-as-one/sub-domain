@@ -18,7 +18,7 @@ export default class Beach extends Area {
   get defaults() {
     return Object.assign(super.defaults, {
       current: true,
-      discovered: true
+      discovered: true,
     })
   }
 
@@ -55,7 +55,7 @@ export default class Beach extends Area {
   get exploreMessage() {
     return chance.pickone([
       `The soft sand caresses [your:feet] as [you] explore the **beach**.`,
-      `You/have a long walk along the **beach**.`
+      `You/have a long walk along the **beach**.`,
     ])
   }
 
@@ -91,7 +91,7 @@ export default class Beach extends Area {
       return Area.weighted([
         { option: this.findClam, weight: 1 },
         { option: this.nothingHappened, weight: 0.5 },
-        { option: this.findMilk, weight: 0.5 }
+        { option: this.findMilk, weight: 0.5 },
       ]).call(this)
     }
   }

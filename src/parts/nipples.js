@@ -6,7 +6,7 @@ export default class Nipples extends Part {
     return Object.assign(super.defaults, {
       quantity: 1, //quantity per breast
       sensitivity: 0.75,
-      size: 0.2 //in inches
+      size: 0.2, //in inches
     })
   }
 

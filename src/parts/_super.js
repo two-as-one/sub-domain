@@ -13,7 +13,7 @@ export default class Part {
       quantity: 0,
       size: 0,
       sensitivity: 0.25,
-      type: "human"
+      type: "human",
     }
   }
 

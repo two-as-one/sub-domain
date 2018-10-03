@@ -63,7 +63,7 @@ const contractions = new Contractions({
   "you'd've": "you would have",
   "you'll": "you will",
   "you're": "you are",
-  "you've": "you have"
+  "you've": "you have",
 })
 
 //add irregular plurals
@@ -79,15 +79,15 @@ const PRONOUNS = {
       objective: "me",
       determiner: "my",
       possessive: "mine",
-      reflexive: "myself"
+      reflexive: "myself",
     },
     plural: {
       subjective: "we",
       objective: "us",
       determiner: "our",
       possessive: "ours",
-      reflexive: "ourselves"
-    }
+      reflexive: "ourselves",
+    },
   },
   second: {
     singular: {
@@ -95,15 +95,15 @@ const PRONOUNS = {
       objective: "you",
       determiner: "your",
       possessive: "yours",
-      reflexive: "yourself"
+      reflexive: "yourself",
     },
     plural: {
       subjective: "you",
       objective: "you",
       determiner: "your",
       possessive: "yours",
-      reflexive: "yourself"
-    }
+      reflexive: "yourself",
+    },
   },
   third: {
     singular: {
@@ -112,38 +112,38 @@ const PRONOUNS = {
         objective: "them",
         determiner: "their",
         possessive: "theirs",
-        reflexive: "themself"
+        reflexive: "themself",
       },
       female: {
         subjective: "she",
         objective: "her",
         determiner: "her",
         possessive: "hers",
-        reflexive: "herself"
+        reflexive: "herself",
       },
       male: {
         subjective: "he",
         objective: "him",
         determiner: "his",
         possessive: "his",
-        reflexive: "himself"
+        reflexive: "himself",
       },
       none: {
         subjective: "it",
         objective: "it",
         determiner: "its",
         possessive: "its",
-        reflexive: "itself"
-      }
+        reflexive: "itself",
+      },
     },
     plural: {
       subjective: "they",
       objective: "them",
       determiner: "their",
       possessive: "theirs",
-      reflexive: "themselves"
-    }
-  }
+      reflexive: "themselves",
+    },
+  },
 }
 
 /** return the correct pronoun based on a set of criteria */
@@ -172,7 +172,7 @@ export default class Grammar {
         } else {
           return `the ${this.title}`
         }
-      }
+      },
     })
 
     Object.defineProperty(SuperClass.prototype, "whose", {
@@ -182,42 +182,42 @@ export default class Grammar {
         } else {
           return `${this.who}'s`
         }
-      }
+      },
     })
 
     /** he/she/they/it */
     Object.defineProperty(SuperClass.prototype, "they", {
       get() {
         return pronoun("subjective", this.multiple, this.person, this.gender)
-      }
+      },
     })
 
     /** him/her/them/it */
     Object.defineProperty(SuperClass.prototype, "them", {
       get() {
         return pronoun("objective", this.multiple, this.person, this.gender)
-      }
+      },
     })
 
     /** his/her/their/its */
     Object.defineProperty(SuperClass.prototype, "their", {
       get() {
         return pronoun("determiner", this.multiple, this.person, this.gender)
-      }
+      },
     })
 
     /** his/hers/theirs/its */
     Object.defineProperty(SuperClass.prototype, "theirs", {
       get() {
         return pronoun("possessive", this.multiple, this.person, this.gender)
-      }
+      },
     })
 
     /** himself/herself/themself/itself */
     Object.defineProperty(SuperClass.prototype, "themself", {
       get() {
         return pronoun("reflexive", this.multiple, this.person, this.gender)
-      }
+      },
     })
 
     /** conjugate a verb for this entity */
@@ -298,7 +298,7 @@ export default class Grammar {
 
   /** converts cm into feet and inches as a string */
   static toFt(cm = 0) {
-    const realFeet = cm * 0.3937 / 12
+    const realFeet = (cm * 0.3937) / 12
     const feet = Math.floor(realFeet)
     const inches = Math.round((realFeet - feet) * 12)
     return feet + "&prime;" + inches + "&Prime;"

@@ -35,7 +35,7 @@ export default class Area {
     return {
       lvl: 0,
       current: false,
-      discovered: false
+      discovered: false,
     }
   }
 

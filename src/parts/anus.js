@@ -6,7 +6,7 @@ export default class Anus extends Part {
     return Object.assign(super.defaults, {
       size: 0.2, //diameter of opening
       sensitivity: 0.75,
-      quantity: 1
+      quantity: 1,
     })
   }
 
@@ -32,7 +32,7 @@ export default class Anus extends Part {
         Looking back over your shoulder, [you] invitingly sway your bottom back and forth.
         Then, with a playful smirk on [your:face], you firmly slap your own ass.`,
       `You turn around and bend over.
-        Looking at [foe] from between your own legs, you invitingly shake your ass at [them].`
+        Looking at [foe] from between your own legs, you invitingly shake your ass at [them].`,
     ])
   }
 

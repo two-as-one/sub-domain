@@ -39,7 +39,7 @@ export default class Breasts extends Part {
       sensitivity: 0.5,
       quantity: 2,
       milk: 0, //milk production
-      config: [2] //defines how many breasts there are per row
+      config: [2], //defines how many breasts there are per row
     })
   }
 
@@ -144,7 +144,7 @@ export default class Breasts extends Part {
       [them] playfully.`,
       `With [your:hands] behind [your:head], you shake your bosom. Making
        [all of:your:adjective:breasts] jiggle in a delightfully delicious
-       display.`
+       display.`,
     ])
   }
 
@@ -177,7 +177,7 @@ export default class Breasts extends Part {
       "boobies",
       "tits",
       "titties",
-      "mammaries"
+      "mammaries",
     ]
 
     if (this.size > 8) {

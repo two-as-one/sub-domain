@@ -34,7 +34,7 @@ export default class MainScene extends Scene {
       { name: "perks", from: "self" },
 
       { name: "explore", from: "main" },
-      { name: "exploreResult", from: "explore" }
+      { name: "exploreResult", from: "explore" },
     ]
   }
 
@@ -79,23 +79,23 @@ export default class MainScene extends Scene {
         {
           text: "**Level up!**",
           state: "levelUp",
-          if: this.game.player.canLvlUp
+          if: this.game.player.canLvlUp,
         },
         {
           text: `explore **${this.area.name}**`,
           state: "explore",
-          disabled: this.game.world.night || mortallyWounded || aroused
+          disabled: this.game.world.night || mortallyWounded || aroused,
         },
         {
           text: "rest until healed",
           state: "heal",
-          if: wounded && this.game.world.day
+          if: wounded && this.game.world.day,
         },
         {
           text: "sleep",
           state: "rest",
           disabled: this.game.world.day,
-          if: !(wounded && this.game.world.day)
+          if: !(wounded && this.game.world.day),
         },
         { text: "self", state: "self" },
         { text: "inventory", state: "inventory" },
@@ -104,9 +104,9 @@ export default class MainScene extends Scene {
           text: "travel",
           state: "chooseArea",
           disabled: this.game.world.night || mortallyWounded || aroused,
-          if: this.availableTravelAreas.length > 0
-        }
-      ]
+          if: this.availableTravelAreas.length > 0,
+        },
+      ],
     })
   }
 
@@ -115,7 +115,7 @@ export default class MainScene extends Scene {
 
     this.render({
       text: this.area.introMessage,
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 
@@ -127,7 +127,7 @@ export default class MainScene extends Scene {
   explore() {
     this.render({
       text: this.area.exploreMessage,
-      responses: [{ state: "exploreResult" }]
+      responses: [{ state: "exploreResult" }],
     })
   }
 
@@ -137,7 +137,7 @@ export default class MainScene extends Scene {
     if (typeof result === "string") {
       this.render({
         text: result,
-        responses: [{ state: "main" }]
+        responses: [{ state: "main" }],
       })
 
       this.game.world.advance()
@@ -148,24 +148,24 @@ export default class MainScene extends Scene {
     const options = this.availableTravelAreas.map(area => ({
       text: area.name,
       state: "travel",
-      area: area
+      area: area,
     }))
 
     options.push({
       text: "back",
-      state: "main"
+      state: "main",
     })
 
     this.render({
       text: `Where would you like to travel to?`,
-      responses: options
+      responses: options,
     })
   }
 
   travel(data) {
     this.render({
       text: `You pack your bags and and travel to the **${data.area.name}**.`,
-      responses: [{ state: "switchArea", area: data.area }]
+      responses: [{ state: "switchArea", area: data.area }],
     })
   }
 
@@ -179,7 +179,7 @@ export default class MainScene extends Scene {
 
     this.render({
       text: this.area.sleepMessage,
-      responses: [{ state: "sunrise" }]
+      responses: [{ state: "sunrise" }],
     })
   }
 
@@ -188,7 +188,7 @@ export default class MainScene extends Scene {
 
     this.render({
       text: `You lay down and rest.`,
-      responses: [{ state: "main", fade: true }]
+      responses: [{ state: "main", fade: true }],
     })
   }
 
@@ -207,7 +207,7 @@ export default class MainScene extends Scene {
       this.game.world.transitioned = false
       this.render({
         text: this.area.sunriseMessage + wetDream,
-        responses: [{ state: "main" }]
+        responses: [{ state: "main" }],
       })
     })
   }
@@ -216,7 +216,7 @@ export default class MainScene extends Scene {
     this.game.world.transitioned = false
     this.render({
       text: this.area.sunsetMessage,
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 
@@ -235,8 +235,8 @@ export default class MainScene extends Scene {
         // DISABLED UNTIL USEFUL PERKS
         // { text: "perks", state: "perks" },
         { text: "masturbate", state: "masturbate" },
-        { text: "back", state: "main" }
-      ]
+        { text: "back", state: "main" },
+      ],
     })
   }
 
@@ -257,7 +257,7 @@ export default class MainScene extends Scene {
         It's **${time}**.
 
         ${this.area.campDescription}`,
-      responses: [{ text: "back", state: "main" }]
+      responses: [{ text: "back", state: "main" }],
     })
   }
 
@@ -269,14 +269,14 @@ export default class MainScene extends Scene {
   gear() {
     this.render({
       text: this.game.player.equipmentDescription,
-      responses: [{ text: "back", state: "self" }]
+      responses: [{ text: "back", state: "self" }],
     })
   }
 
   body() {
     this.render({
       text: this.game.player.bodyDescription,
-      responses: [{ text: "back", state: "self" }]
+      responses: [{ text: "back", state: "self" }],
     })
   }
 
@@ -290,7 +290,7 @@ export default class MainScene extends Scene {
 
     this.render({
       text: text || `You don't have any perks yet.`,
-      responses: [{ text: "back", state: "self" }]
+      responses: [{ text: "back", state: "self" }],
     })
   }
 

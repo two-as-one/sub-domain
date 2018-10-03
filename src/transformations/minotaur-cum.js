@@ -24,7 +24,7 @@ export default class MinotaurCum extends Transformation {
         "grow a bovine udder",
         "increase udder size",
         "increase nipple size",
-        "grow an extra nipple"
+        "grow an extra nipple",
       ],
       1
     )

@@ -6,7 +6,7 @@ export default class Balls extends Part {
       size: 1, //length in inches
       sensitivity: 0.5,
       quantity: 0, //number of testicles in the scrotum
-      external: true //whether the scrotum is inside or outside of the body
+      external: true, //whether the scrotum is inside or outside of the body
     })
   }
 

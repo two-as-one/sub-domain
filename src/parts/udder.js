@@ -7,7 +7,7 @@ export default class Udder extends Part {
       quantity: 0,
       size: 0,
       sensitivity: 0.5,
-      teats: 4
+      teats: 4,
     })
   }
 

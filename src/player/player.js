@@ -49,7 +49,7 @@ export default class Player extends Entity {
 
   get defaults() {
     return Object.assign(super.defaults, {
-      xp: 0
+      xp: 0,
     })
   }
 
@@ -156,47 +156,47 @@ export default class Player extends Entity {
       <p class="block">
         ${statBarTemplate({
           label: "Level",
-          current: this.stored.lvl
+          current: this.stored.lvl,
         })}
         ${statBarTemplate({
           label: "XP",
           current: this.stored.xp,
           max: this.expRequired,
-          percentage: this.stored.xp / this.expRequired * 100
+          percentage: (this.stored.xp / this.expRequired) * 100,
         })}
         ${statBarTemplate({
           label: "HP",
           current: this.health,
           max: this.healthMax,
-          percentage: this.health / this.healthMax * 100
+          percentage: (this.health / this.healthMax) * 100,
         })}
         ${statBarTemplate({
           label: "Lust",
           current: this.lust,
           max: this.lustMax,
-          percentage: this.lust / this.lustMax * 100
+          percentage: (this.lust / this.lustMax) * 100,
         })}
       </p>
       <p class="block">
         ${statBarTemplate({
           label: "Strength",
-          current: this.strength
+          current: this.strength,
         })}
         ${statBarTemplate({
           label: "Stamina",
-          current: this.stamina
+          current: this.stamina,
         })}
         ${statBarTemplate({
           label: "Charisma",
-          current: this.charisma
+          current: this.charisma,
         })}
         ${statBarTemplate({
           label: "Willpower",
-          current: this.willpower
+          current: this.willpower,
         })}
         ${statBarTemplate({
           label: "Dexterity",
-          current: this.dexterity
+          current: this.dexterity,
         })}
       </p>`
   }

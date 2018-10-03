@@ -111,7 +111,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
       text: position.name,
       state: "fuck",
       disabled: position.disabled,
-      position: position
+      position: position,
     }))
 
     // sort actions by name
@@ -138,7 +138,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
 
     this.render({
       text: text,
-      responses: actions
+      responses: actions,
     })
   }
 
@@ -167,7 +167,7 @@ export default class MastrubateEncounter extends DefaultEncounter {
 
     this.render({
       text: message,
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 

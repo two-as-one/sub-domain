@@ -19,7 +19,7 @@ export default class CharacterCreation extends DialogueEncounter {
   get FSMStates() {
     return super.FSMStates.concat([
       { name: "outro", from: "*" },
-      { name: "end", from: "*" }
+      { name: "end", from: "*" },
     ])
   }
 
@@ -50,7 +50,7 @@ export default class CharacterCreation extends DialogueEncounter {
       },
       outro: () => {
         this.state.outro()
-      }
+      },
     }
   }
 
@@ -58,7 +58,7 @@ export default class CharacterCreation extends DialogueEncounter {
     this.render({
       classes: "title-screen animated",
       static: titleScreen(),
-      responses: [{ state: "end" }]
+      responses: [{ state: "end" }],
     })
     this.finishTyping()
     this.locked = true

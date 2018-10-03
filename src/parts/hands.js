@@ -4,7 +4,7 @@ export default class Hands extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 2,
-      size: 1
+      size: 1,
     })
   }
 

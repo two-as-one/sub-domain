@@ -27,7 +27,7 @@ export default class Body extends Part {
       quantity: 1,
       size: 170, //in cm
       weight: 65, //in kg
-      hipWidth: 10
+      hipWidth: 10,
       //TODO body fat, hip width, skin
     })
   }

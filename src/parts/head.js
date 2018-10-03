@@ -3,7 +3,7 @@ import Part from "./_super"
 export default class Head extends Part {
   get defaults() {
     return Object.assign(super.defaults, {
-      size: 1
+      size: 1,
     })
   }
 

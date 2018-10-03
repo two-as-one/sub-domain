@@ -4,7 +4,7 @@ import { Anus, Vagina, Breasts, Mouth, Penis } from "parts/_all"
 export default class Minotaur extends Entity {
   constructor() {
     super({
-      lvl: 3
+      lvl: 3,
     })
 
     this.title = "minotaur"

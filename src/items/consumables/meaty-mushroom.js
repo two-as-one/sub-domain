@@ -21,7 +21,7 @@ export default class MeatyMushroom extends Consumable {
       ${player.transform.pickOne([
         "gain minor xp",
         "increase penis size",
-        "grow a new penis"
+        "grow a new penis",
       ])}`
   }
 }

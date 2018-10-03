@@ -4,7 +4,7 @@ import Entity from "./_super"
 export default class Nobody extends Entity {
   constructor() {
     super({
-      lvl: 1
+      lvl: 1,
     })
 
     this.name = "nobody"

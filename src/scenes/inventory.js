@@ -11,7 +11,7 @@ export default class InventoryScene extends Scene {
     return [
       { name: "list", from: "*" },
       { name: "inspect", from: "*" },
-      { name: "end", from: "*" }
+      { name: "end", from: "*" },
     ]
   }
 
@@ -23,7 +23,7 @@ export default class InventoryScene extends Scene {
       item: item,
       text: `${item.name} × ${this.game.player.inventory.quantity(
         item.fileName
-      )}`
+      )}`,
     }))
 
     responses.push({ text: "back", state: "end" })
@@ -37,7 +37,7 @@ export default class InventoryScene extends Scene {
 
     this.render({
       text: text,
-      responses: responses
+      responses: responses,
     })
   }
 

@@ -14,7 +14,7 @@ export default class ItemScene extends Scene {
       { name: "inspect", from: "*" },
       { name: "use", from: "inspect" },
       { name: "discard", from: "inspect" },
-      { name: "end", from: "*" }
+      { name: "end", from: "*" },
     ]
   }
 
@@ -24,8 +24,8 @@ export default class ItemScene extends Scene {
       responses: [
         { text: "use", state: "use", if: this.item.isConsumable },
         { text: "discard", state: "discard" },
-        { text: "back", state: "end" }
-      ]
+        { text: "back", state: "end" },
+      ],
     })
   }
 
@@ -41,7 +41,7 @@ export default class ItemScene extends Scene {
 
     this.render({
       text: result,
-      responses: [{ state: more ? "inspect" : "end" }]
+      responses: [{ state: more ? "inspect" : "end" }],
     })
   }
 
@@ -57,7 +57,7 @@ export default class ItemScene extends Scene {
 
     this.render({
       text: `You tossed away ${item.name} × ${i}`,
-      responses: [{ state: "end" }]
+      responses: [{ state: "end" }],
     })
   }
 }

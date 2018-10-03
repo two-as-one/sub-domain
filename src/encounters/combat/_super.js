@@ -14,7 +14,7 @@ import {
   Grapple,
   Interested,
   Seduce,
-  Struggle
+  Struggle,
 } from "mechanics/formulas"
 
 /**
@@ -65,7 +65,7 @@ export default class CombatEncounter extends Scene {
       player: this.player,
       enemy: this.enemy,
       hideEnemyNumbers: this.player.perception < this.enemy.perception / 2,
-      hideStats: data.hideStats
+      hideStats: data.hideStats,
     })
 
     data.classes = "combat"
@@ -106,7 +106,7 @@ export default class CombatEncounter extends Scene {
       { name: "climax", from: ["end", "pullOut"] },
       { name: "endResults", from: ["end", "climax"] },
 
-      { name: "exit", from: ["flee", "endResults"] }
+      { name: "exit", from: ["flee", "endResults"] },
     ]
   }
 
@@ -118,7 +118,7 @@ export default class CombatEncounter extends Scene {
     this.render({
       text: this.introMessage(this.player, this.enemy),
       hideStats: true,
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 
@@ -153,7 +153,7 @@ export default class CombatEncounter extends Scene {
       actions = [
         { text: "keep fucking", state: "fuck" },
         { text: "change position", state: "submit" },
-        { text: struggleLabel, state: "struggle" }
+        { text: struggleLabel, state: "struggle" },
       ]
     } else {
       message = this.mainMessage(this.player, this.enemy)
@@ -162,7 +162,7 @@ export default class CombatEncounter extends Scene {
         { text: "seduce", state: "seduce" },
         { text: "submit", state: "submit" },
         { text: "examine", state: "examine" },
-        { text: fleeLabel, state: "flee" }
+        { text: fleeLabel, state: "flee" },
       ]
     }
 
@@ -173,7 +173,7 @@ export default class CombatEncounter extends Scene {
 
     this.render({
       text: message,
-      responses: actions
+      responses: actions,
     })
   }
 
@@ -193,7 +193,7 @@ export default class CombatEncounter extends Scene {
       text:
         this.attackMessage(this.player, this.enemy) +
         this.attackResultsMessage(amount),
-      responses: [{ state: "enemyAction" }]
+      responses: [{ state: "enemyAction" }],
     })
   }
 
@@ -209,7 +209,7 @@ export default class CombatEncounter extends Scene {
 
     this.render({
       text: text,
-      responses: [{ text: "back", state: "main" }]
+      responses: [{ text: "back", state: "main" }],
     })
   }
 
@@ -231,7 +231,7 @@ export default class CombatEncounter extends Scene {
         state: "seduceResults",
         text: label,
         part: name,
-        if: part.canSeduce && part.has
+        if: part.canSeduce && part.has,
       })
     })
 
@@ -239,7 +239,7 @@ export default class CombatEncounter extends Scene {
 
     this.render({
       text: `How do you want to try to seduce [foe]?`,
-      responses: responses
+      responses: responses,
     })
   }
 
@@ -254,7 +254,7 @@ export default class CombatEncounter extends Scene {
       text:
         this.player[data.part].seductionMessage +
         this.seduceResultsMessage(amount),
-      responses: [{ state: "enemyAction" }]
+      responses: [{ state: "enemyAction" }],
     })
   }
 
@@ -264,14 +264,14 @@ export default class CombatEncounter extends Scene {
       state: "submitResults",
       text: position.name,
       position: position,
-      disabled: position.disabled
+      disabled: position.disabled,
     }))
 
     responses.push({ state: "main", text: "back" })
 
     this.render({
       text: `What are you offering?`,
-      responses: responses
+      responses: responses,
     })
   }
 
@@ -291,12 +291,12 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text: this.position.get("player.start"),
-        responses: [{ state: "fuck" }]
+        responses: [{ state: "fuck" }],
       })
     } else {
       this.render({
         text: this.notInterestedMessage(this.player, this.enemy),
-        responses: [{ state: "enemyAction" }]
+        responses: [{ state: "enemyAction" }],
       })
     }
   }
@@ -316,7 +316,7 @@ export default class CombatEncounter extends Scene {
       text:
         this.position.get("player.continue") +
         this.seduceResultsMessage(amount),
-      responses: [{ state: "enemyAction" }]
+      responses: [{ state: "enemyAction" }],
     })
   }
 
@@ -331,12 +331,12 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text: this.struggleSuccessMessage(this.player, this.enemy),
-        responses: [{ state: "main" }]
+        responses: [{ state: "main" }],
       })
     } else {
       this.render({
         text: this.struggleFailureMessage(this.player, this.enemy),
-        responses: [{ state: "enemyAction" }]
+        responses: [{ state: "enemyAction" }],
       })
     }
   }
@@ -395,7 +395,7 @@ export default class CombatEncounter extends Scene {
       text:
         this.playerAttackedMessage(this.player, this.enemy) +
         this.attackedResultsMessage(amount),
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 
@@ -410,7 +410,7 @@ export default class CombatEncounter extends Scene {
       text:
         this.seducedMessage(this.player, this.enemy) +
         this.seducedResultsMessage(amount),
-      responses: [{ state: "main" }]
+      responses: [{ state: "main" }],
     })
   }
 
@@ -420,7 +420,7 @@ export default class CombatEncounter extends Scene {
       text: this.player.orgasmed
         ? this.tooHornyMessage(this.player)
         : this.tooWeakMessage(this.player),
-      responses: [{ state: "enemyAction" }]
+      responses: [{ state: "enemyAction" }],
     })
   }
 
@@ -437,12 +437,12 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text: this.position.get("enemy.start"),
-        responses: [{ state: "enemyAction", initiated: true }]
+        responses: [{ state: "enemyAction", initiated: true }],
       })
     } else {
       this.render({
         text: this.grappleFailureMessage(this.player, this.enemy),
-        responses: [{ state: "main" }]
+        responses: [{ state: "main" }],
       })
     }
   }
@@ -461,7 +461,7 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text: this.position.get("enemy.start"),
-        responses: [{ state: "enemyAction" }]
+        responses: [{ state: "enemyAction" }],
       })
     } else {
       const formula = new Fuck(
@@ -477,7 +477,7 @@ export default class CombatEncounter extends Scene {
         text:
           this.position.get("enemy.continue") +
           this.seducedResultsMessage(amount),
-        responses: [{ state: "main" }]
+        responses: [{ state: "main" }],
       })
     }
   }
@@ -493,12 +493,12 @@ export default class CombatEncounter extends Scene {
     if (success) {
       this.render({
         text: this.fleeSuccessMessage(this.player, this.enemy),
-        responses: [{ state: "exit" }]
+        responses: [{ state: "exit" }],
       })
     } else {
       this.render({
         text: this.fleeFailureMessage(this.player, this.enemy),
-        responses: [{ state: "enemyAction" }]
+        responses: [{ state: "enemyAction" }],
       })
     }
   }
@@ -513,8 +513,8 @@ export default class CombatEncounter extends Scene {
           text: this.pullOutMessage(this.player, this.enemy),
           responses: [
             { text: "pull out", state: "pullOut" },
-            { text: "keep going", state: "climax" }
-          ]
+            { text: "keep going", state: "climax" },
+          ],
         })
       }
     } else if (this.enemy.orgasmed) {
@@ -534,12 +534,12 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text: this.struggleSuccessMessage(this.player, this.enemy),
-        responses: [{ state: "climax" }]
+        responses: [{ state: "climax" }],
       })
     } else {
       this.render({
         text: this.struggleFailureMessage(this.player, this.enemy),
-        responses: [{ state: "climax" }]
+        responses: [{ state: "climax" }],
       })
     }
   }
@@ -552,7 +552,7 @@ export default class CombatEncounter extends Scene {
 
     this.render({
       text: message,
-      responses: [{ state: "endResults" }]
+      responses: [{ state: "endResults" }],
     })
   }
 
@@ -634,7 +634,7 @@ export default class CombatEncounter extends Scene {
     this.render({
       text: text,
       hideStats: true,
-      responses: [{ state: "exit" }]
+      responses: [{ state: "exit" }],
     })
   }
 

@@ -15,8 +15,8 @@ export default class Inventory {
   get defaults() {
     return {
       bag: {
-        rock: 0
-      }
+        rock: 0,
+      },
     }
   }
 

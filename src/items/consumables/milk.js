@@ -21,7 +21,7 @@ export default class Milk extends Consumable {
         "gain minor xp",
         "increase breast size",
         "grow a pair of breasts",
-        "increase nipple size"
+        "increase nipple size",
       ])}`
   }
 }

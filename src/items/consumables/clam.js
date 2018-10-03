@@ -21,7 +21,7 @@ export default class Clam extends Consumable {
       ${player.transform.pickOne([
         "gain minor xp",
         "increase vagina size",
-        "grow a new vagina"
+        "grow a new vagina",
       ])}`
   }
 }
