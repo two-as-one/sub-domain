@@ -1,75 +1,67 @@
 {
-  "name": "sub-domain-ass",
-  "version": "0.4.19",
-  "description": "SUB DOMAIN: a spunky story - an adult themed text adventure",
-  "main": "app.js",
-  "scripts": {
-    "version": "npm run build && git add -A dist",
-    "start": "node ./bin/www",
-    "build": "webpack --env.dist",
-    "dev": "webpack-dev-server --content-base dist/ --port 3000 --open",
-    "lint-staged": "lint-staged"
-  },
-  "author": "furka.thorne@gmail.com",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "articles": "^0.2.2",
-    "babel-loader": "^8.0.0-beta.4",
-    "babel-polyfill": "^6.26.0",
-    "chance": "^1.0.10",
-    "conjugate": "^1.0.4",
-    "contractions": "0.0.7",
-    "convert-units": "^2.3.1",
-    "cool-typewriter": "^1.0.4",
-    "css-loader": "^1.0.0",
-    "eslint": "^4.10.0",
-    "handlebars": "^4.0.11",
-    "handlebars-loader": "^1.7.0",
-    "html-webpack-inline-source-plugin": "0.0.10",
-    "html-webpack-plugin": "^3.2.0",
-    "husky": "^0.14.3",
-    "javascript-state-machine": "^3.0.1",
-    "json-loader": "^0.5.4",
-    "less": "^3.8.0",
-    "less-loader": "^4.1.0",
-    "lint-staged": "^4.3.0",
-    "lodash": "^4.17.10",
-    "number-to-words": "^1.2.3",
-    "pluralize": "^7.0.0",
-    "pre-commit": "^1.2.2",
-    "prettier": "^1.14.3",
-    "pug": "^2.0.3",
-    "pug-loader": "^2.4.0",
-    "raw-loader": "^0.5.1",
-    "showdown": "^1.8.6",
-    "style-loader": "^0.21.0",
-    "underscore": "^1.8.3",
-    "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
-  },
-  "dependencies": {
-    "debug": "~2.6.3",
-    "express": "^4.16.3"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write --no-semi",
-      "git add"
-    ],
-    "*.less": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "pre-commit": [
-    "lint-staged"
-  ]
+    "name": "sub-domain-ass",
+    "version": "0.4.19",
+    "description": "SUB DOMAIN: a spunky story - an adult themed text adventure",
+    "main": "app.js",
+    "scripts": {
+        "version": "npm run build && git add -A dist",
+        "start": "node ./bin/www",
+        "build": "webpack --env.dist",
+        "dev": "webpack-dev-server --content-base dist/ --port 3000 --open"
+    },
+    "author": "furka.thorne@gmail.com",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.0.0-beta.51",
+        "@babel/preset-env": "^7.0.0-beta.51",
+        "articles": "^0.2.2",
+        "babel-loader": "^8.0.0-beta.4",
+        "babel-polyfill": "^6.26.0",
+        "chance": "^1.0.10",
+        "conjugate": "^1.0.4",
+        "contractions": "0.0.7",
+        "convert-units": "^2.3.1",
+        "cool-typewriter": "^1.0.4",
+        "css-loader": "^1.0.0",
+        "eslint": "^5.6.1",
+        "handlebars": "^4.0.11",
+        "handlebars-loader": "^1.7.0",
+        "html-webpack-inline-source-plugin": "0.0.10",
+        "html-webpack-plugin": "^3.2.0",
+        "husky": "^1.1.0",
+        "javascript-state-machine": "^3.0.1",
+        "json-loader": "^0.5.4",
+        "less": "^3.8.0",
+        "less-loader": "^4.1.0",
+        "lint-staged": "^7.3.0",
+        "lodash": "^4.17.10",
+        "number-to-words": "^1.2.3",
+        "pluralize": "^7.0.0",
+        "prettier": "^1.14.3",
+        "pretty-quick": "^1.7.0",
+        "pug": "^2.0.3",
+        "pug-loader": "^2.4.0",
+        "raw-loader": "^0.5.1",
+        "showdown": "^1.8.6",
+        "style-loader": "^0.21.0",
+        "underscore": "^1.8.3",
+        "webpack": "^4.16.3",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5"
+    },
+    "dependencies": {
+        "debug": "~2.6.3",
+        "express": "^4.16.3"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged && lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ]
+    }
 }
