@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.4.19] - 2018-10-03
+### Fixed
+- Fixed bug where the index page template wasn't getting parsed
+
 ## [0.4.18] - 2018-10-02
 ### Added
 - new dialogue parser
