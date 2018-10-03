@@ -75,7 +75,7 @@ module.exports = function(env) {
       }),
       new HtmlWebpackPlugin({
         inlineSource: '.js$',
-        template: "./src/templates/layout.pug"
+        template: "pug-loader!./src/templates/layout.pug"
       }),
       new HtmlWebpackInlineSourcePlugin()
     ]
@@ -88,8 +88,7 @@ module.exports = function(env) {
       include: [
         path.resolve(__dirname, 'src'),
         path.resolve(__dirname, 'node_modules/contractions'),
-        path.resolve(__dirname, 'node_modules/cool-typewriter'),
-        path.resolve(__dirname, 'node_modules/rpg-dialogue')
+        path.resolve(__dirname, 'node_modules/cool-typewriter')
       ],
       use: {
         loader: "babel-loader",
