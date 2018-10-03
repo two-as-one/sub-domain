@@ -63,10 +63,6 @@
     "*.less": [
       "prettier --write",
       "git add"
-    ],
-    "*.hbs": [
-      "prettier --write",
-      "git add"
     ]
   },
   "pre-commit": [
