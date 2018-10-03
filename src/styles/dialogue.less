@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 .dialogue,
 .static,
@@ -18,11 +18,13 @@
     }
   }
 
-  p, blockquote {
+  p,
+  blockquote {
     margin: 0 0 @font-size 0;
   }
 
-  b, strong {
+  b,
+  strong {
     color: @color-foreground-strong;
     font-weight: normal;
   }
@@ -32,17 +34,17 @@
     font-style: italic;
 
     &::before {
-      content: '“';
+      content: "“";
     }
     &::after {
-      content: '”';
+      content: "”";
     }
 
     //hides the quotation marks until there is content inside of them, this is needed by the typing animation
-    &:empty{
+    &:empty {
       &::before,
       &::after {
-        content: '';
+        content: "";
       }
     }
   }
@@ -65,8 +67,8 @@
     padding: 6px 0;
     font-size: @font-size;
 
-    body[mouse-control=true] &:hover,
-    body:not([mouse-control=true]) &.focus {
+    body[mouse-control="true"] &:hover,
+    body:not([mouse-control="true"]) &.focus {
       color: @color-foreground-strong;
       background-color: @color-hover;
     }
@@ -75,7 +77,7 @@
       padding: 0;
     }
 
-    &.disabled{
+    &.disabled {
       opacity: 0.35;
       filter: grayscale(100%);
     }
