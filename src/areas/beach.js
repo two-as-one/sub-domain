@@ -31,7 +31,7 @@ export default class Beach extends Area {
       [you] open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach.
       Waking up to the peaceful sound of waves crashing against the shore.
 
-      Where are you? Just long did you sleep? More importantly — What the heck happened?
+      Where are you? Just how long did you sleep? More importantly — What the heck happened?
 
       [you] try to get up but [your:body] is sore and weak — maybe you'll just lay down for a little longer, coming to grips with your situation.`
   }
@@ -49,7 +49,7 @@ export default class Beach extends Area {
 
   get campDescription() {
     return `
-      You have made a ramshackle camp using debris from a sunken ship.`
+      You have made a ramshackle camp using debris from what you assume is a sunken ship.`
   }
 
   get exploreMessage() {
@@ -83,9 +83,10 @@ export default class Beach extends Area {
 
     //always discover forest first
     if (!this.game.world.forest.discovered) {
+      // discover the forest first
       return this.discoverForest()
-      //guarantee finding a clam at lvl 1 - teaches the player about consumables
     } else if (lvl === 2) {
+      // guarantee finding a clam after that - teaches the player about consumables
       return this.findClam()
     } else {
       return Area.weighted([
@@ -100,9 +101,18 @@ export default class Beach extends Area {
     this.game.world.forest.discover()
 
     return `
-      There's a forest which seems to span all the way across the coast — at least as far as the eye can see.
+      Without straying too far from where you woke up, you explore this
+      unfamiliar beach. Its shoreline extending both ways — far into the
+      distance.
 
-      Maybe you could explore it too?
+      You gaze over the azure sea with its cloudless blue sky draped above it.
+      The temperature is quite nice. Even though the sun shines bright, there's
+      a cool breeze coming from the ocean. You close your eyes for a while,
+      letting the tranquillity flow through you.
+
+      Behind you, there's a forest which seems to span all the way across the
+      coast — at least as far as the eye can see. Maybe you could explore it
+      too?
 
       You have discovered the **forest**!`
   }

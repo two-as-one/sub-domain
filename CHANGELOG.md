@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Security
 
+## [0.4.20] - 2018-10-03
+
+### Changed
+
+- Changed beach area to match character creation story
+
 ## [0.4.19] - 2018-10-03
 
 ### Fixed
