@@ -136,20 +136,13 @@ Usually used as a subject, use the name of the part to target it. This should us
 
 #### available parts
 
-- `[your:anus]`
-- `[your:balls]`
-- `[your:body]`
-- `[your:breasts]`
-- `[your:face]`
-- `[your:feet]`
-- `[your:hands]`
-- `[your:head]`
-- `[your:mouth]`
-- `[your:nipples]`
+Any of the parts described in [all.js](src/parts/_all.js) are accessible via any of their synonyms. For instance:
+
 - `[your:penis]`
-- `[your:tail]`
-- `[your:udder]`
+- `[your:cock]`
+- `[your:pussy]`
 - `[your:vagina]`
+- `[your:breasts]`
 
 (you can use `foe` to target the opponent's parts)
 
@@ -309,11 +302,11 @@ This allows you to easily `*`_emphasize_`*` or `**`**bold**`**` text and insert 
 Additionally, the parser will also understand quoted text using `"` , even though this isn't basic markdown syntax.
 
 ```js
-`paragraph *one*
+;`paragraph *one*
 
 paragraph "two"
 
-paragraph **three**`;
+paragraph **three**`
 ```
 
 => `<p>paragraph <em>one</em></p><p>paragraph <q>two</q></p><p>paragraph <strong>three</strong></p>`
