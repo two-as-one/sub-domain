@@ -19,6 +19,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Security
 
+## [0.4.21] - 2018-10-15
+
+### Added
+
+- arms body part
+- butt body part
+- hips body part
+- legs body part
+- added extra masturbate options
+
+### Changed
+
+- Challenge rating is now displayed in combat instead of LVL
+- changed some wording in minotaur encounter
+- body parts can now be accessed by any of their synonyms in the parser
+
+### Fixed
+
+- Fixed masturbate
+
 ## [0.4.20] - 2018-10-03
 
 ### Changed
