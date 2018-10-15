@@ -2,8 +2,8 @@ import Entity from "./_super"
 import { Anus, Vagina, Breasts, Mouth, Penis } from "parts/_all"
 
 export default class Minotaur extends Entity {
-  constructor() {
-    super({
+  constructor(game) {
+    super(game, {
       lvl: 3,
     })
 

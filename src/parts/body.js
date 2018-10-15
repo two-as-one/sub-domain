@@ -2,6 +2,14 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Body extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("body")
+
+    this.addAdjective("shared", () => this.owner.perks.has("conjoined"))
+  }
+
   get description() {
     return `${this.heightDescription} You weigh ${this.weight}.`
   }
@@ -27,27 +35,7 @@ export default class Body extends Part {
       quantity: 1,
       size: 170, //in cm
       weight: 65, //in kg
-      hipWidth: 10,
-      //TODO body fat, hip width, skin
     })
-  }
-
-  get singular() {
-    return ["body"]
-  }
-
-  get plural() {
-    return ["bodies"]
-  }
-
-  get adjectives() {
-    const list = []
-
-    if (this.owner.perks && this.owner.perks.has("conjoined")) {
-      list.push("shared")
-    }
-
-    return list
   }
 
   get height() {
@@ -56,5 +44,15 @@ export default class Body extends Part {
 
   get weight() {
     return Grammar.toLbs(this.stored.weight)
+  }
+
+  // < 18 - underweight
+  // > 25 - overweight
+  // > 30 - obese
+  // > 40 - morbidly obese
+  get bmi() {
+    return Math.round(
+      (this.stored.weight / this.stored.size / this.stored.size) * 10000
+    )
   }
 }

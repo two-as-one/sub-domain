@@ -1,6 +1,14 @@
 import Part from "./_super"
 
 export default class Face extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("face")
+
+    // TODO - adjectives
+  }
+
   get size() {
     return this.owner.head.size
   }
@@ -14,12 +22,4 @@ export default class Face extends Part {
 
   //no-op
   set quantity(val) {}
-
-  get singular() {
-    return ["face"]
-  }
-
-  get plural() {
-    return ["faces"]
-  }
 }

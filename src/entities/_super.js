@@ -1,15 +1,20 @@
 import Chance from "chance"
 import Grammar from "grammar/grammar"
+import PerkManager from "perks/_manager"
 
 import {
   Anus,
+  Arm,
   Balls,
   Body,
   Breasts,
+  Butt,
   Face,
   Feet,
   Hands,
   Head,
+  Hips,
+  Legs,
   Mouth,
   Nipples,
   Penis,
@@ -30,7 +35,9 @@ const HP_SCALE = 5
  * refer to README.md for instructions on how to make custom entities
  */
 export default class Entity {
-  constructor(config = {}) {
+  constructor(game, config = {}) {
+    this.game = game
+
     //name is used by specific NPC's, leave this blank if an entity has no known name
     //eg: 'Bob', 'Alice'
     this.name = ""
@@ -56,13 +63,17 @@ export default class Entity {
 
     this.parts = {
       anus: new Anus(this),
+      arms: new Arm(this),
       balls: new Balls(this),
       body: new Body(this),
       breasts: new Breasts(this),
+      butt: new Butt(this),
       face: new Face(this),
       feet: new Feet(this),
       hands: new Hands(this),
       head: new Head(this),
+      hips: new Hips(this),
+      legs: new Legs(this),
       mouth: new Mouth(this),
       nipples: new Nipples(this),
       penis: new Penis(this),
@@ -71,8 +82,21 @@ export default class Entity {
       vagina: new Vagina(this),
     }
 
-    // make parts directly accessible on entity, ie `entity.hands`
-    Object.keys(this.parts).forEach(key => (this[key] = this.parts[key]))
+    // make each body part available directly on the entity, including synonyms and plural
+    Object.entries(this.parts).forEach(pair => {
+      const part = pair[1]
+
+      part.synonyms.forEach(word => {
+        if (word.singular && !(word.singular in this)) {
+          this[word.singular] = part
+        }
+        if (word.plural && !(word.plural in this)) {
+          this[word.plural] = part
+        }
+      })
+    })
+
+    this.perks = new PerkManager(this)
   }
 
   get defaults() {
@@ -374,19 +398,31 @@ export default class Entity {
    *                           1    even match
    *                           <0.5 trivial
    */
-  difficulty(target) {
-    return (
-      (target.strength +
-        target.stamina +
-        target.charisma +
-        target.willpower +
-        target.dexterity) /
+  get difficulty() {
+    const player = this.game.player
+    const difficulty =
+      (player.strength +
+        player.stamina +
+        player.charisma +
+        player.willpower +
+        player.dexterity) /
       (this.strength +
         this.stamina +
         this.charisma +
         this.willpower +
         this.dexterity)
-    )
+
+    if (difficulty < 0.5) {
+      return "trivial"
+    } else if (difficulty < 1) {
+      return "easy"
+    } else if (difficulty < 1.5) {
+      return "challenging"
+    } else if (difficulty < 2) {
+      return "difficult"
+    } else {
+      return "impossible"
+    }
   }
 
   /**

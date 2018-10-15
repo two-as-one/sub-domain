@@ -1,6 +1,56 @@
 import Part from "./_super"
 
 export default class Penis extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("dick")
+    this.addSynonym("dong")
+    this.addSynonym("cock")
+    this.addSynonym("shaft")
+    this.addSynonym("penis")
+    this.addSynonym("phallus")
+    this.addSynonym("pecker", null, () => this.size < 4)
+
+    this.addAdjective("minuscule", () => this.size < 2)
+    this.addAdjective("cute", () => this.between(2, 4))
+    this.addAdjective("tiny", () => this.between(2, 4))
+    this.addAdjective("useless", () => this.between(2, 4))
+    this.addAdjective("medium", () => this.between(4, 7))
+    this.addAdjective("average", () => this.between(4, 7))
+    this.addAdjective("ordinary", () => this.between(4, 7))
+    this.addAdjective("unexceptional", () => this.between(4, 7))
+    this.addAdjective("large", () => this.between(7, 12))
+    this.addAdjective("hefty", () => this.between(7, 12))
+    this.addAdjective("generous", () => this.between(7, 12))
+    this.addAdjective("impressive", () => this.between(7, 12))
+    this.addAdjective("giant", () => this.size > 12)
+    this.addAdjective("massive", () => this.size > 12)
+    this.addAdjective("monstrous", () => this.size > 12)
+    this.addAdjective("humongous", () => this.size > 12)
+
+    this.addAdjective("limp", () => !this.functional)
+    this.addAdjective("useless", () => !this.functional)
+    this.addAdjective("impotent", () => !this.functional)
+
+    this.addAdjective(
+      "flaccid",
+      () => this.functional && this.owner.lustNormalized < 0.15
+    )
+    this.addAdjective(
+      "erect",
+      () => this.functional && this.owner.lustNormalized >= 0.3
+    )
+    this.addAdjective(
+      "stiff",
+      () => this.functional && this.owner.lustNormalized >= 0.3
+    )
+    this.addAdjective(
+      "throbbing",
+      () => this.functional && this.owner.lustNormalized >= 0.3
+    )
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       size: 6, //in inches
@@ -58,60 +108,12 @@ export default class Penis extends Part {
 
   get seductionMessage() {
     return `
-        With [your.face.multiple?wicked smirks|a wicked smirk] on [your:face],
-        [you] firmly grab [one of:your:adjective:penis]. Jerking it a few times
-        while humping the air.`
+        With a wicked smirk on [each of:your:face], [you] firmly grab
+        [one of:your:adjective:penis]. Jerking it a few times while humping the
+        air.`
   }
 
   get canSeduce() {
     return true
-  }
-
-  get singular() {
-    const words = ["penis", "dick", "dong", "cock", "shaft", "phallus"]
-
-    if (this.size < 4) {
-      words.push("pecker")
-    }
-
-    return words
-  }
-
-  get plural() {
-    const words = ["penises", "dicks", "dongs", "cocks", "shafts", "phalluses"]
-
-    if (this.size < 4) {
-      words.push("peckers")
-    }
-
-    return words
-  }
-
-  get adjectives() {
-    const adjectives = super.adjectives
-
-    if (this.size < 2) {
-      adjectives.push("minuscule")
-    } else if (this.size < 4) {
-      adjectives.push("cute", "tiny", "useless")
-    } else if (this.size < 7) {
-      adjectives.push("average", "medium", "ordinary", "unexceptional")
-    } else if (this.size < 12) {
-      adjectives.push("large", "impressive", "generous", "hefty")
-    } else {
-      adjectives.push("monstrous", "giant", "humongous")
-    }
-
-    if (!this.functional) {
-      adjectives.push("limp", "useless")
-    } else if (this.owner.lustNormalized < 0.15) {
-      adjectives.push("flaccid")
-    } else if (this.owner.lustNormalized < 0.3) {
-      adjectives.push("semi-erect")
-    } else {
-      adjectives.push("throbbing", "erect")
-    }
-
-    return adjectives
   }
 }

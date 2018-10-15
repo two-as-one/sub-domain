@@ -1,6 +1,19 @@
 import Part from "./_super"
 
 export default class Balls extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("ball")
+    this.addSynonym("testicle")
+
+    this.addAdjective("internal", () => this.internal)
+    this.addAdjective("cute", () => !this.internal && this.size < 1)
+    this.addAdjective("heavy", () => !this.internal && this.between(1.5, 4))
+    this.addAdjective("saggy", () => !this.internal && this.between(1.5, 4))
+    this.addAdjective("monstrous", () => !this.internal && this.size > 4)
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       size: 1, //length in inches
@@ -69,6 +82,14 @@ export default class Balls extends Part {
     return text
   }
 
+  get internal() {
+    return this.stored.internal
+  }
+
+  set internal(val) {
+    this.stored.internal = Boolean(val)
+  }
+
   get all() {
     let text = `your ${this.adjective} scrotum`
 
@@ -83,31 +104,7 @@ export default class Balls extends Part {
     return text
   }
 
-  get singular() {
-    return ["ball", "testicle"]
-  }
-
-  get plural() {
-    return ["balls", "testicles"]
-  }
-
   get scrotumSize() {
     return this.quantity * this.size
-  }
-
-  get adjectives() {
-    const adjectives = super.adjectives
-
-    if (!this.stored.external) {
-      adjectives.push("internal")
-    } else if (this.scrotumSize < 4) {
-      adjectives.push("tight")
-    } else if (this.scrotumSize < 8) {
-      adjectives.push("heavy", "saggy")
-    } else {
-      adjectives.push("monstrous")
-    }
-
-    return adjectives
   }
 }

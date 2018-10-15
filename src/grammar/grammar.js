@@ -362,6 +362,25 @@ export default class Grammar {
   }
 
   /**
+   * Fixes spacing around punctuation
+   */
+  static punctuate(text = "") {
+    return (
+      Grammar.trim(text)
+        .replace(/\s?—\s?/g, " — ")
+        .replace(/\s?…\s?/g, " … ")
+        .replace(/\s?,\s?/g, ", ")
+        .replace(/\s?!\s?/g, "! ")
+        .replace(/\s?:\s?/g, ": ")
+        .replace(/\s?;\s?/g, "; ")
+        .replace(/\s?\?\s?/g, "? ")
+        .replace(/\s?\.\s?/g, ". ")
+        // if both sides of a dot have numbers, remove the space between
+        .replace(/(\d)\.\s(\d)/g, "$1.$2")
+    )
+  }
+
+  /**
    * conjugates all verbs in a blob of text
    * mark the subject by trailing it with a `~`
    * mark the verb by prepending it with `>`
@@ -398,17 +417,18 @@ export default class Grammar {
    * @return {String}      the cleaned up text
    */
   static clean(text = "") {
-    text = parse(text)
+    text = text
       .split(/\n\n|\r\r/)
-      .map(text => parse(text))
       .map(text => Grammar.collapse(text))
+      .map(text => Grammar.trim(text))
+      .map(text => parse(text))
       .map(text => Grammar.unundefined(text))
       .filter(text => text)
       .map(text => Grammar.conjugate(text))
-      .map(text => Grammar.trim(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))
       .map(text => Grammar.quote(text))
+      .map(text => Grammar.punctuate(text))
       .map(text => converter.makeHtml(text))
 
     return text.join("")

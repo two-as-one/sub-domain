@@ -2,6 +2,28 @@ import Grammar from "grammar/grammar"
 import Part from "./_super"
 
 export default class Anus extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("anus")
+    this.addSynonym("rectum")
+    this.addSynonym("rosebud")
+    this.addSynonym("butthole")
+
+    this.addAdjective("firm", () => this.size <= 1)
+    this.addAdjective("tight", () => this.size <= 1)
+    this.addAdjective("puckered", () => this.size <= 1)
+    this.addAdjective("used", () => this.between(1, 3))
+    this.addAdjective("loose", () => this.between(1, 3))
+    this.addAdjective("sloppy", () => this.between(1, 3))
+    this.addAdjective("wide", () => this.size > 3)
+    this.addAdjective("gaping", () => this.size > 3)
+    this.addAdjective("greedy", () => this.size > 3)
+    this.addAdjective("ravenous", () => this.size > 3)
+    this.addAdjective("cavernous", () => this.size > 3)
+    this.addAdjective("gluttonous", () => this.size > 3)
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       size: 0.2, //diameter of opening
@@ -28,11 +50,11 @@ export default class Anus extends Part {
 
   get seductionMessage() {
     return Grammar.random([
-      `You turn around and place [your:hands] on your hips.
+      `You turn around and place [your:hands] on [your:adjective:hips].
         Looking back over your shoulder, [you] invitingly sway your bottom back and forth.
-        Then, with a playful smirk on [your:face], you firmly slap your own ass.`,
+        Then, with a playful smirk on [your:face], you firmly slap [your:own:butt].`,
       `You turn around and bend over.
-        Looking at [foe] from between your own legs, you invitingly shake your ass at [them].`,
+        Looking at [foe] from between your own legs, you invitingly shake [your:adjective:butt] at [them].`,
     ])
   }
 
@@ -50,34 +72,5 @@ export default class Anus extends Part {
 
   get growth() {
     return this.size > 2 ? this.size / 10 : 0.2
-  }
-
-  get singular() {
-    return ["anus", "butthole", "rectum", "rosebud"]
-  }
-
-  get plural() {
-    return ["anuses", "buttholes", "rectums", "rosebuds"]
-  }
-
-  get adjectives() {
-    const adjectives = super.adjectives
-
-    if (this.size < 1) {
-      adjectives.push("tight", "firm")
-    } else if (this.size < 3) {
-      adjectives.push("used", "sloppy", "loose")
-    } else {
-      adjectives.push(
-        "ravenous",
-        "greedy",
-        "wide",
-        "gluttonous",
-        "gaping",
-        "cavernous"
-      )
-    }
-
-    return adjectives
   }
 }

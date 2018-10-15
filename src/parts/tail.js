@@ -1,6 +1,14 @@
 import Part from "./_super"
 
 export default class Tail extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("tail")
+
+    // TODO - adjectives
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 0,
@@ -16,13 +24,5 @@ export default class Tail extends Part {
     }
 
     return ""
-  }
-
-  get singular() {
-    return ["tail"]
-  }
-
-  get plural() {
-    return ["tails"]
   }
 }

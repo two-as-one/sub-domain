@@ -33,6 +33,42 @@ for (let a = 0; a <= 4; a += 1) {
 BREAST_CONFIGS.push([1, 0, 0, 0]) //make an exception for a single breast
 
 export default class Breasts extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("pec", null, () => this.size === 0)
+    this.addSynonym("tit")
+    this.addSynonym("boob")
+    this.addSynonym("breast")
+    this.addSynonym("mammary")
+    this.addSynonym("tit", "titties")
+    this.addSynonym("boob", "boobies")
+    this.addSynonym("jug", "jugs", () => this.size > 8)
+    this.addSynonym("melon", "melons", () => this.size > 8)
+    this.addSynonym("knocker", "knockers", () => this.size > 8)
+
+    this.addAdjective("flat", () => this.size === 0)
+    this.addAdjective("soft", () => this.size > 0)
+    this.addAdjective("sensitive", () => this.size > 0)
+    this.addAdjective("small", () => this.between(0, 4))
+    this.addAdjective("perky", () => this.between(0, 4))
+    this.addAdjective("little", () => this.between(0, 4))
+    this.addAdjective("modest", () => this.between(4, 8))
+    this.addAdjective("sizeable", () => this.between(4, 8))
+    this.addAdjective("big", () => this.between(8, 12))
+    this.addAdjective("ample", () => this.between(8, 12))
+    this.addAdjective("hefty", () => this.between(8, 12))
+    this.addAdjective("heavy", () => this.between(8, 12))
+    this.addAdjective("large", () => this.between(8, 12))
+    this.addAdjective("massive", () => this.size > 12)
+    this.addAdjective("enormous", () => this.size > 12)
+    this.addAdjective("imposing", () => this.size > 12)
+    this.addAdjective("humongous", () => this.size > 12)
+    this.addAdjective("milky", () => this.milky)
+    this.addAdjective("creamy", () => this.milky)
+    this.addAdjective("bountiful", () => this.milky)
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       size: 0, //in bust inches
@@ -125,9 +161,7 @@ export default class Breasts extends Part {
       text += this.owner.nipples.description
 
       if (this.milky) {
-        text += ` ${Grammar.capitalize(
-          this.all
-        )} ache, feeling **full of milk**.`
+        text += ` [all of:them(your.breasts)]~>ache, **brimming with milk**.`
       }
     } else {
       text = `Your chest is flat and unnoteworthy. Your pecs each ${
@@ -150,67 +184,6 @@ export default class Breasts extends Part {
 
   get canSeduce() {
     return true
-  }
-
-  get singular() {
-    if (this.size === 0) {
-      return ["pec"]
-    }
-
-    const choices = ["breast", "boob", "tit", "mammary"]
-
-    if (this.size > 8) {
-      choices.push("knocker", "jug", "melon")
-    }
-
-    return choices
-  }
-
-  get plural() {
-    if (this.size === 0) {
-      return ["pecs"]
-    }
-
-    const choices = [
-      "breasts",
-      "boobs",
-      "boobies",
-      "tits",
-      "titties",
-      "mammaries",
-    ]
-
-    if (this.size > 8) {
-      choices.push("knockers", "jugs", "melons")
-    }
-
-    return choices
-  }
-
-  get adjectives() {
-    const adjectives = super.adjectives
-
-    if (this.size === 0) {
-      return "flat"
-    }
-
-    if (this.size < 4) {
-      adjectives.push("small", "little", "perky")
-    } else if (this.size < 8) {
-      adjectives.push("modest", "sizeable")
-    } else if (this.size < 12) {
-      adjectives.push("hefty", "heavy", "large")
-    } else {
-      adjectives.push("humongous", "enormous", "massive", "imposing")
-    }
-
-    if (this.milky) {
-      adjectives.push("milky", "bountiful")
-    }
-
-    adjectives.push("sensitive", "soft")
-
-    return adjectives
   }
 
   get cupSize() {

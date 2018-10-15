@@ -9,49 +9,49 @@ class Anal extends Position {
     this.infects = true
   }
 
-  idle(p, e) {
+  idle() {
     return `
       [foe]~>have [all of:their:adjective:penis] lodged deep inside
       [your:adjective:anus].`
   }
 
-  playerStart(p, e) {
+  playerStart() {
     return `
-      [you] turn your back towards [foe], shaking your ass a few times before
-      bending over. On all fours and with your ass pointing up, [you] look back
-      over your shoulders at [foe]. [they]~>snort, unable to resist and with
-      one hand on [their:penis] and the other on your ass, [they(foe)]~ brutally
-      >ram [all of:their:adjective:penis] deep into
-      [one of:your:adjective:anus].`
+      [you] turn your back towards [foe], shaking [your:adjective:butt] a few
+      times before bending over. On all fours and with [your:butt] pointing up,
+      [you] look back over your shoulders at [foe]. [they]~>snort, unable to
+      resist and with one hand on [their:penis] and the other on
+      [your:adjective:butt], [they(foe)]~ brutally >ram
+      [all of:their:adjective:penis] deep into [one of:your:adjective:anus].`
   }
 
-  enemyStart(p, e) {
+  enemyStart() {
     return `
       [foe]~>grab you by your wrist then >pin [you] face first down against the
-      ground. Snorting hungrily like a bull, [foe]~>look down at your ass
-      before brutally ramming [all of:their:adjective:penis] into
-      [one of:your:adjective:anus].`
+      ground. Snorting hungrily like a bull, [foe]~>look down at
+      [your:adjective:butt] before brutally ramming
+      [all of:their:adjective:penis] into [one of:your:adjective:anus].`
   }
 
-  playerContinue(p, e) {
+  playerContinue() {
     return `
       [you] squeeze down on [all of:that:adjective:penis(foe)]~ that ceaselessly
-      >keep pounding away at your ass.`
+      >keep pounding away at [your:adjective:butt].`
   }
 
-  enemyContinue(p, e) {
-    return `[foe]~>continue to ravage your ass.`
+  enemyContinue() {
+    return `[foe]~>continue to ravage [your:adjective:butt].`
   }
 
-  climax(p, e) {
+  climax() {
     return `
       [foe]~>roar out loudly as [they]~>be close to orgasm. With both hands
-      around your waist [they] furiously >ravage your ass until [they]
-      finally >explode into it. Thick bovine cum slathering your insides and
-      dribbling out of [your:adjective:anus]. Overwhelmed with satisfaction,
-      [foe]~>fall down on [their] back — pulling [you] down with [them(foe)],
-      impaling you on [their:adjective:penis]. As the beast recovers from its
-      ordeal, [you] slowly and carefully get up. Feeling
+      around your waist [they] furiously >ravage [your:adjective:butt]
+      until [they] finally >explode into it. Thick bovine cum slathering your
+      insides and dribbling out of [your:adjective:anus]. Overwhelmed with
+      satisfaction, [foe]~>fall down on [their] back — pulling [you] down with
+      [them(foe)], impaling you on [their:adjective:penis]. As the beast
+      recovers from its ordeal, [you] slowly and carefully get up. Feeling
       [all of:that:adjective:penis(foe)] sliding out of your abused hole while
       beads of cum trickle down your thighs.`
   }
@@ -64,21 +64,21 @@ class Vaginal extends Position {
     this.infects = true
   }
 
-  idle(p, e) {
+  idle() {
     return `
       [one of:whose:penis(foe)] is throbbing deep inside [one of:your:vagina].`
   }
 
-  playerStart(p, e) {
+  playerStart() {
     return `
-      [you] turn your back towards [foe], shaking your ass a few times before
-      bending over. On all fours and with your ass pointing up, [you] look back
-      at [foe] from between your legs. Without any hesitation, [foe]~>grab you
-      by your hips and >ram [one of:their:adjective:penis] into
-      [one of:your:adjective:vagina].`
+      [you] turn your back towards [foe], shaking [your:adjective:butt] a few
+      times before bending over. On all fours and with [your:adjective:butt]
+      pointing up, [you] look back at [foe] from between your legs. Without any
+      hesitation, [foe]~>grab you by [your:adjective:hips] and >ram
+      [one of:their:adjective:penis] into [one of:your:adjective:vagina].`
   }
 
-  enemyStart(p, e) {
+  enemyStart() {
     // todo
     return `
       [whose(foe)] mighty hands grab [you] by the waist as [they(foe)]~>force
@@ -87,15 +87,15 @@ class Vaginal extends Position {
       [one of:them(your.vagina)].`
   }
 
-  playerContinue(p, e) {
+  playerContinue() {
     return `your inner walls squeeze down tight on that monstrous cock.`
   }
 
-  enemyContinue(p, e) {
+  enemyContinue() {
     return `[foe]~>pound vigorously at [one of:your:adjective:vagina].`
   }
 
-  climax(p, e) {
+  climax() {
     return `
       [foe]~>pick up the pace, [one of:their:adjective:penis] sliding in and out
       of [one of:your:vagina]. [you] greedily squeeze down on it, moaning with
@@ -116,11 +116,11 @@ class Blowjob extends Position {
     this.infects = true
   }
 
-  idle(p, e) {
+  idle() {
     return `[one of:whose:penis(foe)] is throbbing deep down your throat.`
   }
 
-  playerStart(p, e) {
+  playerStart() {
     return `
       [you] get down on your knees in front of [foe]. Facing
       [their:adjective:type:penis], you grab [them] with [your:hands] and jerk
@@ -128,27 +128,29 @@ class Blowjob extends Position {
       [one of:your:mouth] and swallow [one of:them(foe.penis)] whole.`
   }
 
-  enemyStart(p, e) {
+  enemyStart() {
     return `
-      [foe]~>punch [you] in the gut. As soon as [your:mouth]~>open to cry
-      out in pain, [they(foe)]~>shove [one of:their:adjective:penis] through
-      your lips. The thick bovine shaft drilling into [one of:your:mouth] and
-      forcing itself down your throat.`
+      [foe]~>place [their] hand behind the back of [one of:your:head] and >shove
+      it straight against [their(foe)] groin but you resist with your mouth
+      closed. [foe]~>smirk and >pinch your nose shut and as soon as you open
+      your mouth to breathe, [they(foe)]~>shove [one of:their:adjective:penis]
+      through your lips. The thick bovine shaft drilling into
+      [one of:your:mouth] and forcing itself down your throat.`
   }
 
-  playerContinue(p, e) {
+  playerContinue() {
     return `
       [you] continue to bob your head back and forth as
       [one of:that:adjective:type:penis(foe)] fills your throat.`
   }
 
-  enemyContinue(p, e) {
+  enemyContinue() {
     return `
       [foe]~>keep fucking your face. [their] hand on the back of your head,
       preventing you from escaping.`
   }
 
-  climax(p, e) {
+  climax() {
     return `
       [foe]~>place [their] hand against the back of your head, then >thrust
       vigorously — [one of:their:adjective:penis] sliding all the way down your
@@ -168,13 +170,13 @@ class Boobjob extends Position {
     this.infects = false
   }
 
-  idle(p, e) {
+  idle() {
     return `
       you have got [all of:your:adjective:breasts] squeezed tightly around
       [whose:penis(foe)].`
   }
 
-  playerStart(p, e) {
+  playerStart() {
     return `
       [you] get down on your knees in front of [foe]. Cupping
       [two of:your:adjective:breasts] and kneading them playfully. [foe]~>take
@@ -182,24 +184,24 @@ class Boobjob extends Position {
       [them(your.breasts)].`
   }
 
-  enemyStart(p, e) {
+  enemyStart() {
     return `
       [foe]~>overpower [you] and >pin you to the floor under [their(foe)]
       weight. [they]~>sit down on top of [you] with [their:adjective:penis]
       throbbing between [all of:your:breasts].`
   }
 
-  playerContinue(p, e) {
+  playerContinue() {
     return `
       [you] squeeze [two of:your:adjective:breasts] together around
       [whose:penis(foe)].`
   }
 
-  enemyContinue(p, e) {
+  enemyContinue() {
     return `[foe]~>continue to fuck your cleavage.`
   }
 
-  climax(p, e) {
+  climax() {
     return `
       [foe]~>groan and >growl with [their:adjective:penis] throbbing between
       [your:adjective:breasts]. [they(foe)]~>fuck your cleavage over and over
@@ -211,7 +213,7 @@ class Boobjob extends Position {
 
 export default class MinotaurEncounter extends DefaultEncounter {
   constructor(game) {
-    super(game, new Minotaur())
+    super(game, new Minotaur(game))
 
     this.addPosition(Anal)
     this.addPosition(Vaginal)
@@ -221,22 +223,22 @@ export default class MinotaurEncounter extends DefaultEncounter {
     //TODO - footjob
   }
 
-  introMessage(p, e) {
+  introMessage() {
     return `
       Suddenly a massive axe swings right above [your:head(your)] and cuts
       through the flora. You are ambushed by a **[title(foe)]**!`
   }
 
-  mainMessage(p, e) {
+  mainMessage() {
     return `[you] are facing a **[title(foe)]**.`
   }
 
-  describeEnemyMessage(p, e) {
+  describeEnemyMessage() {
     let text = `
       You have read about these in books. A creature with the head of a bull and
       the body of a man.`
 
-    if (p.body.size < 190) {
+    if (this.player.body.size < 190) {
       text += `
         Towering over [you], [they(foe)] must be at least 7 feet tall.`
     } else {
@@ -252,69 +254,69 @@ export default class MinotaurEncounter extends DefaultEncounter {
     return text
   }
 
-  playerAttackedMessage(p, e) {
+  playerAttackedMessage() {
     return `[foe]~>swing [their] massive axe at [you].`
   }
 
-  combatLossMessage(p, e) {
+  combatLossMessage() {
     return `
       [foe]~>roar victoriously, swinging [their] axe in the air a few times
       before walking away. Leaving your —almost lifeless— body behind.`
   }
 
-  combatVictoryMessage(p, e) {
+  combatVictoryMessage() {
     return `[foe]~>succumb to [their] wounds.`
   }
 
-  climaxLossMessage(p, e) {
+  climaxLossMessage() {
     return `
       Satisfied from the fucking, [foe]~>leave [their] bitch —[you]— behind as
       [they(foe)]~>shuffle back into the wilderness.`
   }
 
-  climaxVictoryMessage(p, e) {
+  climaxVictoryMessage() {
     return `
       [you] sneak off as [foe]~>have become docile from [their] recent orgasm.`
   }
 
-  seducedMessage(p, e) {
+  seducedMessage() {
     return `
       [foe]~>stroke [one of:their:adjective:type:penis] — Pre-cum dribbling down
       from its tip and filling the air with overpowering musk.`
   }
 
   // TODO add gradations of disinterest ?
-  notInterestedMessage(p, e) {
+  notInterestedMessage() {
     return `
       [foe]~>slap [you] in the face as you try to approach [them(foe)] — clearly
       not impressed by what you're offering.`
   }
 
-  grappleFailureMessage(p, e) {
+  grappleFailureMessage() {
     return `
       [foe]~>be horny as fuck and >try to pin [you] down, but you manage to
       dodge [their(foe)] assault.`
   }
 
-  infectionMessage(p, e) {
+  infectionMessage() {
     return `**[whose(foe)] spunk corrupts your body…**`
   }
 
-  struggleSuccessMessage(p, e) {
+  struggleSuccessMessage() {
     return `[you] manage to wriggle out of [whose(foe)] grasp.`
   }
 
-  struggleFailureMessage(p, e) {
+  struggleFailureMessage() {
     return `
       [you] attempt to struggle free but [foe]~>keep you firmly pinned down.`
   }
 
-  pullOutMessage(p, e) {
+  pullOutMessage() {
     return `
       [foe]~>be about to climax — pull out at the last moment?`
   }
 
-  climaxMessage(p, e) {
+  climaxMessage() {
     return `
       [foe]~>roar out with both hands around [their:penis], jerking [themself]
       off until [they]~>explode into an overwhelming orgasm. Cum spurting all

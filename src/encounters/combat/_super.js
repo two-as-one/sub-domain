@@ -62,6 +62,7 @@ export default class CombatEncounter extends Scene {
   //render combat
   render(data) {
     data.static = template({
+      difficulty: this.enemy.difficulty,
       player: this.player,
       enemy: this.enemy,
       hideEnemyNumbers: this.player.perception < this.enemy.perception / 2,
@@ -116,7 +117,7 @@ export default class CombatEncounter extends Scene {
   //encounter intro text
   intro() {
     this.render({
-      text: this.introMessage(this.player, this.enemy),
+      text: this.introMessage(),
       hideStats: true,
       responses: [{ state: "main" }],
     })
@@ -156,7 +157,7 @@ export default class CombatEncounter extends Scene {
         { text: struggleLabel, state: "struggle" },
       ]
     } else {
-      message = this.mainMessage(this.player, this.enemy)
+      message = this.mainMessage()
       actions = [
         { text: attackLabel, state: "attack" },
         { text: "seduce", state: "seduce" },
@@ -190,21 +191,19 @@ export default class CombatEncounter extends Scene {
     this.enemy.damage(amount)
 
     this.render({
-      text:
-        this.attackMessage(this.player, this.enemy) +
-        this.attackResultsMessage(amount),
+      text: this.attackMessage() + this.attackResultsMessage(),
       responses: [{ state: "enemyAction" }],
     })
   }
 
   //examine enemy
   examine() {
-    let text = this.describeEnemyMessage(this.player, this.enemy)
+    let text = this.describeEnemyMessage()
 
     if (this.player.perception > this.enemy.perception) {
       text += `
 
-        ${this.inspectStats(this.player, this.enemy)}`
+        ${this.inspectStats()}`
     }
 
     this.render({
@@ -252,8 +251,7 @@ export default class CombatEncounter extends Scene {
 
     this.render({
       text:
-        this.player[data.part].seductionMessage +
-        this.seduceResultsMessage(amount),
+        this.player[data.part].seductionMessage + this.seduceResultsMessage(),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -295,7 +293,7 @@ export default class CombatEncounter extends Scene {
       })
     } else {
       this.render({
-        text: this.notInterestedMessage(this.player, this.enemy),
+        text: this.notInterestedMessage(),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -313,9 +311,7 @@ export default class CombatEncounter extends Scene {
     this.enemy.arouse(amount)
 
     this.render({
-      text:
-        this.position.get("player.continue") +
-        this.seduceResultsMessage(amount),
+      text: this.position.get("player.continue") + this.seduceResultsMessage(),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -330,12 +326,12 @@ export default class CombatEncounter extends Scene {
       this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage(this.player, this.enemy),
+        text: this.struggleSuccessMessage(),
         responses: [{ state: "main" }],
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage(this.player, this.enemy),
+        text: this.struggleFailureMessage(),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -392,9 +388,7 @@ export default class CombatEncounter extends Scene {
     this.player.damage(amount)
 
     this.render({
-      text:
-        this.playerAttackedMessage(this.player, this.enemy) +
-        this.attackedResultsMessage(amount),
+      text: this.playerAttackedMessage() + this.attackedResultsMessage(),
       responses: [{ state: "main" }],
     })
   }
@@ -407,9 +401,7 @@ export default class CombatEncounter extends Scene {
     this.player.arouse(amount)
 
     this.render({
-      text:
-        this.seducedMessage(this.player, this.enemy) +
-        this.seducedResultsMessage(amount),
+      text: this.seducedMessage() + this.seducedResultsMessage(),
       responses: [{ state: "main" }],
     })
   }
@@ -418,8 +410,8 @@ export default class CombatEncounter extends Scene {
   unableToResist() {
     this.render({
       text: this.player.orgasmed
-        ? this.tooHornyMessage(this.player)
-        : this.tooWeakMessage(this.player),
+        ? this.tooHornyMessage()
+        : this.tooWeakMessage(),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -441,7 +433,7 @@ export default class CombatEncounter extends Scene {
       })
     } else {
       this.render({
-        text: this.grappleFailureMessage(this.player, this.enemy),
+        text: this.grappleFailureMessage(),
         responses: [{ state: "main" }],
       })
     }
@@ -475,8 +467,7 @@ export default class CombatEncounter extends Scene {
 
       this.render({
         text:
-          this.position.get("enemy.continue") +
-          this.seducedResultsMessage(amount),
+          this.position.get("enemy.continue") + this.seducedResultsMessage(),
         responses: [{ state: "main" }],
       })
     }
@@ -492,12 +483,12 @@ export default class CombatEncounter extends Scene {
 
     if (success) {
       this.render({
-        text: this.fleeSuccessMessage(this.player, this.enemy),
+        text: this.fleeSuccessMessage(),
         responses: [{ state: "exit" }],
       })
     } else {
       this.render({
-        text: this.fleeFailureMessage(this.player, this.enemy),
+        text: this.fleeFailureMessage(),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -510,7 +501,7 @@ export default class CombatEncounter extends Scene {
         return this.state.climax()
       } else {
         this.render({
-          text: this.pullOutMessage(this.player, this.enemy),
+          text: this.pullOutMessage(),
           responses: [
             { text: "pull out", state: "pullOut" },
             { text: "keep going", state: "climax" },
@@ -533,12 +524,12 @@ export default class CombatEncounter extends Scene {
       this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage(this.player, this.enemy),
+        text: this.struggleSuccessMessage(),
         responses: [{ state: "climax" }],
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage(this.player, this.enemy),
+        text: this.struggleFailureMessage(),
         responses: [{ state: "climax" }],
       })
     }
@@ -548,7 +539,7 @@ export default class CombatEncounter extends Scene {
   climax() {
     const message = this.fucking
       ? this.position.get("climax")
-      : this.climaxMessage(this.player, this.enemy)
+      : this.climaxMessage()
 
     this.render({
       text: message,
@@ -593,7 +584,7 @@ export default class CombatEncounter extends Scene {
 
       if (transformation) {
         infectionMessage = `
-          ${this.infectionMessage(this.player, this.enemy)}
+          ${this.infectionMessage()}
 
           ${transformation}`
       }
@@ -601,13 +592,13 @@ export default class CombatEncounter extends Scene {
 
     //message
     if (this.player.orgasmed) {
-      resultMessage = this.climaxLossMessage(this.player, this.enemy)
+      resultMessage = this.climaxLossMessage()
     } else if (this.enemy.orgasmed) {
-      resultMessage = this.climaxVictoryMessage(this.player, this.enemy)
+      resultMessage = this.climaxVictoryMessage()
     } else if (!this.player.alive) {
-      resultMessage = this.combatLossMessage(this.player, this.enemy)
+      resultMessage = this.combatLossMessage()
     } else {
-      resultMessage = this.combatVictoryMessage(this.player, this.enemy)
+      resultMessage = this.combatVictoryMessage()
     }
 
     if (this.player.orgasmed || !this.player.alive) {
@@ -679,37 +670,37 @@ export default class CombatEncounter extends Scene {
   // Helper messages
   //----------------
 
-  attackResultsMessage(damage) {
+  attackResultsMessage() {
     return `
 
       You deal **[damage(foe)]**`
   }
 
-  attackedResultsMessage(damage) {
+  attackedResultsMessage() {
     return `
 
       You suffer **[damage(you)]**`
   }
 
-  seduceResultsMessage(lust) {
+  seduceResultsMessage() {
     return `
 
       [foe] gains **[lust(foe)]**`
   }
 
-  seducedResultsMessage(lust) {
+  seducedResultsMessage() {
     return `
 
       You gain **[lust(you)]**`
   }
 
-  tooHornyMessage(p) {
+  tooHornyMessage() {
     return `
 
       [you] are overwhelmed with lust and unable to control your actions.`
   }
 
-  tooWeakMessage(p) {
+  tooWeakMessage() {
     return `
 
       [you] have lost all strength in [your:body] and are unable to resist.`
@@ -729,23 +720,25 @@ export default class CombatEncounter extends Scene {
     return text
   }
 
-  attackMessage(p, e) {
+  attackMessage() {
     return `
 
       [you] swing [your.weapon] at [foe].`
   }
 
-  fleeSuccessMessage(p, e) {
+  fleeSuccessMessage() {
     return `
       [you] manage to run away from [foe]!`
   }
 
-  fleeFailureMessage(p, e) {
+  fleeFailureMessage() {
     return `
       [you] try to flee but [foe]~>stop you in your tracks!`
   }
 
-  inspectStats(p, e) {
+  inspectStats() {
+    const e = this.enemy
+
     return `
       STR:${e.strength} | STAM:${e.stamina} | CHAR:${e.charisma} |
       WILL:${e.willpower} | DEX:${e.dexterity}`
@@ -754,67 +747,67 @@ export default class CombatEncounter extends Scene {
   // Messages - extend these with encounter specific messages
   //---------------------------------------------------------
 
-  introMessage(p, e) {
+  introMessage() {
     return ""
   }
 
-  mainMessage(p, e) {
+  mainMessage() {
     return ""
   }
 
-  describeEnemyMessage(p, e) {
+  describeEnemyMessage() {
     return ""
   }
 
-  playerAttackedMessage(p, e) {
+  playerAttackedMessage() {
     return ""
   }
 
-  combatLossMessage(p, e) {
+  combatLossMessage() {
     return ""
   }
 
-  combatVictoryMessage(p, e) {
+  combatVictoryMessage() {
     return ""
   }
 
-  climaxLossMessage(p, e) {
+  climaxLossMessage() {
     return ""
   }
 
-  climaxVictoryMessage(p, e) {
+  climaxVictoryMessage() {
     return ""
   }
 
-  infectionMessage(p, e) {
+  infectionMessage() {
     return ""
   }
 
-  pullOutMessage(p, e) {
+  pullOutMessage() {
     return ""
   }
 
-  struggleSuccessMessage(p, e) {
+  struggleSuccessMessage() {
     return ""
   }
 
-  struggleFailureMessage(p, e) {
+  struggleFailureMessage() {
     return ""
   }
 
-  seducedMessage(p, e) {
+  seducedMessage() {
     return ""
   }
 
-  notInterestedMessage(p, e) {
+  notInterestedMessage() {
     return ""
   }
 
-  grappleFailureMessage(p, e) {
+  grappleFailureMessage() {
     return ""
   }
 
-  climaxMessage(p, e) {
+  climaxMessage() {
     return ""
   }
 
@@ -823,44 +816,40 @@ export default class CombatEncounter extends Scene {
 
   /** output all static text strings */
   get debugStatic() {
-    const p = this.player
-    const e = this.enemy
     return G.trim(`
-      ${G.clean(this.attackResultsMessage(10))}
-      ${G.clean(this.attackedResultsMessage(10))}
-      ${G.clean(this.attackedResultsMessage(10, 10))}
-      ${G.clean(this.seduceResultsMessage(10))}
-      ${G.clean(this.seducedResultsMessage(10))}
-      ${G.clean(this.tooHornyMessage(p, e))}
-      ${G.clean(this.tooWeakMessage(p, e))}
+      ${G.clean(this.attackResultsMessage())}
+      ${G.clean(this.attackedResultsMessage())}
+      ${G.clean(this.attackedResultsMessage())}
+      ${G.clean(this.seduceResultsMessage())}
+      ${G.clean(this.seducedResultsMessage())}
+      ${G.clean(this.tooHornyMessage())}
+      ${G.clean(this.tooWeakMessage())}
       ${G.clean(this.gainMessage(10))}
       ${G.clean(this.gainMessage(10, { name: "Dummy" }))}
-      ${G.clean(this.attackMessage(p, e))}
-      ${G.clean(this.fleeSuccessMessage(p, e))}
-      ${G.clean(this.fleeFailureMessage(p, e))}
+      ${G.clean(this.attackMessage())}
+      ${G.clean(this.fleeSuccessMessage())}
+      ${G.clean(this.fleeFailureMessage())}
     `)
   }
 
   get debugExtended() {
-    const p = this.player
-    const e = this.enemy
     return G.trim(`
-      ${G.clean(this.introMessage(p, e))}
-      ${G.clean(this.mainMessage(p, e))}
-      ${G.clean(this.describeEnemyMessage(p, e))}
-      ${G.clean(this.playerAttackedMessage(p, e))}
-      ${G.clean(this.combatLossMessage(p, e))}
-      ${G.clean(this.combatVictoryMessage(e, p))}
-      ${G.clean(this.climaxLossMessage(p, e))}
-      ${G.clean(this.climaxVictoryMessage(p, e))}
-      ${G.clean(this.infectionMessage(p, e))}
-      ${G.clean(this.seducedMessage(p, e))}
-      ${G.clean(this.pullOutMessage(p, e))}
-      ${G.clean(this.struggleSuccessMessage(p, e))}
-      ${G.clean(this.struggleFailureMessage(p, e))}
-      ${G.clean(this.grappleFailureMessage(p, e))}
-      ${G.clean(this.notInterestedMessage(p, e))}
-      ${G.clean(this.climaxMessage(p, e))}
+      ${G.clean(this.introMessage())}
+      ${G.clean(this.mainMessage())}
+      ${G.clean(this.describeEnemyMessage())}
+      ${G.clean(this.playerAttackedMessage())}
+      ${G.clean(this.combatLossMessage())}
+      ${G.clean(this.combatVictoryMessage())}
+      ${G.clean(this.climaxLossMessage())}
+      ${G.clean(this.climaxVictoryMessage())}
+      ${G.clean(this.infectionMessage())}
+      ${G.clean(this.seducedMessage())}
+      ${G.clean(this.pullOutMessage())}
+      ${G.clean(this.struggleSuccessMessage())}
+      ${G.clean(this.struggleFailureMessage())}
+      ${G.clean(this.grappleFailureMessage())}
+      ${G.clean(this.notInterestedMessage())}
+      ${G.clean(this.climaxMessage())}
     `)
   }
 

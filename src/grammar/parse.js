@@ -7,7 +7,7 @@ class Parser {
   constructor(string, subject) {
     const regex = /(^|[^\\])(\[)([^\]]*)(\])/g
     const whoRegex = /(.*)\((.*)\)$/
-    const conditionRegex = /(.*)(\?|!)(.*)\|(.*)$/
+    const conditionRegex = /([^?!]+)(\?|!)(.*)\|(.*)$/
 
     this.parsed = string.replace(regex, (match, a, b, snip) => {
       // check if the selector has a specific target

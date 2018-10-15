@@ -1,8 +1,42 @@
 import Grammar from "grammar/grammar"
 
+/**
+ * describe a synonym for this part
+ * synonyms can have conditions preventing them from being picked
+ */
+class Synonym {
+  constructor(singular = "", plural = "", condition = false) {
+    this.condition = condition
+    this.singular = singular
+    this.plural = plural || Grammar.pluralize(singular)
+  }
+
+  get available() {
+    return this.condition ? this.condition() : true
+  }
+}
+
+/**
+ * describe an adjective
+ * describe can have conditions preventing them from being picked
+ */
+class Adjective {
+  constructor(word = "", condition = false) {
+    this.condition = condition
+    this.word = word
+  }
+
+  get available() {
+    return this.condition ? this.condition() : true
+  }
+}
+
 export default class Part {
   constructor(owner, config = {}) {
     this.owner = owner
+
+    this.synonyms = []
+    this.adjectives = []
 
     this.stored = Object.assign({}, this.defaults, config)
   }
@@ -17,12 +51,43 @@ export default class Part {
     }
   }
 
+  addSynonym(singular, plural, condition) {
+    this.synonyms.push(new Synonym(singular, plural, condition))
+  }
+
+  addAdjective(word, condition) {
+    this.adjectives.push(new Adjective(word, condition))
+  }
+
   get name() {
-    if (this.quantity === 1) {
-      return Grammar.random(this.singular)
-    } else {
-      return Grammar.random(this.plural)
+    return this.multiple ? this.plural : this.singular
+  }
+
+  get singular() {
+    const word = Grammar.random(this.synonyms.filter(word => word.available))
+    return word.singular
+  }
+
+  get plural() {
+    const word = Grammar.random(this.synonyms.filter(word => word.available))
+    return word.plural
+  }
+
+  get adjective() {
+    const adjectives = this.adjectives
+      .filter(adjective => adjective.available)
+      .map(adjective => adjective.word)
+
+    // adds type to adjectives if its noteworthy
+    if (this.type !== "human") {
+      adjectives.push(this.type)
     }
+
+    if (!adjectives.length) {
+      return ""
+    }
+
+    return Grammar.random(adjectives) || ""
   }
 
   get person() {
@@ -93,6 +158,11 @@ export default class Part {
     return this.quantity !== 1
   }
 
+  // check whether this part's size is between a minimum and (including) a maximum
+  between(min, max) {
+    return this.size > Number(min) && this.size <= Number(max)
+  }
+
   grow() {
     this.size += this.growth
 
@@ -140,41 +210,6 @@ export default class Part {
   // determine by how much this part grows or shrinks
   get growth() {
     return 1
-  }
-
-  // define one or more singulars of this part
-  get singular() {
-    return "part"
-  }
-
-  // define one or more plurals for this part
-  get plural() {
-    return "parts"
-  }
-
-  // picks a random adjective from the list of available adjectives
-  get adjective() {
-    let adjectives = this.adjectives
-    if (!Array.isArray(adjectives)) {
-      adjectives = [adjectives]
-    }
-
-    if (adjectives.length) {
-      return Grammar.random(adjectives) || ""
-    } else {
-      return adjectives[0] || ""
-    }
-  }
-
-  get adjectives() {
-    const adjectives = []
-
-    // adds type to adjectives if its noteworthy
-    if (this.type !== "human") {
-      adjectives.push(this.type)
-    }
-
-    return adjectives
   }
 
   // refers to specifically ALL of this part

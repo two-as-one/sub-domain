@@ -1,6 +1,12 @@
 import Part from "./_super"
 
 export default class Head extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("head")
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       size: 1,
@@ -17,12 +23,4 @@ export default class Head extends Part {
 
   //no-op
   set quantity(val) {}
-
-  get singular() {
-    return ["head"]
-  }
-
-  get plural() {
-    return ["heads"]
-  }
 }

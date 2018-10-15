@@ -1,5 +1,3 @@
-import { persist } from "save/saveable"
-
 export default class PerkManager {
   constructor(owner) {
     this.owner = owner
@@ -14,8 +12,6 @@ export default class PerkManager {
     })
 
     this._PERKS.sort((a, b) => a.name < b.name)
-
-    persist(this, "player-perks")
   }
 
   //check whether the player has a perk

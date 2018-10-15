@@ -51,17 +51,17 @@ export class Position {
   get(action) {
     switch (action) {
       case "idle":
-        return this.idle(this.player, this.enemy)
+        return this.idle()
       case "player.start":
-        return this.playerStart(this.player, this.enemy)
+        return this.playerStart()
       case "enemy.start":
-        return this.enemyStart(this.player, this.enemy)
+        return this.enemyStart()
       case "player.continue":
-        return this.playerContinue(this.player, this.enemy)
+        return this.playerContinue()
       case "enemy.continue":
-        return this.enemyContinue(this.player, this.enemy)
+        return this.enemyContinue()
       case "climax":
-        return this.climax(this.player, this.enemy)
+        return this.climax()
     }
 
     return ""
@@ -96,27 +96,27 @@ export class Position {
   // Messages - extend these with position specific messages
   //--------------------------------------------------------
 
-  idle(player, enemy) {
+  idle() {
     return ""
   }
 
-  playerStart(player, enemy) {
+  playerStart() {
     return ""
   }
 
-  enemyStart(player, enemy) {
+  enemyStart() {
     return ""
   }
 
-  playerContinue(player, enemy) {
+  playerContinue() {
     return ""
   }
 
-  enemyContinue(player, enemy) {
+  enemyContinue() {
     return ""
   }
 
-  climax(player, enemy) {
+  climax() {
     return ""
   }
 }

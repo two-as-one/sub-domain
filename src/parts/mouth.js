@@ -1,6 +1,12 @@
 import Part from "./_super"
 
 export default class Mouth extends Part {
+  constructor(...args) {
+    super(...args)
+
+    this.addSynonym("mouth")
+  }
+
   get defaults() {
     return Object.assign(super.defaults, {
       quantity: 1,
@@ -18,13 +24,5 @@ export default class Mouth extends Part {
 
   get canSeduce() {
     return true
-  }
-
-  get singular() {
-    return ["mouth"]
-  }
-
-  get plural() {
-    return ["mouths"]
   }
 }

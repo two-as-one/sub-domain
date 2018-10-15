@@ -147,7 +147,7 @@ class Game {
 
   /** initializes game objects */
   init() {
-    this.player = new Player()
+    this.player = new Player(this)
     this.world = new World(this)
 
     // fallback [foe] for the parser

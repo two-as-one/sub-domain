@@ -1,14 +1,13 @@
 import Entity from "entities/_super"
 import G from "grammar/grammar"
 import Inventory from "./inventory"
-import PerkManager from "perks/_manager"
 import TransformationManager from "transformations/_manager"
 import { persist } from "save/saveable"
 import statBarTemplate from "templates/stat-bar.hbs"
 
 export default class Player extends Entity {
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
 
     this.name = ""
     this.title = "hero"
@@ -19,12 +18,12 @@ export default class Player extends Entity {
 
     // restore & persist state of player and parts
     persist(this, "player-stats")
+    persist(this.perks, "player-perks")
     Object.keys(this.parts).forEach(key =>
       persist(this[key], `player-part-${key}`)
     )
 
     this.transform = new TransformationManager(this)
-    this.perks = new PerkManager(this)
   }
 
   /**
@@ -33,7 +32,7 @@ export default class Player extends Entity {
    */
   get who() {
     if (this.head.quantity === 2) {
-      return G.random(["both of you", "you both", "you", "you", "you"])
+      return G.random(["both of you", "you both", "you", "you", "you"]) // multiple "you" intentional to increase its chance of appearing
     } else {
       return super.who
     }

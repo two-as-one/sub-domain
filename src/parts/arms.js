@@ -1,25 +1,18 @@
 import Part from "./_super"
 
-export default class Feet extends Part {
+export default class Arm extends Part {
   constructor(...args) {
     super(...args)
 
-    this.addSynonym("foot")
+    this.addSynonym("arm")
 
     // TODO - adjectives
   }
 
   get defaults() {
     return Object.assign(super.defaults, {
+      quantity: 2,
       size: 1,
     })
-  }
-
-  get quantity() {
-    return this.owner.legs.quantity
-  }
-
-  set quantity(val) {
-    this.owner.legs.quantity = val
   }
 }
