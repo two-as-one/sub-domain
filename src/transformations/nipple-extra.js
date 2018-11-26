@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Grows a extra nipple if the player already has some - up to 4
- */
 export default class NippleExtra extends Transformation {
   get name() {
     return "grow an extra nipple"
@@ -16,9 +14,6 @@ export default class NippleExtra extends Transformation {
     this.owner.nipples.add()
     this.owner.nipples.arouse(10)
 
-    return `
-      Your chest feels tingly and hot. [you] look down and quickly realize why.
-
-      **[each of:your:breasts]~>have grown an additional nipple!**`
+    lib("TRANSFORM_NIPPLE_EXTRA")
   }
 }

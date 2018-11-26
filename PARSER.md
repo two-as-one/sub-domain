@@ -19,7 +19,6 @@ To keep things readable, it is asked that you don't exceed the 80 character line
 A limited set of symbols are reserved by the parser and caution is advised when using them. Usually these only serve as syntax when **directly attached to a word**, otherwise they can be used freely without concern. See blow for details on each of them
 
 - `/`
-- `%`
 - `~` and `>`
 - `[` and `]`
 

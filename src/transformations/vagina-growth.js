@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Increases vagina size if the player has one
- */
 export default class VaginaGrowth extends Transformation {
   get name() {
     return "increase vagina size"
@@ -17,11 +15,6 @@ export default class VaginaGrowth extends Transformation {
     vagina.grow()
     vagina.arouse(10)
 
-    return `
-        [you] feel a warmth radiating from your nether regions — followed by a
-        trickle down your inner thighs. You grow hot and horny and reach down
-        between your legs to find out why.
-
-        **[all of:your:adjective:vagina]~>have grown plumper!**`
+    return lib("TRANSFORM_VAGINA_GROWTH")
   }
 }

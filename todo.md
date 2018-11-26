@@ -63,11 +63,19 @@ add [weapon(yours)] and [armor(yours)]
 add [male] and [female]
 add [man] and [woman]
 
+add way for parser to use word A or B depending on whether the subject is plural
+
+update parser playground so that you can pick between bob/alice/charlie as fallback foe
+update parser playground to allow for more consistent seeding
+
+reintroduce conditionals
+
 ## parts to add
 
 - eyes
 - toes
 - fingers
+- clit
 
 ## stats
 
@@ -76,3 +84,13 @@ add [man] and [woman]
 player.int > foe.int / 2 -> see hp/lust
 player.int > foe.int -> see actual stats when inspecting
 player.int > foe.int \* 2 -> see percentage chance against each action (or damage/lust ranges)
+
+make items be yaml-driven
+move seduce messages to yaml
+make sure the point at which a foe will accept to fuck is also the point at which their penis is not flaccid (a semi is ok!)
+
+# refactor dependencies
+
+less circular dependencies
+more top-down
+allows tests to be better encapsulated without having to load everything

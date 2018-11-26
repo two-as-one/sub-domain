@@ -2,6 +2,7 @@ import "styles/title-screen.less"
 import Scene from "./_super"
 import save from "save/save"
 import titleScreen from "templates/title.hbs"
+import { lib } from "library/library"
 
 export default class TitleScreenScene extends Scene {
   constructor(game) {
@@ -45,14 +46,10 @@ export default class TitleScreenScene extends Scene {
   }
 
   outOfDate() {
-    const save_VERSION = save.fetch().VERSION
-
     this.render({
-      text: `
-          Your saved game [${save_VERSION}] does not match the latest version of the game [${VERSION}].
-          You can still continue but this may cause unexpected bugs.
-
-          It/is recommend to start a new game.`,
+      text: lib("TITLE_INCOMPATIBLE_SAVE")
+        .replace("$1", save.fetch().VERSION)
+        .replace("$2", VERSION),
       responses: [
         { text: "continue", state: "continue", force: true },
         { text: "cancel", state: "title" },
@@ -63,7 +60,7 @@ export default class TitleScreenScene extends Scene {
   new() {
     if (save.hasData) {
       this.render({
-        text: `You/will **lose any saved progress**, are you sure you want to start a new adventure?`,
+        text: lib("TITLE_CONFIRM_NEW_GAME"),
         responses: [
           { text: "New game", state: "confirm" },
           { text: "Cancel", state: "cancel" },

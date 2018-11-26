@@ -1,11 +1,14 @@
 import Articles from "articles"
-import Chance from "chance"
+import { chance } from "utils/chance"
 import { Contractions } from "contractions"
 import conjugate from "conjugate"
 import number from "number-to-words"
-import { parse } from "./parse"
+import { parse, DEBUG } from "./parse"
 import pluralize from "pluralize"
 import showdown from "showdown"
+import template from "./debug.hbs"
+
+window.conjugate = conjugate
 
 const converter = new showdown.Converter()
 
@@ -69,8 +72,6 @@ const contractions = new Contractions({
 //add irregular plurals
 pluralize.addIrregularRule("isn't", "aren't")
 pluralize.addIrregularRule("hasn't", "haven't")
-
-const chance = new Chance()
 
 const PRONOUNS = {
   first: {
@@ -146,27 +147,18 @@ const PRONOUNS = {
   },
 }
 
-/** return the correct pronoun based on a set of criteria */
-function pronoun(type, plural = false, person = "third", gender = "neutral") {
-  let p = PRONOUNS[person]
-  p = p && p[plural ? "plural" : "singular"]
-
-  if (person === "third" && !plural) {
-    p = p && p[gender]
-  }
-
-  p = p && p[type]
-
-  return p
-}
-
 export default class Grammar {
   //mixes a class with built-in Grammar capability
   static mix(SuperClass) {
     Object.defineProperty(SuperClass.prototype, "who", {
       get() {
         if (this.person === "second") {
-          return pronoun("subjective", this.multiple, this.person, this.gender)
+          return Grammar.pronoun(
+            "subjective",
+            this.multiple,
+            this.person,
+            this.gender
+          )
         } else if (this.name) {
           return this.name
         } else {
@@ -178,7 +170,12 @@ export default class Grammar {
     Object.defineProperty(SuperClass.prototype, "whose", {
       get() {
         if (this.person === "second") {
-          return pronoun("possessive", this.multiple, this.person, this.gender)
+          return Grammar.pronoun(
+            "determiner",
+            this.multiple,
+            this.person,
+            this.gender
+          )
         } else {
           return `${this.who}'s`
         }
@@ -188,58 +185,81 @@ export default class Grammar {
     /** he/she/they/it */
     Object.defineProperty(SuperClass.prototype, "they", {
       get() {
-        return pronoun("subjective", this.multiple, this.person, this.gender)
+        return Grammar.pronoun(
+          "subjective",
+          this.multiple,
+          this.person,
+          this.gender
+        )
       },
     })
 
     /** him/her/them/it */
     Object.defineProperty(SuperClass.prototype, "them", {
       get() {
-        return pronoun("objective", this.multiple, this.person, this.gender)
+        return Grammar.pronoun(
+          "objective",
+          this.multiple,
+          this.person,
+          this.gender
+        )
       },
     })
 
     /** his/her/their/its */
     Object.defineProperty(SuperClass.prototype, "their", {
       get() {
-        return pronoun("determiner", this.multiple, this.person, this.gender)
+        return Grammar.pronoun(
+          "determiner",
+          this.multiple,
+          this.person,
+          this.gender
+        )
       },
     })
 
     /** his/hers/theirs/its */
     Object.defineProperty(SuperClass.prototype, "theirs", {
       get() {
-        return pronoun("possessive", this.multiple, this.person, this.gender)
+        return Grammar.pronoun(
+          "possessive",
+          this.multiple,
+          this.person,
+          this.gender
+        )
       },
     })
 
     /** himself/herself/themself/itself */
     Object.defineProperty(SuperClass.prototype, "themself", {
       get() {
-        return pronoun("reflexive", this.multiple, this.person, this.gender)
+        return Grammar.pronoun(
+          "reflexive",
+          this.multiple,
+          this.person,
+          this.gender
+        )
       },
     })
+  }
 
-    /** conjugate a verb for this entity */
-    SuperClass.prototype.verb = function(verb, full) {
-      return Grammar.verb(this.they, verb, full)
+  /** return the correct pronoun based on a set of criteria */
+  static pronoun(type, plural = false, person = "third", gender = "neutral") {
+    let p = PRONOUNS[person]
+    p = p && p[plural ? "plural" : "singular"]
+
+    if (person === "third" && !plural) {
+      p = p && p[gender]
     }
+
+    p = p && p[type]
+
+    return p
   }
 
   /** conjugates a verb based on noun/pronoun */
-  static verb(who, verb, full = true) {
-    who = who.trim()
-
-    if (!Grammar.isPronoun(who)) {
-      const pronoun = pluralize.isPlural(who) ? "they" : "he"
-      let out = conjugate(pronoun, verb)
-      if (full) {
-        out = `${who} ${out}`
-      }
-      return out
-    }
-
-    return conjugate(who, verb, full)
+  static conjugate(subject, verb, full = false) {
+    return conjugate(subject, verb, full)
   }
 
   /** check whether a word is a pronoun */
@@ -301,7 +321,12 @@ export default class Grammar {
     const realFeet = (cm * 0.3937) / 12
     const feet = Math.floor(realFeet)
     const inches = Math.round((realFeet - feet) * 12)
-    return feet + "&prime;" + inches + "&Prime;"
+
+    if (feet) {
+      return feet + "&prime;" + inches + "&Prime;"
+    } else {
+      return inches + "&Prime;"
+    }
   }
 
   /** converts kg into lbs as a string */
@@ -363,6 +388,7 @@ export default class Grammar {
 
   /**
    * Fixes spacing around punctuation
+   * must happen AFTER markdown conversion, otherwise it can mess up
    */
   static punctuate(text = "") {
     return (
@@ -381,33 +407,20 @@ export default class Grammar {
   }
 
   /**
-   * conjugates all verbs in a blob of text
-   * mark the subject by trailing it with a `~`
-   * mark the verb by prepending it with `>`
-   * When conjugating a simple subject and verb` you can just use `subject~>verb`
-   * A single subject can conjugate multiple verbs
-   * examples:
-   *     "he~>walk"                        -> "he walks"
-   *     "they~>walk"                      -> "they walk"
-   *     "the minotaur~ viscously >slam"   -> "the minotaur viscously slams"
-   *     "the minotaurs~ viscously >slam"  -> "the minotaurs viscously slam"
+   * Replace debug markers with debug data
+   * This has to happen AFTER all of the other modifications as it manipulates the DOM
    */
-  static conjugate(text = "") {
-    let subject
-    return text
-      .replace(/>(\w*)/g, (match, verb, i, string) => {
-        string = string.slice(0, i).match(/\w*~/g)
-        if (string) {
-          subject = string.pop().replace(/~$/, "")
-        }
+  static debug(text = "") {
+    const debugRegex = /\[🡆(\d*)\](.*)/
 
-        if (subject) {
-          return Grammar.verb(subject, verb, false)
-        } else {
-          return verb
-        }
+    while (debugRegex.test(text)) {
+      text = text.replace(debugRegex, (match, i, next) => {
+        const debug = DEBUG[Number(i)]
+        return template(debug) + next.substring(debug.length)
       })
-      .replace(/(\w*)~/g, (match, subject) => subject + " ")
+    }
+
+    return text
   }
 
   /**
@@ -416,22 +429,35 @@ export default class Grammar {
    * @param  {String} text - the text to clean up
    * @return {String}      the cleaned up text
    */
-  static clean(text = "") {
-    text = text
-      .split(/\n\n|\r\r/)
+  static clean(text = "", debug = false, dom = true) {
+    text = text.split(/\n\n|\r\r/)
+    text = Grammar.parse(text, debug)
+    if (dom) {
+      text = Grammar.DOMify(text)
+    }
+    return text.join("")
+  }
+
+  static parse(text = [], debug = false) {
+    // clear debugger
+    DEBUG.length = 0
+
+    return text
       .map(text => Grammar.collapse(text))
+      .map(text => parse(text, debug))
       .map(text => Grammar.trim(text))
-      .map(text => parse(text))
       .map(text => Grammar.unundefined(text))
       .filter(text => text)
-      .map(text => Grammar.conjugate(text))
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))
-      .map(text => Grammar.quote(text))
-      .map(text => Grammar.punctuate(text))
-      .map(text => converter.makeHtml(text))
+  }
 
-    return text.join("")
+  static DOMify(text = []) {
+    return text
+      .map(text => Grammar.quote(text))
+      .map(text => converter.makeHtml(text))
+      .map(text => Grammar.punctuate(text))
+      .map(text => Grammar.debug(text))
   }
 }
 

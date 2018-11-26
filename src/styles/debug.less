@@ -1,0 +1,50 @@
+.debug {
+  cursor: pointer;
+  position: relative;
+
+  &.verb {
+    background-color: rgba(0, 255, 255, 0.25);
+  }
+  &.entity {
+    background-color: rgba(255, 0, 255, 0.25);
+  }
+  &.a-an {
+    background-color: rgba(255, 255, 0, 0.25);
+  }
+  &.dynamic {
+    background-color: rgba(255, 100, 100, 0.25);
+  }
+  &.static {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  &.hidden {
+    .word {
+      opacity: 0.5;
+    }
+  }
+
+  .info {
+    pointer-events: none;
+    position: absolute;
+    top: 24px;
+    left: 0;
+    background-color: @color-off-stage;
+    z-index: 100;
+    display: none;
+    width: 300px;
+    padding: 8px;
+    border: 1px solid @color-foreground;
+    border-radius: 3px;
+    box-shadow: 0 0 3px 3px #000;
+    font-weight: normal;
+    color: @color-foreground;
+
+    & > span {
+      display: block;
+    }
+  }
+
+  &:hover .info {
+    display: block;
+  }
+}

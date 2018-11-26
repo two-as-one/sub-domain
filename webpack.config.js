@@ -2,7 +2,7 @@
 
 var path = require("path")
 var HtmlWebpackPlugin = require("html-webpack-plugin")
-var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+var HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin")
 var webpack = require("webpack")
 
 module.exports = function(env) {
@@ -11,29 +11,32 @@ module.exports = function(env) {
   env.dev = !env.dist
 
   const config = {
+    mode: env.dist ? "production" : "development",
+
     resolve: {
-      modules: [path.resolve("./src"), "node_modules"]
+      modules: [path.resolve("./src"), "node_modules"],
     },
 
     entry: {
-      scripts: ["babel-polyfill", "./src/index.js"]
+      scripts: ["babel-polyfill", "./src/index.js"],
     },
 
     devServer: {
       inline: true,
       hot: true,
-      stats: "minimal"
+      port: 3000,
+      stats: "minimal",
     },
 
     performance: {
-      hints: false
+      hints: false,
     },
 
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "[name].js",
       library: "game",
-      libraryTarget: "var"
+      libraryTarget: "var",
     },
 
     module: {
@@ -41,44 +44,48 @@ module.exports = function(env) {
         {
           test: /\.less$/,
           use: [
-            { loader: 'style-loader' },
-            { loader: 'css-loader' },
-            { loader: 'less-loader' }
-          ]
+            { loader: "style-loader" },
+            { loader: "css-loader" },
+            { loader: "less-loader" },
+          ],
         },
         {
           test: /\.hbs$/,
           loader: "handlebars-loader",
           options: {
-            runtime: 'handlebars/dist/handlebars.runtime.js'
-          }
+            runtime: "handlebars/dist/handlebars.runtime.js",
+          },
+        },
+        {
+          test: /\.yaml$/,
+          use: [{ loader: "json-loader" }, { loader: "yaml-loader" }],
         },
         {
           test: /\.json$/,
-          use: "json-loader"
+          use: "json-loader",
         },
         {
           test: /\.txt$/,
-          use: "raw-loader"
-        }
-      ]
+          use: "raw-loader",
+        },
+      ],
     },
 
     node: {
-      fs: "empty"
+      fs: "empty",
     },
 
     plugins: [
       new webpack.DefinePlugin({
         VERSION: JSON.stringify(require("./package.json").version),
-        "process.env": env
+        "process.env": env,
       }),
       new HtmlWebpackPlugin({
-        inlineSource: '.js$',
-        template: "pug-loader!./src/templates/layout.pug"
+        inlineSource: ".js$",
+        template: "pug-loader!./src/templates/layout.pug",
       }),
-      new HtmlWebpackInlineSourcePlugin()
-    ]
+      new HtmlWebpackInlineSourcePlugin(),
+    ],
   }
 
   if (env.dist) {
@@ -86,21 +93,19 @@ module.exports = function(env) {
     config.module.rules.push({
       test: /\.js$/,
       include: [
-        path.resolve(__dirname, 'src'),
-        path.resolve(__dirname, 'node_modules/contractions'),
-        path.resolve(__dirname, 'node_modules/cool-typewriter')
+        path.resolve(__dirname, "src"),
+        path.resolve(__dirname, "node_modules/contractions"),
+        path.resolve(__dirname, "node_modules/cool-typewriter"),
       ],
       use: {
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env"]
-        }
-      }
+          presets: ["@babel/preset-env"],
+        },
+      },
     })
-    config.mode = 'production'
   } else {
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
-    config.mode = 'development'
   }
 
   return config

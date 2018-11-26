@@ -1,0 +1,129 @@
+strings:
+  INTRO: |
+    [you] find yourself a nice and comfortable spot to spend some well-deserved "alone time".
+  MAIN_LUST_0: |
+    You're not really in the mood but with a little stimulation [you] might get there.
+  MAIN_LUST_1: |
+    You're feeling a little horny and [your:body] lusts for more.
+  MAIN_LUST_2: |
+    Your body feels warm and tingly and your mind is flooded with dirty images.
+  MAIN_LUST_3: |
+    All you can think of is sex and [you] just want to feel that sweet release.
+  MAIN_LUST_4: |
+    Oh god — You're so close! You can feel it coming, just a little more …
+  CLIMAX_LOSS: |
+
+# configure available positions
+positions:
+  # FINGER ASS
+  - name: finger ass
+    infects: false
+    player:
+      - hands
+    enemy:
+      - anus
+    strings:
+      IDLE: |
+        You're fingering [one of:your:adjective:anus].
+      PLAYER_START: |
+        Reaching down between your legs, you let your middle finger trace the contour of [one of:your:adjective:anus]. A soft moan escapes your lips as you push your finger inside. Pausing for a moment to savour the wonderful sensation. Though you can't resist much longer and quickly pick up the pace — continually fingering [that:adjective:anus] of yours.
+      PLAYER_CONTINUE: |
+        With [your:hands] between your legs, you playfully finger [one of:your:adjective:anus]. Your middle finger sliding in and out of it, occasionally popping all the way out before eagerly sliding back in.
+      CLIMAX: |
+        [your:adjective:anus:>squirm] hungrily as you ceaselessly finger [them]. Losing yourself to the amazing sensation and crying out with pure ecstasy as an earth-shattering anal orgasm overwhelms [you]. Your entire body quivering and shaking before [you] slowly regain your senses.
+
+        With a satisfied smile you lick your fingers, basking in the glory of the aftermath.
+
+  # JERK OFF
+  - name: jerk off
+    infects: false
+    player:
+      - hands
+    enemy:
+      - penis
+    strings:
+      IDLE: |
+        You're jerking [two of:your:adjective:penis].
+      PLAYER_START: |
+        Reaching down between your legs, you grab [two of:your:adjective:penis] and groan as you start jerking [them] — slowly and steadily. [all of:your:hands:>start] to get sticky as pre drips over [them].
+      PLAYER_CONTINUE: |
+        [you] keep pumping [two of:your:adjective:penis] as [they:>throb] in [your:hands]. Your fingers getting stickier as even more pre drools all over them.
+      CLIMAX: |
+        Your groans get louder and more erratic as [your:adjective:penis:>throb] with anticipation. You find yourself jerking [them] furiously — lost in the primal sensation. Then, as a shiver runs down your spine, [you] burst out with pure ecstasy — spurting cum all over yourself.
+
+        Moments pass as [you] revel in the fading afterglow.
+
+  # FINGER PUSSY
+  - name: finger pussy
+    infects: false
+    player:
+      - hands
+    enemy:
+      - vagina
+    strings:
+      IDLE: |
+        Your fleshy walls squeeze around your fingers as you play with [all of:your:adjective:wet:vagina].
+      PLAYER_START: |
+        You reach down between your legs and place a hand against your womanhood — Your fingers exploring your slick folds while flicking [your:adjective:clit]. It feels good but you need more. Eager and playful, you slide a finger into [each of:your:adjective:vagina].
+
+        [you] can't help but moan with delight at the wonderful sensation.
+      PLAYER_CONTINUE: |
+        [you] continue playing with your sensitive wet folds. A finger curling inside [each of:your:adjective:vagina], sliding in and out rhythmically. Your inner walls squeezing tightly at the wonderful sensation.
+
+        Clear and sticky juices drooling out ceaselessly as you make a mess down there.
+      CLIMAX: |
+        You keep fingering [each of:your:adjective:vagina] — drenching your fingers in girl drool. Losing track of time as the euphoric sensation washes over you. [you] just need _more_, and without further hesitation you shove as many fingers as will fit into [each of:your:adjective:vagina].
+
+        The sensation overwhelms [you] as you cry out with joy — waves of pure delight coursing through [your:body] as [you] ride that orgasm for as long as you can.
+
+        Moments pass and you breathe heavily as [you] recover from your orgasm. You've lost track of time and all you know is that [all of:your:adjective:vagina:>feel] sore and used — _you_ however, glow with satisfaction.
+
+  # TEASE TITS
+  - name: tease tits
+    infects: false
+    condition: "!game.player.breasts.milky"
+    player:
+      - hands
+    enemy:
+      - breasts
+    strings:
+      IDLE: |
+        you're holding [two of:your:adjective:breasts], kneading and squeezing them playfully.
+      PLAYER_START: |
+        [you] sensually caress the curves of [your:adjective:breasts]. Taking your time and easing yourself into the wonderful sensation — occasionally flicking [your:adjective:nipples].
+
+        It doesn't take long before you find yourself greedily groping and kneading them.
+      PLAYER_CONTINUE: |
+        You continue to tug on [your:throbbing:adjective:nipples]. Your heart pounding in your chest as soft moans escape from your lips.
+
+        [your:adjective:breasts:>feel] so sensitive and [your:adjective:nipples] all tingly.
+      CLIMAX: |
+        You keep rubbing and squeezing [two of:your:adjective:breasts]. The sensation is thrilling and wonderful and you just can't stop tugging on [your:adjective:nipples]. A warmth emanates from your chest and engulfs your entire body as [you] cry out with joy.
+
+        Gradually you regain your senses, still slowly rubbing [your:adjective:breasts]. You can't believe [you] just came from playing with [your:breasts].
+
+  # MILK TITS
+  - name: milk tits
+    infects: false
+    condition: game.player.breasts.milky
+    player:
+      - hands
+    enemy:
+      - breasts
+    strings:
+      IDLE: |
+        you're holding [two of:your:adjective:breasts], kneading and squeezing them playfully.
+      PLAYER_START: |
+        [you] sensually caress the curves of [your:adjective:breasts]. Taking your time and easing yourself into the wonderful sensation — occasionally flicking [your:adjective:nipples].
+
+        It doesn't take long before you find yourself greedily groping and kneading them.
+      PLAYER_CONTINUE: |
+        You continue to tug on [your:throbbing:adjective:nipples] leaking milk all over your fingers. Your heart pounding in your chest as soft moans escape from your lips.
+
+        [your:adjective:breasts:>feel] so sensitive and [your:adjective:nipples] all tingly.
+      CLIMAX: |
+        You keep rubbing and squeezing [two of:your:adjective:breasts] squirting milk all over yourself. The sensation is thrilling and wonderful and you just can't stop tugging on [your:adjective:nipples]. A warmth emanates from your chest and engulfs your entire body as [you] cry out with joy.
+
+        [all of:your:adjective:nipples:>throb] delightfully before you burst out like a fountain and spray your milk everywhere!
+
+        Gradually you regain your senses, still slowly rubbing [your:adjective:breasts]. You can't believe [you] just came from playing with [your:breasts].

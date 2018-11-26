@@ -1,8 +1,5 @@
 import Transformation from "./_super"
 
-/**
- * Effects of minotaur cum
- */
 export default class MinotaurCum extends Transformation {
   get name() {
     return "minotaur cum"
@@ -17,6 +14,7 @@ export default class MinotaurCum extends Transformation {
       [
         "grow four breasts",
         "increase breast size",
+        "produce breast milk",
         "increase breast milk",
         "increase penis size",
         "change tail to bovine",

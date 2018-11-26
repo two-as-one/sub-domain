@@ -50,6 +50,10 @@ export default class Hips extends Part {
   // no-op
   set quantity(val) {}
 
+  get humanReadableSize() {
+    return `size-${this.hipSize}`
+  }
+
   get hipSize() {
     if (this.size < 25) {
       return "XS"

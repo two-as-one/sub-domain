@@ -1,4 +1,3 @@
-import G from "grammar/grammar"
 import StateMachine from "javascript-state-machine"
 import TypeWriter from "cool-typewriter"
 import template from "templates/main.hbs"
@@ -81,7 +80,7 @@ export default class Scene {
       response => !response.hasOwnProperty("if") || response.if
     )
 
-    data.text = G.clean(data.text)
+    data.text = this.game.parse(data.text)
 
     data.responses.forEach((response, i) => {
       if (!response.text) {
@@ -105,7 +104,8 @@ export default class Scene {
       response.text =
         response.text.charAt(0).toUpperCase() + response.text.slice(1)
 
-      response.text = G.clean(response.text)
+      response.text = this.game
+        .parse(response.text)
         .replace(/^<p>/, "")
         .replace(/<\/p>$/, "")
     })
@@ -157,6 +157,11 @@ export default class Scene {
   }
 
   type() {
+    // no typing animation in debug mode
+    if (this.game.debug) {
+      return
+    }
+
     typeWriter.type(document.getElementsByClassName("dialogue")[0])
     typeWriter.type(document.getElementsByClassName("options")[0])
     typeWriter.start()

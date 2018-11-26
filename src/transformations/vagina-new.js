@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Grows a new vagina if the player has none
- */
 export default class VaginaNew extends Transformation {
   get name() {
     return "grow a new vagina"
@@ -18,11 +16,6 @@ export default class VaginaNew extends Transformation {
     vagina.size = 0.2
     vagina.arouse(99999)
 
-    return `
-        You feel a warmth radiating from your nether regions. It quickly grows
-        stronger and starts feeling good — *really good*. The sensation
-        overwhelms [you] and you soon find yourself crying out with joy.
-
-        **You have grown a brand new pussy!**`
+    return lib("TRANSFORM_VAGINA_NEW")
   }
 }

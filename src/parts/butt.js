@@ -41,7 +41,4 @@ export default class Butt extends Part {
 
   // no-op
   set size(val) {}
-
-  // no-op
-  set quantity(val) {}
 }

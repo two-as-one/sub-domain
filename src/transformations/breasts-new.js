@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Grow a new pair of breasts if the player has none
- */
 export default class BreastsNew extends Transformation {
   get name() {
     return "grow a pair of breasts"
@@ -19,10 +17,6 @@ export default class BreastsNew extends Transformation {
     breasts.size = 1
     breasts.arouse(10)
 
-    return `
-      Your chest feels tingly and hot. [you] look down and quickly realize why.
-
-      Your chest has swollen and **you now have
-      [number:adjective:breasts(your)]!**`
+    return lib("TRANSFORM_BREASTS_NEW")
   }
 }

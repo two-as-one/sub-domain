@@ -1,24 +1,36 @@
 import "styles/index.less"
 import { clear, save } from "save/saveable"
+import Grammar from "grammar/grammar"
 import CharacterCreation from "encounters/dialogue/character-creation/scene"
 import InventoryScene from "scenes/inventory"
 import ItemScene from "scenes/item"
 import LevelUpScene from "scenes/level-up"
 import MainScene from "scenes/main"
-import Mastrubate from "encounters/other/masturbate"
+import ParserPlayground from "scenes/parser-playground/parser-playground"
 import Player from "player/player"
 import TitleScreen from "scenes/title-screen"
 import World from "world"
 import Nobody from "entities/nobody"
+import Alice from "entities/alice"
+import Bob from "entities/bob"
+import Charlie from "entities/charlie"
 import Rock from "items/consumables/rock"
+
+import { Factory } from "encounters/all"
 
 class Game {
   constructor() {
     this.init()
 
-    document.addEventListener("click", e => this._click(e))
-    document.addEventListener("mousemove", e => this._mouseMove(e))
-    document.addEventListener("keydown", e => this._keyPress(e))
+    this.listeners = {
+      click: e => this._click(e),
+      mousemove: e => this._mouseMove(e),
+      keydown: e => this._keyPress(e),
+    }
+
+    Object.entries(this.listeners).forEach(listener =>
+      document.addEventListener(listener[0], listener[1])
+    )
   }
 
   /** Toggle the game between mouse and keyboard control */
@@ -151,10 +163,19 @@ class Game {
     this.world = new World(this)
 
     // fallback [foe] for the parser
-    this.nobody = new Nobody()
+    this.nobody = new Nobody(this)
+
+    // test entities for the parser
+    this.bob = new Bob(this)
+    this.alice = new Alice(this)
+    this.charlie = new Charlie(this)
 
     // fallback [item] for the parser
     this.rock = new Rock()
+  }
+
+  parse(text, debug = this.debug) {
+    return Grammar.clean(text, debug)
   }
 
   /**
@@ -190,6 +211,8 @@ class Game {
     switch (name) {
       case "start":
         return new TitleScreen(this, ...args)
+      case "parser-playground":
+        return new ParserPlayground(this, ...args)
       case "new-game":
         return new CharacterCreation(this, ...args)
       case "inventory":
@@ -201,27 +224,11 @@ class Game {
       case "level-up":
         return new LevelUpScene(this, ...args)
       case "masturbate":
-        return new Mastrubate(this, ...args)
+        return Factory(this, name, ...args)
       case "encounter":
-        return this.Encounter(...args)
+        return Factory(this, ...args)
       default:
         throw new Error(`Error: unknown game scene: ${name}`)
-    }
-  }
-
-  /** create an encounter by name */
-  Encounter(name) {
-    const encounter = this.ENCOUNTERS[name]
-    return new encounter(this)
-  }
-
-  /**
-   * List of encounters available to this game
-   */
-  get ENCOUNTERS() {
-    return {
-      minotaur: require("encounters/combat/minotaur").default,
-      //"phallic shrine": require("encounters/dialogue/phallic-shrine").default
     }
   }
 }

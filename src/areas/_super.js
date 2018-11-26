@@ -1,6 +1,6 @@
-import Chance from "chance"
+import { chance } from "utils/chance"
 import { abstract } from "utils/abstract"
-const chance = new Chance()
+import { lib, combine } from "library/library"
 
 /**
  * Area
@@ -15,18 +15,7 @@ export default class Area {
       throw new TypeError("Cannot construct Area instances directly")
     }
 
-    abstract(
-      this,
-      "name",
-      "introMessage",
-      "exploreMessage",
-      "dayDescription",
-      "nightDescription",
-      "campDescription",
-      "sleepMessage",
-      "sunsetMessage",
-      "sunriseMessage"
-    )
+    abstract(this, "name", "prefix")
 
     this.game = game
   }
@@ -40,6 +29,7 @@ export default class Area {
   }
 
   /** This is the location of the area on the map */
+  // at the moment this is only really used to calculate the distance it takes to go from one area to another
   get position() {
     return { x: 0, y: 0 }
   }
@@ -114,12 +104,9 @@ export default class Area {
   //get the correct description based on day/nigh cycle
   get description() {
     if (this.game.world.day) {
-      return this.dayDescription
+      return lib(this, "DAY_DESCRIPTION")
     } else {
-      return `
-        Night has fallen.
-
-        ${this.nightDescription}`
+      return combine(lib("NIGHTFALL"), lib(this, "NIGHT_DESCRIPTION"))
     }
   }
 
@@ -139,43 +126,8 @@ export default class Area {
     return "super"
   }
 
-  //this message is shown the first time the player enters this area
-  get introMessage() {
-    return ""
-  }
-
-  //message when exploring the area
-  get exploreMessage() {
-    return ""
-  }
-
-  //the description of the area when at your camp during the day
-  get dayDescription() {
-    return ""
-  }
-
-  //the description of the area when at your camp during at night
-  get nightDescription() {
-    return ""
-  }
-
-  //description of the player's camp
-  get campDescription() {
-    return ""
-  }
-
-  //message shown when the player sleeps through the night
-  get sleepMessage() {
-    return ""
-  }
-
-  //message shown when the sun sets in this area
-  get sunsetMessage() {
-    return ""
-  }
-
-  //message shown when the sun rises in this area
-  get sunriseMessage() {
+  // define what prefix is used for the string library
+  get prefix() {
     return ""
   }
 }

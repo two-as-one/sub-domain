@@ -1,0 +1,158 @@
+# TODO: allow entity to be configured here
+# TODO: allow entity randomization
+
+entity:
+  title: minotaur
+  gender: none
+  level: 3
+  stats:
+    - str
+    - stam
+  loot:
+    - minotaur-spunk
+  infect:
+    transform: minotaur cum
+    potency: 0.9
+
+  # configure body parts
+  parts:
+    penis:
+      size: 16
+      quantity: 1
+      type: bovine
+    balls:
+      quantity: 2
+
+  # define how much this entity likes different body parts
+  # (anything not defined will default to 0.5)
+  likes:
+    anus: 1
+    vagina: 1
+    breasts: 0.75
+    mouth: 0.75
+    penis: 0.25
+
+# these strings MUST be defined
+strings:
+  INTRO: |
+    Suddenly a massive axe swings right above [your:head] and cuts through the flora. You are ambushed by **[(foe):a:title]**!
+  MAIN: |
+    [you] are facing **[(foe):a:title]**.
+  DESCRIBE_FOE: |
+    You have read about these in books. A creature with the head of a bull and the body of a man. Towering over [you], [(foe):they] must be at least 7 feet tall.
+
+    Brandishing an oversized axe and wearing no clothing or jewellery. The tales failed to mention a considerable detail — [their:adjective:penis], throbbing and filling the air with potent musk!
+  PLAYER_ATTACKED: |
+    [foe:>swing] [their] massive axe at [you].
+  COMBAT_LOSS: |
+    [foe:>roar] victoriously, swinging [their] axe in the air a few times before walking away. Leaving your —almost lifeless— body behind.
+  COMBAT_VICTORY: |
+    [foe:>succumb] to [their] wounds.
+  CLIMAX_LOSS: |
+    Satisfied from the fucking, [foe:>leave] [their] bitch —[you]— behind as [(foe):they:>shuffle] back into the wilderness.
+  CLIMAX_VICTORY: |
+    [you] sneak off as [foe:>have] become docile from [their] recent orgasm.
+  SEDUCED: |
+    [foe:>stroke] [one of:their:adjective:type:penis] — Pre-cum dribbling down from [their] tip and filling the air with overpowering musk.
+  NOT_INTERESTED: |
+    [foe:>slap] [you] in the face as you try to approach [(foe):them] — clearly not impressed by what you're offering.
+  GRAPPLE_FAILURE: |
+    [foe:>be] horny as fuck and [>try] to pin [you] down, but you manage to dodge [(foe):their] assault.
+  INFECT: |
+    **[foe's] spunk corrupts your body…**
+  STRUGGLE_SUCCESS: |
+    [you] manage to wriggle out of [foe's] grasp.
+  STRUGGLE_FAILURE: |
+    [you] attempt to struggle free but [foe:>keep] you firmly pinned down.
+  PULL_OUT: |
+    [foe:>be] about to climax — pull out at the last moment?
+  CLIMAX: |
+    [foe:>roar] out with both hands around [their:penis], jerking [(foe):themself] off until [they:>explode] into an overwhelming orgasm. Cum spurting all over the place with a few drops managing to land on [your:face]. Half unconscious [they:(foe):>fall] down to the ground.
+
+# configure available positions
+positions:
+  # ANAL
+  - name: anal
+    infects: true
+    player:
+      - anus
+    enemy:
+      - penis
+    strings:
+      IDLE: |
+        [foe:>have] [all of:their:adjective:penis] lodged deep inside [your:adjective:anus].
+      PLAYER_START: |
+        [you] turn your back towards [foe], shaking [your:adjective:butt] a few times before bending over. On all fours and with [your:butt] pointing up, [you] look back over your shoulders at [foe]. [they:>snort], unable to resist and with one hand on [their:penis] and the other on [your:adjective:butt], [(foe):they] brutally [>ram] [all of:their:adjective:penis] deep into [one of:your:adjective:anus].
+      ENEMY_START: |
+        [foe:>grab] you by your wrist then [>pin] [you] face first down against the ground. Snorting hungrily like a bull, [(foe):they:>look] down at [your:adjective:butt] before brutally ramming [all of:their:adjective:penis] into [one of:your:adjective:anus].
+      PLAYER_CONTINUE: |
+        [you] squeeze down on [all of:that:(foe's):adjective:penis] that ceaselessly [>keep] pounding away at [your:adjective:butt].
+      ENEMY_CONTINUE: |
+        [foe:>continue] to ravage [your:adjective:butt].
+      CLIMAX: |
+        [foe:>roar] out loudly as [they:>be] close to orgasm. With [two of:their:hands] around your waist [(foe):they] furiously [>ravage] [your:adjective:butt] until [(foe):they] finally [>explode] into it. Thick bovine cum slathering your insides and dribbling out of [your:adjective:anus]. Overwhelmed with satisfaction, [foe:>fall] down on [their] back — dragging [you] along and impaling you on [their:adjective:penis]. As the beast recovers from its ordeal, [you] slowly and carefully get up. Feeling [all of:that:(foe's):adjective:penis] sliding out of your abused hole while beads of cum trickle down your inner thighs.
+
+  # VAGINAL
+  - name: vaginal
+    infects: true
+    player:
+      - vagina
+    enemy:
+      - penis
+    strings:
+      IDLE: |
+        [one of:foe's:penis] is throbbing deep inside [one of:your:vagina].
+      PLAYER_START: |
+        [you] turn your back towards [foe], shaking [your:adjective:butt] a few times before bending over. On all fours and with [your:adjective:butt] pointing up, [you] look back at [foe] from between your legs. Without any hesitation, [foe:>grab] you by [your:adjective:hips] and [(foe):>ram] [one of:their:adjective:penis] into [one of:your:adjective:vagina].
+      ENEMY_START: |
+        [foe's] mighty hands grab [you] by the waist as [(foe):they:>force] you to turn around and bend over. With a grunt, [they:>look] down at [your:adjective:vagina] and then [(they):>ram] [one of:their:adjective:penis] into [one of:them:(your):(vagina)].
+      PLAYER_CONTINUE: |
+        your inner walls squeeze down tight on that monstrous cock.
+      ENEMY_CONTINUE: |
+        [foe:>pound] vigorously at [one of:your:adjective:vagina].
+      CLIMAX: |
+        [foe:>pick] up the pace, [one of:their:adjective:penis] sliding in and out of [one of:your:vagina]. [you] greedily squeeze down on it, moaning with pleasure. It doesn't take long for the monster to roar out and unload into [one of:your:vagina]. Hot bovine spunk building up inside of you and finally spurting out under its own pressure — dripping down your inner thighs. Snorting one last time and filled with satisfaction — [foe:>fall] asleep, pinning [you] under [(foe):their] weight.
+
+        With some effort [you] manage to dislodge the cock while wriggling out from under the sleeping beast.
+
+  # BLOWJOB
+  - name: blowjob
+    infects: true
+    player:
+      - mouth
+    enemy:
+      - penis
+    strings:
+      IDLE: |
+        [one of:foe's:penis] is throbbing deep down your throat.
+      PLAYER_START: |
+        [you] get down on your knees in front of [foe]. Facing [their:adjective:type:penis], you grab [them] with [your:hands] and jerk [them:(foe's):(penis)] a few times. Licking your lips hungrily, you open [one of:your:mouth] and swallow [one of:them:(foe's):(penis)] whole.
+      ENEMY_START: |
+        [foe:>place] [one of:their:hands] behind the back of [one of:your:head] and [(foe):>shove] it straight against [(foe):their] groin. You resist with your mouth shut but [foe:>smirk] and [>pinch] your nose — forcing you to part your lips to breathe. [they:(foe):>seize] the opportunity and [>shove] [one of:their:adjective:penis] through your lips. The thick bovine shaft drilling into [one of:your:mouth], forcing itself down your throat and making it bulge visibly.
+      PLAYER_CONTINUE: |
+        [you] continue to bob your head back and forth as [one of:that:(foe's):adjective:type:penis] fills your throat.
+      ENEMY_CONTINUE: |
+        [foe:>keep] fucking your face. [their] hand on the back of your head, preventing you from escaping.
+      CLIMAX: |
+        [foe:>have] [two of:their:hands] placed firmly against the back of your head, keeping [your:face] firmly in place while vigorously [they:(foe):>thrust] into it — [one of:their:adjective:penis] sliding all the way down your throat, making it bulge visibly. [(foe):they:>keep] pounding away at your face while tears roll down your cheeks. [you] almost faint from the lack of air, but luckily the brute reaches [their:(foe)] orgasm first. Thick salty cum filling your insides — rushing down your throat, overflowing and spurting through your nose. As [foe's] grip weakens — you pull back quickly, feeling that monster cock sliding out of your throat before being able to gasp for air.
+
+  # BOOBJOB
+  - name: boobjob
+    infects: false
+    player:
+      - breasts
+    enemy:
+      - penis
+    strings:
+      IDLE: |
+        you have got [all of:your:adjective:breasts] squeezed tightly around [foe's:penis].
+      PLAYER_START: |
+        [you] get down on your knees in front of [foe]. Cupping [two of:your:adjective:breasts] and kneading them playfully. [foe:>take] you up on the offer and [>jam] [all of:their:adjective:penis] in between [them:(your):(breasts)].
+      ENEMY_START: |
+        [foe:>overpower] [you] and [(foe):>pin] you to the floor with [(foe):their] superior strength. [they:>sit] down on top of [you], with [their:adjective:penis] throbbing between [all of:your:breasts].
+      PLAYER_CONTINUE: |
+        [you] squeeze [two of:your:adjective:breasts] together around [foe's:penis].
+      ENEMY_CONTINUE: |
+        [foe:>continue] to fuck your cleavage.
+      CLIMAX: |
+        [foe:>groan] and [>growl] with [their:adjective:penis] throbbing between [your:adjective:breasts]. [(foe):they:>fuck] your cleavage over and over like a wild beast. Even though [you] start feeling sore, you can't help but moan out with joy — triggering [foe's] climax as thick bovine spunk sprays all over [your:face].

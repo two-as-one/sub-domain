@@ -1,15 +1,13 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Increases milk production and grows breasts larger if the player has breasts
- */
-export default class BreastMilkier extends Transformation {
+export default class BreastsMilkier extends Transformation {
   get name() {
     return "increase breast milk"
   }
 
   get available() {
-    return this.owner.breasts.has
+    return this.owner.breasts.has && this.owner.breasts.milky
   }
 
   apply() {
@@ -19,12 +17,6 @@ export default class BreastMilkier extends Transformation {
     breasts.stored.milk += 1
     breasts.arouse(10)
 
-    const milky = breasts.stored.milk === 1 ? "milky" : "milkier"
-
-    return `
-      Your chest starts aching as [your:adjective:breasts] feel *just so full*.
-      [you] look down and notice beads of milk forming around [your:nipples].
-
-      **[all of:your:breasts]~>have grown ${milky}!**`
+    return lib("TRANSFORM_BREASTS_MILKIER")
   }
 }

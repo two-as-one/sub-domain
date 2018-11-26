@@ -1,9 +1,7 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Gain a minor amount of XP
- */
-export default class MinorXP extends Transformation {
+export default class XPMinorGain extends Transformation {
   get name() {
     return "gain minor xp"
   }
@@ -15,6 +13,6 @@ export default class MinorXP extends Transformation {
   apply() {
     this.owner.giveXP(5)
 
-    return `**you gained [xp]**`
+    return lib("XP_GAIN")
   }
 }

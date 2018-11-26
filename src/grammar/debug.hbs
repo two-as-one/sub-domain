@@ -1,0 +1,13 @@
+{{!-- note: formatting is intentionally messy as it can't have whitespaces --}}
+<span class="debug {{type}} {{#if hidden}}hidden{{/if}}"><span class="word">
+    {{~#if hidden}}(*){{else}}{{{out}}}{{/if~}}
+  </span><span class="info">
+    <span><b>{{type}}</b></span>
+    <span>{{in}} <b>🡆</b> {{out}}</span>
+    {{#if subject}}
+      <span>
+        <b>subject:</b>
+        {{subject.entity.owner.whose}} {{subject.entity.who}}
+      </span>
+    {{/if}}
+  </span></span>

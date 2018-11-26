@@ -1,11 +1,10 @@
 import "styles/combat.less"
 
-import Chance from "chance"
-import G from "grammar/grammar"
+import { lib, combine } from "library/library"
+import { Position } from "../position"
+import { chance } from "utils/chance"
 import Scene from "scenes/_super"
-import { abstract } from "utils/abstract"
 import template from "templates/combat.hbs"
-const chance = new Chance()
 
 import {
   Attack,
@@ -23,38 +22,20 @@ import {
  * refer to README.md for instructions on how to make custom encounters
  */
 export default class CombatEncounter extends Scene {
-  constructor(game, enemy) {
+  constructor(game, enemy, config) {
     super(game)
 
-    abstract(
-      this,
-      "introMessage",
-      "mainMessage",
-      "describeEnemyMessage",
-      "playerAttackedMessage",
-      "combatLossMessage",
-      "combatVictoryMessage",
-      "climaxLossMessage",
-      "climaxVictoryMessage",
-      "infectionMessage",
-      "pullOutMessage",
-      "struggleSuccessMessage",
-      "struggleFailureMessage",
-      "seducedMessage",
-      "notInterestedMessage",
-      "grappleFailureMessage",
-      "climaxMessage"
-    )
+    this.prefix = config.prefix
 
-    this.player = game.player
     this.enemy = enemy
+    this.player = game.player
 
     this.fucking = false
     this.position = null
-
     this.consent = false
 
     this.positions = []
+    config.positions.forEach(config => this.addPosition(config))
 
     this.state.intro()
   }
@@ -117,7 +98,7 @@ export default class CombatEncounter extends Scene {
   //encounter intro text
   intro() {
     this.render({
-      text: this.introMessage(),
+      text: lib(this, "INTRO"),
       hideStats: true,
       responses: [{ state: "main" }],
     })
@@ -138,26 +119,26 @@ export default class CombatEncounter extends Scene {
     let struggleLabel = "struggle"
     if (this.player.perception > this.enemy.perception * 2) {
       let formula = new Attack(this.player, this.enemy)
-      attackLabel += ` (${formula.min}-${formula.max})`
+      attackLabel += formula.toString()
 
       formula = new Flee(this.player, this.enemy)
-      fleeLabel += ` (${formula.chance})`
+      fleeLabel += formula.toString()
 
       formula = new Struggle(this.player, this.enemy)
-      struggleLabel += ` (${formula.chance})`
+      struggleLabel += formula.toString()
     }
 
     let actions
     let message
     if (this.fucking) {
-      message = this.position.get("idle")
+      message = lib(this.position, "IDLE")
       actions = [
         { text: "keep fucking", state: "fuck" },
         { text: "change position", state: "submit" },
         { text: struggleLabel, state: "struggle" },
       ]
     } else {
-      message = this.mainMessage()
+      message = lib(this, "MAIN")
       actions = [
         { text: attackLabel, state: "attack" },
         { text: "seduce", state: "seduce" },
@@ -191,19 +172,17 @@ export default class CombatEncounter extends Scene {
     this.enemy.damage(amount)
 
     this.render({
-      text: this.attackMessage() + this.attackResultsMessage(),
+      text: lib("COMBAT_ATTACK"),
       responses: [{ state: "enemyAction" }],
     })
   }
 
   //examine enemy
   examine() {
-    let text = this.describeEnemyMessage()
+    let text = lib(this, "DESCRIBE_FOE")
 
     if (this.player.perception > this.enemy.perception) {
-      text += `
-
-        ${this.inspectStats()}`
+      text = combine(text, this.inspectStats())
     }
 
     this.render({
@@ -223,7 +202,7 @@ export default class CombatEncounter extends Scene {
 
       if (this.player.perception > this.enemy.perception * 2) {
         const formula = new Seduce(part, this.enemy)
-        label += ` (${formula.min}-${formula.max})`
+        label += formula.toString()
       }
 
       responses.push({
@@ -237,7 +216,7 @@ export default class CombatEncounter extends Scene {
     responses.push({ state: "main", text: "back" })
 
     this.render({
-      text: `How do you want to try to seduce [foe]?`,
+      text: lib("COMBAT_CHOOSE_SEDUCTION"),
       responses: responses,
     })
   }
@@ -249,9 +228,10 @@ export default class CombatEncounter extends Scene {
 
     this.enemy.arouse(amount)
 
+    const message = this.player[data.part].seductionMessage
+
     this.render({
-      text:
-        this.player[data.part].seductionMessage + this.seduceResultsMessage(),
+      text: combine(message, lib("COMBAT_SEDUCE")),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -268,7 +248,7 @@ export default class CombatEncounter extends Scene {
     responses.push({ state: "main", text: "back" })
 
     this.render({
-      text: `What are you offering?`,
+      text: lib("COMBAT_CHOOSE_SUBMIT"),
       responses: responses,
     })
   }
@@ -288,12 +268,12 @@ export default class CombatEncounter extends Scene {
       this.position = data.position
 
       this.render({
-        text: this.position.get("player.start"),
+        text: lib(this.position, "PLAYER_START"),
         responses: [{ state: "fuck" }],
       })
     } else {
       this.render({
-        text: this.notInterestedMessage(),
+        text: lib(this, "NOT_INTERESTED"),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -311,7 +291,10 @@ export default class CombatEncounter extends Scene {
     this.enemy.arouse(amount)
 
     this.render({
-      text: this.position.get("player.continue") + this.seduceResultsMessage(),
+      text: combine(
+        lib(this.position, "PLAYER_CONTINUE"),
+        lib("COMBAT_SEDUCE")
+      ),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -326,12 +309,12 @@ export default class CombatEncounter extends Scene {
       this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage(),
+        text: lib(this, "STRUGGLE_SUCCESS"),
         responses: [{ state: "main" }],
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage(),
+        text: lib(this, "STRUGGLE_FAILURE"),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -371,7 +354,7 @@ export default class CombatEncounter extends Scene {
       return this.state.getForceSubmitted()
 
       // seduce player
-    } else if (Math.random() < enemy.lustNormalized) {
+    } else if (chance.random() < enemy.lustNormalized) {
       return this.state.getSeduced()
 
       // attack player
@@ -388,7 +371,7 @@ export default class CombatEncounter extends Scene {
     this.player.damage(amount)
 
     this.render({
-      text: this.playerAttackedMessage() + this.attackedResultsMessage(),
+      text: combine(lib(this, "PLAYER_ATTACKED"), lib("COMBAT_ATTACKED")),
       responses: [{ state: "main" }],
     })
   }
@@ -401,7 +384,7 @@ export default class CombatEncounter extends Scene {
     this.player.arouse(amount)
 
     this.render({
-      text: this.seducedMessage() + this.seducedResultsMessage(),
+      text: combine(lib(this, "SEDUCED"), lib("LUST_GAIN")),
       responses: [{ state: "main" }],
     })
   }
@@ -410,8 +393,8 @@ export default class CombatEncounter extends Scene {
   unableToResist() {
     this.render({
       text: this.player.orgasmed
-        ? this.tooHornyMessage()
-        : this.tooWeakMessage(),
+        ? lib("COMBAT_TOO_HORNY")
+        : lib("COMBAT_TOO_WEAK"),
       responses: [{ state: "enemyAction" }],
     })
   }
@@ -428,12 +411,12 @@ export default class CombatEncounter extends Scene {
       this.position = position
 
       this.render({
-        text: this.position.get("enemy.start"),
+        text: lib(this.position, "ENEMY_START"),
         responses: [{ state: "enemyAction", initiated: true }],
       })
     } else {
       this.render({
-        text: this.grappleFailureMessage(),
+        text: lib(this, "GRAPPLE_FAILURE"),
         responses: [{ state: "main" }],
       })
     }
@@ -452,7 +435,7 @@ export default class CombatEncounter extends Scene {
       this.position = position
 
       this.render({
-        text: this.position.get("enemy.start"),
+        text: lib(this.position, "ENEMY_START"),
         responses: [{ state: "enemyAction" }],
       })
     } else {
@@ -466,8 +449,7 @@ export default class CombatEncounter extends Scene {
       this.player.arouse(amount)
 
       this.render({
-        text:
-          this.position.get("enemy.continue") + this.seducedResultsMessage(),
+        text: combine(lib(this.position, "ENEMY_CONTINUE"), lib("LUST_GAIN")),
         responses: [{ state: "main" }],
       })
     }
@@ -483,12 +465,12 @@ export default class CombatEncounter extends Scene {
 
     if (success) {
       this.render({
-        text: this.fleeSuccessMessage(),
+        text: lib("COMBAT_FLEE_SUCCESS"),
         responses: [{ state: "exit" }],
       })
     } else {
       this.render({
-        text: this.fleeFailureMessage(),
+        text: lib("COMBAT_FLEE_FAILURE"),
         responses: [{ state: "enemyAction" }],
       })
     }
@@ -501,7 +483,7 @@ export default class CombatEncounter extends Scene {
         return this.state.climax()
       } else {
         this.render({
-          text: this.pullOutMessage(),
+          text: lib(this, "PULL_OUT"),
           responses: [
             { text: "pull out", state: "pullOut" },
             { text: "keep going", state: "climax" },
@@ -524,12 +506,12 @@ export default class CombatEncounter extends Scene {
       this.position = null
 
       this.render({
-        text: this.struggleSuccessMessage(),
+        text: lib(this, "STRUGGLE_SUCCESS"),
         responses: [{ state: "climax" }],
       })
     } else {
       this.render({
-        text: this.struggleFailureMessage(),
+        text: lib(this, "STRUGGLE_FAILURE"),
         responses: [{ state: "climax" }],
       })
     }
@@ -537,12 +519,8 @@ export default class CombatEncounter extends Scene {
 
   //climax
   climax() {
-    const message = this.fucking
-      ? this.position.get("climax")
-      : this.climaxMessage()
-
     this.render({
-      text: message,
+      text: lib(this.fucking ? this.position : this, "CLIMAX"),
       responses: [{ state: "endResults" }],
     })
   }
@@ -550,6 +528,7 @@ export default class CombatEncounter extends Scene {
   //combat results, exp, loot, etc...
   endResults() {
     let XPmessage = ""
+    let ItemMessage = ""
     let dilationMessage = ""
     let infectionMessage = ""
     let resultMessage = ""
@@ -563,9 +542,12 @@ export default class CombatEncounter extends Scene {
       let item
       if (this.enemy.loot) {
         item = this.player.inventory.loot(this.enemy.loot)
+        this.game.scene.item = item
+        ItemMessage = lib("ITEM_PICKUP")
       }
 
-      XPmessage = this.gainMessage(xp, item)
+      // TODO: fix this
+      XPmessage = lib("XP_GAIN")
     }
 
     //dilation
@@ -583,47 +565,39 @@ export default class CombatEncounter extends Scene {
       const transformation = this.enemy.infect(this.player)
 
       if (transformation) {
-        infectionMessage = `
-          ${this.infectionMessage()}
-
-          ${transformation}`
+        infectionMessage = combine(lib(this, "INFECT"), transformation)
       }
     }
 
     //message
     if (this.player.orgasmed) {
-      resultMessage = this.climaxLossMessage()
+      resultMessage = lib(this, "CLIMAX_LOSS")
     } else if (this.enemy.orgasmed) {
-      resultMessage = this.climaxVictoryMessage()
+      resultMessage = lib(this, "CLIMAX_VICTORY")
     } else if (!this.player.alive) {
-      resultMessage = this.combatLossMessage()
+      resultMessage = lib(this, "COMBAT_LOSS")
     } else {
-      resultMessage = this.combatVictoryMessage()
+      resultMessage = lib(this, "COMBAT_VICTORY")
     }
 
     if (this.player.orgasmed || !this.player.alive) {
       this.fadeout = true
-      passOutMessage = `
-        Time passes before [you] regain your senses.`
+      passOutMessage = lib("COMBAT_PASSED_OUT")
     }
 
     if (this.player.orgasmed) {
       this.player.soothe(999999)
     }
 
-    const text = `
-      ${XPmessage}
-
-      ${dilationMessage}
-
-      ${infectionMessage}
-
-      ${resultMessage}
-
-      ${passOutMessage}`
-
     this.render({
-      text: text,
+      text: combine(
+        XPmessage,
+        ItemMessage,
+        dilationMessage,
+        infectionMessage,
+        resultMessage,
+        passOutMessage
+      ),
       hideStats: true,
       responses: [{ state: "exit" }],
     })
@@ -644,8 +618,8 @@ export default class CombatEncounter extends Scene {
   //--------------
 
   // add a position to this encounter
-  addPosition(Position) {
-    this.positions.push(new Position(this.player, this.enemy))
+  addPosition(config) {
+    this.positions.push(new Position(this.player, this.enemy, config))
   }
 
   get availablePositions() {
@@ -670,213 +644,11 @@ export default class CombatEncounter extends Scene {
   // Helper messages
   //----------------
 
-  attackResultsMessage() {
-    return `
-
-      You deal **[damage(foe)]**`
-  }
-
-  attackedResultsMessage() {
-    return `
-
-      You suffer **[damage(you)]**`
-  }
-
-  seduceResultsMessage() {
-    return `
-
-      [foe] gains **[lust(foe)]**`
-  }
-
-  seducedResultsMessage() {
-    return `
-
-      You gain **[lust(you)]**`
-  }
-
-  tooHornyMessage() {
-    return `
-
-      [you] are overwhelmed with lust and unable to control your actions.`
-  }
-
-  tooWeakMessage() {
-    return `
-
-      [you] have lost all strength in [your:body] and are unable to resist.`
-  }
-
-  gainMessage(xp, item) {
-    let text = `
-
-      Gained **[xp]**`
-
-    if (item) {
-      this.game.scene.item = item
-
-      text += ` and found **[item]**`
-    }
-
-    return text
-  }
-
-  attackMessage() {
-    return `
-
-      [you] swing [your.weapon] at [foe].`
-  }
-
-  fleeSuccessMessage() {
-    return `
-      [you] manage to run away from [foe]!`
-  }
-
-  fleeFailureMessage() {
-    return `
-      [you] try to flee but [foe]~>stop you in your tracks!`
-  }
-
   inspectStats() {
     const e = this.enemy
 
     return `
       STR:${e.strength} | STAM:${e.stamina} | CHAR:${e.charisma} |
       WILL:${e.willpower} | DEX:${e.dexterity}`
-  }
-
-  // Messages - extend these with encounter specific messages
-  //---------------------------------------------------------
-
-  introMessage() {
-    return ""
-  }
-
-  mainMessage() {
-    return ""
-  }
-
-  describeEnemyMessage() {
-    return ""
-  }
-
-  playerAttackedMessage() {
-    return ""
-  }
-
-  combatLossMessage() {
-    return ""
-  }
-
-  combatVictoryMessage() {
-    return ""
-  }
-
-  climaxLossMessage() {
-    return ""
-  }
-
-  climaxVictoryMessage() {
-    return ""
-  }
-
-  infectionMessage() {
-    return ""
-  }
-
-  pullOutMessage() {
-    return ""
-  }
-
-  struggleSuccessMessage() {
-    return ""
-  }
-
-  struggleFailureMessage() {
-    return ""
-  }
-
-  seducedMessage() {
-    return ""
-  }
-
-  notInterestedMessage() {
-    return ""
-  }
-
-  grappleFailureMessage() {
-    return ""
-  }
-
-  climaxMessage() {
-    return ""
-  }
-
-  // Debugging
-  //----------
-
-  /** output all static text strings */
-  get debugStatic() {
-    return G.trim(`
-      ${G.clean(this.attackResultsMessage())}
-      ${G.clean(this.attackedResultsMessage())}
-      ${G.clean(this.attackedResultsMessage())}
-      ${G.clean(this.seduceResultsMessage())}
-      ${G.clean(this.seducedResultsMessage())}
-      ${G.clean(this.tooHornyMessage())}
-      ${G.clean(this.tooWeakMessage())}
-      ${G.clean(this.gainMessage(10))}
-      ${G.clean(this.gainMessage(10, { name: "Dummy" }))}
-      ${G.clean(this.attackMessage())}
-      ${G.clean(this.fleeSuccessMessage())}
-      ${G.clean(this.fleeFailureMessage())}
-    `)
-  }
-
-  get debugExtended() {
-    return G.trim(`
-      ${G.clean(this.introMessage())}
-      ${G.clean(this.mainMessage())}
-      ${G.clean(this.describeEnemyMessage())}
-      ${G.clean(this.playerAttackedMessage())}
-      ${G.clean(this.combatLossMessage())}
-      ${G.clean(this.combatVictoryMessage())}
-      ${G.clean(this.climaxLossMessage())}
-      ${G.clean(this.climaxVictoryMessage())}
-      ${G.clean(this.infectionMessage())}
-      ${G.clean(this.seducedMessage())}
-      ${G.clean(this.pullOutMessage())}
-      ${G.clean(this.struggleSuccessMessage())}
-      ${G.clean(this.struggleFailureMessage())}
-      ${G.clean(this.grappleFailureMessage())}
-      ${G.clean(this.notInterestedMessage())}
-      ${G.clean(this.climaxMessage())}
-    `)
-  }
-
-  /** output dynamic strings */
-  get debugDynamic() {
-    return G.trim(
-      this.positions
-        .map(
-          p => `
-        ## ${p.name} ##
-        ${G.clean(p.get("idle"))}
-        ${G.clean(p.get("player.start"))}
-        ${G.clean(p.get("enemy.start"))}
-        ${G.clean(p.get("player.continue"))}
-        ${G.clean(p.get("enemy.continue"))}
-        ${G.clean(p.get("climax"))}
-      `
-        )
-        .join("")
-    )
-  }
-
-  get debug() {
-    return G.trim(`
-      ${this.debugStatic}
-      ${this.debugExtended}
-      ${this.debugDynamic}
-    `)
   }
 }

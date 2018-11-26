@@ -1,4 +1,5 @@
 import Part from "./_super"
+import Grammar from "grammar/grammar"
 
 export default class Penis extends Part {
   constructor(...args) {
@@ -8,7 +9,7 @@ export default class Penis extends Part {
     this.addSynonym("dong")
     this.addSynonym("cock")
     this.addSynonym("shaft")
-    this.addSynonym("penis")
+    this.addSynonym("penis", "penises")
     this.addSynonym("phallus")
     this.addSynonym("pecker", null, () => this.size < 4)
 
@@ -115,5 +116,9 @@ export default class Penis extends Part {
 
   get canSeduce() {
     return true
+  }
+
+  get humanReadableSize() {
+    return Grammar.toFt(this.size)
   }
 }

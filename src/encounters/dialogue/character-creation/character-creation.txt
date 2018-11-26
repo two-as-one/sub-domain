@@ -58,8 +58,8 @@ And today was your lucky day …
     You stared at her, losing track of time. Lost in your own thoughts — how could someone be this pretty, did she use magic maybe?
       ...Then suddenly, her gaze met yours! You instantly snapped out of your trance. She smiled back at you and extended her hand, motioning for you to come forward.
 
-      You broke eye contact, looking around. Surely it wasn't you she was after? What would a beautiful wizard like this want with a farmer [boy(you)]? But before you could muster any coherent thoughts, the crowd had pushed you out and towards her.
-        ...She grabbed your hand, her skin as soft as it looked. She smiled endlessly before turning her attention back at the crowd and with a surprisingly imposing voice said — "And for my next magic trick, I/will make this pretty [boy(you)] disappear!"
+      You broke eye contact, looking around. Surely it wasn't you she was after? What would a beautiful wizard like this want with a farmer [(you):boy]? But before you could muster any coherent thoughts, the crowd had pushed you out and towards her.
+        ...She grabbed your hand, her skin as soft as it looked. She smiled endlessly before turning her attention back at the crowd and with a surprisingly imposing voice said — "And for my next magic trick, I/will make this pretty [(you):boy] disappear!"
 
         She looked back at you with those perfect eyes of her, winked and then whispered softly — "Don't worry cute one. It won't hurt, I promise. Just climb in this chest over here and sit still, will you?" You blushed at her compliments and without thinking twice, followed her command. Climbing in the ornate man-sized chest that was on the floor in front of you both.
           ...With you inside, the lid closed with a solid thud. Pitch black darkness engulfing you. You couldn't hear the outside crowd any more, it was as if you were in a different place.

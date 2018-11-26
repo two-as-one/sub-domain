@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Grows a new penis if the player has none
- */
 export default class PenisNew extends Transformation {
   get name() {
     return "grow a new penis"
@@ -17,10 +15,6 @@ export default class PenisNew extends Transformation {
     this.owner.penis.size = 2
     this.owner.penis.arouse(10)
 
-    return `
-      Your groin feels hot and itchy — as you reach down to scratch, [you]
-      notice something unusual.
-
-      **You have grown a tiny new [penis]!**`
+    return lib("TRANSFORM_PENIS_NEW")
   }
 }

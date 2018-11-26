@@ -3,6 +3,7 @@ export default class PerkManager {
     this.owner = owner
 
     this._PERKS = []
+    this.stored = []
 
     //load all transformations
     const req = require.context("./", true, /^(?!\.\/_).+\.js/)

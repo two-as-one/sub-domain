@@ -1,3 +1,5 @@
+import { chance } from "utils/chance"
+
 /**
  * formula for calculating damage
  */
@@ -37,7 +39,11 @@ export class DamageFormula {
 
   // roll the die and get a result
   roll() {
-    return this.calc(Math.random())
+    return this.calc(chance.random())
+  }
+
+  toString() {
+    return ` (${this.min}-${this.max})`
   }
 }
 
@@ -64,7 +70,11 @@ export class ChanceFormula {
   }
 
   roll() {
-    return this.calc(Math.random())
+    return this.calc(chance.random())
+  }
+
+  toString() {
+    return ` (${this.chance})`
   }
 }
 

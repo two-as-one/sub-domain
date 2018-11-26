@@ -1,0 +1,241 @@
+TITLE_INCOMPATIBLE_SAVE: |
+  Your saved game \[$1] does not match the latest version of the game \[$2]. You can still continue but this may cause unexpected bugs.
+
+  It/is recommend to start a new game.
+
+TITLE_CONFIRM_NEW_GAME: |
+  You/will **lose any saved progress**, are you sure you want to start a new adventure?
+
+ITEM_PICKUP: |
+  **[item]** has been added to your inventory.
+
+XP_GAIN: |
+  You gain **[xp]**.
+
+LUST_GAIN: |
+  You gain **[(your):lust]**
+
+CURRENT_TIME: |
+  It's **[time]**.
+
+NIGHTFALL: |
+  Night has fallen.
+
+CHOOSE_TRAVEL_DESTINATION: |
+  Where would you like to travel to?
+
+TRAVEL_CONFIRMATION: |
+  You pack your bags and travel to **[area]**.
+
+REST_UNTIL_HEALED: |
+  You lay down and rest.
+
+WET_DREAM: |
+  **You had a wet dream** — Your loins are on fire and you've made a sticky mess down there.
+
+  Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.
+
+INVENTORY_EMPTY: |
+  You don't have any items.
+
+INVENTORY_LIST: |
+  These are the items you/have.
+
+COMBAT_ATTACK: |
+  [you] swing [your.weapon] at [foe].
+
+  You deal **[(foe):damage]**
+
+COMBAT_ATTACKED: |
+  You suffer **[(your):damage]**
+
+COMBAT_SEDUCE: |
+  [foe] gains **[(foe):lust]**
+
+COMBAT_TOO_WEAK: |
+  [you] have lost all strength in [your:body] and are unable to resist.
+
+COMBAT_TOO_HORNY: |
+  [you] are overwhelmed with lust and unable to control your actions.
+
+COMBAT_FLEE_SUCCESS: |
+  [you] manage to run away from [foe]!
+
+COMBAT_FLEE_FAILURE: |
+  [you] try to flee but [foe] [>stop] you in your tracks!
+
+COMBAT_CHOOSE_SEDUCTION: |
+  How do you want to try to seduce [foe]?
+
+COMBAT_CHOOSE_SUBMIT: |
+  What are you offering?
+
+COMBAT_PASSED_OUT: |
+  Time passes before [you] regain your senses.
+
+PLAYER_WOUNDED: |
+  You are **severely wounded** and must rest.
+
+PLAYER_AROUSED: |
+  You are **too horny** to do anything productive.
+
+TRANSFORM_VAGINA_NEW: |
+  You feel a warmth radiating from your nether regions. It quickly grows stronger and starts feeling good — *really good*. The sensation overwhelms [you] and you soon find yourself crying out with joy.
+
+  **You have grown [a:adjective:(your):new:vagina]!**
+
+TRANSFORM_VAGINA_GROWTH: |
+  [you] feel a warmth radiating from your nether regions — followed by a trickle down your inner thighs. You grow hot and horny and reach down between your legs to find out why.
+
+  **[all of:your:adjective:vagina:>have] grown plumper!**
+
+TRANSFORM_VAGINA_EXTRA: |
+  You/have an uncontrollable itch between your legs and the sensation builds up until you reach some sort of pseudo-orgasm. You feel a trickle down your inner thigh. Gasping — [you] look down and notice why.
+
+  **You have grown an extra pussy!**
+
+TRANSFORM_UDDER_GROWTH: |
+  Your teats start dripping with milk as [your:adjective:udder:>feel] full to the brim.
+
+  **[each of:your:udder:>have] swollen permanently!**
+
+TRANSFORM_PENIS_NEW: |
+  Your groin feels hot and itchy — as you reach down to scratch, [you] notice something unusual.
+
+  **You have grown [a:adjective:(your):new:penis]!**
+
+TRANSFORM_PENIS_GROWTH: |
+  [your:adjective:penis:>throb] as [they:each:>grow] thicker and longer — **[each of:your:penis:>have] grown!**
+
+TRANSFORM_NIPPLE_GROWTH: |
+  Your chest feels tingly and hot. [you] look down and quickly realize why.
+
+  **[your:nipples:>have] swollen and permanently grown longer and thicker!**
+
+TRANSFORM_NIPPLE_EXTRA: |
+  Your chest feels tingly and hot. [you] look down and quickly realize why.
+
+  **[each of:your:breasts:>have] grown an additional nipple!**
+
+TRANSFORM_TAIL_NEW_BOVINE: |
+  You have a strange itching sensation down your lower back and as you reach to scratch it, you realize where it's coming from …
+
+  **You have grown a bovine tail!**
+
+TRANSFORM_TAIL_TO_BOVINE: |
+  [you] immediately lose balance as soon as you start walking. It's as if your centre of gravity has changed. [you] examine yourself to find out why …
+
+  **Your tail has turned into a bovine one!**
+
+TRANSFORM_BREASTS_QUARTET: |
+  Your chest feels tingly and hot. [you] look down and quickly realize why.
+
+  **you now have [number:(your):adjective:breasts]**
+
+TRANSFORM_BREASTS_NEW: |
+  Your chest feels tingly and hot. [you] look down and quickly realize why.
+
+  [your] chest has swollen and **you now have [number:adjective:breasts]!**
+
+TRANSFORM_BREASTS_MILKY: |
+  [all of:your:breasts:>tingle] with a strange but pleasant sensation. [you] look down and notice beads of milk forming around [your:adjective:nipples].
+
+  **[your:adjective:breasts] now [>produce] milk!**
+
+TRANSFORM_BREASTS_MILKIER: |
+  Your chest aches as [all of:your:adjective:breasts] feel *just so full*. [you] look down and notice beads of milk forming around [your:adjective:nipples].
+
+  **[your:adjective:breasts] now [>produce] more milk!**
+
+TRANSFORM_BREASTS_GROWTH: |
+  Your chest feels tingly and hot. [you] look down and quickly realize why.
+
+  **[all of:your:adjective:breasts:>have] grown!**
+
+TRANSFORM_UDDER_NEW_BOVINE: |
+  Your tummy feels sensitive and bloated. [you] examine yourself to find out why.
+
+  You have grown **a perky udder** with **four sensitive teats**!
+
+FOREST_INTRO: |
+  [you]/have a slow and arduous journey marked by the barely breathable air that is just as thick as the dense vegetation. Hardly any sunlight manages to make its way through the ominous canopy. Strange exotic sounds echo through the wilds, keeping you on your toes.
+
+  After a couple of hours, you find a small opening in the vegetation with a hollow tree in the middle. Exhausted and needing a rest, [you] decide to set up camp here.
+
+FOREST_EXPLORE: |
+  [you] cautiously creep through the dense foliage. Thick vines and branches constantly getting in your way and slowing you down.
+
+FOREST_SLEEP: |
+  [you] curl up on a bed of leaves and doze off to the sound of crickets and owls.
+
+FOREST_SUNSET: |
+  Darkness falls over the forest as **night** takes over.
+
+FOREST_SUNRISE: |
+  [you] wake up from an uncomfortable night of sleep, due to the high temperature and humidity. A bright ray of sunshine pierces through the canopy and shines straight on [your:face].
+
+FOREST_DAY_DESCRIPTION: |
+  The temperature is uncomfortably high while the air feels heavy and damp. A handful of sun rays pierce through the dense canopy, illuminating the darkness below.
+
+FOREST_NIGHT_DESCRIPTION: |
+  The familiar sounds of the forest have been replaced by those of crickets and owls. The pitch blackness occasionally pierced by the light of a firefly.
+
+FOREST_CAMP_DESCRIPTION: |
+  Your camp is set up on the inside of a massive hollow tree.
+
+FOREST_FIND_MEATY_MUSHROOM: |
+  You find an odd mushroom. It's long, meaty and starts throbbing as soon as you touch it. It kinda looks and feels like a cock. You pick it up, and bring it back to camp.
+
+FOREST_NOTHING_HAPPENED: |
+  About an hour later [you] end up back at your camp. You had no idea you were going in a circle, but you've learned a little about this place.
+
+BEACH_INTRO: |
+  [you] open your eyes — looking up to a cloudless blue sky, laying on the warm sand of an unknown beach. Waking up to the peaceful sound of waves crashing against the shore.
+
+  Where are you? Just how long did you sleep? More importantly — What the heck happened?
+
+  [you] try to get up but [your:body] is sore and weak — maybe you'll just lay down for a little longer, coming to grips with your situation.
+
+BEACH_EXPLORE:
+  - The soft sand caresses [your:feet] as [you] explore the **beach**.
+  - You/have a long walk along the **beach**.
+
+BEACH_SLEEP: |
+  You lay down on the cool sand. Gazing up to the sky, counting the stars until [you] drift off.
+
+BEACH_SUNSET: |
+  The day has come to an end as the **sun sets** below the horizon.
+
+BEACH_SUNRISE: |
+  [you] wake up to the sound of crashing waves. The sun has already begun its ascend across the sky.
+
+BEACH_DAY_DESCRIPTION: |
+  The sun shines bright on the hot sand, but the cool ocean breeze keeps things bearable.
+
+BEACH_NIGHT_DESCRIPTION: |
+  A beautiful starry sky blankets the ocean. The pale moon reflecting on the water and illuminating the shore. The temperature has dropped drastically.
+
+BEACH_CAMP_DESCRIPTION: |
+  You have made a ramshackle camp using debris from what you assume is a sunken ship.
+
+BEACH_DISCOVER_FOREST: |
+  Without straying too far from where you woke up, you explore this unfamiliar beach. Its shoreline extend both ways — far into the distance.
+
+  You gaze over the azure sea with a cloudless blue sky draped above it. The temperature is quite comfortable. Even though the sun shines bright, there's an ocean breeze cooling things down. [you] close your eyes for a while, letting the tranquillity flow through you.
+
+  Behind you, there's a forest which seems to span all the way across the coast — or at least as far as the eye can see. Maybe you could explore it too?
+
+  You have discovered the **forest**!
+
+BEACH_FIND_CLAM: |
+  You've found a peculiar looking clam laying on the beach.
+
+  You pick it up, then head back to camp.
+
+BEACH_FIND_MILK: |
+  You've stumbled upon a half-buried bottle in the sand.
+
+  You pick it up, then head back to camp.
+
+BEACH_NOTHING_HAPPENED: |
+  After a long and uneventful stroll along the coast, [you] decide to head back to camp.

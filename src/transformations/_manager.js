@@ -1,5 +1,4 @@
-import Chance from "chance"
-const chance = new Chance()
+import { chance } from "utils/chance"
 
 export default class TransformationManager {
   constructor(owner) {
@@ -32,7 +31,7 @@ export default class TransformationManager {
       return ""
     }
 
-    const roll = Math.random()
+    const roll = chance.random()
 
     if (roll < potency) {
       return choice.apply()

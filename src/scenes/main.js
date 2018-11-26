@@ -1,4 +1,5 @@
 import Scene from "./_super"
+import { lib, combine } from "library/library"
 
 export default class MainScene extends Scene {
   constructor(game) {
@@ -114,7 +115,7 @@ export default class MainScene extends Scene {
     this.area.lvlUp()
 
     this.render({
-      text: this.area.introMessage,
+      text: lib(this.area, "INTRO"),
       responses: [{ state: "main" }],
     })
   }
@@ -126,7 +127,7 @@ export default class MainScene extends Scene {
 
   explore() {
     this.render({
-      text: this.area.exploreMessage,
+      text: lib(this.area, "EXPLORE"),
       responses: [{ state: "exploreResult" }],
     })
   }
@@ -157,20 +158,21 @@ export default class MainScene extends Scene {
     })
 
     this.render({
-      text: `Where would you like to travel to?`,
+      text: lib("CHOOSE_TRAVEL_DESTINATION"),
       responses: options,
     })
   }
 
   travel(data) {
+    this.game.world.switchArea(data.area)
+
     this.render({
-      text: `You pack your bags and and travel to the **${data.area.name}**.`,
-      responses: [{ state: "switchArea", area: data.area }],
+      text: lib("TRAVEL_CONFIRMATION"),
+      responses: [{ state: "switchArea" }],
     })
   }
 
   switchArea(data) {
-    this.game.world.switchArea(data.area)
     this.fade().then(() => this.game.setScene("main"))
   }
 
@@ -178,7 +180,7 @@ export default class MainScene extends Scene {
     this.game.world.advanceToDawn()
 
     this.render({
-      text: this.area.sleepMessage,
+      text: lib(this.area, "SLEEP"),
       responses: [{ state: "sunrise" }],
     })
   }
@@ -187,26 +189,23 @@ export default class MainScene extends Scene {
     this.game.world.advanceUntilHealed()
 
     this.render({
-      text: `You lay down and rest.`,
+      text: lib("REST_UNTIL_HEALED"),
       responses: [{ state: "main", fade: true }],
     })
   }
 
   sunrise() {
+    this.game.player.arouse(this.game.player.lust / 2)
+
     let wetDream = ""
     if (this.game.player.lustNormalized > 0.5) {
-      wetDream = `
-
-          **You had a wet dream** — Your loins are on fire and you've made a sticky mess down there.
-          Your memories of the wonderfully depraved dream quickly fade away, leaving you with a burning desire.`
+      wetDream = lib("WET_DREAM")
     }
-
-    this.game.player.arouse(this.game.player.lust / 2)
 
     this.fade().then(() => {
       this.game.world.transitioned = false
       this.render({
-        text: this.area.sunriseMessage + wetDream,
+        text: combine(lib(this.area, "SUNRISE"), wetDream),
         responses: [{ state: "main" }],
       })
     })
@@ -215,7 +214,7 @@ export default class MainScene extends Scene {
   sunset() {
     this.game.world.transitioned = false
     this.render({
-      text: this.area.sunsetMessage,
+      text: lib(this.area, "SUNSET"),
       responses: [{ state: "main" }],
     })
   }
@@ -241,22 +240,8 @@ export default class MainScene extends Scene {
   }
 
   camp() {
-    let time = this.game.world.time.hour
-    if (time < 12) {
-      time = `${time} am`
-    } else if (time === 12) {
-      time = `noon`
-    } else if (time === 24) {
-      time = `midnight`
-    } else {
-      time = `${time - 12} pm`
-    }
-
     this.render({
-      text: `
-        It's **${time}**.
-
-        ${this.area.campDescription}`,
+      text: combine(lib("CURRENT_TIME"), lib(this.area, "CAMP_DESCRIPTION")),
       responses: [{ text: "back", state: "main" }],
     })
   }

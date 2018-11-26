@@ -1,18 +1,20 @@
 import Entity from "entities/_super"
-import G from "grammar/grammar"
 import Inventory from "./inventory"
 import TransformationManager from "transformations/_manager"
 import { persist } from "save/saveable"
 import statBarTemplate from "templates/stat-bar.hbs"
+import { lib } from "library/library"
+import { chance } from "utils/chance"
 
 export default class Player extends Entity {
-  constructor(...args) {
-    super(...args)
+  constructor(game) {
+    super(game, {
+      name: "",
+      title: "hero",
+      gender: "neutral",
+    })
 
-    this.name = ""
-    this.title = "hero"
     this.person = "second"
-    this.gender = "neutral"
 
     this.inventory = new Inventory(this)
 
@@ -32,7 +34,19 @@ export default class Player extends Entity {
    */
   get who() {
     if (this.head.quantity === 2) {
-      return G.random(["both of you", "you both", "you", "you", "you"]) // multiple "you" intentional to increase its chance of appearing
+      // multiple "you" intentional to increase its chance of appearing
+      const word = chance.pickone([
+        "both of you",
+        "you both",
+        "you",
+        "you",
+        "you",
+      ])
+
+      this.__lastUsedWord = word
+      this.__lastUsedName = word
+
+      return word
     } else {
       return super.who
     }
@@ -71,19 +85,16 @@ export default class Player extends Entity {
   }
 
   get woundedDescription() {
-    if (this.health <= 1) {
-      return `You are **severely wounded** and must rest.`
-    }
-
-    return ""
+    return this.health <= 1 ? lib("PLAYER_WOUNDED") : ""
   }
 
   get arousedDescription() {
-    if (this.lust >= this.lustMax - 1) {
-      return `You are **too horny** to do anything productive.`
-    }
+    return this.lust >= this.lustMax - 1 ? lib("PLAYER_AROUSED") : ""
+  }
 
-    return ""
+  // the player likes everything equally
+  likes() {
+    return 1
   }
 
   // LVLing Up

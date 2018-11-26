@@ -11,13 +11,13 @@ You must ingest a template in the constructor of your dialogue.
 See [template syntax](#template-syntax) below.
 
 ```js
-import DialogueEncounter from "encounters/dialogue/_super";
-import template from "./template.txt";
+import DialogueEncounter from "encounters/dialogue/_super"
+import template from "./template.txt"
 
 export default class CustomDialogue extends DialogueEncounter {
   constructor(game) {
-    super(game);
-    this.ingest(template);
+    super(game)
+    this.ingest(template)
   }
 }
 ```
@@ -31,7 +31,7 @@ Templates are text files that represent a dialogue tree. A dialogue tree is a br
 Remember that just like any other text in the game, you can use the [parser](../../../PARSER.md) to access game entities and write dynamic text.
 
 ```
-[foe] grabs [whose:penis].
+[foe] grabs [their:penis].
 ```
 
 ```

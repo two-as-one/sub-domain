@@ -52,4 +52,8 @@ export default class Nipples extends Part {
   get growth() {
     return 0.2
   }
+
+  get humanReadableSize() {
+    return Grammar.toFt(this.size)
+  }
 }

@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Increases penis size if the player has one
- */
 export default class PenisGrowth extends Transformation {
   get name() {
     return "increase penis size"
@@ -18,8 +16,6 @@ export default class PenisGrowth extends Transformation {
     penis.grow()
     penis.arouse(10)
 
-    return `
-      [your:adjective:penis]~>throb as [they]~>grow thicker and longer —
-      **[each of:your:penis]~>have grown!**`
+    return lib("TRANSFORM_PENIS_GROWTH")
   }
 }

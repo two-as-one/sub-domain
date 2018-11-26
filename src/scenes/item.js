@@ -6,6 +6,8 @@ export default class ItemScene extends Scene {
 
     this.item = item
 
+    game.scene.item = item
+
     this.state.inspect()
   }
 
@@ -56,7 +58,7 @@ export default class ItemScene extends Scene {
     }
 
     this.render({
-      text: `You tossed away ${item.name} × ${i}`,
+      text: `You tossed away [item] × ${i}`,
       responses: [{ state: "end" }],
     })
   }

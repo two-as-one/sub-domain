@@ -1,4 +1,4 @@
-import Chance from "chance"
+import { chance } from "utils/chance"
 import Grammar from "grammar/grammar"
 import PerkManager from "perks/_manager"
 
@@ -23,8 +23,6 @@ import {
   Vagina,
 } from "parts/_all"
 
-const chance = new Chance()
-
 const STAT_BASE = 5
 const LEVEL_STAT_SCALE = 1
 const HP_SCALE = 5
@@ -36,30 +34,19 @@ const HP_SCALE = 5
  */
 export default class Entity {
   constructor(game, config = {}) {
+    this.config = config
+
     this.game = game
 
-    //name is used by specific NPC's, leave this blank if an entity has no known name
-    //eg: 'Bob', 'Alice'
-    this.name = ""
-
-    //the title refers to the category of this entity
-    //eg: 'Minotaur', 'Goblin'
-    this.title = "creature"
-
-    //the gender of this creature
-    //male/female/neutral/none
-    //he/she/they/it
-    this.gender = "none"
-
-    //whether to refer to this entity in the first, second or third person
-    //third person used for NPC's
-    //second person used for the player
+    // whether to refer to this entity in the first, second or third person
+    // third person used for NPC's
+    // second person used for the player
     this.person = "third"
 
-    //whether this entity is actually multiple people
+    // whether this entity is actually multiple people
     this.multiple = false
 
-    this.stored = Object.assign({}, this.defaults, config)
+    this.stored = Object.assign({}, this.defaults)
 
     this.parts = {
       anus: new Anus(this),
@@ -86,7 +73,7 @@ export default class Entity {
     Object.entries(this.parts).forEach(pair => {
       const part = pair[1]
 
-      part.synonyms.forEach(word => {
+      part.synonyms.__list.forEach(word => {
         if (word.singular && !(word.singular in this)) {
           this[word.singular] = part
         }
@@ -96,7 +83,47 @@ export default class Entity {
       })
     })
 
+    // grant random stats
+    if (this.config.stats) {
+      this.giveRandomStats(this.stored.lvl * 2, this.config.stats)
+    }
+
+    this.configure(config)
+
     this.perks = new PerkManager(this)
+  }
+
+  configure(config) {
+    // apply body parts
+    if (config.parts) {
+      Object.entries(config.parts).forEach(pair => {
+        const part = pair[1]
+        const name = pair[0]
+
+        for (const key in part) {
+          this[name][key] = part[key]
+        }
+      })
+    }
+  }
+
+  // name is used by specific NPC's, leave this blank if an entity has no known name
+  // eg: 'Bob', 'Alice'
+  get name() {
+    return this.config.name || ""
+  }
+
+  // the title refers to the category of this entity
+  // eg: 'Minotaur', 'Goblin'
+  get title() {
+    return this.config.title || "creature"
+  }
+
+  // the gender of this creature
+  // male/female/neutral/none
+  // he/she/they/it
+  get gender() {
+    return this.config.gender || "none"
   }
 
   get defaults() {
@@ -316,6 +343,19 @@ export default class Entity {
     )
   }
 
+  get loot() {
+    const table = this.config.loot
+    if (table) {
+      if (typeof table === "string") {
+        return table
+      } else if (Array.isArray(table)) {
+        return chance.pickone(table)
+      }
+    }
+
+    return null
+  }
+
   // Methods
   //--------
 
@@ -374,21 +414,42 @@ export default class Entity {
 
   /**
    * Determines how much this entity likes the given part
-   * Extend this with a custom function when implementing bespoke entities
    * @param  {Part} part - The part to check
    * @return {Number}    A multiplier to be applied where relevant
    */
   likes(part) {
-    return 1
+    const prefs = this.config.likes
+
+    if (prefs) {
+      for (const key in prefs) {
+        if (part.synonyms.__list.includes(key)) {
+          return prefs[key]
+        }
+      }
+    }
+
+    return 0.5
   }
 
   /**
    * Method that applies a transformation to the player
-   * Extend this with a custom function when implementing bespoke entities
    * @param  {Entity} player - The player to infect
    * @return {String}        A string describing the transformation
    */
-  infect(player) {}
+  infect(player) {
+    const infection = this.config.infect
+
+    if (infection) {
+      const potency = infection.potency || 1
+      let transformations = infection.transform
+
+      if (!Array.isArray(transformations)) {
+        transformations = [transformations]
+      }
+
+      return player.transform.pickOne(transformations, potency)
+    }
+  }
 
   /**
    * measure difficulty of a target
@@ -433,6 +494,10 @@ export default class Entity {
   giveRandomStats(number, list) {
     if (!list) {
       list = ["str", "stam", "dex", "will", "char"]
+    }
+
+    if (!Array.isArray(list)) {
+      list = [list]
     }
 
     for (let i = 0; i < number; i++) {

@@ -1,4 +1,4 @@
-import Grammar from "grammar/grammar"
+import { chance } from "utils/chance"
 import Part from "./_super"
 
 export default class Anus extends Part {
@@ -49,7 +49,7 @@ export default class Anus extends Part {
   }
 
   get seductionMessage() {
-    return Grammar.random([
+    return chance.pickone([
       `You turn around and place [your:hands] on [your:adjective:hips].
         Looking back over your shoulder, [you] invitingly sway your bottom back and forth.
         Then, with a playful smirk on [your:face], you firmly slap [your:own:butt].`,

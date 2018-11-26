@@ -1,5 +1,7 @@
 import Scene from "./_super"
 
+import { lib } from "library/library"
+
 export default class InventoryScene extends Scene {
   constructor(game) {
     super(game)
@@ -30,9 +32,9 @@ export default class InventoryScene extends Scene {
 
     let text
     if (items.length === 0) {
-      text = `You don't have any items.`
+      text = lib("INVENTORY_EMPTY")
     } else {
-      text = `These are the items you/have.`
+      text = lib("INVENTORY_LIST")
     }
 
     this.render({

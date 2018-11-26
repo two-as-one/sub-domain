@@ -1,294 +1,475 @@
 import Grammar from "./grammar"
 import game from "../game"
 
-// TODO [size] modifier -> '12 inch', 'B-cup'
+// this is where debug info is stored
+const DEBUG = []
+export { DEBUG }
+
+class Subject {
+  constructor() {
+    this.change(game.nobody)
+  }
+
+  // change the entity of the subject
+  change(entity) {
+    this.entity = entity
+    this.__pronounUsed = null
+    this.__forcedSingular = false
+  }
+
+  // forces this subject to be singular
+  // e.g: 'one of your arms' (even though arms is plural, we are only referring to one of them)
+  forceSingular() {
+    this.__forcedSingular = true
+  }
+
+  // mark a specific pronoun as having been used
+  usePronoun(pronoun) {
+    this.__pronounUsed = pronoun
+  }
+
+  get pronoun() {
+    if (this.__pronounUsed) {
+      return this.__pronounUsed
+    }
+
+    if (this.__forcedSingular) {
+      return "it"
+    }
+
+    if (this.entity.person === "second") {
+      return "you"
+    }
+
+    return this.entity.multiple ? "they" : "it"
+  }
+
+  // get a pronoun of the subject
+  // type = subjective, objective, determiner, possessive or reflexive
+  getPronoun(type = "subjective") {
+    const plural = this.__forcedSingular ? false : this.entity.multiple
+    const pronoun = Grammar.pronoun(
+      type,
+      plural,
+      this.entity.person,
+      this.entity.gender
+    )
+    this.usePronoun(pronoun)
+    return pronoun
+  }
+
+  // conjugate a verb according to the subject and any used pronouns
+  conjugate(verb) {
+    return Grammar.conjugate(this.pronoun, verb)
+  }
+}
 
 class Parser {
-  constructor(string, subject) {
+  constructor(string, debug = false) {
     const regex = /(^|[^\\])(\[)([^\]]*)(\])/g
-    const whoRegex = /(.*)\((.*)\)$/
-    const conditionRegex = /([^?!]+)(\?|!)(.*)\|(.*)$/
+    let subject = new Subject()
 
     this.parsed = string.replace(regex, (match, a, b, snip) => {
-      // check if the selector has a specific target
-      let specific = snip.match(whoRegex)
-      if (specific) {
-        snip = specific[1]
-        specific = specific[2]
-      }
+      const previous = subject
+      subject = new Subject()
+      subject.change(previous.entity)
 
-      // conditionals
-      const condition = snip.match(conditionRegex)
+      // TODO: conditionals
 
-      if (condition) {
-        let result = this.__find(condition[1], subject)
-
-        // reverse condition
-        if (condition[2] === "!") {
-          result = !result
-        }
-
-        if (result) {
-          snip = condition[3]
-        } else {
-          snip = condition[4]
-        }
-      }
-
-      const parsed = this.__parse(snip, subject, specific)
-      subject = parsed[1]
-
-      return a.replace("/", "") + parsed[0]
+      return a.replace("/", "") + Parser.__parse(snip, subject, debug)
     })
-
-    // articlize [a] and [an]
-    this.parsed = this.parsed.replace(
-      /\[(a|an)\] (\w+)/g,
-      (match, article, word) => Grammar.articlize(word)
-    )
   }
 
   // parse a snippet
-  __parse(snip, subject, specific) {
-    // split selector into its fragments
-    const frags = snip.split(":")
+  static __parse(snip, subject, debug) {
+    const hiddenRegex = /^\((.*)\)$/ // e.g: (you)
+    const verbRegex = /^>/ // e.g: >verb
+    const possessiveRegex = /'s\)?$/ // e.g: bob's, alice's
 
-    // use the last fragment as the target
-    const target = frags[frags.length - 1]
+    // split snippet into its fragments and detect special cases
+    const frags = snip.split(":").map(frag => ({
+      raw: frag,
+      frag: frag
+        .replace(hiddenRegex, "$1")
+        .replace(verbRegex, "")
+        .replace(possessiveRegex, ""),
+      possessive: possessiveRegex.test(frag),
+      hidden: hiddenRegex.test(frag),
+      verb: verbRegex.test(frag),
+    }))
 
-    // subject modifiers
-    // the presence of these fragments changes the subject of the sentence
-    if (frags.includes("your")) {
-      subject = this.__select("you")
-    }
-
-    if (frags.includes("their")) {
-      subject = this.__select("foe")
-    }
-
-    // check for specific subject
-    if (specific) {
-      specific = this.__find(specific, subject)
-
-      if (typeof specific === "object") {
-        subject = specific
+    // find out who and what we're talking about
+    const possession = Parser.__possession(frags)
+    if (possession) {
+      subject.change(possession)
+    } else {
+      const person = Parser.__person(frags)
+      if (person) {
+        subject.change(person)
       }
     }
 
-    // find the actual subject
-    const object = this.__find(target, subject)
-    if (typeof object === "object") {
-      subject = object
+    // determine fragment types
+    frags.forEach(frag => {
+      if (frag.frag === "a" || frag.frag === "an") {
+        frag.type = "a-an"
+      } else if (frag.verb) {
+        frag.type = "verb"
+      } else if (Parser[frag.frag]) {
+        frag.type = "dynamic"
+      } else if (frag.entity) {
+        frag.type = "entity"
+      } else {
+        frag.type = "static"
+      }
+
+      // the following frag types cannot be possessive
+      switch (frag.type) {
+        case "static":
+        case "verb":
+        case "a-an":
+          frag.possessive = false
+          break
+      }
+    })
+
+    // parse static words
+    frags
+      .filter(frag => frag.type === "static")
+      .forEach(frag => (frag.parsed = frag.frag))
+
+    // parse dynamic
+    frags.filter(frag => frag.type === "dynamic").forEach(frag => {
+      const parsed = Parser[frag.frag](subject, frag, frags)
+
+      if (parsed) {
+        frag.parsed = parsed
+      } else {
+        frag.hidden = true
+        frag.parsed = frag.frag
+      }
+    })
+
+    // parse entities
+    frags
+      .filter(frag => frag.type === "entity")
+      .forEach(frag => (frag.parsed = frag.entity.who))
+
+    // parse possessive
+    frags
+      .filter(frag => frag.possessive)
+      .forEach(frag => (frag.parsed = `${frag.parsed}'s`))
+
+    // parse verbs
+    frags
+      .filter(frag => frag.type === "verb")
+      .forEach(frag => (frag.parsed = subject.conjugate(frag.frag)))
+
+    // parse a/an
+    frags.forEach((frag, i) => {
+      const next = frags[i + 1]
+
+      if (next && frag.type === "a-an") {
+        frag.parsed = Grammar.articlize(next.parsed).replace(next.parsed, "")
+      }
+    })
+
+    // debug
+    if (debug) {
+      frags.forEach(frag => {
+        DEBUG.push({
+          in: frag.raw,
+          out: frag.hidden ? "_" : frag.parsed,
+          type: frag.type,
+          subject: subject,
+          hidden: frag.hidden,
+          length: frag.parsed.length,
+        })
+
+        frag.parsed = `[🡆${DEBUG.length - 1}]${frag.parsed}`
+      })
     }
 
-    // construct words, applying modifiers
     const parsed = frags
-      .map(mod => {
-        try {
-          if (this[mod]) {
-            return this[mod](subject, target, specific)
-          } else if (mod === target && subject) {
-            return subject.who
-          } else {
-            return mod
-          }
-        } catch (e) {
-          console.warn("Parser Error: Failed to apply mod: " + mod)
-          return ""
-        }
-      })
+      .filter(frag => !frag.hidden || debug)
+      .map(frag => frag.parsed)
       .join(" ")
       .trim()
 
-    // TODO: prevent duplicate adjectives showing up
-    // TODO: prevent type being used as adjective, if type is also part of the frag
-
-    return [parsed, subject]
+    return parsed
   }
 
-  __find(key, subject) {
-    const keys = key.split(".")
-
-    // eslint-disable-next-line no-cond-assign
-    while ((key = keys.shift())) {
-      if (subject && key in subject) {
-        subject = subject[key]
-      } else {
-        subject = this.__select(key)
-      }
-    }
-
-    return subject
+  // check whether something is an entity
+  static __isEntity(item) {
+    return Boolean(item && item.who)
   }
 
-  __select(key) {
+  // selects a top-level game entity based on common words referring to them
+  static __select(key = "") {
     switch (key) {
       case "foe":
-      case "their":
-        return game.scene.enemy || game.nobody
+        if (game.scene && game.scene.enemy) {
+          return game.scene.enemy
+        } else {
+          return Parser.__select("bob")
+        }
       case "you":
-      case "your":
-      case "yours":
         return game.player
       case "item":
         return game.scene.item || game.rock
+      case "bob":
+        return game.bob
+      case "alice":
+        return game.alice
+      case "charlie":
+        return game.charlie
     }
 
     return null
   }
 
-  a() {
-    return "[a]"
-  }
+  // determine which person we're talking about
+  static __person(frags) {
+    for (let i = 0; i < frags.length; i++) {
+      const frag = frags[i]
 
-  an() {
-    return "[an]"
-  }
-
-  item(subject) {
-    return subject.name
-  }
-
-  damage(subject) {
-    return `${Number(subject.damaged) || 0} damage`
-  }
-
-  lust(subject) {
-    return `${Number(subject.aroused) || 0} lust`
-  }
-
-  xp() {
-    return `${Number(game.player.xpGained) || 0}xp`
-  }
-
-  title(subject) {
-    return subject.title
-  }
-
-  that(subject) {
-    return subject.that
-  }
-
-  those(subject) {
-    return subject.that
-  }
-
-  number(subject) {
-    return subject.number
-  }
-
-  "each of"(subject) {
-    return subject.quantity > 2 ? "each of" : subject.all
-  }
-
-  "every one of"(subject) {
-    return subject.quantity > 2 ? "every one of" : subject.all
-  }
-
-  "all of"(subject) {
-    return subject.all
-  }
-
-  "one of"(subject) {
-    return subject.one
-  }
-
-  "two of"(subject) {
-    return subject.two
-  }
-
-  "three of"(subject) {
-    return subject.three
-  }
-
-  "four of"(subject) {
-    return subject.four
-  }
-
-  adjective(subject) {
-    return subject.adjective
-  }
-
-  type(subject) {
-    return subject.type === "human" ? "" : subject.type
-  }
-
-  they(subject) {
-    return subject.they
-  }
-
-  them(subject) {
-    return subject.them
-  }
-
-  their(subject) {
-    subject = subject.owner ? subject.owner : subject
-
-    return subject.their
-  }
-
-  theirs(subject) {
-    return subject.theirs
-  }
-
-  themself(subject) {
-    return subject.themself
-  }
-
-  who(subject) {
-    return subject.who
-  }
-
-  whose(subject, target, specific) {
-    // if there is a specific subject, use that
-    if (specific) {
-      subject = specific
-
-      // otherwise if the subject has an owner use that
-    } else if (subject.owner) {
-      subject = subject.owner
+      if (!frag.possessive && Parser.__select(frag.frag)) {
+        frag.entity = Parser.__select(frag.frag)
+        return frag.entity
+      }
     }
 
-    if (target !== "whose" && subject === game.player) {
-      return "your"
-    } else if (subject.owner && specific) {
-      return `${this.whose(subject.owner, target)} ${subject.whose}`
+    return null
+  }
+
+  // determine what possession we're talking about
+  static __possession(frags) {
+    const [who, whoFrag] = Parser.__possesiveDeterminer(frags)
+
+    if (!who) {
+      return null
+    }
+
+    for (let i = 0; i < frags.length; i++) {
+      const frag = frags[i]
+
+      if (Parser.__isEntity(who[frag.frag])) {
+        whoFrag.owner = who
+        frag.entity = who[frag.frag]
+        return frag.entity
+      }
+    }
+
+    return null
+  }
+
+  static __condition(string) {
+    let result = false
+    try {
+      result = new Function('"use strict";return (game.' + string + ")")()
+    } catch (e) {
+      console.error(`Invalid condition: ${string}`)
+    }
+
+    return result
+  }
+
+  // check if the snippet contains a possessive determiner
+  // in that case we are talking about someone's possession
+  static __possesiveDeterminer(frags) {
+    for (let i = 0; i < frags.length; i++) {
+      const frag = frags[i]
+
+      if (frag.frag === "your") {
+        return [Parser.__select("you"), frag]
+      } else if (
+        frag.frag === "their" ||
+        frag.frag === "her" ||
+        frag.frag === "his" ||
+        frag.frag === "its"
+      ) {
+        return [Parser.__select("foe"), frag]
+      } else if (frag.possessive && Parser.__select(frag.frag)) {
+        return [Parser.__select(frag.frag), frag]
+      }
+    }
+
+    return [null, null]
+  }
+
+  static item(subject) {
+    return subject.entity.name
+  }
+
+  static damage(subject) {
+    return `${Number(subject.entity.damaged) || 0} damage`
+  }
+
+  static lust(subject) {
+    return `${Number(subject.entity.aroused) || 0} lust`
+  }
+
+  static xp() {
+    return `${Number(Parser.__select("you").xpGained) || 0}xp`
+  }
+
+  static time() {
+    let time = game.world.time.hour
+
+    if (time < 12) {
+      time = `${time} am`
+    } else if (time === 12) {
+      time = `noon`
+    } else if (time === 24) {
+      time = `midnight`
     } else {
-      return subject.whose
+      time = `${time - 12} pm`
+    }
+
+    return time
+  }
+
+  static area() {
+    return game.world.area.name
+  }
+
+  static title(subject) {
+    return subject.entity.title
+  }
+
+  static that(subject) {
+    return subject.entity.that
+  }
+
+  static those(subject) {
+    return subject.entity.that
+  }
+
+  static number(subject) {
+    return subject.entity.number
+  }
+
+  static each(subject) {
+    if (subject.entity.quantity === 2) {
+      return "both"
+    } else if (subject.entity.multiple) {
+      return "each"
+    } else {
+      return ""
     }
   }
 
-  you(subject) {
-    return subject.who
+  static "each of"(subject) {
+    if (subject.entity.quantity === 2) {
+      return "both of"
+    } else if (subject.entity.multiple) {
+      return "each of"
+    } else {
+      return ""
+    }
   }
 
-  your() {
-    return "your"
+  static "every one of"(subject) {
+    if (subject.entity.quantity === 2) {
+      return "both of"
+    } else if (subject.entity.multiple) {
+      return "every one of"
+    } else {
+      return ""
+    }
   }
 
-  foe(subject) {
-    return subject.who
+  static "all of"(subject) {
+    if (subject.entity.quantity === 2) {
+      return "both of"
+    } else if (subject.entity.multiple) {
+      return `all ${subject.entity.number} of`
+    } else {
+      return ""
+    }
   }
 
-  boy(subject, target, specific) {
-    if (specific) {
-      subject = specific
+  static "one of"(subject) {
+    subject.forceSingular()
+    return subject.entity.one
+  }
+
+  static "two of"(subject) {
+    return subject.entity.two
+  }
+
+  static "three of"(subject) {
+    return subject.entity.three
+  }
+
+  static "four of"(subject) {
+    return subject.entity.four
+  }
+
+  static adjective(subject) {
+    return subject.entity.adjective
+  }
+
+  static type(subject) {
+    return subject.entity.type === "human" ? "" : subject.entity.type
+  }
+
+  static size(subject) {
+    return subject.entity.humanReadableSize || ""
+  }
+
+  static they(subject) {
+    return subject.getPronoun("subjective")
+  }
+
+  static them(subject) {
+    return subject.getPronoun("objective")
+  }
+
+  static their(subject, frag, frags) {
+    // if the subject belongs to someone AND the fragments already contain a subject
+    // then the `their` refers to the subject's owner
+    if (subject.entity.owner && frags.map(f => f.type).includes("entity")) {
+      return subject.entity.owner.their
     }
 
-    return subject.gender === "female" ? "girl" : "boy"
+    return subject.getPronoun("determiner")
   }
 
-  girl(subject, target, specific) {
-    return this.boy(subject, target, specific)
+  static theirs(subject) {
+    return subject.getPronoun("possessive")
+  }
+
+  static themself(subject) {
+    return subject.getPronoun("reflexive")
+  }
+
+  static who(subject) {
+    return subject.entity.who
+  }
+
+  static you() {
+    return Parser.__select("you").who
+  }
+
+  static your() {
+    return Parser.__select("you").their
+  }
+
+  static foe() {
+    return Parser.__select("foe").who
+  }
+
+  static boy(subject) {
+    return subject.entity.gender === "female" ? "girl" : "boy"
+  }
+
+  static girl(subject) {
+    return Parser.boy(subject.entity)
   }
 }
 
-export function parse(text = "") {
-  try {
-    const p = new Parser(text)
-    return p.parsed
-  } catch (e) {
-    console.warn("Parser Error:" + text)
-    return text
-  }
+export function parse(text = "", debug) {
+  const p = new Parser(text, debug)
+  return p.parsed
 }

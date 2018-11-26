@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Increases nipple size if the player has nipples
- */
 export default class NippleGrowth extends Transformation {
   get name() {
     return "increase nipple size"
@@ -19,10 +17,6 @@ export default class NippleGrowth extends Transformation {
     this.owner.nipples.grow()
     this.owner.nipples.arouse(10)
 
-    return `
-      Your chest feels tingly and hot. [you] look down and quickly realize why.
-
-      **[your:nipples]~>have swollen and permanently >grow longer and
-      thicker!**`
+    return lib("TRANSFORM_NIPPLE_GROWTH")
   }
 }

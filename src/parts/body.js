@@ -55,4 +55,8 @@ export default class Body extends Part {
       (this.stored.weight / this.stored.size / this.stored.size) * 10000
     )
   }
+
+  get humanReadableSize() {
+    return Grammar.toFt(this.size)
+  }
 }

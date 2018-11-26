@@ -1,162 +1,65 @@
-import { abstract } from "utils/abstract"
-
 /**
  * class that represents a position in an encounter
  */
 export class Position {
-  constructor(player, playerParts = [], enemy, enemyParts = []) {
-    abstract(
-      this,
-      "idle",
-      "playerStart",
-      "playerContinue",
-      "enemyStart",
-      "enemyContinue",
-      "climax"
-    )
-
+  constructor(player, enemy, config) {
     this.player = player
     this.enemy = enemy
-
-    // the name of this position
-    this.name = ""
-
-    if (playerParts.length < 1 || enemyParts.length < 1) {
-      throw new Error("Position must have at least 1 player and 1 enemy part")
-    }
-
-    // the parts the player uses to achieve this position
-    // note that the first part in this list will be considered the focus of this position and will be used to determine lust gained
-    this.playerParts = playerParts
-
-    // the parts the enemy uses to achieve this position
-    // note that the first part in this list will be considered the focus of this position and will be used to determine lust gained
-    this.enemyParts = enemyParts
-
-    // whether this position has a risk of infection
-    this.infects = false
+    this.config = config
   }
 
-  /**
-   * Get the text associated with a specific action on this position
-   * @param {String} action
-   * valid actions:
-   *   `idle`
-   *   `player.start`
-   *   `enemy.start`
-   *   `player.continue`
-   *   `enemy.continue`
-   *   `climax`
-   */
-  get(action) {
-    switch (action) {
-      case "idle":
-        return this.idle()
-      case "player.start":
-        return this.playerStart()
-      case "enemy.start":
-        return this.enemyStart()
-      case "player.continue":
-        return this.playerContinue()
-      case "enemy.continue":
-        return this.enemyContinue()
-      case "climax":
-        return this.climax()
-    }
+  get name() {
+    return this.config.name || ""
+  }
 
-    return ""
+  get prefix() {
+    return this.config.prefix || ""
+  }
+
+  get infects() {
+    return Boolean(this.config.infects)
   }
 
   // check whether this position is available for use
   get available() {
-    const player = this.playerParts.every(part => this.player.has[part])
-    const enemy = this.enemyParts.every(part => this.enemy.has[part])
+    const player = this.config.player.every(part => this.player.has[part])
+    const enemy = this.config.enemy.every(part => this.enemy.has[part])
 
-    return Boolean(player && enemy)
+    return Boolean(player && enemy && this.evalCondition)
+  }
+
+  // evaluates extra conditions
+  get evalCondition() {
+    let ok = true
+
+    if (this.config.condition) {
+      try {
+        ok = new Function(
+          '"use strict";return (' + this.config.condition + ")"
+        )()
+      } catch (e) {
+        console.error(`Invalid config - ${this.config.condition}`)
+      }
+    }
+
+    return ok
   }
 
   // get the body parts that are the focus of this position
   get focus() {
     return {
-      player: this.player[this.playerParts[0]],
-      enemy: this.enemy[this.enemyParts[0]],
+      player: this.player[this.config.player[0]],
+      enemy: this.enemy[this.config.enemy[0]],
     }
   }
 
   // check whether this position is enabled
   // this is different from available because it will still be visible in the interface but not be selectable by the player
   get enabled() {
-    return this.playerParts.every(part => this.player[part].functional)
+    return this.config.player.every(part => this.player[part].functional)
   }
 
   get disabled() {
     return !this.enabled
   }
-
-  // Messages - extend these with position specific messages
-  //--------------------------------------------------------
-
-  idle() {
-    return ""
-  }
-
-  playerStart() {
-    return ""
-  }
-
-  enemyStart() {
-    return ""
-  }
-
-  playerContinue() {
-    return ""
-  }
-
-  enemyContinue() {
-    return ""
-  }
-
-  climax() {
-    return ""
-  }
 }
-
-/**
- * Position boilerplate for easy copy&paste
- */
-/*
-
-class Name extends Position {
-  constructor(player, enemy) {
-    super(player, [], enemy, [])
-    this.name = 'name'
-    this.infects = false
-  }
-
-  idle (p, e) {
-    return ``
-  }
-
-  playerStart (p, e) {
-    return ``
-  }
-
-  enemyStart (p, e) {
-    return ``
-  }
-
-  playerContinue (p, e) {
-    return ``
-  }
-
-  enemyContinue (p, e) {
-    return ``
-  }
-
-  climax (p, e) {
-    return ``
-  }
-}
-
-
- */

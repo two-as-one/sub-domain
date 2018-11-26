@@ -1,8 +1,6 @@
 import Transformation from "./_super"
+import { lib } from "library/library"
 
-/**
- * Grows an extra vagina (up to 3) if the player already has one
- */
 export default class VaginaExtra extends Transformation {
   get name() {
     return "grow an extra vagina"
@@ -30,11 +28,6 @@ export default class VaginaExtra extends Transformation {
     vagina.add()
     vagina.arouse(30)
 
-    return `
-      You/have an uncontrollable itch between your legs and the sensation builds
-      up until you reach some sort of pseudo-orgasm. You feel a trickle down
-      your inner thigh. Gasping — [you] look down and notice why.
-
-      **You have grown an extra pussy!**`
+    return lib("TRANSFORM_VAGINA_EXTRA")
   }
 }

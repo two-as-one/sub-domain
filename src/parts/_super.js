@@ -1,4 +1,30 @@
 import Grammar from "grammar/grammar"
+import pluralize from "pluralize"
+import { chance } from "utils/chance"
+
+// a word collection ensures that each word in the collection is used at least once before it starts repeating
+// TODO: this is not doing as advertised
+class WordCollection {
+  constructor() {
+    this.__list = []
+  }
+
+  // adds a word to the collection (at a random position)
+  add(word) {
+    this.__list.push(word)
+  }
+
+  // get the next word in the collection
+  get next() {
+    const available = this.__list.filter(word => word.available)
+
+    if (available.length) {
+      return chance.pickone(available)
+    } else {
+      return ""
+    }
+  }
+}
 
 /**
  * describe a synonym for this part
@@ -8,7 +34,12 @@ class Synonym {
   constructor(singular = "", plural = "", condition = false) {
     this.condition = condition
     this.singular = singular
-    this.plural = plural || Grammar.pluralize(singular)
+
+    if (plural) {
+      pluralize.addIrregularRule(singular, plural)
+    }
+
+    this.plural = Grammar.pluralize(singular)
   }
 
   get available() {
@@ -35,8 +66,8 @@ export default class Part {
   constructor(owner, config = {}) {
     this.owner = owner
 
-    this.synonyms = []
-    this.adjectives = []
+    this.adjectives = new WordCollection()
+    this.synonyms = new WordCollection()
 
     this.stored = Object.assign({}, this.defaults, config)
   }
@@ -52,11 +83,11 @@ export default class Part {
   }
 
   addSynonym(singular, plural, condition) {
-    this.synonyms.push(new Synonym(singular, plural, condition))
+    this.synonyms.add(new Synonym(singular, plural, condition))
   }
 
   addAdjective(word, condition) {
-    this.adjectives.push(new Adjective(word, condition))
+    this.adjectives.add(new Adjective(word, condition))
   }
 
   get name() {
@@ -64,30 +95,30 @@ export default class Part {
   }
 
   get singular() {
-    const word = Grammar.random(this.synonyms.filter(word => word.available))
-    return word.singular
+    const word = this.synonyms.next
+    if (word) {
+      return word.singular
+    } else {
+      return ""
+    }
   }
 
   get plural() {
-    const word = Grammar.random(this.synonyms.filter(word => word.available))
-    return word.plural
+    const word = this.synonyms.next
+    if (word) {
+      return word.plural
+    } else {
+      return ""
+    }
   }
 
   get adjective() {
-    const adjectives = this.adjectives
-      .filter(adjective => adjective.available)
-      .map(adjective => adjective.word)
-
-    // adds type to adjectives if its noteworthy
-    if (this.type !== "human") {
-      adjectives.push(this.type)
-    }
-
-    if (!adjectives.length) {
+    const word = this.adjectives.next
+    if (word) {
+      return word.word
+    } else {
       return ""
     }
-
-    return Grammar.random(adjectives) || ""
   }
 
   get person() {
@@ -118,7 +149,7 @@ export default class Part {
   }
 
   set size(val) {
-    this.stored.size = Math.round(val * 100) / 100
+    this.stored.size = Number(Math.round(val * 100) / 100)
   }
 
   // extend this with some part-specific formula to determine diameter
@@ -131,7 +162,7 @@ export default class Part {
   }
 
   set type(val) {
-    this.stored.type = val
+    this.stored.type = String(val)
   }
 
   get quantity() {
@@ -139,7 +170,7 @@ export default class Part {
   }
 
   set quantity(val) {
-    this.stored.quantity = Math.floor(val)
+    this.stored.quantity = Math.floor(Number(val))
   }
 
   get sensitivity() {
@@ -147,7 +178,7 @@ export default class Part {
   }
 
   set sensitivity(val) {
-    this.stored.sensitivity = val
+    this.stored.sensitivity = Number(val)
   }
 
   /**
@@ -257,6 +288,12 @@ export default class Part {
     } else {
       return this.all
     }
+  }
+
+  // extend this with part-specific code
+  // should return the size of this part on a meaningful scale (ie, cm, inches, cup-size,...)
+  get humanReadableSize() {
+    return ""
   }
 
   get number() {

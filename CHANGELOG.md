@@ -19,6 +19,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Security
 
+## [0.4.22] - 2018-11-26
+
+### Added
+
+- added groundwork for unit tests, `npm test` to run them
+- added the ability to boot the game straight into a specific scene, useful for debugging. Enabled via query string `?scene=name-of-scene`
+- added a parser playground. Enabled via query string `?scene=parser-playground`
+- added `bob`, a male test entity
+- added `alice`, a female test entity
+- added `charlie`, a gender-neutral test entity
+- added a library of strings to more easily manage game text without having to look at code (yaml)
+- added the ability to have parsed text with debug info, enabled via query string `?debug`
+
+### Changed
+
+- all randomness in the game now goes through `chance.js` this allows it to be seeded and produce consistent results. This is mainly useful for the parser playground and unit tests
+- refactored entities to be able to be configured via raw json
+- refactored combat so that each encounter is now driven by a single `yaml` config file which includes:
+  - opponent config
+  - positions config
+  - all encounter-specific text
+- major refactoring to the parser (README to be updated later)
+
+### Removed
+
+- removed conditionals from the parser, these may be reintroduced at a later point
+
 ## [0.4.21] - 2018-10-15
 
 ### Added

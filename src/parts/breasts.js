@@ -1,7 +1,6 @@
-import Chance from "chance"
+import { chance } from "utils/chance"
 import Grammar from "grammar/grammar"
 import Part from "./_super"
-const chance = new Chance()
 
 const BREAST_CONFIGS = []
 
@@ -37,15 +36,15 @@ export default class Breasts extends Part {
     super(...args)
 
     this.addSynonym("pec", null, () => this.size === 0)
-    this.addSynonym("tit")
-    this.addSynonym("boob")
-    this.addSynonym("breast")
-    this.addSynonym("mammary")
-    this.addSynonym("tit", "titties")
-    this.addSynonym("boob", "boobies")
-    this.addSynonym("jug", "jugs", () => this.size > 8)
-    this.addSynonym("melon", "melons", () => this.size > 8)
-    this.addSynonym("knocker", "knockers", () => this.size > 8)
+    this.addSynonym("tit", null, () => this.size > 0)
+    this.addSynonym("boob", null, () => this.size > 0)
+    this.addSynonym("breast", null, () => this.size > 0)
+    this.addSynonym("mammary", null, () => this.size > 0)
+    this.addSynonym("tit", "titties", () => this.size > 0)
+    this.addSynonym("boob", "boobies", () => this.size > 0)
+    this.addSynonym("jug", null, () => this.size > 8)
+    this.addSynonym("melon", null, () => this.size > 8)
+    this.addSynonym("knocker", null, () => this.size > 8)
 
     this.addAdjective("flat", () => this.size === 0)
     this.addAdjective("soft", () => this.size > 0)
@@ -123,10 +122,10 @@ export default class Breasts extends Part {
 
       const number = this.number
       const adjective = this.adjective
-      const cupSize = this.cupSize
+      const humanReadableSize = this.humanReadableSize
       const tits = this.name
 
-      text += `**${number} ${adjective} ${cupSize} ${tits}**`
+      text += `**${number} ${adjective} ${humanReadableSize} ${tits}**`
 
       //false if rows are uneven, otherwise returns the amount of breasts per row
       const evenRows = this.stored.config.reduce((a, b) => a === b && b)
@@ -161,7 +160,7 @@ export default class Breasts extends Part {
       text += this.owner.nipples.description
 
       if (this.milky) {
-        text += ` [all of:them(your.breasts)]~>ache, **brimming with milk**.`
+        text += ` [all of:them:(your):(breasts)]~>ache, **brimming with milk**.`
       }
     } else {
       text = `Your chest is flat and unnoteworthy. Your pecs each ${
@@ -173,7 +172,7 @@ export default class Breasts extends Part {
   }
 
   get seductionMessage() {
-    return Grammar.random([
+    return chance.pickone([
       `you cup [two of:your:adjective:breasts] and make [them] jiggle — squeezing
       [them] playfully.`,
       `With [your:hands] behind [your:head], you shake your bosom. Making
@@ -186,7 +185,7 @@ export default class Breasts extends Part {
     return true
   }
 
-  get cupSize() {
+  get humanReadableSize() {
     if (this.size <= 1) {
       return "AA-cup"
     } else if (this.size <= 2) {

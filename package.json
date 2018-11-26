@@ -7,7 +7,8 @@
     "version": "npm run build && git add -A dist",
     "start": "node ./bin/www",
     "build": "webpack --env.dist",
-    "dev": "webpack-dev-server --content-base dist/ --port 3000 --open"
+    "dev": "webpack-dev-server --content-base dist/ --open",
+    "test": "mocha-webpack --require test/setup.js --webpack-config webpack.config-test.js \"src/**/*.test.js\""
   },
   "author": "furka.thorne@gmail.com",
   "license": "MIT",
@@ -30,11 +31,16 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.1.0",
     "javascript-state-machine": "^3.0.1",
+    "jsdom": "^13.0.0",
+    "jsdom-global": "^3.0.2",
     "json-loader": "^0.5.4",
     "less": "^3.8.0",
     "less-loader": "^4.1.0",
     "lint-staged": "^7.3.0",
+    "localstorage-polyfill": "^1.0.1",
     "lodash": "^4.17.10",
+    "mocha": "^5.2.0",
+    "mocha-webpack": "^2.0.0-beta.0",
     "number-to-words": "^1.2.3",
     "pluralize": "^7.0.0",
     "prettier": "^1.14.3",
@@ -45,9 +51,11 @@
     "showdown": "^1.8.6",
     "style-loader": "^0.21.0",
     "underscore": "^1.8.3",
-    "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-node-externals": "^1.7.2",
+    "yaml-loader": "^0.5.0"
   },
   "dependencies": {
     "debug": "~2.6.3",

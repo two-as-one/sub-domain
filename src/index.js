@@ -2,7 +2,24 @@
  * This file is a commonJs module so that `game` is available as a global variable instead of on `game.default`
  */
 var game = require("game").default
-game.setScene("start")
+var scene = "start"
+
+var sceneRegexp = /[?&]scene=([^&]*)/
+if (window.location.search.match(sceneRegexp)) {
+  scene = window.location.search.match(sceneRegexp)[1]
+}
+
+var debugRegexp = /[?&]debug/
+if (window.location.search.match(debugRegexp)) {
+  game.debug = true
+}
+
+try {
+  game.setScene(scene)
+} catch (e) {
+  game.setScene("start")
+}
+
 game.VERSION = VERSION
 
 module.exports = game
