@@ -70,7 +70,12 @@ update parser playground to allow for more consistent seeding
 
 reintroduce conditionals
 
-## parts to add
+## parts
+
+set min and max sizes for parts where it makes sense
+make sure humanReadableSize covers all possible sizes
+
+### add
 
 - eyes
 - toes

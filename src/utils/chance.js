@@ -8,5 +8,3 @@ export function seed(value = null) {
 
 // seed with random name
 seed(new Chance().name())
-
-window.seed = seed

@@ -14,6 +14,7 @@ import Nobody from "entities/nobody"
 import Alice from "entities/alice"
 import Bob from "entities/bob"
 import Charlie from "entities/charlie"
+import Dave from "entities/dave"
 import Rock from "items/consumables/rock"
 
 import { Factory } from "encounters/all"
@@ -169,13 +170,14 @@ class Game {
     this.bob = new Bob(this)
     this.alice = new Alice(this)
     this.charlie = new Charlie(this)
+    this.dave = new Dave(this)
 
     // fallback [item] for the parser
     this.rock = new Rock()
   }
 
-  parse(text, debug = this.debug) {
-    return Grammar.clean(text, debug)
+  parse(text) {
+    return Grammar.clean(text)
   }
 
   /**

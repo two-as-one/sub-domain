@@ -46,6 +46,14 @@ export default class Body extends Part {
     return Grammar.toLbs(this.stored.weight)
   }
 
+  set weight(val) {
+    this.stored.weight = val
+  }
+
+  set height(val) {
+    this.stored.height = val
+  }
+
   // < 18 - underweight
   // > 25 - overweight
   // > 30 - obese

@@ -69,6 +69,8 @@ export default class Entity {
       vagina: new Vagina(this),
     }
 
+    this.perks = new PerkManager(this)
+
     // make each body part available directly on the entity, including synonyms and plural
     Object.entries(this.parts).forEach(pair => {
       const part = pair[1]
@@ -89,8 +91,6 @@ export default class Entity {
     }
 
     this.configure(config)
-
-    this.perks = new PerkManager(this)
   }
 
   configure(config) {
@@ -104,6 +104,10 @@ export default class Entity {
           this[name][key] = part[key]
         }
       })
+    }
+
+    if (config.perks) {
+      config.perks.forEach(perk => this.perks.grant(perk))
     }
   }
 

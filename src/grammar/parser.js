@@ -1,9 +1,11 @@
 import Grammar from "./grammar"
 import game from "../game"
+import { DEBUG } from "globals/debug"
+import { seed } from "utils/chance"
 
 // this is where debug info is stored
-const DEBUG = []
-export { DEBUG }
+const PARSER_DEBUG_INFO = []
+export { PARSER_DEBUG_INFO }
 
 class Subject {
   constructor() {
@@ -65,7 +67,7 @@ class Subject {
 }
 
 class Parser {
-  constructor(string, debug = false) {
+  constructor(string) {
     const regex = /(^|[^\\])(\[)([^\]]*)(\])/g
     let subject = new Subject()
 
@@ -76,12 +78,12 @@ class Parser {
 
       // TODO: conditionals
 
-      return a.replace("/", "") + Parser.__parse(snip, subject, debug)
+      return a.replace("/", "") + Parser.__parse(snip, subject)
     })
   }
 
   // parse a snippet
-  static __parse(snip, subject, debug) {
+  static __parse(snip, subject) {
     const hiddenRegex = /^\((.*)\)$/ // e.g: (you)
     const verbRegex = /^>/ // e.g: >verb
     const possessiveRegex = /'s\)?$/ // e.g: bob's, alice's
@@ -175,9 +177,9 @@ class Parser {
     })
 
     // debug
-    if (debug) {
+    if (DEBUG.PARSER) {
       frags.forEach(frag => {
-        DEBUG.push({
+        PARSER_DEBUG_INFO.push({
           in: frag.raw,
           out: frag.hidden ? "_" : frag.parsed,
           type: frag.type,
@@ -186,12 +188,12 @@ class Parser {
           length: frag.parsed.length,
         })
 
-        frag.parsed = `[🡆${DEBUG.length - 1}]${frag.parsed}`
+        frag.parsed = `[🡆${PARSER_DEBUG_INFO.length - 1}]${frag.parsed}`
       })
     }
 
     const parsed = frags
-      .filter(frag => !frag.hidden || debug)
+      .filter(frag => !frag.hidden || DEBUG.PARSER)
       .map(frag => frag.parsed)
       .join(" ")
       .trim()
@@ -206,23 +208,25 @@ class Parser {
 
   // selects a top-level game entity based on common words referring to them
   static __select(key = "") {
-    switch (key) {
+    switch (key.toLowerCase()) {
       case "foe":
         if (game.scene && game.scene.enemy) {
           return game.scene.enemy
         } else {
-          return Parser.__select("bob")
+          return Parser.__select("dave")
         }
       case "you":
         return game.player
       case "item":
-        return game.scene.item || game.rock
+        return (game.scene && game.scene.item) || game.rock
       case "bob":
         return game.bob
       case "alice":
         return game.alice
       case "charlie":
         return game.charlie
+      case "dave":
+        return game.dave
     }
 
     return null
@@ -461,15 +465,28 @@ class Parser {
   }
 
   static boy(subject) {
-    return subject.entity.gender === "female" ? "girl" : "boy"
+    switch (subject.entity.gender) {
+      case "male":
+        return "boy"
+      case "female":
+        return "girl"
+      case "neutral":
+        return "person"
+      default:
+        return "thing"
+    }
   }
 
   static girl(subject) {
-    return Parser.boy(subject.entity)
+    return Parser.boy(subject)
   }
 }
 
-export function parse(text = "", debug) {
-  const p = new Parser(text, debug)
+export function parse(text = "") {
+  if (DEBUG.PARSER_SEED) {
+    seed(DEBUG.PARSER_SEED)
+  }
+
+  const p = new Parser(text)
   return p.parsed
 }

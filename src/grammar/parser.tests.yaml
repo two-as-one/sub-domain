@@ -1,0 +1,1575 @@
+# MODIFIERS
+- title: "[damage]"
+  category: modifiers
+  snip: "you take [damage]"
+  tests:
+    - expected: "you take 0 damage"
+
+- title: "[lust]"
+  category: modifiers
+  snip: "you gain [lust]"
+  tests:
+    - expected: "you gain 0 lust"
+
+- title: "[xp]"
+  category: modifiers
+  snip: "you gain [xp]"
+  tests:
+    - expected: "you gain 0xp"
+
+- title: "[item]"
+  category: modifiers
+  snip: "you picked up [item]"
+  tests:
+    - expected: "you picked up a rock"
+
+- title: "[time]"
+  category: modifiers
+  snip: "it's [time]"
+  tests:
+    - expected: "it's noon"
+
+- title: "[area]"
+  category: modifiers
+  snip: "you're at [area]"
+  tests:
+    - expected: "you're at the beach"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[you] are [a:title]"
+  tests:
+    - expected: "you're a hero"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[you], the [title]"
+  tests:
+    - expected: "you, the hero"
+
+- title: "[title]"
+  category: modifiers
+  snip: "the enemy is [a:(foe):title]"
+  tests:
+    - expected: "the enemy is a slime"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[dave] the [title]"
+  tests:
+    - expected: "Dave the slime"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[bob] is [a:title]"
+  tests:
+    - expected: "Bob is a male person"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[bob] the [title]"
+  tests:
+    - expected: "Bob the male person"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[alice] is [a:title]"
+  tests:
+    - expected: "Alice is a female person"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[alice] the [title]"
+  tests:
+    - expected: "Alice the female person"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[charlie] is [a:title]"
+  tests:
+    - expected: "Charlie is a gender-neutral person"
+
+- title: "[title]"
+  category: modifiers
+  snip: "[charlie] the [title]"
+  tests:
+    - expected: "Charlie the gender-neutral person"
+
+- title: "[that]"
+  category: modifiers
+  snip: "[foe:>grab] [that:penis:(your)] of yours"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "Dave grabs that penis of yours"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "Dave grabs those penises of yours"
+
+- title: "[those]"
+  category: modifiers
+  snip: "[those:penis:(your)]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "that penis"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "those penises"
+
+- title: "[adjective]"
+  category: modifiers
+  snip: "[your:adjective:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 10
+      expected: "your large boobies"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 0
+      expected: "your flat pecs"
+
+- title: "[all of]"
+  category: modifiers
+  snip: "[all of:your:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 1
+      expected: "your pec"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 2
+      expected: "both of your pecs"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 3
+      expected: "all three of your pecs"
+
+- title: "[every one of]"
+  category: modifiers
+  snip: "[every one of:your:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 1
+      expected: "your pec"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 2
+      expected: "both of your pecs"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 3
+      expected: "every one of your pecs"
+
+- title: "[number]"
+  category: modifiers
+  snip: "[your:number:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 1
+      expected: "your one pec"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 2
+      expected: "your two pecs"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 3
+      expected: "your three pecs"
+
+- title: "[each of]"
+  category: modifiers
+  snip: "[each of:your:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 1
+      expected: "your pec"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 2
+      expected: "both of your pecs"
+    - config:
+        player:
+          parts:
+            breasts:
+              quantity: 3
+      expected: "each of your pecs"
+
+- title: "[each]"
+  category: modifiers
+  snip: "you grab [your:boobs], [they:each:>ache]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 10
+              quantity: 1
+      expected: "you grab your jug, it aches"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 10
+              quantity: 2
+      expected: "you grab your jugs, they both ache"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 10
+              quantity: 3
+      expected: "you grab your jugs, they each ache"
+
+- title: "[one of]"
+  category: modifiers
+  snip: "[one of:your:penis:>ache]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "your penis aches"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "one of your penises aches"
+
+- title: "[two of]"
+  category: modifiers
+  snip: "[two of:your:penis:>ache]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "your penis aches"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "both of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 3
+      expected: "two of your penises ache"
+
+- title: "[three of]"
+  category: modifiers
+  snip: "[three of:your:penis:>ache]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "your penis aches"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "both of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 3
+      expected: "all three of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 4
+      expected: "three of your penises ache"
+
+- title: "[four of]"
+  category: modifiers
+  snip: "[four of:your:penis:>ache]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+      expected: "your penis aches"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 2
+      expected: "both of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 3
+      expected: "all three of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 4
+      expected: "all four of your penises ache"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 5
+      expected: "four of your penises ache"
+
+- title: "[type]"
+  category: modifiers
+  snip: "[your:type:penis]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+              type: "human"
+      expected: "your penis"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+              type: "equine"
+      expected: "your equine penis"
+
+- title: "[size]"
+  category: modifiers
+  snip: "[your:size:penis]"
+  tests:
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+              size: 2
+      expected: "your 1″ phallus"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+              size: 10
+      expected: "your 4″ penis"
+    - config:
+        player:
+          parts:
+            penis:
+              quantity: 1
+              size: 50
+      expected: "your 1′8″ penis"
+
+- title: "[size]"
+  category: modifiers
+  snip: "[your:size:breasts]"
+  tests:
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 0
+      expected: "your flat pecs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 1
+      expected: "your AA-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 2
+      expected: "your A-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 3
+      expected: "your B-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 4
+      expected: "your C-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 5
+      expected: "your D-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 6
+      expected: "your DD-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 7
+      expected: "your E-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 8
+      expected: "your F-cup titties"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 9
+      expected: "your G-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 10
+      expected: "your H-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 11
+      expected: "your I-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 12
+      expected: "your J-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 13
+      expected: "your K-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 14
+      expected: "your L-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 15
+      expected: "your M-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 16
+      expected: "your N-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 17
+      expected: "your O-cup jugs"
+    - config:
+        player:
+          parts:
+            breasts:
+              size: 18
+      expected: "your jugs"
+
+- title: "[size]"
+  category: modifiers
+  snip: "[your:size:body]"
+  tests:
+    - expected: "your 5′7″ body"
+
+- title: "[size]"
+  category: modifiers
+  snip: "[your:size:hips]"
+  tests:
+    - config:
+        player:
+          parts:
+            body:
+              weight: 40
+      expected: "your size-XS hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 45
+      expected: "your size-S hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 55
+      expected: "your size-M hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 60
+      expected: "your size-L hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 75
+      expected: "your size-XL hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 80
+      expected: "your size-XXL hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 90
+      expected: "your size-XXXL hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 100
+      expected: "your size-4XL hips"
+    - config:
+        player:
+          parts:
+            body:
+              weight: 110
+      expected: "your size-5XL hips"
+
+- title: "[size]"
+  category: modifiers
+  snip: "[your:size:nipple]"
+  tests:
+    - config:
+        player:
+          parts:
+            nipple:
+              size: 1
+      expected: "your 0.4″ nipples"
+    - config:
+        player:
+          parts:
+            nipple:
+              size: 2
+      expected: "your 0.8″ nipples"
+    - config:
+        player:
+          parts:
+            nipple:
+              size: 4
+      expected: "your 1.6″ teats"
+
+- title: "[them]"
+  category: modifiers
+  snip: "[you] look at [them:(alice)]"
+  tests:
+    - expected: "you look at her"
+
+- title: "[them]"
+  category: modifiers
+  snip: "[you] look at [them:(bob)]"
+  tests:
+    - expected: "you look at him"
+
+- title: "[them]"
+  category: modifiers
+  snip: "[you] look at [them:(charlie)]"
+  tests:
+    - expected: "you look at them"
+
+- title: "[them]"
+  category: modifiers
+  snip: "[you] look at [them:(dave)]"
+  tests:
+    - expected: "you look at it"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[alice:>grab] [their] bag"
+  tests:
+    - expected: "Alice grabs her bag"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[bob:>grab] [their] bag"
+  tests:
+    - expected: "Bob grabs his bag"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[charlie:>grab] [their] bag"
+  tests:
+    - expected: "Charlie grabs their bag"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[dave:>grab] [their] bag"
+  tests:
+    - expected: "Dave grabs its bag"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[their:penis]"
+  tests:
+    - expected: "its penises"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[their:penis] and [their] spunk"
+  tests:
+    - expected: "its penises and their spunk"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(bob's):their:penis]"
+  tests:
+    - expected: "his penis"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(bob's):their:penis] and [their] spunk"
+  tests:
+    - expected: "his penis and its spunk"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(alice's):their:penis]"
+  tests:
+    - config:
+        alice:
+          parts:
+            penis:
+              quantity: 1
+      expected: "her penis"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(alice's):their:penis] and [their] spunk"
+  tests:
+    - config:
+        alice:
+          parts:
+            penis:
+              quantity: 1
+      expected: "her penis and its spunk"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(charlie's):their:penis]"
+  tests:
+    - expected: "their penis"
+
+- title: "[their]"
+  category: modifiers
+  snip: "[(charlie's):their:penis] and [their] spunk"
+  tests:
+    - expected: "their penis and its spunk"
+
+- title: "[theirs]"
+  category: modifiers
+  snip: "it's [(bob):theirs]"
+  tests:
+    - expected: "it's his"
+
+- title: "[theirs]"
+  category: modifiers
+  snip: "it's [(alice):theirs]"
+  tests:
+    - expected: "it's hers"
+
+- title: "[theirs]"
+  category: modifiers
+  snip: "it's [(charlie):theirs]"
+  tests:
+    - expected: "it's theirs"
+
+- title: "[theirs]"
+  category: modifiers
+  snip: "it's [(dave):theirs]"
+  tests:
+    - expected: "it's its"
+
+- title: "[themself]"
+  category: modifiers
+  snip: "[bob:>love] [themself]"
+  tests:
+    - expected: "Bob loves himself"
+
+- title: "[themself]"
+  category: modifiers
+  snip: "[alice:>love] [themself]"
+  tests:
+    - expected: "Alice loves herself"
+
+- title: "[themself]"
+  category: modifiers
+  snip: "[charlie:>love] [themself]"
+  tests:
+    - expected: "Charlie loves themself"
+
+- title: "[themself]"
+  category: modifiers
+  snip: "[dave:>love] [themself]"
+  tests:
+    - expected: "Dave loves itself"
+
+- title: "[who]"
+  category: modifiers
+  snip: "[(alice):who]"
+  tests:
+    - expected: "Alice"
+
+- title: "[who]"
+  category: modifiers
+  snip: "[(bob):who]"
+  tests:
+    - expected: "Bob"
+
+- title: "[who]"
+  category: modifiers
+  snip: "[(charlie):who]"
+  tests:
+    - expected: "Charlie"
+
+- title: "[who]"
+  category: modifiers
+  snip: "[(dave):who]"
+  tests:
+    - expected: "Dave"
+
+- title: "[who]"
+  category: modifiers
+  snip: "[(you):who]"
+  tests:
+    - expected: "you"
+
+- title: "[you]"
+  category: modifiers
+  snip: "[you], [you], [you], [you], [you], [you], [you], [you], [you], [you], [you], [you]"
+  tests:
+    - expected: "you, you, you, you, you, you, you, you, you, you, you, you"
+    - config:
+        player:
+          perks:
+            - conjoined
+      expected: "you, both of you, you, you, you, both of you, both of you, you, you, you, you both, both of you"
+
+- title: "[your]"
+  category: modifiers
+  snip: "[your:penis]"
+  tests:
+    - expected: "your penis"
+
+- title: "[your]"
+  category: modifiers
+  snip: "[your:breasts]"
+  tests:
+    - expected: "your jugs"
+
+- title: "[foe]"
+  category: modifiers
+  snip: "[foe], the [title]"
+  tests:
+    - expected: "Dave, the slime"
+
+- title: "[boy]"
+  category: modifiers
+  snip: "[you:>be] a [boy]"
+  tests:
+    - expected: "you're a person"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[you:>be] a [girl]"
+  tests:
+    - expected: "you're a person"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[bob:>be] a [boy]"
+  tests:
+    - expected: "Bob is a boy"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[bob:>be] a [girl]"
+  tests:
+    - expected: "Bob is a boy"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[alice:>be] a [boy]"
+  tests:
+    - expected: "Alice is a girl"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[alice:>be] a [girl]"
+  tests:
+    - expected: "Alice is a girl"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[charlie:>be] a [boy]"
+  tests:
+    - expected: "Charlie is a person"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[charlie:>be] a [girl]"
+  tests:
+    - expected: "Charlie is a person"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[dave:>be] a [boy]"
+  tests:
+    - expected: "Dave is a thing"
+
+- title: "[boy] & [girl]"
+  category: modifiers
+  snip: "[dave:>be] a [girl]"
+  tests:
+    - expected: "Dave is a thing"
+
+# CONJUGATIONS
+- title: ""
+  category: conjugation
+  snip: "[alice:>huff], [they:>be] tired"
+  tests:
+    - expected: "Alice huffs, she's tired"
+
+- title: ""
+  category: conjugation
+  snip: "[bob:>huff], [they:>be] tired"
+  tests:
+    - expected: "Bob huffs, he's tired"
+
+- title: ""
+  category: conjugation
+  snip: "[charlie:>huff], [they:>be] tired"
+  tests:
+    - expected: "Charlie huffs, they're tired"
+
+- title: ""
+  category: conjugation
+  snip: "[dave:>huff], [they:>be] tired"
+  tests:
+    - expected: "Dave huffs, it's tired"
+
+# CONTRACTIONS
+- title: "are not"
+  category: "contractions"
+  snip: "are not"
+  tests:
+    - expected: "aren't"
+
+- title: "are not"
+  category: "contractions"
+  snip: "are/not"
+  tests:
+    - expected: "are not"
+
+- title: "can not"
+  category: "contractions"
+  snip: "can not"
+  tests:
+    - expected: "can't"
+
+- title: "can not"
+  category: "contractions"
+  snip: "can/not"
+  tests:
+    - expected: "can not"
+
+- title: "could have"
+  category: "contractions"
+  snip: "could have"
+  tests:
+    - expected: "could've"
+
+- title: "could have"
+  category: "contractions"
+  snip: "could/have"
+  tests:
+    - expected: "could have"
+
+- title: "could not"
+  category: "contractions"
+  snip: "could not"
+  tests:
+    - expected: "couldn't"
+
+- title: "could not"
+  category: "contractions"
+  snip: "could/not"
+  tests:
+    - expected: "could not"
+
+- title: "did not"
+  category: "contractions"
+  snip: "did not"
+  tests:
+    - expected: "didn't"
+
+- title: "did not"
+  category: "contractions"
+  snip: "did/not"
+  tests:
+    - expected: "did not"
+
+- title: "does not"
+  category: "contractions"
+  snip: "does not"
+  tests:
+    - expected: "doesn't"
+
+- title: "does not"
+  category: "contractions"
+  snip: "does/not"
+  tests:
+    - expected: "does not"
+
+- title: "do not"
+  category: "contractions"
+  snip: "do not"
+  tests:
+    - expected: "don't"
+
+- title: "do not"
+  category: "contractions"
+  snip: "do/not"
+  tests:
+    - expected: "do not"
+
+- title: "had not"
+  category: "contractions"
+  snip: "had not"
+  tests:
+    - expected: "hadn't"
+
+- title: "had not"
+  category: "contractions"
+  snip: "had/not"
+  tests:
+    - expected: "had not"
+
+- title: "has not"
+  category: "contractions"
+  snip: "has not"
+  tests:
+    - expected: "hasn't"
+
+- title: "has not"
+  category: "contractions"
+  snip: "has/not"
+  tests:
+    - expected: "has not"
+
+- title: "have not"
+  category: "contractions"
+  snip: "have not"
+  tests:
+    - expected: "haven't"
+
+- title: "have not"
+  category: "contractions"
+  snip: "have/not"
+  tests:
+    - expected: "have not"
+
+- title: "he would"
+  category: "contractions"
+  snip: "he would"
+  tests:
+    - expected: "he'd"
+
+- title: "he would"
+  category: "contractions"
+  snip: "he/would"
+  tests:
+    - expected: "he would"
+
+- title: "he is"
+  category: "contractions"
+  snip: "he is"
+  tests:
+    - expected: "he's"
+
+- title: "he is"
+  category: "contractions"
+  snip: "he/is"
+  tests:
+    - expected: "he is"
+
+- title: "how did"
+  category: "contractions"
+  snip: "how did"
+  tests:
+    - expected: "how'd"
+
+- title: "how did"
+  category: "contractions"
+  snip: "how/did"
+  tests:
+    - expected: "how did"
+
+- title: "how is"
+  category: "contractions"
+  snip: "how is"
+  tests:
+    - expected: "how's"
+
+- title: "how is"
+  category: "contractions"
+  snip: "how/is"
+  tests:
+    - expected: "how is"
+
+- title: "i would"
+  category: "contractions"
+  snip: "i would"
+  tests:
+    - expected: "i'd"
+
+- title: "i would"
+  category: "contractions"
+  snip: "i/would"
+  tests:
+    - expected: "i would"
+
+- title: "i will"
+  category: "contractions"
+  snip: "i will"
+  tests:
+    - expected: "i'll"
+
+- title: "i will"
+  category: "contractions"
+  snip: "i/will"
+  tests:
+    - expected: "i will"
+
+- title: "i am"
+  category: "contractions"
+  snip: "i am"
+  tests:
+    - expected: "i'm"
+
+- title: "i am"
+  category: "contractions"
+  snip: "i/am"
+  tests:
+    - expected: "i am"
+
+- title: "i have"
+  category: "contractions"
+  snip: "i have"
+  tests:
+    - expected: "i've"
+
+- title: "i have"
+  category: "contractions"
+  snip: "i/have"
+  tests:
+    - expected: "i have"
+
+- title: "is not"
+  category: "contractions"
+  snip: "is not"
+  tests:
+    - expected: "isn't"
+
+- title: "is not"
+  category: "contractions"
+  snip: "is/not"
+  tests:
+    - expected: "is not"
+
+- title: "it would"
+  category: "contractions"
+  snip: "it would"
+  tests:
+    - expected: "it'd"
+
+- title: "it would"
+  category: "contractions"
+  snip: "it/would"
+  tests:
+    - expected: "it would"
+
+- title: "it will"
+  category: "contractions"
+  snip: "it will"
+  tests:
+    - expected: "it'll"
+
+- title: "it will"
+  category: "contractions"
+  snip: "it/will"
+  tests:
+    - expected: "it will"
+
+- title: "it is"
+  category: "contractions"
+  snip: "it is"
+  tests:
+    - expected: "it's"
+
+- title: "it is"
+  category: "contractions"
+  snip: "it/is"
+  tests:
+    - expected: "it is"
+
+- title: "let us"
+  category: "contractions"
+  snip: "let us"
+  tests:
+    - expected: "let's"
+
+- title: "let us"
+  category: "contractions"
+  snip: "let/us"
+  tests:
+    - expected: "let us"
+
+- title: "she would"
+  category: "contractions"
+  snip: "she would"
+  tests:
+    - expected: "she'd"
+
+- title: "she would"
+  category: "contractions"
+  snip: "she/would"
+  tests:
+    - expected: "she would"
+
+- title: "she will"
+  category: "contractions"
+  snip: "she will"
+  tests:
+    - expected: "she'll"
+
+- title: "she will"
+  category: "contractions"
+  snip: "she/will"
+  tests:
+    - expected: "she will"
+
+- title: "she is"
+  category: "contractions"
+  snip: "she is"
+  tests:
+    - expected: "she's"
+
+- title: "she is"
+  category: "contractions"
+  snip: "she/is"
+  tests:
+    - expected: "she is"
+
+- title: "should have"
+  category: "contractions"
+  snip: "should have"
+  tests:
+    - expected: "should've"
+
+- title: "should have"
+  category: "contractions"
+  snip: "should/have"
+  tests:
+    - expected: "should have"
+
+- title: "should not"
+  category: "contractions"
+  snip: "should not"
+  tests:
+    - expected: "shouldn't"
+
+- title: "should not"
+  category: "contractions"
+  snip: "should/not"
+  tests:
+    - expected: "should not"
+
+- title: "someone is"
+  category: "contractions"
+  snip: "someone is"
+  tests:
+    - expected: "someone's"
+
+- title: "someone is"
+  category: "contractions"
+  snip: "someone/is"
+  tests:
+    - expected: "someone is"
+
+- title: "that is"
+  category: "contractions"
+  snip: "that is"
+  tests:
+    - expected: "that's"
+
+- title: "that is"
+  category: "contractions"
+  snip: "that/is"
+  tests:
+    - expected: "that is"
+
+- title: "there would"
+  category: "contractions"
+  snip: "there would"
+  tests:
+    - expected: "there'd"
+
+- title: "there would"
+  category: "contractions"
+  snip: "there/would"
+  tests:
+    - expected: "there would"
+
+- title: "there is"
+  category: "contractions"
+  snip: "there is"
+  tests:
+    - expected: "there's"
+
+- title: "there is"
+  category: "contractions"
+  snip: "there/is"
+  tests:
+    - expected: "there is"
+
+- title: "they would"
+  category: "contractions"
+  snip: "they would"
+  tests:
+    - expected: "they'd"
+
+- title: "they would"
+  category: "contractions"
+  snip: "they/would"
+  tests:
+    - expected: "they would"
+
+- title: "they are"
+  category: "contractions"
+  snip: "they are"
+  tests:
+    - expected: "they're"
+
+- title: "they are"
+  category: "contractions"
+  snip: "they/are"
+  tests:
+    - expected: "they are"
+
+- title: "they have"
+  category: "contractions"
+  snip: "they have"
+  tests:
+    - expected: "they've"
+
+- title: "they have"
+  category: "contractions"
+  snip: "they/have"
+  tests:
+    - expected: "they have"
+
+- title: "was not"
+  category: "contractions"
+  snip: "was not"
+  tests:
+    - expected: "wasn't"
+
+- title: "was not"
+  category: "contractions"
+  snip: "was/not"
+  tests:
+    - expected: "was not"
+
+- title: "we would"
+  category: "contractions"
+  snip: "we would"
+  tests:
+    - expected: "we'd"
+
+- title: "we would"
+  category: "contractions"
+  snip: "we/would"
+  tests:
+    - expected: "we would"
+
+- title: "we will"
+  category: "contractions"
+  snip: "we will"
+  tests:
+    - expected: "we'll"
+
+- title: "we will"
+  category: "contractions"
+  snip: "we/will"
+  tests:
+    - expected: "we will"
+
+- title: "we are"
+  category: "contractions"
+  snip: "we are"
+  tests:
+    - expected: "we're"
+
+- title: "we are"
+  category: "contractions"
+  snip: "we/are"
+  tests:
+    - expected: "we are"
+
+- title: "we have"
+  category: "contractions"
+  snip: "we have"
+  tests:
+    - expected: "we've"
+
+- title: "we have"
+  category: "contractions"
+  snip: "we/have"
+  tests:
+    - expected: "we have"
+
+- title: "were not"
+  category: "contractions"
+  snip: "were not"
+  tests:
+    - expected: "weren't"
+
+- title: "were not"
+  category: "contractions"
+  snip: "were/not"
+  tests:
+    - expected: "were not"
+
+- title: "what is"
+  category: "contractions"
+  snip: "what is"
+  tests:
+    - expected: "what's"
+
+- title: "what is"
+  category: "contractions"
+  snip: "what/is"
+  tests:
+    - expected: "what is"
+
+- title: "what have"
+  category: "contractions"
+  snip: "what have"
+  tests:
+    - expected: "what've"
+
+- title: "what have"
+  category: "contractions"
+  snip: "what/have"
+  tests:
+    - expected: "what have"
+
+- title: "where is"
+  category: "contractions"
+  snip: "where is"
+  tests:
+    - expected: "where's"
+
+- title: "where is"
+  category: "contractions"
+  snip: "where/is"
+  tests:
+    - expected: "where is"
+
+- title: "who is"
+  category: "contractions"
+  snip: "who is"
+  tests:
+    - expected: "who's"
+
+- title: "who is"
+  category: "contractions"
+  snip: "who/is"
+  tests:
+    - expected: "who is"
+
+- title: "will not"
+  category: "contractions"
+  snip: "will not"
+  tests:
+    - expected: "won't"
+
+- title: "will not"
+  category: "contractions"
+  snip: "will/not"
+  tests:
+    - expected: "will not"
+
+- title: "would have"
+  category: "contractions"
+  snip: "would have"
+  tests:
+    - expected: "would've"
+
+- title: "would have"
+  category: "contractions"
+  snip: "would/have"
+  tests:
+    - expected: "would have"
+
+- title: "would not"
+  category: "contractions"
+  snip: "would not"
+  tests:
+    - expected: "wouldn't"
+
+- title: "would not"
+  category: "contractions"
+  snip: "would/not"
+  tests:
+    - expected: "would not"
+
+- title: "you would"
+  category: "contractions"
+  snip: "you would"
+  tests:
+    - expected: "you'd"
+
+- title: "you would"
+  category: "contractions"
+  snip: "you/would"
+  tests:
+    - expected: "you would"
+
+- title: "you will"
+  category: "contractions"
+  snip: "you will"
+  tests:
+    - expected: "you'll"
+
+- title: "you will"
+  category: "contractions"
+  snip: "you/will"
+  tests:
+    - expected: "you will"
+
+- title: "you are"
+  category: "contractions"
+  snip: "you are"
+  tests:
+    - expected: "you're"
+
+- title: "you are"
+  category: "contractions"
+  snip: "you/are"
+  tests:
+    - expected: "you are"
+
+- title: "you have"
+  category: "contractions"
+  snip: "you have"
+  tests:
+    - expected: "you've"
+
+- title: "you have"
+  category: "contractions"
+  snip: "you/have"
+  tests:
+    - expected: "you have"
+
+# OTHER
+- title: "remove undefined"
+  category: "other"
+  snip: "your undefined cock"
+  tests:
+    - expected: "your cock"
+
+- title: "trim spaces"
+  category: "other"
+  snip: "    you      and     someone    else    "
+  tests:
+    - expected: "you and someone else"
+
+- title: "capitalisation"
+  category: "other"
+  snip: "you walk. you run? you jump!"
+  tests:
+    - expected: "You walk. You run? You jump!"
+
+- title: "a/an"
+  category: "other"
+  snip: "[a:elephant]"
+  tests:
+    - expected: "an elephant"
+
+- title: "a/an"
+  category: "other"
+  snip: "[a:door]"
+  tests:
+    - expected: "a door"

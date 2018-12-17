@@ -8,7 +8,8 @@
     "start": "node ./bin/www",
     "build": "webpack --env.dist",
     "dev": "webpack-dev-server --content-base dist/ --open",
-    "test": "mocha-webpack --require test/setup.js --webpack-config webpack.config-test.js \"src/**/*.test.js\""
+    "test": "mocha-webpack --require test/setup.js --webpack-config webpack.config-test.js \"src/**/*.test.js\"",
+    "test:watch": "mocha-webpack --watch --require test/setup.js --webpack-config webpack.config-test.js \"src/**/*.test.js\""
   },
   "author": "furka.thorne@gmail.com",
   "license": "MIT",

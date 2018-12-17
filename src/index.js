@@ -9,11 +9,6 @@ if (window.location.search.match(sceneRegexp)) {
   scene = window.location.search.match(sceneRegexp)[1]
 }
 
-var debugRegexp = /[?&]debug/
-if (window.location.search.match(debugRegexp)) {
-  game.debug = true
-}
-
 try {
   game.setScene(scene)
 } catch (e) {

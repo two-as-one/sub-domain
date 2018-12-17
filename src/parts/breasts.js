@@ -186,6 +186,9 @@ export default class Breasts extends Part {
   }
 
   get humanReadableSize() {
+    if (this.size === 0) {
+      return "flat"
+    }
     if (this.size <= 1) {
       return "AA-cup"
     } else if (this.size <= 2) {

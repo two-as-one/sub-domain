@@ -3,7 +3,7 @@ import { chance } from "utils/chance"
 import { Contractions } from "contractions"
 import conjugate from "conjugate"
 import number from "number-to-words"
-import { parse, DEBUG } from "./parse"
+import { parse, PARSER_DEBUG_INFO } from "./parser"
 import pluralize from "pluralize"
 import showdown from "showdown"
 import template from "./debug.hbs"
@@ -63,7 +63,6 @@ const contractions = new Contractions({
   "would've": "would have",
   "wouldn't": "would not",
   "you'd": "you would",
-  "you'd've": "you would have",
   "you'll": "you will",
   "you're": "you are",
   "you've": "you have",
@@ -317,15 +316,15 @@ export default class Grammar {
   }
 
   /** converts cm into feet and inches as a string */
-  static toFt(cm = 0) {
+  static toFt(cm = 0, precision = 1) {
     const realFeet = (cm * 0.3937) / 12
     const feet = Math.floor(realFeet)
-    const inches = Math.round((realFeet - feet) * 12)
+    const inches = Math.round((realFeet - feet) * 12 * precision) / precision
 
     if (feet) {
-      return feet + "&prime;" + inches + "&Prime;"
+      return feet + "′" + inches + "″"
     } else {
-      return inches + "&Prime;"
+      return inches + "″"
     }
   }
 
@@ -415,7 +414,7 @@ export default class Grammar {
 
     while (debugRegex.test(text)) {
       text = text.replace(debugRegex, (match, i, next) => {
-        const debug = DEBUG[Number(i)]
+        const debug = PARSER_DEBUG_INFO[Number(i)]
         return template(debug) + next.substring(debug.length)
       })
     }
@@ -429,24 +428,24 @@ export default class Grammar {
    * @param  {String} text - the text to clean up
    * @return {String}      the cleaned up text
    */
-  static clean(text = "", debug = false, dom = true) {
+  static clean(text = "", dom = true) {
     text = text.split(/\n\n|\r\r/)
-    text = Grammar.parse(text, debug)
+    text = Grammar.parse(text)
     if (dom) {
       text = Grammar.DOMify(text)
     }
     return text.join("")
   }
 
-  static parse(text = [], debug = false) {
+  static parse(text = []) {
     // clear debugger
-    DEBUG.length = 0
+    PARSER_DEBUG_INFO.length = 0
 
     return text
       .map(text => Grammar.collapse(text))
-      .map(text => parse(text, debug))
-      .map(text => Grammar.trim(text))
+      .map(text => parse(text))
       .map(text => Grammar.unundefined(text))
+      .map(text => Grammar.trim(text))
       .filter(text => text)
       .map(text => Grammar.sentences(text))
       .map(text => Grammar.contract(text))

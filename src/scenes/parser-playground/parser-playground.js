@@ -2,6 +2,7 @@ import "./style.less"
 import Scene from "../_super"
 import template from "./template.hbs"
 import { library } from "library/library"
+import { DEBUG } from "globals/debug"
 
 const DEFAULT_TEXT = `
 [your:adjective:breasts]
@@ -66,6 +67,9 @@ export default class ParserPlayground extends Scene {
   }
 
   async updateText() {
+    DEBUG.PARSER = true
+    DEBUG.PARSER_SEED = "test"
+
     if (this.updateQueued) {
       return
     }

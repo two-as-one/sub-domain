@@ -19,6 +19,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Security
 
+## [0.4.23] - 2018-12-17
+
+### Added
+
+- added test entity Dave (the genderless slime)
+- added the ability to give the parser a seed to produce consistent results
+- added rounding to part sizes
+
+### Changed
+
+- automated tests for parser
+  - now has a big config file with all kinds of specific tests
+- changed default foe from Bob to Dave
+
 ## [0.4.22] - 2018-11-26
 
 ### Added

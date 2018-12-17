@@ -1,6 +1,7 @@
 import StateMachine from "javascript-state-machine"
 import TypeWriter from "cool-typewriter"
 import template from "templates/main.hbs"
+import { DEBUG } from "globals/debug"
 
 const typeWriter = new TypeWriter()
 
@@ -158,7 +159,7 @@ export default class Scene {
 
   type() {
     // no typing animation in debug mode
-    if (this.game.debug) {
+    if (DEBUG.PARSER) {
       return
     }
 
