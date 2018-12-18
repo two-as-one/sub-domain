@@ -5,10 +5,17 @@ node_js:
 install:
   - npm ci
 
+env:
+  - JOB=test
+  - JOB=build
+
 matrix:
-  - script:
-      - npm test
-  - script:
-      - npm run build
+  include:
+    - script:
+        - npm test
+      env: JOB=test
+    - script:
+        - npm run build
+      env: JOB=build
 
 cache: npm
