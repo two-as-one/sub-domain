@@ -3,10 +3,12 @@ node_js:
   - "8"
 
 install:
-  - npm install
+  - npm ci
 
-script:
-  - npm test
-  - npm run build
+matrix:
+  - script:
+      - npm test
+  - script:
+      - npm run build
 
 cache: npm
