@@ -185,7 +185,7 @@ class Parser {
           type: frag.type,
           subject: subject,
           hidden: frag.hidden,
-          length: frag.parsed.length,
+          length: frag.parsed && frag.parsed.length,
         })
 
         frag.parsed = `[🡆${PARSER_DEBUG_INFO.length - 1}]${frag.parsed}`

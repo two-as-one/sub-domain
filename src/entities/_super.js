@@ -130,6 +130,10 @@ export default class Entity {
     return this.config.gender || "none"
   }
 
+  set gender(gender) {
+    this.config.gender = gender
+  }
+
   get defaults() {
     return {
       lvl: 1,

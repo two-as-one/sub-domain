@@ -4,7 +4,9 @@ import template from "./template.hbs"
 import { library } from "library/library"
 import { DEBUG } from "globals/debug"
 
-const DEFAULT_TEXT = `
+const DEFAULT_TEXT =
+  localStorage.getItem("parser-playground") ||
+  `
 [your:adjective:breasts]
 `
 
@@ -81,6 +83,7 @@ export default class ParserPlayground extends Scene {
 
     const val = this.input.value
     if (val != this.prev) {
+      localStorage.setItem("parser-playground", val)
       this.output.innerHTML = this.game.parse(val, true)
       this.prev = val
     }
